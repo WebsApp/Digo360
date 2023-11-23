@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.OnboardScreen">
+
+    <androidx.viewpager.widget.ViewPager
+        android:background="@color/white"
+        android:id="@+id/pagerIntroSlider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:background="@color/white"
+        android:id="@+id/lytButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/tvSkip"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="60dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Skip"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:visibility="gone"
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabBackground="@drawable/slider_dot_selector"
+            app:tabGravity="center"
+            android:background="@color/white"
+            app:tabIndicatorHeight="0dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/circle"
+                android:layout_gravity="center"
+                android:layout_width="45dp"
+                android:layout_height="45dp">
+
+                <ImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/baseline_arrow_forward_ios_24" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvNext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Next"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/purple"
+                android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.GetStartedPage">
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/getstarted" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/iv_bg"
+        android:src="@drawable/digo2" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/logo"
+        android:gravity="center"
+        android:textColor="@color/yellow"
+        android:text="Easy to practice !"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="5dp">
+
+            <TextView
+                android:id="@+id/tv_getStarted"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@color/purple"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/get_started"
+                android:textColor="@color/yellow"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</RelativeLayout>

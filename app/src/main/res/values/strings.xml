@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Digo360</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="skip">SKIP</string>
+    <string name="next">NEXT</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="heading_one">Manage your case . </string>
+    <string name="heading_two">Manage your case .</string>
+    <string name="heading_three">Manage your case . </string>
+
+    <string name="title_one">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
+    <string name="title_two">Create stunning NFTs applications with bullet proof guidelines and thoughtful components.</string>
+    <string name="title_three">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
+
+    <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
+    <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
+    <!--    <string name="title_three">This App helps you Enhance your Earning, It\'s a free to use App, So keep it on your mobile</string>-->
+</resources>
