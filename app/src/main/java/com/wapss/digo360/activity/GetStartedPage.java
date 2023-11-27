@@ -21,9 +21,6 @@ public class GetStartedPage extends AppCompatActivity {
         setContentView(R.layout.activity_get_started_page);
         tv_getStarted = findViewById(R.id.tv_getStarted);
         Window window = getWindow();
-
-
-
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
@@ -31,7 +28,7 @@ public class GetStartedPage extends AppCompatActivity {
         tv_getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GetStartedPage.this,OTPActivity.class);
+                Intent intent = new Intent(GetStartedPage.this,LoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -5,5 +5,7 @@
 
     <color name="purple">#8114B3</color>
     <color name="purple1">#7210A1</color>
+    <color name="purple3">#C054F1</color>
     <color name="yellow">#FFC943</color>
+    <color name="darkgrey">#6C6C6C</color>
 </resources>

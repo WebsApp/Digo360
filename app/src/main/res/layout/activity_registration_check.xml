@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegistrationCheckActivity">
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/back"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -35,10 +35,10 @@
 
                 <TextView
                     android:padding="5dp"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/login"
+                    android:text="@string/registration"
                     android:textColor="@color/white"
                     android:textSize="16dp" />
 
@@ -48,91 +48,26 @@
     </LinearLayout>
 
     <ImageView
+        android:layout_marginTop="50dp"
         android:id="@+id/otpimg"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_below="@id/header"
-        android:src="@drawable/loginbg" />
-
-    <LinearLayout
-        android:id="@+id/iv_bg"
-        android:layout_below="@+id/otpimg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/phone_number"
-            android:textColor="@color/purple"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:textStyle="normal"
-            android:textColor="@color/purple1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"
-            android:textSize="16dp"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_phone"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/iv_bg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:background="@drawable/time_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:padding="15dp"
-                android:text="+91"
-                android:textSize="18dp"
-                android:textColor="@color/purple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/time_bg"
-            android:layout_width="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_height="wrap_content">
-            <EditText
-                android:layout_marginStart="5dp"
-                android:background="@null"
-                android:padding="15dp"
-                android:textColorHint="@color/purple"
-                android:hint="97XXXXXX44"
-                android:textSize="18dp"
-                android:textColor="@color/purple"
-                android:maxLength="10"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:src="@drawable/registrationcheck" />
 
     <LinearLayout
         android:id="@+id/loginmsg"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/ll_phone"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@+id/otpimg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"/>
     </LinearLayout>
 
@@ -154,6 +89,7 @@
             android:visibility="gone" />
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -171,7 +107,7 @@
                 android:background="@color/purple"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/agree_amp_continue"
+                android:text="@string/registration"
                 android:textColor="@color/yellow"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -181,6 +117,5 @@
 
 
     </LinearLayout>
-
 
 </RelativeLayout>

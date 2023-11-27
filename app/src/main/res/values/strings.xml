@@ -14,6 +14,26 @@
     <string name="title_one">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
     <string name="title_two">Create stunning NFTs applications with bullet proof guidelines and thoughtful components.</string>
     <string name="title_three">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
+    <string name="verify_your_phone_number">Verify Your Phone Number</string>
+    <string name="we_have_sent_an_otp_to_91_97xxxxxxx_please_wait_for_2_min_before_resend_attempt">We have sent an OTP to +91 97XXXXXXX. Please wait for 2 min Before resend Attempt .</string>
+    <string name="you_can_request_otp_after_1_59">You Can Request OTP after 1:59</string>
+    <string name="login">Login</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="create_stunning_nfts_applications_with_bullet_proof_guidelines">Create stunning NFTs applications with bullet proof guidelines</string>
+    <string name="agree_amp_continue"><![CDATA[Agree & Continue]]></string>
+    <string name="registration">Registration</string>
+    <string name="salutation">Salutation</string>
+    <string name="name_of_your">Name Of Your</string>
+    <string name="suitable_designation">Suitable Designation</string>
+    <string name="your_specialization">Your Specialization</string>
+    <string name="address">Address</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="pincode">Pincode</string>
+    <string name="submit">Submit</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="lets_start">Lets Start</string>
+    <string name="loading_page">Loading Page</string>
 
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
