@@ -39,9 +39,9 @@ public class LoadingPage extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //startActivity(new Intent(LoadingPage.this, RegistrationActivity.class));
+                        startActivity(new Intent(LoadingPage.this, MainActivity.class));
                     }
-                },3000);
+                },1000);
                 //  HomeActivity.class is the activity to go after showing the Registration screen.
             }
 

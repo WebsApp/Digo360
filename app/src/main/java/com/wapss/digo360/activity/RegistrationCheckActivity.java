@@ -41,7 +41,7 @@ public class RegistrationCheckActivity extends AppCompatActivity {
                     public void run() {
                         startActivity(new Intent(RegistrationCheckActivity.this, RegistrationActivity.class));
                     }
-                },3000);
+                },1000);
                //  HomeActivity.class is the activity to go after showing the Registration screen.
             }
 

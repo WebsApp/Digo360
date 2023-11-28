@@ -34,6 +34,14 @@
     <string name="choose_language">Choose Language</string>
     <string name="lets_start">Lets Start</string>
     <string name="loading_page">Loading Page</string>
+    <string name="home">Home</string>
+    <string name="ask_q">Ask Q</string>
+    <string name="cases">Case</string>
+    <string name="profile">Profile</string>
+    <string name="summary">Summary</string>
+    <string name="view_all">View All</string>
+    <string name="top_diagnosis">Top Diagnosis</string>
+    <string name="top_diseases">Top diseases</string>
 
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
