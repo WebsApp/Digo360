@@ -13,6 +13,7 @@ import com.wapss.digo360.fragment.CASE_Fragment;
 import com.wapss.digo360.fragment.FAQ_Fragment;
 import com.wapss.digo360.fragment.HomeFragment;
 import com.wapss.digo360.fragment.Profile_Fragment;
+import com.wapss.digo360.fragment.TopDiseasesFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         else if (id == R.id.history)
         {
-            fragment = new CASE_Fragment();
+            fragment = new TopDiseasesFragment();
         }
         else if (id == R.id.settings)
         {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, fragment)
+                    .replace(R.id.main_container, fragment)
                     .commit();
             return true;
         }
