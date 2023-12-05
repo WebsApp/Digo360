@@ -13,22 +13,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.authentication.CustomProgressDialog;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView iv_logo;
     Animation anim;
+    CustomProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         iv_logo = findViewById(R.id.iv_logo);
+        progressDialog = new CustomProgressDialog(this);
         anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in); // Create the animation.
 
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
+
+        progressDialog.showProgressDialog();
 
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -40,9 +45,10 @@ public class SplashActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.hideProgressDialog();
                         startActivity(new Intent(SplashActivity.this, OnboardScreen.class));
                     }
-                },1000);
+                },3000);
                 // HomeActivity.class is the activity to go after showing the splash screen.
             }
 

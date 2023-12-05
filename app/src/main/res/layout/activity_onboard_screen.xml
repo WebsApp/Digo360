@@ -18,9 +18,9 @@
         android:background="@color/white"
         android:id="@+id/lytButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="3">
 
         <TextView
@@ -37,10 +37,10 @@
             android:textStyle="bold" />
 
         <com.google.android.material.tabs.TabLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             app:tabBackground="@drawable/slider_dot_selector"
             app:tabGravity="center"
@@ -51,6 +51,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center">
             <LinearLayout
                 android:layout_marginBottom="5dp"

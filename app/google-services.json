@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "287431295660",
+    "project_id": "digo360-ae943",
+    "storage_bucket": "digo360-ae943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287431295660:android:618f4dd66f8462742e5509",
+        "android_client_info": {
+          "package_name": "com.wapss.digo360"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0legRLy3idRu4ljecI2RngLdY5iO-v4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
