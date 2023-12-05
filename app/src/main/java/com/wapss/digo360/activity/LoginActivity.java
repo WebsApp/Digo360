@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Log and toast
 //                        String msg = getString(R.string.next, token);
                         Log.d(TAG, fb_token);
+
 //                        Toast.makeText(OTP_Verify.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
