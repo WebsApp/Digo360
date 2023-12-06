@@ -7,24 +7,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.wapss.digo360.R;
+import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.authentication.DeviceUtils;
+import com.wapss.digo360.response.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_login;
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 123;
-    String fb_token;
+    String fb_token, deviceId, phone;
+    EditText et_phone;
+    CustomProgressDialog progressDialog;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +81,49 @@ public class LoginActivity extends AppCompatActivity {
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,OTPActivity.class);
-                startActivity(intent);
+                phone = et_phone.getText().toString();
+                callLogin(phone, deviceId);
+            }
+        });
+    }
+
+    private void callLogin(String phone, String DeviceId) {
+        progressDialog.showProgressDialog();
+        Call<LoginResponse> login_apiCall = ApiService.apiHolders().login(phone, DeviceId);
+        login_apiCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    LoginResponse userLogin_response = response.body();
+                    String phoneNum = response.body().getResult().getMessage();
+                    editor.putString("phone", phoneNum);
+                    // editor.putString("fcm",fb_token);
+                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
+                    startActivity(intent);
+                    progressDialog.hideProgressDialog();
+
+                } else {
+                    progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                progressDialog.hideProgressDialog();
             }
         });
     }
 
     private void initi() {
         tv_login = findViewById(R.id.tv_login);
+        et_phone = findViewById(R.id.et_phone);
+        deviceId = DeviceUtils.getDeviceId(getApplicationContext());
+        progressDialog = new CustomProgressDialog(this);
+        loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        editor = loginPref.edit();
     }
 
     private boolean isNotificationPermissionGranted() {

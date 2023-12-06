@@ -81,6 +81,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_phone"
                 android:textStyle="normal"
                 android:textColor="@color/purple1"
                 android:layout_width="wrap_content"
@@ -215,7 +216,7 @@
             <TextView
                 android:textStyle="bold"
                 android:textColor="@color/purple"
-                android:id="@+id/forgot_pass"
+                android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
