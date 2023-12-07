@@ -33,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
 
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        progressDialog.hideProgressDialog();
+                       // progressDialog.hideProgressDialog();
                         startActivity(new Intent(SplashActivity.this, OnboardScreen.class));
                     }
                 },3000);
