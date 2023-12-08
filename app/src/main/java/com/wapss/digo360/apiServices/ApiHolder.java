@@ -5,6 +5,7 @@ import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.CityResponse;
 import com.wapss.digo360.response.LoginResponse;
 import com.wapss.digo360.response.OTP_Response;
+import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 
 import retrofit2.Call;
@@ -46,4 +47,25 @@ public interface ApiHolder {
                                    @Query("limit") int limit,
                                    @Query("offset") int offset,
                                    @Query("status") String status);
+
+    @GET("specialization")
+    Call<SpecializationResponse> getSpecData(@Header("Authorization") String Token,
+                                             @Query("limit") int limit,
+                                             @Query("offset") int offset,
+                                             @Query("status") String status);
+
+    @POST("doctor-detail")
+    @FormUrlEncoded
+    Call<SpecializationResponse> Registration(@Header("Authorization") String Token,
+                                    @Field("title") String title,
+                                    @Field("name") String name,
+                                    @Field("email") String email,
+                                    @Field("address") String address,
+                                    @Field("pincode") String pincode,
+                                    @Field("tnc") String tnc,
+                                    @Field("designation") String designation,
+                                    @Field("specializationId") String specializationId,
+                                    @Field("areaId")String areaId,
+                                    @Field("cityId")String cityId,
+                                    @Field("stateId")String stateId);
 }

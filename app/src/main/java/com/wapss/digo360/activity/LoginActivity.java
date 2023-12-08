@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         login_apiCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful()) {
+                if (response.code() == 201)  {
                     LoginResponse userLogin_response = response.body();
                     String phoneNum = response.body().getResult().getMessage();
                     editor.putString("phone", phoneNum);

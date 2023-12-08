@@ -146,7 +146,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -154,7 +154,7 @@
                     android:padding="15dp">
 
                     <EditText
-                        android:id="@+id/email"
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -227,7 +227,7 @@
                     android:padding="15dp">
 
                     <EditText
-                        android:id="@+id/address"
+                        android:id="@+id/et_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -299,7 +299,7 @@
                     android:padding="15dp">
 
                     <EditText
-                        android:id="@+id/pincode"
+                        android:id="@+id/et_PinCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"

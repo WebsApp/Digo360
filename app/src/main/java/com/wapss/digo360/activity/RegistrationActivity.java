@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,13 +24,10 @@ import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.AreaResponse;
 import com.wapss.digo360.response.CityResponse;
-import com.wapss.digo360.response.OTP_Response;
+import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,19 +42,22 @@ public class RegistrationActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     CustomProgressDialog progressDialog;
     List<StateResponse.Result> stateResponse;
+    List<SpecializationResponse.Result> specResponse;
     List<CityResponse.Result> cityResponse;
     List<AreaResponse.Result> areaResponse;
     private ArrayList<String> stringStateArrayList = new ArrayList<String>();
+    private ArrayList<String> stringSpecArrayList = new ArrayList<String>();
     private ArrayList<String> stringCityArrayList = new ArrayList<String>();
     private ArrayList<String> stringAreaArrayList = new ArrayList<String>();
     RadioGroup rg_gneder;
     RadioButton rb_male, rb_female;
-    String gender;
+    String gender,deviceToken;
     String[] Desg = {"Select Designation", "PENDING", "RESOLVED", "NOT RESOLVED", "IN PROCESS"};
 
     String[] Spec = {"Select Specialization", "Orthopedic Surgeon", "Dermatologist", "Neurologist", "Cardiologist"};
     String[] drOther = {"DR", "Other"};
-    EditText et_name;
+    EditText et_name,et_address,et_PinCode,et_email;
+    String dr,name,desn,specID,StateId,CityId,AreaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +74,21 @@ public class RegistrationActivity extends AppCompatActivity {
         et_name = findViewById(R.id.et_name);
         city_spinner = findViewById(R.id.city_spinner);
         area_spinner = findViewById(R.id.area_spinner);
+        et_address = findViewById(R.id.et_address);
+        et_PinCode = findViewById(R.id.et_PinCode);
+        et_email = findViewById(R.id.et_email);
         progressDialog = new CustomProgressDialog(this);
         //shared Pref
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
+        deviceToken = loginPref.getString("deviceToken", null);
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
+
+        //Spec
+        callSpecializationAPI(deviceToken);
 
         //designation
         ArrayAdapter<String> designation = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Desg);
@@ -90,8 +97,7 @@ public class RegistrationActivity extends AppCompatActivity {
         sp_designation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String partnerS = sp_designation.getSelectedItem().toString();
-                String design = partnerS;
+                desn = sp_designation.getSelectedItem().toString();
                 //Toast.makeText(getApplicationContext(),design,Toast.LENGTH_SHORT).show();
             }
 
@@ -108,27 +114,7 @@ public class RegistrationActivity extends AppCompatActivity {
         sp_dr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String partnerS = sp_dr.getSelectedItem().toString();
-                String dr = partnerS;
-                //Toast.makeText(getApplicationContext(),design,Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        //Spec
-        ArrayAdapter<String> spec = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Spec);
-        spec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_specialization.setAdapter(spec);
-        sp_specialization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String partnerS = sp_specialization.getSelectedItem().toString();
-                String Spec = partnerS;
-                //Toast.makeText(getApplicationContext(),design,Toast.LENGTH_SHORT).show();
+                dr = sp_dr.getSelectedItem().toString();
             }
 
             @Override
@@ -152,11 +138,103 @@ public class RegistrationActivity extends AppCompatActivity {
         tv_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
-                startActivity(intent);
+                name = et_name.getText().toString();
+                String pinCode = et_PinCode.getText().toString();
+                String email = et_email.getText().toString();
+                String address = et_address.getText().toString();
+
+                callRegistrationAPI(dr,name,email,gender,desn,specID,address,StateId,CityId,AreaId,pinCode);
+//                Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
+//                startActivity(intent);
             }
         });
         callStateDate();
+    }
+
+    private void callRegistrationAPI(String dr, String name,String email, String gender, String desn, String specID, String address, String stateId, String cityId, String areaId, String pinCode) {
+        progressDialog.showProgressDialog();
+        Call<SpecializationResponse> state_apiCall = ApiService.apiHolders().Registration(deviceToken,dr,name,email,address,pinCode,"Yes",desn,specID,areaId,cityId,stateId);
+        state_apiCall.enqueue(new Callback<SpecializationResponse>() {
+            @Override
+            public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    specResponse = response.body().getResult();
+
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpecializationResponse> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
+    }
+
+    private void callSpecializationAPI(String deviceToken) {
+        progressDialog.showProgressDialog();
+        Call<SpecializationResponse> state_apiCall = ApiService.apiHolders().getSpecData(deviceToken,10, 0, "ACTIVE");
+        state_apiCall.enqueue(new Callback<SpecializationResponse>() {
+            @Override
+            public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    specResponse = response.body().getResult();
+                    List<SpecializationResponse.Result> specList = new ArrayList<SpecializationResponse.Result>();
+
+
+                    for (int i = 0; i < specResponse.size(); i++) {
+                        SpecializationResponse.Result response1 = new SpecializationResponse.Result();
+                        response1.setId(specResponse.get(i).getId());
+                        response1.setName(specResponse.get(i).getName());
+                        specList.add(response1);
+
+                    }
+                    for (int i = 0; i < specList.size(); i++) {
+                        // stringArrayList.add(stateResponse.get(i).getId());
+                        stringSpecArrayList.add(specResponse.get(i).getName());
+
+                    }
+                    ArrayAdapter<String> spec = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringSpecArrayList);
+                    spec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp_specialization.setAdapter(spec);
+
+                    sp_specialization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            specID = (specResponse.get(i).getId());
+                           // String StateId = String.valueOf(keyNameStr);
+                            Log.d("Sp_Id",specID);
+
+                            //String stateName = state_spinner.getSelectedItem().toString();
+                           // callCity(specID);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                } else {
+                    progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpecializationResponse> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
     }
 
     private void callStateDate() {
@@ -191,8 +269,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            String stateName = state_spinner.getSelectedItem().toString();
-                            callCity(stateName);
+
+                            int keyNameStr = (stateResponse.get(i).getId());
+                            StateId = String.valueOf(keyNameStr);
+                            Log.d("Sp_Id",StateId);
+
+                            //String stateName = state_spinner.getSelectedItem().toString();
+                            callCity(StateId);
                         }
 
                         @Override
@@ -243,8 +326,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            String cityName = city_spinner.getSelectedItem().toString();
-                            callArea(cityName);
+                            int keyNameStr = (stateResponse.get(i).getId());
+                            CityId = String.valueOf(keyNameStr);
+                            Log.d("City_Id",CityId);
+
+                           // String cityName = city_spinner.getSelectedItem().toString();
+                            callArea(CityId);
                         }
 
                         @Override
@@ -296,7 +383,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     area_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            String cityName = area_spinner.getSelectedItem().toString();
+                            int areaId = (areaResponse.get(i).getId());
+                            AreaId = String.valueOf(areaId);
+                           // String cityName = area_spinner.getSelectedItem().toString();
                            // callArea(cityName);
                         }
 
