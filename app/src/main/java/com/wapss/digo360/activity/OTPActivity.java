@@ -81,13 +81,22 @@ public class OTPActivity extends AppCompatActivity {
         login_apiCall.enqueue(new Callback<OTP_Response>() {
             @Override
             public void onResponse(Call<OTP_Response> call, Response<OTP_Response> response) {
-                if (response.isSuccessful()) {
-                    String deviceToken = response.body().getToken();
+                if(response.code() == 201) {
+                    assert response.body() != null;
+                    String deviceToken = response.body().getResult().getToken();
+                    Boolean latestLogin = response.body().getResult().getLatest();
                     editor.putString("deviceToken", deviceToken);
+                   // editor.putString("latestLogin",latestLogin);
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "OTP Verify Successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(OTPActivity.this, RegistrationActivity.class);
-                    startActivity(intent);
+                    Intent intent;
+                    if (latestLogin) {
+                        intent = new Intent(OTPActivity.this, RegistrationActivity.class);
+                        startActivity(intent);
+                    }else {
+                        intent = new Intent(OTPActivity.this, LoadingPage.class);
+                        startActivity(intent);
+                    }
                     progressDialog.hideProgressDialog();
 
                 } else {

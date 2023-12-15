@@ -12,14 +12,15 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
 import com.wapss.digo360.response.BannerResponse;
+import com.wapss.digo360.response.SettingHomeResponse;
 
 import java.util.List;
 
 public class BannerAdapter extends PagerAdapter {
     private Context Mcontext;
-    private List<BannerResponse.Result> theSlideItemsModelClassList;
+    private List<SettingHomeResponse.Banner> theSlideItemsModelClassList;
 
-    public BannerAdapter(Context Mcontext, List<BannerResponse.Result> theSlideItemsModelClassList) {
+    public BannerAdapter(Context Mcontext, List<SettingHomeResponse.Banner> theSlideItemsModelClassList) {
         this.Mcontext = Mcontext;
         this.theSlideItemsModelClassList = theSlideItemsModelClassList;
     }
@@ -32,9 +33,8 @@ public class BannerAdapter extends PagerAdapter {
         View sliderLayout = inflater.inflate(R.layout.slider_layout,null);
 
         ImageView featured_image = sliderLayout.findViewById(R.id.image_view);
-
         Picasso.with(Mcontext)
-                .load(theSlideItemsModelClassList.get(position).getImageUrl())
+                .load(theSlideItemsModelClassList.get(position).getImage())
                 .into(featured_image);
 
 //        featured_image.setImageResource(theSlideItemsModelClassList.get(position).getImage());
