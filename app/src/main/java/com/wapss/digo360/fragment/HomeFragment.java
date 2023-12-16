@@ -34,11 +34,13 @@ import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
 import com.wapss.digo360.adapter.TopDiagnosiAdapter;
+import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
+import com.wapss.digo360.response.TopDiseaseResponse;
 
 import java.util.List;
 import java.util.Timer;
@@ -49,7 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-    ImageView notification, help,iv_banner1;
+    ImageView notification, help, iv_banner1;
     TextView tv_viewAll;
     private BottomSheetDialog bottomSheetDialog;
     ViewPager viewPager;
@@ -58,6 +60,7 @@ public class HomeFragment extends Fragment {
     List<SettingHomeResponse.Banner> settingBanner;
     List<SettingHomeResponse.Slider> sliderList;
     List<HelpResponse.Result> helpResponse;
+    List<TopDiseaseResponse.Result> topDiseaseResponse;
     private int currentPage = 0;
     private final long DELAY_MS = 3000; // Delay in milliseconds before flipping to the next page
     private final long PERIOD_MS = 3000; // Time period between each auto-flipping
@@ -65,10 +68,11 @@ public class HomeFragment extends Fragment {
     SharedPreferences.Editor editor;
     String deviceToken;
     TopDiagnosiAdapter topDiagnosiAdapter;
-    RecyclerView rv_diagnosis;
+    RecyclerView rv_diagnosis, rv_top_diseases;
     View home;
     HelpAdapter helpAdapter;
-    LinearLayout ll_faq;
+    LinearLayout ll_faq, ll_viewAllDisease;
+    TopDiseaseAdapter topDiseaseAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,8 +89,10 @@ public class HomeFragment extends Fragment {
         notification = home.findViewById(R.id.notification);
         viewPager = home.findViewById(R.id.view_pager);
         iv_banner1 = home.findViewById(R.id.iv_banner1);
-       // progressDialog = new CustomProgressDialog(getContext());
+        // progressDialog = new CustomProgressDialog(getContext());
         rv_diagnosis = home.findViewById(R.id.rv_diagnosis);
+        rv_top_diseases = home.findViewById(R.id.rv_top_diseases);
+        ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
 
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
@@ -99,7 +105,15 @@ public class HomeFragment extends Fragment {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
 
-        tv_viewAll.setOnClickListener(new View.OnClickListener() {
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ll_viewAllDisease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -110,13 +124,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
-                startActivity(intent);
-            }
-        });
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,13 +131,47 @@ public class HomeFragment extends Fragment {
             }
         });
         CallAPI();
+        callTopDiseases();
         return home;
+    }
+
+    private void callTopDiseases() {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token, 3, 0);
+        banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
+            @Override
+            public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                    assert response.body() != null;
+                    topDiseaseResponse = response.body().getResult();
+
+                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse);
+                    rv_top_diseases.setAdapter(topDiseaseAdapter);
+                    rv_top_diseases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+
+                } else {
+                    progressDialog.dismiss();
+                    ll_faq.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                ll_faq.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void callHelpAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<HelpResponse> banner_apiCall = ApiService.apiHolders().helpAPi(Token,10,0,"");
+        Call<HelpResponse> banner_apiCall = ApiService.apiHolders().helpAPi(Token, 10, 0, "");
         banner_apiCall.enqueue(new Callback<HelpResponse>() {
             @Override
             public void onResponse(Call<HelpResponse> call, Response<HelpResponse> response) {
@@ -144,7 +185,7 @@ public class HomeFragment extends Fragment {
                 } else {
                     progressDialog.dismiss();
                     ll_faq.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -152,7 +193,7 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<HelpResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 ll_faq.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -167,11 +208,11 @@ public class HomeFragment extends Fragment {
         RecyclerView rv_help = view1.findViewById(R.id.rv_help);
         ll_faq = view1.findViewById(R.id.ll_faq);
 
-        if(helpResponse.size()==0){
+        if (helpResponse.size() == 0) {
             ll_faq.setVisibility(View.VISIBLE);
         }
 
-        helpAdapter = new HelpAdapter(getContext(),helpResponse);
+        helpAdapter = new HelpAdapter(getContext(), helpResponse);
         rv_help.setAdapter(helpAdapter);
         rv_help.setLayoutManager(new LinearLayoutManager(getContext()));
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -205,13 +246,14 @@ public class HomeFragment extends Fragment {
                     callTopDiagnosis(sliderList);
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<SettingHomeResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(),"Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

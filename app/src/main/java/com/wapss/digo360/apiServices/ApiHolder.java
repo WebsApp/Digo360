@@ -11,6 +11,7 @@ import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
+import com.wapss.digo360.response.TopDiseaseResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -82,4 +83,9 @@ public interface ApiHolder {
 
     @GET("notifications")
     Call<NotificationResponse> notificationAPi(@Header("Authorization") String Token);
+
+    @GET("search-history/top-ten")
+    Call<TopDiseaseResponse> DiseaseAPi(@Header("Authorization") String Token,
+                                     @Query("limit") int limit,
+                                     @Query("offset") int offset);
 }
