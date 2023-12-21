@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
+import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 
@@ -21,9 +23,12 @@ public class TopDiseaseAdapter extends RecyclerView.Adapter<TopDiseaseAdapter.Vi
     public static List<TopDiseaseResponse.Result> ItemList;
     private Context context;
 
-    public TopDiseaseAdapter(Context context, List<TopDiseaseResponse.Result> ItemList) {
+    TopDiseaseListener listener;
+
+    public TopDiseaseAdapter(Context context, List<TopDiseaseResponse.Result> ItemList,TopDiseaseListener listener) {
         this.ItemList = ItemList;
         this.context = context;
+        this.listener = listener;
     }
     @NonNull
     @Override
@@ -55,10 +60,19 @@ public class TopDiseaseAdapter extends RecyclerView.Adapter<TopDiseaseAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_disease;
         ImageView iv_image;
+        LinearLayout item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
             tv_disease = (TextView) itemView.findViewById(R.id.tv_disease);
+            item = (LinearLayout) itemView.findViewById(R.id.item);
+
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClickedItem(ItemList.get(getAdapterPosition()), getAdapterPosition());
+                }
+            });
         }
     }
 }

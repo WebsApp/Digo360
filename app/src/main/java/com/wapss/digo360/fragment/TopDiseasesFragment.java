@@ -20,9 +20,11 @@ import android.widget.Toast;
 
 import com.wapss.digo360.R;
 import com.wapss.digo360.activity.NewCasectivity;
+import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.response.TopDiseaseResponse;
 
 import java.util.List;
@@ -73,14 +75,16 @@ public class TopDiseasesFragment extends Fragment {
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
 
-                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse);
+                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
+                        @Override
+                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
                     rv_disease.setLayoutManager(layoutManager);
                     rv_disease.setAdapter(topDiseaseAdapter);
-//                    rv_disease.setAdapter(topDiseaseAdapter);
-//                    rv_disease.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
                 } else {
                     progressDialog.dismiss();
                   //  ll_faq.setVisibility(View.VISIBLE);

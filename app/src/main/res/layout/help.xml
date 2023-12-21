@@ -4,7 +4,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:id="@+id/container"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
     <RelativeLayout
         android:background="@color/purple"
         android:id="@+id/layout1"

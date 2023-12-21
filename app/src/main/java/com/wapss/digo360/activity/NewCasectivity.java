@@ -43,7 +43,7 @@ public class NewCasectivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewCasectivity.this,AfterPatientRegistrationActivity.class);
+                Intent intent = new Intent(NewCasectivity.this,PatientsProblemActivity.class);
                 startActivity(intent);
             }
         });
@@ -69,10 +69,10 @@ public class NewCasectivity extends AppCompatActivity {
         rb_yes = findViewById(R.id.rb_yes);
         rb_no = findViewById(R.id.rb_no);
         tv_submit = findViewById(R.id.tv_submit);
-        ll_otherProblem= findViewById(R.id.ll_otherProblem);
-        rg_other = findViewById(R.id.rg_other);
-        rb_yes_other = findViewById(R.id.rb_yes_other);
-        rb_no_other = findViewById(R.id.rb_no_other);
+//        ll_otherProblem= findViewById(R.id.ll_otherProblem);
+//        rg_other = findViewById(R.id.rg_other);
+//        rb_yes_other = findViewById(R.id.rb_yes_other);
+//        rb_no_other = findViewById(R.id.rb_no_other);
 
         start_progress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,20 +134,6 @@ public class NewCasectivity extends AppCompatActivity {
                     ll_address.setVisibility(View.VISIBLE);
                 } else if (rb_no.isChecked()) {
                     ll_address.setVisibility(View.GONE);
-                }
-            }
-        });
-        //other issue
-        rg_other.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Handle RadioButton selection changes here
-                if (rb_yes_other.isChecked()) {
-                    ll_otherProblem.setVisibility(View.VISIBLE);
-                    tv_submit.setVisibility(View.VISIBLE);
-                } else if (rb_no_other.isChecked()) {
-                    ll_otherProblem.setVisibility(View.GONE);
-                    tv_submit.setVisibility(View.VISIBLE);
                 }
             }
         });

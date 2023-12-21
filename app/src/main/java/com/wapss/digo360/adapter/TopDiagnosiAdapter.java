@@ -14,11 +14,13 @@ import com.wapss.digo360.R;
 import com.wapss.digo360.response.SettingHomeResponse;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TopDiagnosiAdapter extends RecyclerView.Adapter<TopDiagnosiAdapter.ViewHolder>{
 
     public static List<SettingHomeResponse.Slider> ItemList;
     private Context context;
+    String image = "";
 
 
     public TopDiagnosiAdapter(Context context, List<SettingHomeResponse.Slider> ItemList) {
@@ -37,9 +39,17 @@ public class TopDiagnosiAdapter extends RecyclerView.Adapter<TopDiagnosiAdapter.
     @Override
     public void onBindViewHolder(@NonNull TopDiagnosiAdapter.ViewHolder holder, int position) {
 
-        Picasso.with(context)
-                .load(ItemList.get(position).getImage())
-                .into(holder.iv_image);
+        image = ItemList.get(position).getImage();
+
+        if (!Objects.equals(image, "")) {
+            Picasso.with(context)
+                    .load(ItemList.get(position).getImage())
+                    .into(holder.iv_image);
+        }else {
+            Picasso.with(context)
+                    .load(R.drawable.img2)
+                    .into(holder.iv_image);
+        }
     }
 
     @Override

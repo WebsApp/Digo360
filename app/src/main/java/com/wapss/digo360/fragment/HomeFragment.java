@@ -37,6 +37,7 @@ import com.wapss.digo360.adapter.TopDiagnosiAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
@@ -147,7 +148,12 @@ public class HomeFragment extends Fragment {
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
 
-                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse);
+                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
+                        @Override
+                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+
+                        }
+                    });
                     rv_top_diseases.setAdapter(topDiseaseAdapter);
                     rv_top_diseases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
