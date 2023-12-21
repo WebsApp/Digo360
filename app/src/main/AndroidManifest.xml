@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.PatientsProblemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PatientRegistrationCheckActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AfterQuestionActivity"
             android:exported="false" />
         <activity
@@ -71,6 +77,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">

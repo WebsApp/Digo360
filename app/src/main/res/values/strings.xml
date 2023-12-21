@@ -68,6 +68,9 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
+    <string name="patient_registration">Patient Registration</string>
+    <string name="check">Check</string>
+    <string name="patients_checkup">Patients CheckUp</string>
 
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
