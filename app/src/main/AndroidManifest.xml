@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AboutDigo"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyProfile"
+            android:exported="false" />
+        <activity
             android:name=".activity.AfterQuestionActivity"
             android:exported="false" />
         <activity
@@ -71,6 +77,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">
@@ -78,6 +85,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
