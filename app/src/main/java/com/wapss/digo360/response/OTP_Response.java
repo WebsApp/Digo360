@@ -3,28 +3,56 @@ package com.wapss.digo360.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class OTP_Response {
-    @SerializedName("token")
+    @SerializedName("result")
     @Expose
-    private String token;
-    @SerializedName("user")
-    @Expose
-    private User user;
+    private Result result;
 
-    public String getToken() {
-        return token;
+    public Result getResult() {
+        return result;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setResult(Result result) {
+        this.result = result;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public class Result {
 
-    public void setUser(User user) {
-        this.user = user;
+        @SerializedName("token")
+        @Expose
+        private String token;
+        @SerializedName("user")
+        @Expose
+        private User user;
+        @SerializedName("latest")
+        @Expose
+        private Boolean latest;
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+        public Boolean getLatest() {
+            return latest;
+        }
+
+        public void setLatest(Boolean latest) {
+            this.latest = latest;
+        }
     }
 
     public class User {
@@ -47,6 +75,9 @@ public class OTP_Response {
         @SerializedName("status")
         @Expose
         private String status;
+        @SerializedName("doctorDetail")
+        @Expose
+        private List<Object> doctorDetail;
 
         public String getId() {
             return id;
@@ -94,6 +125,14 @@ public class OTP_Response {
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public List<Object> getDoctorDetail() {
+            return doctorDetail;
+        }
+
+        public void setDoctorDetail(List<Object> doctorDetail) {
+            this.doctorDetail = doctorDetail;
         }
     }
 }

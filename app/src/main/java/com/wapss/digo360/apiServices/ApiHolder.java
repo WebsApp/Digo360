@@ -3,10 +3,15 @@ package com.wapss.digo360.apiServices;
 import com.wapss.digo360.response.AreaResponse;
 import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.CityResponse;
+import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.LoginResponse;
+import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
+import com.wapss.digo360.response.RegistrationResponse;
+import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
+import com.wapss.digo360.response.TopDiseaseResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -18,8 +23,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiHolder {
-    @GET("banners")
-    Call<BannerResponse> banner(@Query("token") String token);
+    @GET("settings/default")
+    Call<SettingHomeResponse> homeAPi(@Header("Authorization") String Token);
 
     @POST("auth/doctor/mobile/login")
     @FormUrlEncoded
@@ -56,16 +61,31 @@ public interface ApiHolder {
 
     @POST("doctor-detail")
     @FormUrlEncoded
-    Call<SpecializationResponse> Registration(@Header("Authorization") String Token,
-                                    @Field("title") String title,
-                                    @Field("name") String name,
-                                    @Field("email") String email,
-                                    @Field("address") String address,
-                                    @Field("pincode") String pincode,
-                                    @Field("tnc") String tnc,
-                                    @Field("designation") String designation,
-                                    @Field("specializationId") String specializationId,
-                                    @Field("areaId")String areaId,
-                                    @Field("cityId")String cityId,
-                                    @Field("stateId")String stateId);
+    Call<RegistrationResponse> Registration(@Header("Authorization") String Token,
+                                            @Field("title") String title,
+                                            @Field("name") String name,
+                                            @Field("gender") String gender,
+                                            @Field("email") String email,
+                                            @Field("address") String address,
+                                            @Field("pincode") String pincode,
+                                            @Field("tnc") String tnc,
+                                            @Field("designation") String designation,
+                                            @Field("specializationId") String specializationId,
+                                            @Field("areaId") String areaId,
+                                            @Field("cityId") String cityId,
+                                            @Field("stateId") String stateId);
+
+    @GET("faqs")
+    Call<HelpResponse> helpAPi(@Header("Authorization") String Token,
+                               @Query("limit") int limit,
+                               @Query("offset") int offset,
+                               @Query("keyword") String keyword);
+
+    @GET("notifications")
+    Call<NotificationResponse> notificationAPi(@Header("Authorization") String Token);
+
+    @GET("search-history/top-ten")
+    Call<TopDiseaseResponse> DiseaseAPi(@Header("Authorization") String Token,
+                                     @Query("limit") int limit,
+                                     @Query("offset") int offset);
 }

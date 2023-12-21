@@ -47,79 +47,15 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_square_corner"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_heading3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Heading Tag Line "
-                    android:textColor="@color/purple"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Create stunning NFTs applications"
-                    android:textColor="@color/black"
-                    android:textSize="12dp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="end"
-                android:padding="10dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:gravity="end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="2 min ago "
-                android:textColor="@color/purple"
-                android:textSize="14dp"
-                android:textStyle="normal" />
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,6 +66,7 @@
         android:orientation="vertical">
 
        <ImageView
+           android:id="@+id/iv_noti"
            android:visibility="gone"
            android:src="@drawable/notification"
            android:layout_width="match_parent"

@@ -4,8 +4,9 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:id="@+id/container"
-    android:layout_height="200dp">
+    android:layout_height="wrap_content">
     <RelativeLayout
+        android:background="@color/purple"
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,100 +26,32 @@
             android:layout_height="50dp"
             android:text="Help"
             android:textSize="16dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_gravity="center"/>
 
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/question"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_help"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout1"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_square_corner"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_heading3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Heading Tag Line "
-                    android:textColor="@color/purple"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Create stunning NFTs applications"
-                    android:textColor="@color/black"
-                    android:textSize="12dp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:gravity="end"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_marginEnd="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/lines" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:gravity="end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="2 min ago "
-                android:textColor="@color/purple"
-                android:textSize="14dp"
-                android:textStyle="normal" />
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp" />
 
     <LinearLayout
+        android:id="@+id/ll_faq"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/question"
+        android:layout_below="@+id/layout1"
         android:layout_margin="10dp"
         android:orientation="vertical">
 
         <ImageView
-            android:visibility="gone"
             android:src="@drawable/faq"
             android:layout_width="match_parent"
             android:layout_height="300dp"/>

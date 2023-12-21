@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.AreaResponse;
 import com.wapss.digo360.response.CityResponse;
+import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 
@@ -37,7 +39,7 @@ import retrofit2.Response;
 public class RegistrationActivity extends AppCompatActivity {
 
     TextView tv_registration;
-    Spinner state_spinner, sp_designation, sp_specialization, sp_dr, city_spinner,area_spinner;
+    Spinner state_spinner, sp_designation, sp_specialization, sp_dr, city_spinner, area_spinner;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     CustomProgressDialog progressDialog;
@@ -50,14 +52,14 @@ public class RegistrationActivity extends AppCompatActivity {
     private ArrayList<String> stringCityArrayList = new ArrayList<String>();
     private ArrayList<String> stringAreaArrayList = new ArrayList<String>();
     RadioGroup rg_gneder;
-    RadioButton rb_male, rb_female;
-    String gender,deviceToken;
+    RadioButton rb_male, rb_female,rb_other;
+    String gender, deviceToken;
     String[] Desg = {"Select Designation", "PENDING", "RESOLVED", "NOT RESOLVED", "IN PROCESS"};
 
     String[] Spec = {"Select Specialization", "Orthopedic Surgeon", "Dermatologist", "Neurologist", "Cardiologist"};
     String[] drOther = {"DR", "Other"};
-    EditText et_name,et_address,et_PinCode,et_email;
-    String dr,name,desn,specID,StateId,CityId,AreaId;
+    EditText et_name, et_address, et_PinCode, et_email;
+    String dr, name, desn, specID, StateId, CityId, AreaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class RegistrationActivity extends AppCompatActivity {
         rg_gneder = findViewById(R.id.rg_gneder);
         rb_male = findViewById(R.id.rb_male);
         rb_female = findViewById(R.id.rb_female);
+        rb_other = findViewById(R.id.rb_other);
         sp_designation = findViewById(R.id.sp_designation);
         sp_specialization = findViewById(R.id.sp_specialization);
         sp_dr = findViewById(R.id.sp_dr);
@@ -88,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
         //Spec
-        callSpecializationAPI(deviceToken);
+        callSpecializationAPI();
 
         //designation
         ArrayAdapter<String> designation = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Desg);
@@ -128,9 +131,11 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // Handle RadioButton selection changes here
                 if (rb_male.isChecked()) {
-                    gender = "Male";
+                    gender = "MALE";
                 } else if (rb_female.isChecked()) {
-                    gender = "Female";
+                    gender = "FEMALE";
+                } else if(rb_other.isChecked()) {
+                    gender = "OTHER";
                 }
             }
         });
@@ -143,26 +148,27 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = et_email.getText().toString();
                 String address = et_address.getText().toString();
 
-                callRegistrationAPI(dr,name,email,gender,desn,specID,address,StateId,CityId,AreaId,pinCode);
-//                Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
-//                startActivity(intent);
+                callRegistrationAPI(dr, name, email, gender, desn, specID, address, StateId, CityId, AreaId, pinCode);
             }
         });
         callStateDate();
     }
 
-    private void callRegistrationAPI(String dr, String name,String email, String gender, String desn, String specID, String address, String stateId, String cityId, String areaId, String pinCode) {
+    private void callRegistrationAPI(String dr, String name, String email, String gender, String desn, String specID, String address, String stateId, String cityId, String areaId, String pinCode) {
         progressDialog.showProgressDialog();
-        Call<SpecializationResponse> state_apiCall = ApiService.apiHolders().Registration(deviceToken,dr,name,email,address,pinCode,"Yes",desn,specID,areaId,cityId,stateId);
-        state_apiCall.enqueue(new Callback<SpecializationResponse>() {
+        String Token = "Bearer " + deviceToken;
+        Call<RegistrationResponse> state_apiCall = ApiService.apiHolders().Registration(Token, dr, name,gender, email, address, pinCode, "Yes", desn, specID, areaId, cityId, stateId);
+        state_apiCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
-            public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
-                    assert response.body() != null;
-                    specResponse = response.body().getResult();
+//                    assert response.body() != null;
+//                    specResponse = response.body().getResult();
 
-                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Successfully Registration", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
+                    startActivity(intent);
 
                 } else {
                     progressDialog.hideProgressDialog();
@@ -171,15 +177,16 @@ public class RegistrationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SpecializationResponse> call, Throwable t) {
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
                 progressDialog.hideProgressDialog();
             }
         });
     }
 
-    private void callSpecializationAPI(String deviceToken) {
+    private void callSpecializationAPI() {
         progressDialog.showProgressDialog();
-        Call<SpecializationResponse> state_apiCall = ApiService.apiHolders().getSpecData(deviceToken,10, 0, "ACTIVE");
+        String Token = "Bearer " + deviceToken;
+        Call<SpecializationResponse> state_apiCall = ApiService.apiHolders().getSpecData(Token, 10, 0, "ACTIVE");
         state_apiCall.enqueue(new Callback<SpecializationResponse>() {
             @Override
             public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
@@ -211,11 +218,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                             specID = (specResponse.get(i).getId());
-                           // String StateId = String.valueOf(keyNameStr);
-                            Log.d("Sp_Id",specID);
-
-                            //String stateName = state_spinner.getSelectedItem().toString();
-                           // callCity(specID);
+                            // String StateId = String.valueOf(keyNameStr);
+                            Log.d("Sp_Id", specID);
                         }
 
                         @Override
@@ -272,7 +276,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             int keyNameStr = (stateResponse.get(i).getId());
                             StateId = String.valueOf(keyNameStr);
-                            Log.d("Sp_Id",StateId);
+                            Log.d("Sp_Id", StateId);
 
                             //String stateName = state_spinner.getSelectedItem().toString();
                             callCity(StateId);
@@ -328,9 +332,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             int keyNameStr = (stateResponse.get(i).getId());
                             CityId = String.valueOf(keyNameStr);
-                            Log.d("City_Id",CityId);
+                            Log.d("City_Id", CityId);
 
-                           // String cityName = city_spinner.getSelectedItem().toString();
+                            // String cityName = city_spinner.getSelectedItem().toString();
                             callArea(CityId);
                         }
 
@@ -385,8 +389,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             int areaId = (areaResponse.get(i).getId());
                             AreaId = String.valueOf(areaId);
-                           // String cityName = area_spinner.getSelectedItem().toString();
-                           // callArea(cityName);
+                            // String cityName = area_spinner.getSelectedItem().toString();
+                            // callArea(cityName);
                         }
 
                         @Override
