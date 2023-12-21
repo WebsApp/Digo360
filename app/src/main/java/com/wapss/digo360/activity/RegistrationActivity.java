@@ -54,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
     RadioGroup rg_gneder;
     RadioButton rb_male, rb_female,rb_other;
     String gender, deviceToken;
-    String[] Desg = {"Select Designation", "PENDING", "RESOLVED", "NOT RESOLVED", "IN PROCESS"};
+    String[] Desg = {"Experience","Intern","Student"};
 
     String[] Spec = {"Select Specialization", "Orthopedic Surgeon", "Dermatologist", "Neurologist", "Cardiologist"};
     String[] drOther = {"DR", "Other"};
