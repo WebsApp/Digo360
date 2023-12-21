@@ -24,6 +24,12 @@
             android:name=".activity.PatientRegistrationCheckActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.AboutDigo"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MyProfile"
+            android:exported="false" />
+        <activity
             android:name=".activity.AfterQuestionActivity"
             android:exported="false" />
         <activity
@@ -85,6 +91,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

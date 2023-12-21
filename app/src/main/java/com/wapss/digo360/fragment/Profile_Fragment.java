@@ -1,5 +1,7 @@
 package com.wapss.digo360.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -10,10 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.activity.AboutDigo;
+import com.wapss.digo360.activity.MyProfile;
+
 public class Profile_Fragment extends Fragment {
 
+    LinearLayout profile_layout,about_layout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +30,26 @@ public class Profile_Fragment extends Fragment {
         window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_, container, false);
+        View profile =  inflater.inflate(R.layout.fragment_profile_, container, false);
+
+        profile_layout = profile.findViewById(R.id.profile_layout);
+        about_layout = profile.findViewById(R.id.about_layout);
+        profile_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), MyProfile.class));
+            }
+        });
+        about_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AboutDigo.class));
+            }
+        });
+        return profile;
     }
 }
