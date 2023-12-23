@@ -330,12 +330,19 @@ public class RegistrationActivity extends AppCompatActivity {
                     city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            int keyNameStr = (stateResponse.get(i).getId());
-                            CityId = String.valueOf(keyNameStr);
-                            Log.d("City_Id", CityId);
+                            String keyNameStr = (stateResponse.get(i).getId()).toString();
+//                            if( (keyNameStr > 0) && (i < keyNameStr) ) {
+//                                callArea(keyNameStr);
+//                            }
+//                            else { // do nothing
+//                            }
+
+                            //CityId = String.valueOf(keyNameStr);
+                           // Log.d("City_Id", CityId);
 
                             // String cityName = city_spinner.getSelectedItem().toString();
-                            callArea(CityId);
+                            callArea(keyNameStr);
+
                         }
 
                         @Override

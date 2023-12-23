@@ -18,6 +18,7 @@ import com.wapss.digo360.fragment.TopDiseasesFragment;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
+    String page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         //loading the default fragment
-        loadFragment(new HomeFragment());
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            // getting the string back
+            page = bundle.getString("page", null);
+        }
+        if (page.equals("my_profile")){
+            loadFragment(new Profile_Fragment());
+        }else {
+            loadFragment(new HomeFragment());
+        }
     }
 
     @Override

@@ -313,6 +313,8 @@
                         android:hint="@string/pincode"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
+                        android:inputType="number"
+                        android:maxLength="6"
                         android:textSize="16dp" />
                 </LinearLayout>
             </LinearLayout>
