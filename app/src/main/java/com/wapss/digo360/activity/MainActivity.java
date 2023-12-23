@@ -27,15 +27,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         //loading the default fragment
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            // getting the string back
-            page = bundle.getString("page", null);
-        }
-        if (page.equals("my_profile")){
-            loadFragment(new Profile_Fragment());
-        }else {
-            loadFragment(new HomeFragment());
-        }
+//        if (bundle != null) {
+//            // getting the string back
+//            page = bundle.getString("page", null);
+//            if (page.equals("my_profile")){
+//                loadFragment(new Profile_Fragment());
+//            }else {
+//                loadFragment(new HomeFragment());
+//            }
+//        }else {
+//            loadFragment(new HomeFragment());
+//        }
+        loadFragment(new HomeFragment());
     }
 
     @Override

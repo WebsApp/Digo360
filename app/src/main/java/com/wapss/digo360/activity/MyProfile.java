@@ -67,11 +67,12 @@ public class MyProfile extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("page","my_profile");
-                Intent intent = new Intent(MyProfile.this,MainActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("page","my_profile");
+//                Intent intent = new Intent(MyProfile.this,MainActivity.class);
+//                intent.putExtras(bundle);
+//                startActivity(intent);
+                onBackPressed();
             }
         });
 
@@ -187,5 +188,11 @@ public class MyProfile extends AppCompatActivity {
     private void takePictureCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, Camera_Req_Code);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

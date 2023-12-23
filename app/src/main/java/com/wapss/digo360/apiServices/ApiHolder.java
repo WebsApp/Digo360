@@ -8,6 +8,7 @@ import com.wapss.digo360.response.LoginResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.RegistrationResponse;
+import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
@@ -88,4 +89,10 @@ public interface ApiHolder {
     Call<TopDiseaseResponse> DiseaseAPi(@Header("Authorization") String Token,
                                      @Query("limit") int limit,
                                      @Query("offset") int offset);
+
+    @GET("diseases/list")
+    Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
+                                          @Query("limit") int limit,
+                                          @Query("offset") int offset,
+                                          @Query("keyword")String keyword);
 }

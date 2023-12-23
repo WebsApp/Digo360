@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
 import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.adapter.BannerAdapter;
@@ -74,6 +75,8 @@ public class HomeFragment extends Fragment {
     HelpAdapter helpAdapter;
     LinearLayout ll_faq, ll_viewAllDisease;
     TopDiseaseAdapter topDiseaseAdapter;
+    ImageView iv_image1,iv_image2,iv_image3;
+    TextView tv_disease1,tv_disease2,tv_disease3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,14 @@ public class HomeFragment extends Fragment {
         rv_diagnosis = home.findViewById(R.id.rv_diagnosis);
         rv_top_diseases = home.findViewById(R.id.rv_top_diseases);
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
+
+        iv_image1 = home.findViewById(R.id.iv_image1);
+        iv_image2 = home.findViewById(R.id.iv_image2);
+        iv_image3 = home.findViewById(R.id.iv_image3);
+
+        tv_disease1 = home.findViewById(R.id.tv_disease1);
+        tv_disease2 = home.findViewById(R.id.tv_disease2);
+        tv_disease3 = home.findViewById(R.id.tv_disease3);
 
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
@@ -147,6 +158,41 @@ public class HomeFragment extends Fragment {
                     progressDialog.dismiss();
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
+
+                    if (topDiseaseResponse!=null){
+                        tv_disease1.setText(topDiseaseResponse.get(0).getDiseaseName());
+                        tv_disease2.setText(topDiseaseResponse.get(1).getDiseaseName());
+                        tv_disease3.setText(topDiseaseResponse.get(2).getDiseaseName());
+
+                        String img1 =topDiseaseResponse.get(0).getDiseaseImage();
+                        String img2 = topDiseaseResponse.get(1).getDiseaseImage();
+                        String img3 =topDiseaseResponse.get(2).getDiseaseImage();
+
+                        if (img1==null){
+                            iv_image1.setBackgroundResource(R.drawable.ivicon);
+                        }
+                        else {
+                            Picasso.with(getContext())
+                                    .load(img1)
+                                    .into(iv_image1);
+                        }
+                        if (img2==null){
+                            iv_image2.setBackgroundResource(R.drawable.ivicon);
+                        }
+                        else {
+                            Picasso.with(getContext())
+                                    .load(img2)
+                                    .into(iv_image2);
+                        }
+                        if (img3==null){
+                            iv_image3.setBackgroundResource(R.drawable.ivicon);
+                        }
+                        else {
+                            Picasso.with(getContext())
+                                    .load(img3)
+                                    .into(iv_image3);
+                        }
+                    }
 
                     topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
                         @Override
