@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.LoginActivity">
+
+
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -35,22 +37,24 @@
 
                 <TextView
                     android:padding="5dp"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/login"
                     android:textColor="@color/white"
-                    android:textSize="16dp" />
+                    android:textSize="@dimen/_15ssp" />
 
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <ImageView
         android:id="@+id/otpimg"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/_170sdp"
         android:layout_below="@id/header"
         android:src="@drawable/loginbg" />
 
@@ -68,7 +72,7 @@
             android:padding="5dp"
             android:text="@string/phone_number"
             android:textColor="@color/purple"
-            android:textSize="16dp"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
         <TextView
@@ -77,8 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"
-            android:textSize="16dp"
+            android:text="@string/top_header"
+            android:textSize="@dimen/_10ssp"
             android:visibility="visible" />
     </LinearLayout>
 
@@ -91,35 +95,35 @@
         android:orientation="horizontal">
         <LinearLayout
             android:background="@drawable/time_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_35sdp">
             <TextView
-                android:padding="15dp"
                 android:text="+91"
-                android:textSize="18dp"
+                android:textSize="@dimen/_15ssp"
                 android:textColor="@color/purple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
         <LinearLayout
             android:background="@drawable/time_bg"
             android:layout_width="match_parent"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/_35sdp">
             <EditText
                 android:id="@+id/et_phone"
-                android:layout_marginStart="5dp"
                 android:background="@null"
-                android:padding="15dp"
                 android:textColorHint="@color/purple"
                 android:hint="97XXXXXX44"
-                android:textSize="18dp"
+                android:textSize="@dimen/_14ssp"
                 android:textColor="@color/purple"
                 android:maxLength="10"
                 android:inputType="number"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -128,19 +132,39 @@
         android:layout_margin="10dp"
         android:layout_below="@+id/ll_phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"
-            android:textSize="14dp"
-            android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"/>
+            android:textSize="@dimen/_10ssp"
+            android:text="@string/terms"/>
+        <TextView
+            android:id="@+id/txt_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:text="@string/privacy_policy"/>
+        <TextView
+            android:id="@+id/txt_tnc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="bold"
+            android:text="@string/terms_amp_conditions"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-2dp"
         android:gravity="bottom"
         android:orientation="vertical">
 
@@ -161,27 +185,24 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="7dp"
+            app:cardCornerRadius="@dimen/_7sdp"
             app:cardElevation="5dp">
 
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:background="@color/purple"
+                android:background="@drawable/ripple_bg"
                 android:gravity="center"
-                android:padding="10dp"
                 android:text="@string/agree_amp_continue"
                 android:textColor="@color/yellow"
-                android:textSize="15dp"
+                android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 android:visibility="visible" />
 
         </androidx.cardview.widget.CardView>
 
-
     </LinearLayout>
-
 
 </RelativeLayout>

@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -31,7 +32,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
+import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.NotificationActivity;
+import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
+import com.wapss.digo360.activity.SearchPage;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
 import com.wapss.digo360.adapter.TopDiagnosiAdapter;
@@ -54,7 +58,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     ImageView notification, help, iv_banner1;
-    TextView tv_viewAll;
+    TextView tv_viewAll,btn_search;
     private BottomSheetDialog bottomSheetDialog;
     ViewPager viewPager;
     CustomProgressDialog progressDialog;
@@ -78,6 +82,8 @@ public class HomeFragment extends Fragment {
     ImageView iv_image1,iv_image2,iv_image3;
     TextView tv_disease1,tv_disease2,tv_disease3;
 
+    LinearLayout btn_fever;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,14 +95,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         home = inflater.inflate(R.layout.fragment_home, container, false);
         help = home.findViewById(R.id.help);
+        btn_search = home.findViewById(R.id.btn_search);
         tv_viewAll = home.findViewById(R.id.tv_viewAll);
         notification = home.findViewById(R.id.notification);
-        viewPager = home.findViewById(R.id.view_pager);
+        //viewPager = home.findViewById(R.id.view_pager);
         iv_banner1 = home.findViewById(R.id.iv_banner1);
         // progressDialog = new CustomProgressDialog(getContext());
         rv_diagnosis = home.findViewById(R.id.rv_diagnosis);
         rv_top_diseases = home.findViewById(R.id.rv_top_diseases);
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
+        btn_fever = home.findViewById(R.id.btn_fever);
 
         iv_image1 = home.findViewById(R.id.iv_image1);
         iv_image2 = home.findViewById(R.id.iv_image2);
@@ -116,7 +124,6 @@ public class HomeFragment extends Fragment {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
-
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +131,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchPage.class);
+                startActivity(intent);
+            }
+        });
         ll_viewAllDisease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,15 +148,21 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null).commit();
             }
         });
-
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callHelpAPI(deviceToken);
+                //callHelpAPI(deviceToken);
+                startActivity(new Intent(getContext(), HelpPage.class));
             }
         });
-        CallAPI();
-        callTopDiseases();
+        btn_fever.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
+            }
+        });
+//        CallAPI();
+//        callTopDiseases();
         return home;
     }
 
@@ -278,7 +297,6 @@ public class HomeFragment extends Fragment {
         bottomSheetDialog.show();
         bottomSheetDialog.setCanceledOnTouchOutside(false);
     }
-
     private void CallAPI() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -301,7 +319,6 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<SettingHomeResponse> call, Throwable t) {
                 progressDialog.dismiss();
@@ -320,11 +337,6 @@ public class HomeFragment extends Fragment {
     private void callBanner(List<SettingHomeResponse.Banner> settingBanner) {
         BannerAdapter bannerAdapter = new BannerAdapter(getContext(), settingBanner);
         viewPager.setAdapter(bannerAdapter);
-
-//                    // The_slide_timer
-//                    java.util.Timer timer = new java.util.Timer();
-//                    timer.scheduleAtFixedRate(new The_slide_timer(), 2000, 3000);
-        // Auto-scrolling with Timer
         final Handler handler = new Handler(Looper.getMainLooper());
         final Runnable update = () -> {
             if (currentPage == settingBanner.size()) {

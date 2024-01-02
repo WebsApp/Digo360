@@ -43,7 +43,6 @@ public class SplashActivity extends AppCompatActivity {
         deviceToken = loginPref.getString("deviceToken", null);
 
        // progressDialog.showProgressDialog();
-
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -68,7 +67,6 @@ public class SplashActivity extends AppCompatActivity {
                 },3000);
                 // HomeActivity.class is the activity to go after showing the splash screen.
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
             }

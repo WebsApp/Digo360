@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -52,18 +53,36 @@ public class MyProfile extends AppCompatActivity {
     private final int MY_CAMERA_REQUEST_CODE = 101;
     ImageView back;
 
+    ImageView address_edite,college_edite,btn_camera,btn_edite;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        btn_edite = findViewById(R.id.btn_edite);
+        btn_camera = findViewById(R.id.btn_camera);
         iv_profile = findViewById(R.id.iv_profile);
         back = findViewById(R.id.back);
+        college_edite = findViewById(R.id.college_edite);
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
-
+        address_edite = findViewById(R.id.address_edite);
+        address_edite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyProfile.this, AddressPage.class));
+            }
+        });
+        college_edite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyProfile.this, CollegePage.class));
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
@@ -30,6 +31,7 @@ import retrofit2.Response;
 
 public class NotificationActivity extends AppCompatActivity {
     ImageView back, iv_noti;
+    TextView btn_back_home;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String deviceToken;
@@ -43,6 +45,7 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         back = findViewById(R.id.back);
+        btn_back_home = findViewById(R.id.btn_back_home);
         progressDialog = new CustomProgressDialog(this);
         rv_notification = findViewById(R.id.rv_notification);
         iv_noti = findViewById(R.id.iv_noti);
@@ -58,14 +61,20 @@ public class NotificationActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               finish();
+            }
+        });
+        btn_back_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(NotificationActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-        callNotificationAPI(deviceToken);
+        /*callNotificationAPI(deviceToken);*/
     }
 
-    private void callNotificationAPI(String deviceToken) {
+    /*private void callNotificationAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
         Call<NotificationResponse> banner_apiCall = ApiService.apiHolders().notificationAPi(Token);
@@ -98,5 +107,5 @@ public class NotificationActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }

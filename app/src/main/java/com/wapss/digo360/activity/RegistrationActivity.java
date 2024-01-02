@@ -57,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
     String[] Desg = {"Experience","Intern","Student"};
 
     String[] Spec = {"Select Specialization", "Orthopedic Surgeon", "Dermatologist", "Neurologist", "Cardiologist"};
-    String[] drOther = {"DR", "Other"};
+    String[] drOther = {"Dr","Other"};
     EditText et_name, et_address, et_PinCode, et_email;
     String dr, name, desn, specID, StateId, CityId, AreaId;
 
@@ -91,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
         //Spec
-        callSpecializationAPI();
+        //callSpecializationAPI();
 
         //designation
         ArrayAdapter<String> designation = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Desg);
@@ -148,10 +148,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = et_email.getText().toString();
                 String address = et_address.getText().toString();
 
-                callRegistrationAPI(dr, name, email, gender, desn, specID, address, StateId, CityId, AreaId, pinCode);
+                Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
+                startActivity(intent);
+                //callRegistrationAPI(dr, name, email, gender, desn, specID, address, StateId, CityId, AreaId, pinCode);
             }
         });
-        callStateDate();
+        //callStateDate();
     }
 
     private void callRegistrationAPI(String dr, String name, String email, String gender, String desn, String specID, String address, String stateId, String cityId, String areaId, String pinCode) {
@@ -279,7 +281,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             Log.d("Sp_Id", StateId);
 
                             //String stateName = state_spinner.getSelectedItem().toString();
-                            callCity(StateId);
+                            //callCity(StateId);
                         }
 
                         @Override
@@ -341,7 +343,7 @@ public class RegistrationActivity extends AppCompatActivity {
                            // Log.d("City_Id", CityId);
 
                             // String cityName = city_spinner.getSelectedItem().toString();
-                            callArea(keyNameStr);
+                            //callArea(keyNameStr);
 
                         }
 

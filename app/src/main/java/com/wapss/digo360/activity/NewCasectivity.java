@@ -73,11 +73,9 @@ public class NewCasectivity extends AppCompatActivity {
 //        rg_other = findViewById(R.id.rg_other);
 //        rb_yes_other = findViewById(R.id.rb_yes_other);
 //        rb_no_other = findViewById(R.id.rb_no_other);
-
         start_progress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CurrentProgress = CurrentProgress + 10;
                 progressBar.setProgress(CurrentProgress);
                 progressBar.setMax(100);
@@ -88,11 +86,7 @@ public class NewCasectivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                TopDiseasesFragment topDiseasesFragment = new TopDiseasesFragment();
-//                fragmentTransaction.replace(R.id.main_container, topDiseasesFragment);
-//                fragmentTransaction.addToBackStack(null).commit();
+                finish();
             }
         });
 

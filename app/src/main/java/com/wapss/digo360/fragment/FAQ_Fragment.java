@@ -61,7 +61,7 @@ public class FAQ_Fragment extends Fragment {
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
 
-        callHelpAPI();
+        ///callHelpAPI();
 
         return faq;
     }

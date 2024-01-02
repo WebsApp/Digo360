@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import com.wapss.digo360.R;
 
 public class RegistrationCheckActivity extends AppCompatActivity {
-
     Animation anim;
     ImageView otpimg;
     @Override
@@ -41,7 +40,7 @@ public class RegistrationCheckActivity extends AppCompatActivity {
                     public void run() {
                         startActivity(new Intent(RegistrationCheckActivity.this, RegistrationActivity.class));
                     }
-                },1000);
+                },3000);
                //  HomeActivity.class is the activity to go after showing the Registration screen.
             }
 

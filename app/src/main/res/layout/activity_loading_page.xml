@@ -15,6 +15,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,33 +47,56 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_below="@+id/header"
-        android:layout_margin="20dp">
+        android:layout_margin="@dimen/_20sdp">
 
         <ImageView
             android:id="@+id/iv_loading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_gravity="center"
             android:src="@drawable/loading" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/loginmsg"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_below="@+id/ll_image"
+        android:layout_marginEnd="@dimen/_10sdp"
+
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_image"
-        android:layout_margin="20dp">
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:text="@string/hold"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"
-            android:textColor="@color/purple" />
+            android:text="We are creating Specialized Dashboard for you. It might take some to please allow us a moment."
+            android:textColor="#7210A1"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/_11ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textStyle="normal"/>
+
     </LinearLayout>
 
 </RelativeLayout>

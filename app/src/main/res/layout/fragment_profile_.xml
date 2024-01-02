@@ -51,6 +51,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/logout_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -59,6 +60,7 @@
                 android:gravity="right">
 
                 <ImageView
+                    android:id="@+id/btn_faq"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/question"
@@ -120,7 +122,7 @@
                         android:layout_margin="5dp"
                         android:text="Dr. Sangeeta Paul"
                         android:textColor="@color/purple"
-                        android:textSize="15dp"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -172,6 +174,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:id="@+id/btn_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -182,14 +185,12 @@
                         android:layout_weight="3"
                         android:orientation="vertical">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:padding="5dp"
-                            android:src="@drawable/user"
-                            app:civ_border_color="@color/purple"
-                            app:civ_border_width="1dp" />
+                            android:src="@drawable/language"/>
 
                     </LinearLayout>
 
@@ -258,14 +259,12 @@
                         android:layout_weight="3"
                         android:orientation="vertical">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:padding="5dp"
-                            android:src="@drawable/user"
-                            app:civ_border_color="@color/purple"
-                            app:civ_border_width="1dp" />
+                            android:src="@drawable/permission"/>
 
                     </LinearLayout>
 
@@ -327,6 +326,7 @@
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
+                    android:id="@+id/btn_refer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -338,14 +338,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/refer"/>
 
                     </LinearLayout>
 
@@ -414,14 +414,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/case_manage"/>
 
                     </LinearLayout>
 
@@ -503,14 +503,12 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            app:civ_border_color="@color/purple"
-                            app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/case_storage"/>
 
                     </LinearLayout>
 
@@ -579,14 +577,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/search"/>
 
                     </LinearLayout>
 
@@ -655,14 +653,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/ai_question"/>
 
                     </LinearLayout>
 
@@ -731,14 +729,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/alarm"/>
 
                     </LinearLayout>
 
@@ -807,14 +805,14 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:civ_border_color="@color/purple"
                             app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/file"/>
 
                     </LinearLayout>
 
@@ -888,14 +886,12 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            app:civ_border_color="@color/purple"
-                            app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/about"/>
 
                     </LinearLayout>
 
@@ -952,6 +948,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <LinearLayout
+                    android:id="@+id/version_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -964,14 +961,12 @@
                         android:orientation="vertical"
                         android:layout_weight="3">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            app:civ_border_color="@color/purple"
-                            app:civ_border_width="1dp"
                             android:padding="5dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/user"/>
+                            android:src="@drawable/app_version"/>
 
                     </LinearLayout>
 

@@ -6,115 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:layout_gravity="center"
+    android:gravity="center"
     tools:context=".activity.RegistrationCheckActivity">
-    <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bground"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:visibility="visible"
-                    android:id="@+id/back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_back_arrow" />
-
-                <TextView
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/registration"
-                    android:textColor="@color/white"
-                    android:textSize="16dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_marginTop="50dp"
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/otpimg"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@id/header"
-        android:src="@drawable/registrationcheck" />
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_centerInParent="true"
+        app:lottie_rawRes="@raw/customer_service"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
     <LinearLayout
         android:id="@+id/loginmsg"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_below="@+id/otpimg"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"
-            android:textSize="16dp"
-            android:text="@string/create_stunning_nfts_applications_with_bullet_proof_guidelines"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:orientation="vertical">
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:text="@string/loding"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="By continuing you agree to our Terms &amp; Condition"
-            android:textSize="14dp"
-            android:visibility="gone" />
-
-        <androidx.cardview.widget.CardView
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="7dp"
-            app:cardElevation="5dp">
-
-            <TextView
-                android:id="@+id/tv_login"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@color/purple"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/registration"
-                android:textColor="@color/yellow"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-        </androidx.cardview.widget.CardView>
-
+            android:text="@string/loading_regis"
+            android:textColor="#7210A1"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_11ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textStyle="normal"/>
 
     </LinearLayout>
 

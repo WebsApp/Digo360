@@ -3,6 +3,7 @@ package com.wapss.digo360.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +30,14 @@ import retrofit2.Response;
 
 public class OTPActivity extends AppCompatActivity {
     TextView tv_verify,tv_phone,timer;
+    ImageView otp_back;
     EditText otp1,otp2,otp3,otp4;
     String otp,phone;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     CustomProgressDialog progressDialog;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,7 @@ public class OTPActivity extends AppCompatActivity {
         otp4 = findViewById(R.id.otp4);
         tv_phone = findViewById(R.id.tv_phone);
         timer = findViewById(R.id.timer);
+        otp_back = findViewById(R.id.otp_back);
         progressDialog = new CustomProgressDialog(this);
         //shared Pref
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
@@ -58,20 +63,26 @@ public class OTPActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
-        tv_phone.setText("We have sent an OTP to +91" +phone+" Please wait for 2 min Before resend Attempt ");
+        //tv_phone.setText("We have sent an OTP to +91" +phone+" Please wait for 2 min Before resend Attempt ");
 
-        timer.setText("Your OTP is 7832");
+        //timer.setText("Your OTP is 7832");
 
         tv_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 otp = otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
-                callVerifyOTP(otp,phone);
-//                Intent intent = new Intent(OTPActivity.this,RegistrationCheckActivity.class);
-//                startActivity(intent);
+                //callVerifyOTP(otp,phone);
+                Intent intent = new Intent(OTPActivity.this,RegistrationCheckActivity.class);
+                startActivity(intent);
             }
         });
         otp_move();
+        otp_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 
@@ -116,7 +127,8 @@ public class OTPActivity extends AppCompatActivity {
         otp1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                otp1.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp1.setTextColor(getResources().getColor(R.color.white));
             }
 
             @Override
@@ -138,6 +150,8 @@ public class OTPActivity extends AppCompatActivity {
         otp2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                otp2.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp2.setTextColor(getResources().getColor(R.color.white));
 
             }
 
@@ -162,7 +176,8 @@ public class OTPActivity extends AppCompatActivity {
         otp3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                otp3.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp3.setTextColor(getResources().getColor(R.color.white));
             }
 
             @Override
@@ -186,11 +201,13 @@ public class OTPActivity extends AppCompatActivity {
         otp4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                otp4.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp4.setTextColor(getResources().getColor(R.color.white));
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
 
             }
 

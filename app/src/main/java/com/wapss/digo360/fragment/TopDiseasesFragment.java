@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.NewCasectivity;
+import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter2;
@@ -49,6 +52,7 @@ public class TopDiseasesFragment extends Fragment {
     RecyclerView rv_disease;
     SearchView sv_search;
     String cName;
+    ImageView notification, help;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,30 +64,47 @@ public class TopDiseasesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View TopDis = inflater.inflate(R.layout.fragment_top_diseases, container, false);
-        rv_disease = TopDis.findViewById(R.id.rv_disease);
-        sv_search = TopDis.findViewById(R.id.sv_search);
+//        rv_disease = TopDis.findViewById(R.id.rv_disease);
+//        sv_search = TopDis.findViewById(R.id.sv_search);
+        help = TopDis.findViewById(R.id.help);
+        notification = TopDis.findViewById(R.id.notification);
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
 
-        callDisease();
-
-        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        help.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                cName = s;
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                cName = newText;
-                searchSku(newText);
-                return false;
+            public void onClick(View v) {
+                //callHelpAPI(deviceToken);
+                startActivity(new Intent(getContext(), HelpPage.class));
             }
         });
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //callDisease();
+
+//        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                cName = s;
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                cName = newText;
+//                searchSku(newText);
+//                return false;
+//            }
+//        });
 
         return TopDis;
     }
@@ -91,9 +112,9 @@ public class TopDiseasesFragment extends Fragment {
     private void searchSku(String newText) {
         if (newText.isEmpty()) {
             Toast.makeText(getContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
-            callDisease();
+            //callDisease();
         } else {
-            callSearchDisease(newText);
+            //callSearchDisease(newText);
         }
     }
 

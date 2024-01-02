@@ -133,6 +133,7 @@
                         android:gravity="right">
 
                         <ImageView
+                            android:id="@+id/btn_edite"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/pen"
@@ -140,6 +141,7 @@
                             android:layout_marginLeft="10dp" />
 
                         <ImageView
+                            android:id="@+id/btn_camera"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@drawable/camera"
@@ -388,7 +390,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height='wrap_content'
                 android:orientation="vertical"
                 android:padding="5dp"
                 android:background="@drawable/background"
@@ -396,15 +398,40 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="College &amp; Degree  "
-                    android:textColor="#626262"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
+                    android:orientation="horizontal"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="College &amp; Degree"
+                        android:textColor="#626262"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:id="@+id/college_edite"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/pen"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -412,10 +439,11 @@
                     android:text="N/A"
                     android:textColor="#6A0E97"
                     android:textSize="12dp"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="normal"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
@@ -454,6 +482,7 @@
                         android:gravity="right">
 
                         <ImageView
+                            android:id="@+id/address_edite"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/pen"

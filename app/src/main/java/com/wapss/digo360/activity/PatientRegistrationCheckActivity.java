@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wapss.digo360.R;
 
 public class PatientRegistrationCheckActivity extends AppCompatActivity {
-    TextView tv_check;
+    TextView tv_check,tv_previous;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +26,27 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
+        back = findViewById(R.id.back);
         tv_check = findViewById(R.id.tv_check);
-
+        tv_previous = findViewById(R.id.tv_previous);
         tv_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class);
                 startActivity(intent);
+            }
+        });
+        tv_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PatientRegistrationCheckActivity.this, PreviousCases.class);
+                startActivity(intent);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

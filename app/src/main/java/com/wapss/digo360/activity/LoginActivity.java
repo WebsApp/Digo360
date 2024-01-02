@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView tv_login;
+    TextView tv_login,txt_tnc,txt_privacy_policy;
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 123;
     String fb_token, deviceId, phone;
     EditText et_phone;
@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
-
         if (!isNotificationPermissionGranted()) {
             // Request notification permission
             requestNotificationPermission();
@@ -66,14 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                             return;
                         }
-
                         // Get new FCM registration token
                         fb_token = task.getResult();
-
                         // Log and toast
 //                        String msg = getString(R.string.next, token);
                         Log.d(TAG, fb_token);
-
 //                        Toast.makeText(OTP_Verify.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -82,7 +78,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phone = et_phone.getText().toString();
-                callLogin(phone, deviceId);
+                Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
+                startActivity(intent);
+                ///callLogin(phone, deviceId);
+            }
+        });
+        txt_tnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        txt_privacy_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -118,6 +128,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initi() {
+        txt_privacy_policy = findViewById(R.id.txt_privacy_policy);
+        txt_tnc = findViewById(R.id.txt_tnc);
         tv_login = findViewById(R.id.tv_login);
         et_phone = findViewById(R.id.et_phone);
         deviceId = DeviceUtils.getDeviceId(getApplicationContext());

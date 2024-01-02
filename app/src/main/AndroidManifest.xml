@@ -25,10 +25,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.PreviousCases"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ReferPage"
+            android:exported="false" />
+        <activity
+            android:name=".activity.CollegePage"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SearchPage"
+            android:exported="false" />
+        <activity
+            android:name=".activity.HelpPage"
+            android:exported="false" />
+        <activity
             android:name=".activity.PatientsProblemActivity"
             android:exported="false" />
         <activity
             android:name=".activity.PatientRegistrationCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddressPage"
             android:exported="false" />
         <activity
             android:name=".activity.AboutDigo"
@@ -71,16 +89,19 @@
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.GetStartedPage"
             android:exported="false" />
         <activity
             android:name=".activity.OnboardScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">
