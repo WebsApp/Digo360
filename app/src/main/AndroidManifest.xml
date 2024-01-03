@@ -25,6 +25,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Pages"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Total_Reports"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ReportPage"
+            android:exported="false" />
+        <activity
             android:name=".activity.PreviousCases"
             android:exported="false" />
         <activity

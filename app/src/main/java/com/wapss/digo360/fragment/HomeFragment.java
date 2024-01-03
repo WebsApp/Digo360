@@ -36,6 +36,7 @@ import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.activity.SearchPage;
+import com.wapss.digo360.activity.Total_Reports;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
 import com.wapss.digo360.adapter.TopDiagnosiAdapter;
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
     ImageView iv_image1,iv_image2,iv_image3;
     TextView tv_disease1,tv_disease2,tv_disease3;
 
-    LinearLayout btn_fever;
+    LinearLayout btn_fever,btn_reports;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,7 @@ public class HomeFragment extends Fragment {
         rv_top_diseases = home.findViewById(R.id.rv_top_diseases);
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
         btn_fever = home.findViewById(R.id.btn_fever);
+        btn_reports = home.findViewById(R.id.btn_reports);
 
         iv_image1 = home.findViewById(R.id.iv_image1);
         iv_image2 = home.findViewById(R.id.iv_image2);
@@ -128,6 +130,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Total_Reports.class);
                 startActivity(intent);
             }
         });

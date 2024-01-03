@@ -28,7 +28,6 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
 
         back = findViewById(R.id.back);
         tv_check = findViewById(R.id.tv_check);
-        tv_previous = findViewById(R.id.tv_previous);
         tv_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,13 +35,13 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        tv_previous.setOnClickListener(new View.OnClickListener() {
+       /* tv_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PatientRegistrationCheckActivity.this, PreviousCases.class);
                 startActivity(intent);
             }
-        });
+        });*/
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

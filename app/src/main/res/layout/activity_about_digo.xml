@@ -80,10 +80,12 @@
         android:layout_below="@id/header">
 
         <LinearLayout
+            android:id="@+id/btn_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:padding="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -92,13 +94,13 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:civ_border_color="@color/purple"
                     app:civ_border_width="1dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/aboutdigo"/>
 
             </LinearLayout>
 
@@ -133,7 +135,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -142,13 +145,13 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:civ_border_color="@color/purple"
                     app:civ_border_width="1dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/contract"/>
 
             </LinearLayout>
 
@@ -182,7 +185,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -191,7 +196,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:civ_border_color="@color/purple"
@@ -213,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Terms Of Services "
+                    android:text="Terms Of Services"
                     android:textColor="#6E6D6F"
                     android:textSize="13dp"
                     android:textStyle="bold" />
@@ -223,6 +228,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E8E8E8"
@@ -231,7 +237,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -240,13 +247,13 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:civ_border_color="@color/purple"
                     app:civ_border_width="1dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/collaboration"/>
 
             </LinearLayout>
 
@@ -262,7 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Data Sharing Policy"
+                    android:text="Data Sharing Policy "
                     android:textColor="#6E6D6F"
                     android:textSize="13dp"
                     android:textStyle="bold" />
@@ -281,7 +288,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:padding="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -290,13 +297,13 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:civ_border_color="@color/purple"
                     app:civ_border_width="1dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/handshake"/>
 
             </LinearLayout>
 

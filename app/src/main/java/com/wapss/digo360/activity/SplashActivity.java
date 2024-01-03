@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                     public void run() {
                         if (deviceToken == null)
                         {
-                            startActivity(new Intent(SplashActivity.this, OnboardScreen.class));
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
                             finish();
                         }
                         else
