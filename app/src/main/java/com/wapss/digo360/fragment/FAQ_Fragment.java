@@ -53,9 +53,9 @@ public class FAQ_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View faq = inflater.inflate(R.layout.fragment_f_a_q_, container, false);
-        rv_faq = faq.findViewById(R.id.rv_faq);
-        progressDialog = new CustomProgressDialog(getContext());
-        ll_faq = faq.findViewById(R.id.ll_faq);
+//        rv_faq = faq.findViewById(R.id.rv_faq);
+//        progressDialog = new CustomProgressDialog(getContext());
+        //ll_faq = faq.findViewById(R.id.ll_faq);
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
@@ -66,7 +66,7 @@ public class FAQ_Fragment extends Fragment {
         return faq;
     }
 
-    private void callHelpAPI() {
+    /*private void callHelpAPI() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
         Call<HelpResponse> banner_apiCall = ApiService.apiHolders().helpAPi(Token, 10, 0, "");
@@ -95,5 +95,5 @@ public class FAQ_Fragment extends Fragment {
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }

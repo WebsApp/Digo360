@@ -14,11 +14,11 @@
         android:id="@+id/otpimg"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_200sdp"
-        android:padding="@dimen/_10sdp"
         android:layout_centerInParent="true"
-        app:lottie_rawRes="@raw/customer_service"
+        android:padding="@dimen/_10sdp"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/doctor_onboard" />
 
     <LinearLayout
         android:id="@+id/loginmsg"
@@ -34,17 +34,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="@string/loding"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading_regis"
-            android:textColor="#7210A1"
+            android:textColor="#C38FDC"
             android:padding="@dimen/_10sdp"
             android:textSize="@dimen/_11ssp"
+            android:lineSpacingExtra="@dimen/_5sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:textStyle="normal"/>
 

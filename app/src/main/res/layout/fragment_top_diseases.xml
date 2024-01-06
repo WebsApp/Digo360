@@ -316,18 +316,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/btn_search"
-                        android:background="@drawable/search_bg"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_12ssp"
-                        android:textColor="@color/white"
-                        android:textStyle="normal"
-                        android:padding="@dimen/_5sdp"
-                        android:text=" Serch by User Name | Case"
-                        android:layout_marginStart="@dimen/_5sdp"
+                    <androidx.appcompat.widget.SearchView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"/>
+                        android:layout_height="@dimen/_35sdp"
+                        android:hint="Search by User Name | Case"
+
+                        android:background="@drawable/search_bg"/>
 
                 </RelativeLayout>
 

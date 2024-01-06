@@ -51,7 +51,7 @@ public class MyProfile extends AppCompatActivity {
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
     String mCurrentPhotoPath = "", image;
     private final int MY_CAMERA_REQUEST_CODE = 101;
-    ImageView back;
+    ImageView back,profile_faq;
 
     ImageView address_edite,college_edite,btn_camera,btn_edite;
 
@@ -63,6 +63,7 @@ public class MyProfile extends AppCompatActivity {
         btn_edite = findViewById(R.id.btn_edite);
         btn_camera = findViewById(R.id.btn_camera);
         iv_profile = findViewById(R.id.iv_profile);
+        profile_faq = findViewById(R.id.profile_faq);
         back = findViewById(R.id.back);
         college_edite = findViewById(R.id.college_edite);
         Window window = getWindow();
@@ -122,7 +123,12 @@ public class MyProfile extends AppCompatActivity {
                 Log.d("PhotoPicker", "No media selected");
             }
         });
-
+        profile_faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyProfile.this, HelpPage.class));
+            }
+        });
         iv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

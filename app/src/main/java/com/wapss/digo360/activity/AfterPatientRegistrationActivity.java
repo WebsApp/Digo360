@@ -53,6 +53,6 @@ public class AfterPatientRegistrationActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(AfterPatientRegistrationActivity.this, QuestionsActivity.class));
             }
-        },1000);
+        },2000);
     }
 }

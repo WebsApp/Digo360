@@ -107,6 +107,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/question"
         android:layout_width="match_parent"
@@ -142,6 +143,7 @@
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_below="@+id/question"
         android:background="@drawable/bg_square_corner"

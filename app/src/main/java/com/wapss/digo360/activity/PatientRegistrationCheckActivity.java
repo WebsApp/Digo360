@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,8 +33,22 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
         tv_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class);
-                startActivity(intent);
+
+                final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(PatientRegistrationCheckActivity.this);
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView1 = inflater.inflate(R.layout.newcase,null);
+                builder.setCancelable(false);
+                builder.setView(dialogView1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class);
+                        startActivity(intent);
+                    }
+                },3000);
+                final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                alertDialog.setCanceledOnTouchOutside(true);
             }
         });
        /* tv_previous.setOnClickListener(new View.OnClickListener() {
