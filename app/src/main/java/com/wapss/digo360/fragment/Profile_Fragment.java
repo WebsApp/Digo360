@@ -61,6 +61,7 @@ public class Profile_Fragment extends Fragment {
         profile_layout = profile.findViewById(R.id.profile_layout);
         about_layout = profile.findViewById(R.id.about_layout);
         ll_logOut = profile.findViewById(R.id.ll_logOut);
+
         profile_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +89,11 @@ public class Profile_Fragment extends Fragment {
         btn_faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), HelpPage.class));
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "PROFILE");
+                Intent i = new Intent(getContext(), HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         ll_logOut.setOnClickListener(new View.OnClickListener() {

@@ -10,9 +10,12 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +32,9 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.authentication.DeviceUtils;
 import com.wapss.digo360.response.LoginResponse;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,12 +42,13 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     TextView tv_login,txt_tnc,txt_privacy_policy;
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 123;
-    String fb_token, deviceId, phone;
+    String fb_token, deviceId, phone, phoneNum;
     EditText et_phone;
     CustomProgressDialog progressDialog;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
 
+    String regex = "^[6-9][0-9]{9}$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE |
+                        WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE );
 
         if (!isNotificationPermissionGranted()) {
             // Request notification permission
@@ -78,21 +88,44 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 phone = et_phone.getText().toString();
-                Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
-                startActivity(intent);
-                ///callLogin(phone, deviceId);
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(phone);
+                if (matcher.matches()) {
+                    callLogin(phone, deviceId);
+                }
+                else {
+                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
+                    LayoutInflater inflater1 = getLayoutInflater();
+                    View dialogView1 = inflater1.inflate(R.layout.invalid_phone_layout,null);
+                    builder1.setCancelable(false);
+                    builder1.setView(dialogView1);
+                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                    alertDialog1.show();
+                    alertDialog1.setCanceledOnTouchOutside(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertDialog1.dismiss();
+                        }
+                    },2000);
+                }
+
             }
         });
         txt_tnc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Uri uri = Uri.parse("https://classpoint.in/terms_and_conditions.php");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
         txt_privacy_policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Uri uri = Uri.parse("https://classpoint.in/privacy_policy.php");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
     }
@@ -105,11 +138,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.code() == 201)  {
                     LoginResponse userLogin_response = response.body();
-                    String phoneNum = response.body().getResult().getMessage();
+                    phoneNum = response.body().getResult().getMessage();
                     editor.putString("phone", phoneNum);
                     // editor.putString("fcm",fb_token);
                     editor.commit();
-                    Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
                     startActivity(intent);
                     progressDialog.hideProgressDialog();
@@ -133,6 +165,7 @@ public class LoginActivity extends AppCompatActivity {
         tv_login = findViewById(R.id.tv_login);
         et_phone = findViewById(R.id.et_phone);
         deviceId = DeviceUtils.getDeviceId(getApplicationContext());
+        Log.d("d_ID", deviceId);
         progressDialog = new CustomProgressDialog(this);
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();

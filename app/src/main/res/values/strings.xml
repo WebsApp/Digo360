@@ -10,13 +10,12 @@
     <string name="heading_one">Manage your case . </string>
     <string name="heading_two">Manage your case .</string>
     <string name="heading_three">Manage your case . </string>
-
     <string name="title_one">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
     <string name="title_two">Create stunning NFTs applications with bullet proof guidelines and thoughtful components.</string>
     <string name="title_three">Create stunning NFTs applications with bullet proof guidelines and thoughtful components. </string>
     <string name="verify_your_phone_number">Verify Your Phone Number</string>
-    <string name="we_have_sent_an_otp_to_91_97xxxxxxx_please_wait_for_2_min_before_resend_attempt">We have sent an OTP to +91 97XXXXXXX. Please wait for 2 min Before resend Attempt .</string>
-    <string name="you_can_request_otp_after_1_59">You Can Request OTP after 1:59</string>
+    <string name="vfy">We have sent an OTP to +91 97XXX - XXXX. Please wait for 2 min before  attempt Next.</string>
+    <string name="you_can_request_otp_after">You Can Request OTP after</string>
     <string name="login">Login</string>
     <string name="phone_number">Phone Number</string>
     <string name="terms">By Continuing I agree with the</string>
@@ -24,12 +23,12 @@
     <string name="registration">Registration</string>
     <string name="salutation">Salutation</string>
     <string name="name_of_your">Name Of Doctor</string>
-    <string name="suitable_designation">Suitable Designation</string>
+    <string name="suitable_designation">Select Suitable Designation</string>
     <string name="your_specialization">Your Specialization</string>
     <string name="address">Enter Your Address</string>
     <string name="state">State</string>
     <string name="city">City</string>
-    <string name="pincode">Pincode</string>
+    <string name="pincode">Pin Code</string>
     <string name="submit">Submit</string>
     <string name="choose_language">Choose Language</string>
     <string name="lets_start">Lets Start</string>
@@ -50,7 +49,7 @@
     <string name="please_select">Please Select</string>
     <string name="email">Email</string>
     <string name="age">age</string>
-    <string name="dob">DOB</string>
+    <string name="dob">Enter Your DOB</string>
     <string name="where_is_he_coming_from">Where is he coming from</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -71,7 +70,7 @@
     <string name="logout">Are you sure you want to end this\n session ?</string>
     <string name="Confirm">Confirm</string>
     <string name="cancel">Cancel</string>
-    <string name="edite_one">House / Flat / Appartment</string>
+    <string name="edite_one">Patient Name</string>
     <string name="Roadno">Road | Lane No</string>
     <string name="patient_registration">Patient Registration</string>
     <string name="check">Check</string>
@@ -89,7 +88,19 @@
     <string name="no_search">No Recent Searches?</string>
     <string name="zipcode">Zipcode</string>
     <string name="Patient">Patient Problem Statement</string>
-
+    <string name="phone"> Please Enter Phone Number</string>
+    <string name="invalid_phone">INVALID PHONE NUMBER</string>
+    <string name="invalid_msg">The phone number you entered is not valid. Please make sure to use a valid format (e.g., XXX-XXX-XXXX) and try again.</string>
+    <string name="enter_mail">Enter Your Mail</string>
+    <string name="invalid_mail_id">INVALID MAIL ID</string>
+    <string name="invalid_email">The email address you entered is not valid. Please provide a correct email address in the format example@example.com.</string>
+    <string name="select_specialization">Select Suitable Specialization</string>
+    <string name="study_year">Select Study Year</string>
+    <string name="select_degree">Select Suitable Degree</string>
+    <string name="select_state">Select State</string>
+    <string name="select_city">Select City</string>
+    <string name="select_area">Select Area</string>
+    <string name="number_hint">97XXXXXX44</string>
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
     <!--    <string name="title_three">This App helps you Enhance your Earning, It\'s a free to use App, So keep it on your mobile</string>-->

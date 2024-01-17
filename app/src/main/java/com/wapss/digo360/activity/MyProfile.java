@@ -14,7 +14,9 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -29,9 +31,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.response.FaqResponse;
+import com.wapss.digo360.response.Profile_Response;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,9 +46,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyProfile extends AppCompatActivity {
     CircleImageView iv_profile;
@@ -52,14 +64,29 @@ public class MyProfile extends AppCompatActivity {
     String mCurrentPhotoPath = "", image;
     private final int MY_CAMERA_REQUEST_CODE = 101;
     ImageView back,profile_faq;
-
     ImageView address_edite,college_edite,btn_camera,btn_edite;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
+    String deviceToken,Token;
+    CustomProgressDialog progressDialog;
+    TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+        address_edite = findViewById(R.id.address_edite);
+        txt_address = findViewById(R.id.txt_address);
+        txt_college = findViewById(R.id.txt_college);
+        txt_exp_year = findViewById(R.id.txt_exp_year);
+        txt_Dob = findViewById(R.id.txt_Dob);
+        txt_Desig = findViewById(R.id.txt_Desig);
+        txt_spec = findViewById(R.id.txt_spec);
+        txt_mail = findViewById(R.id.txt_mail);
+        tv_mobileNum = findViewById(R.id.tv_mobileNum);
+        tv_degree = findViewById(R.id.tv_degree);
+        tv_name = findViewById(R.id.tv_name);
         btn_edite = findViewById(R.id.btn_edite);
         btn_camera = findViewById(R.id.btn_camera);
         iv_profile = findViewById(R.id.iv_profile);
@@ -70,8 +97,11 @@ public class MyProfile extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
-
-        address_edite = findViewById(R.id.address_edite);
+        /*Shared Pref*/
+        loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        editor = loginPref.edit();
+        deviceToken = loginPref.getString("deviceToken", null);
+        progressDialog = new CustomProgressDialog(MyProfile.this);
         address_edite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,9 +167,54 @@ public class MyProfile extends AppCompatActivity {
                 }
             }
         });
-
+        get_profile();
     }
 
+    private void get_profile() {
+        progressDialog.showProgressDialog();
+        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0YWM2MTI0LWE4MjEtNGIyYS1hN2NlLWVkZTBiMzYxZmVlMCIsImlhdCI6MTcwNTI5OTIxMSwiZXhwIjoxNzM2ODM1MjExfQ.Gd5mgsAecp5aIB89nm0HYM9gA3Ve8_uouBo7MdTQDE0";
+        Call<Profile_Response> profile_apiCall = ApiService.apiHolders().get_profile(Token);
+        profile_apiCall.enqueue(new Callback<Profile_Response>() {
+            @Override
+            public void onResponse(Call<Profile_Response> call, Response<Profile_Response> response) {
+                if (response.isSuccessful()){
+                    progressDialog.hideProgressDialog();
+                    tv_name.setText(response.body().getTitle() +"." + " "+ response.body().getName());
+                    tv_mobileNum.setText("+91" + " " + response.body().getAccount().getPhoneNumber());
+                    txt_mail.setText(response.body().getEmail());
+                    txt_Dob.setText(response.body().getDob());
+                    txt_address.setText(response.body().getAddress());
+                    txt_Desig.setText(response.body().getExperienceLevel());
+                    if (response.body().getCollegeName() != "null"){
+                        txt_college.setText(response.body().getCollegeName());
+                    }
+                    else {
+                        txt_college.setText("N/A");
+                    }
+                    if (response.body().getExperience() != "null"){
+                        txt_exp_year.setText(response.body().getExperience());
+                    }
+                    else {
+                        txt_exp_year.setText("N/A");
+                    }
+                    List<String> degreeNames = new ArrayList<>();
+                    degreeNames.add(response.body().getDoctorDetailDegree().get(0).getDegree().getName());
+                    degreeNames.add(response.body().getDoctorDetailDegree().get(1).getDegree().getName());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (String degreeName : degreeNames) {
+                        stringBuilder.append(degreeName).append(" , "); // Use any delimiter or format you prefer
+                    }
+
+                    String degreesText = stringBuilder.toString();
+                    tv_degree.setText(degreesText);
+                }
+            }
+            @Override
+            public void onFailure(Call<Profile_Response> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
+    }
     private boolean checkAndRequestPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             int cameraPermission = ActivityCompat.checkSelfPermission(MyProfile.this, Manifest.permission.CAMERA);

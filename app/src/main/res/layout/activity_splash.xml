@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/digologo" />
+        android:src="@drawable/digologo"/>
 
     <TextView
         android:layout_width="match_parent"

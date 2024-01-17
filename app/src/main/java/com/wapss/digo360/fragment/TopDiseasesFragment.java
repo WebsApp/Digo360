@@ -77,8 +77,11 @@ public class TopDiseasesFragment extends Fragment {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //callHelpAPI(deviceToken);
-                startActivity(new Intent(getContext(), HelpPage.class));
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "DISEASE");
+                Intent i = new Intent(getContext(), HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         notification.setOnClickListener(new View.OnClickListener() {

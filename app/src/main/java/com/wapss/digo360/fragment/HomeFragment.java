@@ -32,8 +32,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
+import com.wapss.digo360.activity.AboutDigo;
 import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.NotificationActivity;
+import com.wapss.digo360.activity.Pages;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.activity.SearchPage;
 import com.wapss.digo360.activity.Total_Reports;
@@ -73,7 +75,7 @@ public class HomeFragment extends Fragment {
     private final long PERIOD_MS = 3000; // Time period between each auto-flipping
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken;
+    String deviceToken,Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
     RecyclerView rv_diagnosis, rv_top_diseases;
     View home;
@@ -82,7 +84,6 @@ public class HomeFragment extends Fragment {
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1,iv_image2,iv_image3;
     TextView tv_disease1,tv_disease2,tv_disease3;
-
     LinearLayout btn_fever,btn_reports;
 
     @Override
@@ -160,8 +161,11 @@ public class HomeFragment extends Fragment {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //callHelpAPI(deviceToken);
-                startActivity(new Intent(getContext(), HelpPage.class));
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "HOME");
+                Intent i = new Intent(getContext(), HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         btn_fever.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +177,12 @@ public class HomeFragment extends Fragment {
 //        CallAPI();
 //        callTopDiseases();
         return home;
+    }
+
+    private void callHelpAPI() {
+        progressDialog.showProgressDialog();
+        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
+
     }
 
     private void callTopDiseases() {
@@ -248,7 +258,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void callHelpAPI(String deviceToken) {
+    /*private void callHelpAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
         Call<HelpResponse> banner_apiCall = ApiService.apiHolders().helpAPi(Token, 10, 0, "");
@@ -276,9 +286,8 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void showHelpButtonSheet(List<HelpResponse.Result> helpResponse) {
+    }*/
+    /*private void showHelpButtonSheet(List<HelpResponse.Result> helpResponse) {
         bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetTheme);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.help,
@@ -305,7 +314,7 @@ public class HomeFragment extends Fragment {
         bottomSheetDialog.setContentView(view1);
         bottomSheetDialog.show();
         bottomSheetDialog.setCanceledOnTouchOutside(false);
-    }
+    }*/
     private void CallAPI() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -335,14 +344,12 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
     private void callTopDiagnosis(List<SettingHomeResponse.Slider> sliderList) {
         topDiagnosiAdapter = new TopDiagnosiAdapter(getContext(), sliderList);
         rv_diagnosis.setAdapter(topDiagnosiAdapter);
         rv_diagnosis.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
     }
-
     private void callBanner(List<SettingHomeResponse.Banner> settingBanner) {
         BannerAdapter bannerAdapter = new BannerAdapter(getContext(), settingBanner);
         viewPager.setAdapter(bannerAdapter);

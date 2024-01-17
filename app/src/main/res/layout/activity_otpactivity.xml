@@ -78,7 +78,7 @@
                 android:padding="5dp"
                 android:text="@string/verify_your_phone_number"
                 android:textColor="@color/purple"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
             <TextView
@@ -88,9 +88,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:text="@string/we_have_sent_an_otp_to_91_97xxxxxxx_please_wait_for_2_min_before_resend_attempt"
-                android:textSize="@dimen/_9ssp"
-                android:visibility="visible" />
+                android:text="@string/vfy"
+                android:textSize="@dimen/_10ssp"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -205,8 +205,7 @@
             android:text="Verify via OTP"
             android:textColor="@color/black"
             android:textSize="16dp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -222,27 +221,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="@dimen/_10sdp"
-                android:text="@string/you_can_request_otp_after_1_59"
+                android:text="@string/you_can_request_otp_after"
                 android:textSize="@dimen/_10ssp"
                 android:visibility="visible" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="right"
-                android:visibility="gone">
+                android:layout_gravity="center">
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/btn_resend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="Resend"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
                     android:textColor="@color/purple"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:visibility="invisible" />
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"/>
 
                 <LinearLayout
                     android:id="@+id/timer_layout"
@@ -251,27 +250,21 @@
                     android:layout_gravity="center"
                     android:gravity="right"
                     android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Timer :"
-                        android:textSize="14dp" />
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/count_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="60"
-                        android:textSize="14dp"
+                        android:text="120"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
             </RelativeLayout>
-
 
         </LinearLayout>
 

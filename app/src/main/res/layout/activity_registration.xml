@@ -9,7 +9,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginBottom="@dimen/_50sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,13 +57,17 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/header"
-                android:layout_margin="10dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -98,6 +104,8 @@
                             android:background="@null"
                             android:hint="@string/name_of_your"
                             android:textColor="@color/purple"
+                            android:inputType="textPersonName"
+                            android:maxLength="20"
                             android:textColorHint="@color/purple"
                             android:textSize="@dimen/_13sdp" />
 
@@ -158,69 +166,35 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="visible"
+                    android:id="@+id/ll_Dob"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/time_bg"
-                    android:padding="@dimen/_3sdp">
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:layout_marginTop="@dimen/_7sdp">
 
                     <EditText
-                        android:id="@+id/et_email"
+                        android:id="@+id/et_DOB"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:background="@null"
-                        android:hint="Enter Your Mail (Optional)"
+                        android:hint="@string/dob"
+                        android:inputType="none"
+                        android:editable="false"
                         android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_13ssp" />
-                </LinearLayout>
+                        android:textColorHint="#B374BD"
+                        android:textSize="@dimen/_13ssp"/>
 
-                <LinearLayout
-                    android:id="@+id/cv_designation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/time_bg"
-                    android:layout_marginTop="@dimen/_7sdp">
-
-                    <Spinner
-                        android:id="@+id/sp_designation"
+                    <ImageView
+                        android:id="@+id/iv_date"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cv_specialization"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/time_bg"
-                    android:layout_marginTop="@dimen/_7sdp">
-
-                    <Spinner
-                        android:id="@+id/sp_specialization"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:background="@drawable/time_bg"
-                    android:padding="15dp">
-
-                    <EditText
-                        android:id="@+id/spec"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/your_specialization"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="16dp" />
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="center"
+                        android:layout_weight="6"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/baseline_calendar_month_24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -237,50 +211,244 @@
                         android:hint="@string/address"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
+                        android:textColorHint="#B374BD"
                         android:textSize="@dimen/_13ssp" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/cv_spinner"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/time_bg"
-                    android:layout_marginTop="@dimen/_7sdp">
+                    android:padding="@dimen/_3sdp">
 
-                    <Spinner
-                        android:id="@+id/state_spinner"
+                    <EditText
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp" />
-
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/enter_mail"
+                        android:textColor="@color/purple"
+                        android:inputType="textEmailAddress"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColorHint="#B374BD"
+                        android:textSize="@dimen/_13ssp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/cv_city_spinner"
+                    android:id="@+id/cv_designation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:background="@drawable/time_bg"
                     android:layout_marginTop="@dimen/_7sdp">
 
-                    <Spinner
-                        android:id="@+id/city_spinner"
+                    <EditText
+                        android:id="@+id/et_desig"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/suitable_designation"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_designation"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
                         android:layout_height="@dimen/_35sdp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/cv_area_spinner"
+                    android:id="@+id/cv_degree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_degree"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_weight="5"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_study_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_s_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/study_year"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_study_year"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_specialization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_spec"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_specialization"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_specialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_weight="5"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:background="@drawable/time_bg"
                     android:layout_marginTop="@dimen/_7sdp">
 
-                    <Spinner
-                        android:id="@+id/area_spinner"
+                    <EditText
+                        android:id="@+id/et_state"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_state"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_state"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_city"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_city"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/cv_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <EditText
+                        android:id="@+id/et_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_area"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_area"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>
 
                 </LinearLayout>
 
@@ -288,7 +456,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:background="@drawable/time_bg">
+                    android:background="@drawable/time_bg"
+                    android:layout_marginBottom="@dimen/_10sdp">
 
                     <EditText
                         android:id="@+id/et_PinCode"
@@ -297,7 +466,7 @@
                         android:background="@null"
                         android:hint="@string/pincode"
                         android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
+                        android:textColorHint="#B374BD"
                         android:inputType="number"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:maxLength="6"
@@ -305,6 +474,21 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -335,6 +519,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </RelativeLayout>

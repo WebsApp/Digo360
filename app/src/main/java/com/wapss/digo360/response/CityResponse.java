@@ -6,28 +6,28 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class CityResponse {
-    @SerializedName("result")
-    @Expose
-    private List<Result> result;
-    @SerializedName("total")
-    @Expose
-    private Integer total;
+        @SerializedName("result")
+        @Expose
+        private List<Result> result;
+        @SerializedName("total")
+        @Expose
+        private Integer total;
 
-    public List<Result> getResult() {
-        return result;
-    }
+        public List<Result> getResult() {
+            return result;
+        }
 
-    public void setResult(List<Result> result) {
-        this.result = result;
-    }
+        public void setResult(List<Result> result) {
+            this.result = result;
+        }
 
-    public Integer getTotal() {
-        return total;
-    }
+        public Integer getTotal() {
+            return total;
+        }
 
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
+        public void setTotal(Integer total) {
+            this.total = total;
+        }
 
     public static class Result {
 
@@ -53,5 +53,6 @@ public class CityResponse {
         public void setName(String name) {
             this.name = name;
         }
+
     }
 }

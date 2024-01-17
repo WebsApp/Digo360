@@ -35,12 +35,13 @@ public class SplashActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
-
        // progressDialog.showProgressDialog();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (deviceToken == null)
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                finish();
+               /* if (deviceToken == null)
                 {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
@@ -49,8 +50,8 @@ public class SplashActivity extends AppCompatActivity {
                 {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
-                }
+                }*/
             }
-        },3000);
+        },2000);
     }
 }
