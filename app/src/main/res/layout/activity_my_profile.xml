@@ -380,7 +380,7 @@
                         android:id="@+id/txt_exp_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="22Years"
+                        android:text="0Years"
                         android:textColor="#6A0E97"
                         android:textSize="12dp"
                         android:layout_gravity="center"

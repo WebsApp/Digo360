@@ -19,7 +19,8 @@ public class ApiService {
                 .build();
         Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
                // .baseUrl("https://server.drpauls.in:3000/api/v1/")
-                     .baseUrl("http://192.168.29.56:3000/api/v1/")
+                     //.baseUrl("http://192.168.29.56:3000/api/v1/")
+                .baseUrl("http://148.251.10.231:8722/api/v1/")
                 .client(okHttpClient)
                 .build();
         return retrofit;

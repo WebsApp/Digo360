@@ -10,6 +10,7 @@ import com.wapss.digo360.response.LoginResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
+import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SearchResponse;
@@ -77,6 +78,8 @@ public interface ApiHolder {
                                             @Field("areaId") String areaId,
                                             @Field("pincode") String pincode,
                                             @Field("tnc") String tnc);
+
+
     @GET("faqs")
     Call<FaqResponse> helpAPi(@Header("Authorization") String Token);
 
@@ -91,6 +94,11 @@ public interface ApiHolder {
     @GET("doctor-detail/profile/doctor")
     Call<Profile_Response> get_profile(@Header("Authorization") String Token);
 
+    @GET("patient-details/list")
+    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
+                                                  @Query("limit") int limit,
+                                                  @Query("offset") int offset,
+                                                  @Query("keyword")String keyword);
 
 
 

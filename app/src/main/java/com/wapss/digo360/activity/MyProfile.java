@@ -156,7 +156,11 @@ public class MyProfile extends AppCompatActivity {
         profile_faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyProfile.this, HelpPage.class));
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "PROFILE");
+                Intent i = new Intent(MyProfile.this, HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         iv_profile.setOnClickListener(new View.OnClickListener() {
@@ -172,41 +176,39 @@ public class MyProfile extends AppCompatActivity {
 
     private void get_profile() {
         progressDialog.showProgressDialog();
-        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0YWM2MTI0LWE4MjEtNGIyYS1hN2NlLWVkZTBiMzYxZmVlMCIsImlhdCI6MTcwNTI5OTIxMSwiZXhwIjoxNzM2ODM1MjExfQ.Gd5mgsAecp5aIB89nm0HYM9gA3Ve8_uouBo7MdTQDE0";
+        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
+
+
         Call<Profile_Response> profile_apiCall = ApiService.apiHolders().get_profile(Token);
         profile_apiCall.enqueue(new Callback<Profile_Response>() {
             @Override
             public void onResponse(Call<Profile_Response> call, Response<Profile_Response> response) {
                 if (response.isSuccessful()){
                     progressDialog.hideProgressDialog();
+                    String exp_year = String.valueOf(response.body().getExperience());
+                    String collage_name = String.valueOf(response.body().getCollegeName());
+                    String address = response.body().getAddress();
                     tv_name.setText(response.body().getTitle() +"." + " "+ response.body().getName());
                     tv_mobileNum.setText("+91" + " " + response.body().getAccount().getPhoneNumber());
                     txt_mail.setText(response.body().getEmail());
                     txt_Dob.setText(response.body().getDob());
-                    txt_address.setText(response.body().getAddress());
                     txt_Desig.setText(response.body().getExperienceLevel());
-                    if (response.body().getCollegeName() != "null"){
-                        txt_college.setText(response.body().getCollegeName());
-                    }
-                    else {
+                    txt_address.setText(address);
+                    txt_college.setText(collage_name);
+                    txt_exp_year.setText(exp_year);
+                    if (collage_name.equals("null")){
                         txt_college.setText("N/A");
                     }
-                    if (response.body().getExperience() != "null"){
-                        txt_exp_year.setText(response.body().getExperience());
-                    }
                     else {
+                        txt_college.setText(collage_name);
+                    }
+                    if (exp_year.equals("null")){
                         txt_exp_year.setText("N/A");
                     }
-                    List<String> degreeNames = new ArrayList<>();
-                    degreeNames.add(response.body().getDoctorDetailDegree().get(0).getDegree().getName());
-                    degreeNames.add(response.body().getDoctorDetailDegree().get(1).getDegree().getName());
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (String degreeName : degreeNames) {
-                        stringBuilder.append(degreeName).append(" , "); // Use any delimiter or format you prefer
+                    else {
+                        txt_exp_year.setText(exp_year);
                     }
 
-                    String degreesText = stringBuilder.toString();
-                    tv_degree.setText(degreesText);
                 }
             }
             @Override
