@@ -118,13 +118,6 @@ public interface ApiHolder {
                                           @Query("offset") int offset,
                                           @Query("keyword")String keyword);
     /*18-01-2024*/
-
-    @GET("patient-details/list")
-    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
-                                               @Query("limit") int limit,
-                                               @Query("offset") int offset,
-                                               @Query("keyword") String keyword);
-
     @POST("search-history")
     @FormUrlEncoded
     Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
