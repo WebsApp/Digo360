@@ -235,17 +235,18 @@
                         android:layout_height="@dimen/_35sdp"
                         android:background="@drawable/time_bg"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:visibility="gone">
 
                         <EditText
                             android:id="@+id/pt_DOB"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:background="@null"
+                            android:layout_weight="1"
                             android:hint="Enter DOB"
-                            android:inputType="textPersonName"
-                            android:maxLength="20"
+                            android:padding="5dp"
+                            android:editable="false"
                             android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
                             android:textSize="@dimen/_14ssp" />
@@ -262,21 +263,25 @@
                     <LinearLayout
                         android:id="@+id/ll_age"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/time_bg"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        android:visibility="gone">
 
                         <EditText
-                            android:id="@+id/age"
+                            android:id="@+id/pt_age"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:background="@null"
-                            android:hint="@string/age"
+                            android:hint="@string/enter_age"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
-                            android:textColorHint="@color/purple"
-                            android:textSize="14dp" />
+                            android:textSize="@dimen/_14ssp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -325,46 +330,49 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_phone_num"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:background="@drawable/time_bg"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone">
 
                     <EditText
-                        android:id="@+id/phone"
+                        android:id="@+id/pt_phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:hint="@string/phone_number"
+                        android:hint="Patient Phone Number"
                         android:padding="5dp"
+                        android:editable="false"
+                        android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="14dp" />
+                        android:textSize="@dimen/_14ssp" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_phone_email"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/time_bg"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:visibility="gone">
 
                     <EditText
-                        android:id="@+id/email"
+                        android:id="@+id/pt_email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:hint="@string/email"
+                        android:hint="@string/patient_email"
                         android:padding="5dp"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="14dp" />
+                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
 
@@ -417,101 +425,108 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="@dimen/_35sdp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:padding="5dp">
 
                             <EditText
-                                android:id="@+id/full_Address"
+                                android:id="@+id/pt_full_Address"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:hint="@string/full_address"
                                 android:padding="5dp"
+                                android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textColorHint="@color/purple"
-                                android:textSize="14dp" />
+                                android:textSize="@dimen/_14ssp"
+                                android:inputType="text"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="@dimen/_35sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:padding="5dp">
 
                             <EditText
-                                android:id="@+id/Area"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/area"
-                                android:padding="5dp"
-                                android:textColor="@color/purple"
-                                android:textColorHint="@color/purple"
-                                android:textSize="14dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/time_bg"
-                            android:orientation="vertical"
-                            android:padding="5dp">
-
-                            <EditText
-                                android:id="@+id/State"
+                                android:id="@+id/pt_State"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:hint="@string/state"
                                 android:padding="5dp"
+                                android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textColorHint="@color/purple"
-                                android:textSize="14dp" />
+                                android:textSize="@dimen/_14ssp"
+                                android:inputType="text"/>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="@dimen/_35sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:padding="5dp">
 
                             <EditText
-                                android:id="@+id/city"
+                                android:id="@+id/pt_city"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:hint="@string/city"
                                 android:padding="5dp"
+                                android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textColorHint="@color/purple"
-                                android:textSize="14dp" />
+                                android:textSize="@dimen/_14ssp"
+                                android:inputType="text"/>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginBottom="@dimen/_40sdp">
+                            android:padding="5dp">
 
                             <EditText
-                                android:id="@+id/pinCode"
+                                android:id="@+id/pt_Area"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:hint="@string/area"
+                                android:padding="5dp"
+                                android:textColorHint="#E594F3"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_14ssp"
+                                android:inputType="text"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:background="@drawable/time_bg"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/_5sdp">
+
+                            <EditText
+                                android:id="@+id/pt_pinCode"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:hint="@string/pin_code"
                                 android:layout_marginStart="@dimen/_5sdp"
+                                android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textColorHint="@color/purple"
-                                android:textSize="14dp" />
+                                android:textSize="@dimen/_14ssp"
+                                android:inputType="text"/>
 
                         </LinearLayout>
 
@@ -535,19 +550,24 @@
                         android:textStyle="bold" />
 
                     <RadioGroup
+                        android:id="@+id/rg_gender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:gravity="start"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_50sdp">
 
                         <RadioButton
+                            android:id="@+id/rb_male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/male"
+                            android:checked="true"
                             android:textColor="@color/purple" />
 
                         <RadioButton
+                            android:id="@+id/rb_female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -555,6 +575,7 @@
                             android:textColor="@color/purple" />
 
                         <RadioButton
+                            android:id="@+id/rb_other"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
