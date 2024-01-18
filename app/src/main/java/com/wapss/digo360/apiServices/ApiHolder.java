@@ -11,6 +11,7 @@ import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
+import com.wapss.digo360.response.PatientDetails_Response;
 import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.RegistrationResponse;
@@ -123,4 +124,19 @@ public interface ApiHolder {
     @FormUrlEncoded
     Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
                                                   @Field("payload") String payload);
+    @POST("patient-details")
+    @FormUrlEncoded
+    Call<PatientDetails_Response> patient_details(@Header("Authorization") String Token,
+                                                  @Field("name") String name,
+                                                  @Field("dob") String dob,
+                                                  @Field("age") String age,
+                                                  @Field("phoneNumber") String phoneNumber,
+                                                  @Field("email") String email,
+                                                  @Field("stateName") String stateName,
+                                                  @Field("cityName") String cityName,
+                                                  @Field("areaName") String areaName,
+                                                  @Field("address") String address,
+                                                  @Field("gender") String gender,
+                                                  @Field("pincode") String pincode);
+
 }

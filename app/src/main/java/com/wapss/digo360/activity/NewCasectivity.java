@@ -24,13 +24,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.fragment.TopDiseasesFragment;
+import com.wapss.digo360.response.FaqResponse;
+import com.wapss.digo360.response.PatientDetails_Response;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewCasectivity extends AppCompatActivity {
     private int CurrentProgress = 0;
@@ -41,10 +48,11 @@ public class NewCasectivity extends AppCompatActivity {
     RadioButton rb_doB,rb_age,rb_phone,rb_email,rb_yes,rb_no,rb_male,rb_female,rb_other;
     TextView tv_submit;
     ImageView back,iv_date;
-    EditText pt_name,pt_age,pt_DOB,pt_phone,pt_email,pt_full_Address,pt_State,pt_Area,pt_city;
-    String gender,currentTime,dob,name,age;
+    EditText pt_name,pt_age,pt_DOB,pt_phone,pt_email,pt_full_Address,pt_State,pt_Area,pt_city,pt_pinCode;
+    String gender,currentTime,dob="",name,age="";
     private Calendar calendar;
     Date dateNow = null;
+    String ss,TOKEN,stateName,cityName,areaName,phoneNumber,email,address,pincode;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,13 +67,25 @@ public class NewCasectivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(NewCasectivity.this,PatientsProblemActivity.class);
-                startActivity(intent);*/
-                validation();
+                /*if (pt_name.getText().toString().isEmpty()){
+                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Name", Toast.LENGTH_SHORT).show();
+                }
+                else if (ss.equals("dob")){
+                    if (pt_DOB.getText().toString().isEmpty()){
+                        Toast.makeText(NewCasectivity.this, "Please Enter DOB ", Toast.LENGTH_SHORT).show();
+                    }
+                }else if (ss.equals("age")){
+                    if (pt_age.getText().toString().isEmpty()){
+                        Toast.makeText(NewCasectivity.this, "Please Enter  Age", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    //patient_details();
+                }*/
+                patient_details();
             }
         });
     }
-
     private void initi() {
         progressBar = findViewById(R.id.progressBar);
         back = findViewById(R.id.back);
@@ -100,6 +120,7 @@ public class NewCasectivity extends AppCompatActivity {
         pt_State = findViewById(R.id.pt_State);
         pt_Area = findViewById(R.id.pt_Area);
         pt_city = findViewById(R.id.pt_city);
+        pt_pinCode = findViewById(R.id.pt_pinCode);
 //        ll_otherProblem= findViewById(R.id.ll_otherProblem);
 //        rg_other = findViewById(R.id.rg_other);
 //        rb_yes_other = findViewById(R.id.rb_yes_other);
@@ -140,6 +161,8 @@ public class NewCasectivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                                 pt_DOB.setText(dateFormat1.format(calendar.getTime()));
                                 dob = dateFormat1.format(calendar.getTime());
+                                Toast.makeText(NewCasectivity.this, ""+dob, Toast.LENGTH_SHORT).show();
+
                             }
                         }, year, month, dayOfMonth);
                 try {
@@ -164,9 +187,15 @@ public class NewCasectivity extends AppCompatActivity {
                 if (rb_doB.isChecked()) {
                     ll_Dob.setVisibility(View.VISIBLE);
                     ll_age.setVisibility(View.GONE);
+                    pt_age.setText("");
+                    ss = "dob";
+                    age = "";
                 } else if (rb_age.isChecked()) {
                     ll_Dob.setVisibility(View.GONE);
                     ll_age.setVisibility(View.VISIBLE);
+                    pt_DOB.setText("");
+                    ss = "age";
+                    dob = "";
                 }
             }
         });
@@ -202,31 +231,40 @@ public class NewCasectivity extends AppCompatActivity {
                 // Handle RadioButton selection changes here
                 if (rb_male.isChecked()) {
                     gender = "MALE";
-                    Toast.makeText(NewCasectivity.this, ""+gender, Toast.LENGTH_SHORT).show();
                 } else if (rb_female.isChecked()) {
                     gender = "FEMALE";
-                    Toast.makeText(NewCasectivity.this, ""+gender, Toast.LENGTH_SHORT).show();
                 } else if (rb_other.isChecked()) {
                     gender = "OTHER";
-                    Toast.makeText(NewCasectivity.this, ""+gender, Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-    private void validation() {
-        if (pt_name.getText().toString().isEmpty()){
-            Toast.makeText(this, "Please Enter Patient Name", Toast.LENGTH_SHORT).show();
-        } else if (pt_DOB.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Please Enter DOB or Age", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            name = pt_name.getText().toString();
-           patient_details();
-        }
-    }
-
     private void patient_details() {
         name = pt_name.getText().toString();
+        TOKEN = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTU2NDgzMywiZXhwIjoxNzM3MTAwODMzfQ.9gunlTjcc7S-OnrOcZo_n3P_whGhE5EqbjAuGHCSIiQ";
+        stateName = pt_State.getText().toString();
+        cityName = pt_city.getText().toString();
+        areaName = pt_Area.getText().toString();
+        phoneNumber = "9609095482";
+        email = pt_email.getText().toString();
+        address = pt_full_Address.getText().toString();
+        pincode = pt_pinCode.getText().toString();
+
+        Call<PatientDetails_Response> details_apiCall = ApiService.apiHolders().patient_details(TOKEN,name,dob,age,phoneNumber,
+                email,stateName,cityName,areaName,address,gender,pincode);
+        details_apiCall.enqueue(new Callback<PatientDetails_Response>() {
+            @Override
+            public void onResponse(Call<PatientDetails_Response> call, Response<PatientDetails_Response> response) {
+                if (response.isSuccessful()){
+                    Intent intent = new Intent(NewCasectivity.this,PatientsProblemActivity.class);
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onFailure(Call<PatientDetails_Response> call, Throwable t) {
+
+            }
+        });
     }
 
 }
