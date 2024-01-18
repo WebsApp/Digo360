@@ -7,6 +7,7 @@ import com.wapss.digo360.response.Degree_Response;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.LoginResponse;
+import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
@@ -116,4 +117,9 @@ public interface ApiHolder {
                                                @Query("limit") int limit,
                                                @Query("offset") int offset,
                                                @Query("keyword") String keyword);
+
+    @POST("search-history")
+    @FormUrlEncoded
+    Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
+                                                  @Field("payload") String payload);
 }

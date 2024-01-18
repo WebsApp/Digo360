@@ -22,6 +22,7 @@ import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener2;
+import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 
@@ -149,6 +150,8 @@ public class TopDiseasesActivity extends AppCompatActivity {
                     topDiseaseAdapter = new TopDiseaseAdapter(getApplicationContext(), topDiseaseResponse, new TopDiseaseListener() {
                         @Override
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+                            String diseaseId = item.getId();
+                            callMostSearchClick(diseaseId);
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
@@ -165,6 +168,31 @@ public class TopDiseasesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                //ll_faq.setVisibility(View.VISIBLE);
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void callMostSearchClick(String diseaseId) {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<MostSearchClickResponse> banner_apiCall = ApiService.apiHolders().MostSearchclick( Token,diseaseId);
+        banner_apiCall.enqueue(new Callback<MostSearchClickResponse>() {
+            @Override
+            public void onResponse(Call<MostSearchClickResponse> call, Response<MostSearchClickResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                } else {
+                    progressDialog.dismiss();
+                    //  ll_faq.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MostSearchClickResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
