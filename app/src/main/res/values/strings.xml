@@ -105,6 +105,9 @@
     <string name="previous_case">Previous Cases</string>
     <string name="previous_details">Previous Details</string>
     <string name="top_diseases_search">Most Search Diseases</string>
+    <string name="enter_age">Enter Age</string>
+    <string name="enter_dob">Enter DOB</string>
+    <string name="patient_email">Patient email</string>
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
     <!--    <string name="title_three">This App helps you Enhance your Earning, It\'s a free to use App, So keep it on your mobile</string>-->
