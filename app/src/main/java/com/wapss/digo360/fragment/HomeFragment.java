@@ -38,6 +38,7 @@ import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.Pages;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.activity.SearchPage;
+import com.wapss.digo360.activity.TopDiseasesActivity;
 import com.wapss.digo360.activity.Total_Reports;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
@@ -61,7 +62,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     ImageView notification, help, iv_banner1;
-    TextView tv_viewAll,btn_search;
+    TextView tv_viewAll, btn_search;
     private BottomSheetDialog bottomSheetDialog;
     ViewPager viewPager;
     CustomProgressDialog progressDialog;
@@ -75,16 +76,16 @@ public class HomeFragment extends Fragment {
     private final long PERIOD_MS = 3000; // Time period between each auto-flipping
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken,Token;
+    String deviceToken, Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
     RecyclerView rv_diagnosis, rv_top_diseases;
     View home;
     HelpAdapter helpAdapter;
     LinearLayout ll_faq, ll_viewAllDisease;
     TopDiseaseAdapter topDiseaseAdapter;
-    ImageView iv_image1,iv_image2,iv_image3;
-    TextView tv_disease1,tv_disease2,tv_disease3;
-    LinearLayout btn_fever,btn_reports;
+    ImageView iv_image1, iv_image2, iv_image3;
+    TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
+    LinearLayout btn_fever, btn_reports;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class HomeFragment extends Fragment {
         btn_search = home.findViewById(R.id.btn_search);
         tv_viewAll = home.findViewById(R.id.tv_viewAll);
         notification = home.findViewById(R.id.notification);
-        //viewPager = home.findViewById(R.id.view_pager);
+        viewPager = home.findViewById(R.id.view_pager);
         iv_banner1 = home.findViewById(R.id.iv_banner1);
         // progressDialog = new CustomProgressDialog(getContext());
         rv_diagnosis = home.findViewById(R.id.rv_diagnosis);
@@ -108,6 +109,10 @@ public class HomeFragment extends Fragment {
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
         btn_fever = home.findViewById(R.id.btn_fever);
         btn_reports = home.findViewById(R.id.btn_reports);
+
+        others = home.findViewById(R.id.others);
+        male = home.findViewById(R.id.male);
+        female = home.findViewById(R.id.female);
 
         iv_image1 = home.findViewById(R.id.iv_image1);
         iv_image2 = home.findViewById(R.id.iv_image2);
@@ -151,11 +156,13 @@ public class HomeFragment extends Fragment {
         ll_viewAllDisease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                TopDiseasesFragment topDiseasesFragment = new TopDiseasesFragment();
-                fragmentTransaction.replace(R.id.main_container, topDiseasesFragment);
-                fragmentTransaction.addToBackStack(null).commit();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                TopDiseasesFragment topDiseasesFragment = new TopDiseasesFragment();
+//                fragmentTransaction.replace(R.id.main_container, topDiseasesFragment);
+//                fragmentTransaction.addToBackStack(null).commit();
+                Intent intent = new Intent(getContext(), TopDiseasesActivity.class);
+                startActivity(intent);
             }
         });
         help.setOnClickListener(new View.OnClickListener() {
@@ -174,21 +181,21 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
             }
         });
-//        CallAPI();
-//        callTopDiseases();
+        CallAPI();
+        callTopDiseases();
         return home;
     }
 
     private void callHelpAPI() {
-        progressDialog.showProgressDialog();
-        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
+        // progressDialog.showProgressDialog();
+        // Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
 
     }
 
     private void callTopDiseases() {
         progressDialog.showProgressDialog();
-        String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token, 3, 0);
+        // String Token = "Bearer " + deviceToken;
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(3, 0);
         banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
             @Override
             public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
@@ -197,35 +204,32 @@ public class HomeFragment extends Fragment {
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
 
-                    if (topDiseaseResponse!=null){
-                        tv_disease1.setText(topDiseaseResponse.get(0).getDiseaseName());
-                        tv_disease2.setText(topDiseaseResponse.get(1).getDiseaseName());
-                        tv_disease3.setText(topDiseaseResponse.get(2).getDiseaseName());
+                    if (topDiseaseResponse != null) {
+                        tv_disease1.setText(topDiseaseResponse.get(0).getName());
+                        tv_disease2.setText(topDiseaseResponse.get(1).getName());
+                        tv_disease3.setText(topDiseaseResponse.get(2).getName());
 
-                        String img1 =topDiseaseResponse.get(0).getDiseaseImage();
-                        String img2 = topDiseaseResponse.get(1).getDiseaseImage();
-                        String img3 =topDiseaseResponse.get(2).getDiseaseImage();
+                        String img1 = topDiseaseResponse.get(0).getImage();
+                        String img2 = topDiseaseResponse.get(1).getImage();
+                        String img3 = topDiseaseResponse.get(2).getImage();
 
-                        if (img1==null){
+                        if (img1 == null) {
                             iv_image1.setBackgroundResource(R.drawable.ivicon);
-                        }
-                        else {
+                        } else {
                             Picasso.with(getContext())
                                     .load(img1)
                                     .into(iv_image1);
                         }
-                        if (img2==null){
+                        if (img2 == null) {
                             iv_image2.setBackgroundResource(R.drawable.ivicon);
-                        }
-                        else {
+                        } else {
                             Picasso.with(getContext())
                                     .load(img2)
                                     .into(iv_image2);
                         }
-                        if (img3==null){
+                        if (img3 == null) {
                             iv_image3.setBackgroundResource(R.drawable.ivicon);
-                        }
-                        else {
+                        } else {
                             Picasso.with(getContext())
                                     .load(img3)
                                     .into(iv_image3);
@@ -235,7 +239,8 @@ public class HomeFragment extends Fragment {
                     topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
                         @Override
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
-
+                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
                         }
                     });
                     rv_top_diseases.setAdapter(topDiseaseAdapter);
@@ -330,13 +335,22 @@ public class HomeFragment extends Fragment {
                     sliderList = response.body().getResult().getSlider();
                     String banner1 = response.body().getResult().getBanner1();
                     iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
+                    //summary
+                    String males = response.body().getSummary().getMaleCount();
+                    String females = response.body().getSummary().getFemaleCount();
+                    String other = response.body().getSummary().getOtherCount();
+                    others.setText(other);
+                    male.setText(males);
+                    female.setText(females);
+
                     callBanner(settingBanner);//Banner
-                    callTopDiagnosis(sliderList);
+                    callTopDiagnosis(sliderList);//Top Diagnosis
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<SettingHomeResponse> call, Throwable t) {
                 progressDialog.dismiss();
@@ -344,12 +358,14 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void callTopDiagnosis(List<SettingHomeResponse.Slider> sliderList) {
         topDiagnosiAdapter = new TopDiagnosiAdapter(getContext(), sliderList);
         rv_diagnosis.setAdapter(topDiagnosiAdapter);
         rv_diagnosis.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
     }
+
     private void callBanner(List<SettingHomeResponse.Banner> settingBanner) {
         BannerAdapter bannerAdapter = new BannerAdapter(getContext(), settingBanner);
         viewPager.setAdapter(bannerAdapter);

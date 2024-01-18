@@ -19,62 +19,38 @@ public class TopDiseaseResponse {
     }
 
     public class Result {
-
-        @SerializedName("disease_name")
+        @SerializedName("id")
         @Expose
-        private String diseaseName;
-        @SerializedName("disease_image")
+        private String id;
+        @SerializedName("name")
         @Expose
-        private String diseaseImage;
-        @SerializedName("disease_imagePath")
+        private String name;
+        @SerializedName("image")
         @Expose
-        private String diseaseImagePath;
-        @SerializedName("diseaseId")
-        @Expose
-        private String diseaseId;
-        @SerializedName("searchCount")
-        @Expose
-        private String searchCount;
+        private String image;
 
-        public String getDiseaseName() {
-            return diseaseName;
+        public String getId() {
+            return id;
         }
 
-        public void setDiseaseName(String diseaseName) {
-            this.diseaseName = diseaseName;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public String getDiseaseImage() {
-            return diseaseImage;
+        public String getName() {
+            return name;
         }
 
-        public void setDiseaseImage(String diseaseImage) {
-            this.diseaseImage = diseaseImage;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public String getDiseaseImagePath() {
-            return diseaseImagePath;
+        public String getImage() {
+            return image;
         }
 
-        public void setDiseaseImagePath(String diseaseImagePath) {
-            this.diseaseImagePath = diseaseImagePath;
-        }
-
-        public String getDiseaseId() {
-            return diseaseId;
-        }
-
-        public void setDiseaseId(String diseaseId) {
-            this.diseaseId = diseaseId;
-        }
-
-        public String getSearchCount() {
-            return searchCount;
-        }
-
-        public void setSearchCount(String searchCount) {
-            this.searchCount = searchCount;
+        public void setImage(String image) {
+            this.image = image;
         }
     }
-
 }

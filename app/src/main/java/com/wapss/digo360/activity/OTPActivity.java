@@ -150,8 +150,8 @@ public class OTPActivity extends AppCompatActivity {
                 else {
                     if(response.code() == 201) {
                         assert response.body() != null;
-                        deviceToken = response.body().getResult().getToken();
-                        latestLogin = response.body().getResult().getLatest();
+                        deviceToken = response.body().getToken();
+                        latestLogin = response.body().getLatest();
                         editor.putString("deviceToken", deviceToken);
                         editor.putBoolean("latestLogin",latestLogin);
                         editor.commit();
@@ -166,10 +166,11 @@ public class OTPActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(OTPActivity.this, ""+latestLogin, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(OTPActivity.this, ""+latestLogin, Toast.LENGTH_SHORT).show();
                                 Intent intent;
                                 if (latestLogin) {
-                                    intent = new Intent(OTPActivity.this, RegistrationActivity.class);
+                                   // intent = new Intent(OTPActivity.this, RegistrationActivity.class);
+                                    intent = new Intent(OTPActivity.this, LoadingPage.class);
                                     startActivity(intent);
                                 }else {
                                     intent = new Intent(OTPActivity.this, LoadingPage.class);

@@ -1,30 +1,21 @@
-package com.wapss.digo360.fragment;
+package com.wapss.digo360.activity;
+
+import static java.security.AccessController.getContext;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
-import com.wapss.digo360.activity.HelpPage;
-import com.wapss.digo360.activity.NewCasectivity;
-import com.wapss.digo360.activity.NotificationActivity;
-import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter2;
 import com.wapss.digo360.apiServices.ApiService;
@@ -40,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TopDiseasesFragment extends Fragment {
+public class TopDiseasesActivity extends AppCompatActivity {
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String deviceToken;
@@ -55,22 +46,16 @@ public class TopDiseasesFragment extends Fragment {
     ImageView notification, help;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_top_diseases);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View TopDis = inflater.inflate(R.layout.fragment_top_diseases, container, false);
-//        rv_disease = TopDis.findViewById(R.id.rv_disease);
-//        sv_search = TopDis.findViewById(R.id.sv_search);
-        help = TopDis.findViewById(R.id.help);
-        notification = TopDis.findViewById(R.id.notification);
-        progressDialog = new CustomProgressDialog(getContext());
+        help = findViewById(R.id.help);
+        notification = findViewById(R.id.notification);
+        rv_disease = findViewById(R.id.rv_disease);
+        progressDialog = new CustomProgressDialog(this);
         //shared Pref
-        loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
 
@@ -79,7 +64,7 @@ public class TopDiseasesFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("PAGE_NAME", "DISEASE");
-                Intent i = new Intent(getContext(), HelpPage.class);
+                Intent i = new Intent(TopDiseasesActivity.this, HelpPage.class);
                 i.putExtras(bundle);
                 startActivity(i);
             }
@@ -87,37 +72,18 @@ public class TopDiseasesFragment extends Fragment {
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                Intent intent = new Intent(TopDiseasesActivity.this, NotificationActivity.class);
                 startActivity(intent);
             }
         });
-
-        //callDisease();
-
-//        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                cName = s;
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                cName = newText;
-//                searchSku(newText);
-//                return false;
-//            }
-//        });
-
-        return TopDis;
+        callDisease();
     }
-
     private void searchSku(String newText) {
         if (newText.isEmpty()) {
-            Toast.makeText(getContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
-            //callDisease();
+            Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
+            callDisease();
         } else {
-            //callSearchDisease(newText);
+            callSearchDisease(newText);
         }
     }
 
@@ -142,20 +108,20 @@ public class TopDiseasesFragment extends Fragment {
 //                            startActivity(intent);
 //                        }
 //                    });
-                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), searchResponse, new TopDiseaseListener2() {
+                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getApplicationContext(), searchResponse, new TopDiseaseListener2() {
                         @Override
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
-                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
                     });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                    GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
                     rv_disease.setLayoutManager(layoutManager);
                     rv_disease.setAdapter(topDiseaseAdapter2);
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -163,7 +129,7 @@ public class TopDiseasesFragment extends Fragment {
             public void onFailure(Call<SearchResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -180,20 +146,20 @@ public class TopDiseasesFragment extends Fragment {
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
 
-                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
+                    topDiseaseAdapter = new TopDiseaseAdapter(getApplicationContext(), topDiseaseResponse, new TopDiseaseListener() {
                         @Override
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
-                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
                     });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                    GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
                     rv_disease.setLayoutManager(layoutManager);
                     rv_disease.setAdapter(topDiseaseAdapter);
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
-                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -201,7 +167,7 @@ public class TopDiseasesFragment extends Fragment {
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -138,7 +138,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.code() == 201)  {
                     LoginResponse userLogin_response = response.body();
-                    phoneNum = response.body().getResult().getMessage();
+                    assert response.body() != null;
+                    phoneNum = response.body().getPhoneNumber();
                     editor.putString("phone", phoneNum);
                     // editor.putString("fcm",fb_token);
                     editor.commit();

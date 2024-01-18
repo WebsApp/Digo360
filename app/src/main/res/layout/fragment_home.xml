@@ -112,14 +112,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp">
 
-<!--                <androidx.viewpager.widget.ViewPager-->
-<!--                    android:id="@+id/view_pager"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="120dp"-->
-<!--                    android:clipToPadding="false"-->
-<!--                    android:foregroundGravity="center"-->
-<!--                    android:overScrollMode="never" />-->
-                <include layout="@layout/slider_layout"/>
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never" />
+<!--                <include layout="@layout/slider_layout"/>-->
             </LinearLayout>
 
             <LinearLayout
@@ -194,6 +194,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/others"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="909"
@@ -244,6 +245,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/male"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="100"
@@ -293,6 +295,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/female"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1023,13 +1026,13 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="gone"
                     android:id="@+id/rv_diagnosis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp" />
 
                 <HorizontalScrollView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none">

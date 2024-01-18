@@ -9,6 +9,12 @@ public class SettingHomeResponse {
     @SerializedName("result")
     @Expose
     private Result result;
+//    @SerializedName("search")
+//    @Expose
+//    private List<Object> search;
+    @SerializedName("summary")
+    @Expose
+    private Summary summary;
 
     public Result getResult() {
         return result;
@@ -16,6 +22,14 @@ public class SettingHomeResponse {
 
     public void setResult(Result result) {
         this.result = result;
+    }
+
+    public Summary getSummary() {
+        return summary;
+    }
+
+    public void setSummary(Summary summary) {
+        this.summary = summary;
     }
 
     public class Result {
@@ -109,31 +123,7 @@ public class SettingHomeResponse {
             this.banner = banner;
         }
     }
-    public class Banner {
 
-        @SerializedName("id")
-        @Expose
-        private Integer id;
-        @SerializedName("image")
-        @Expose
-        private String image;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String image) {
-            this.image = image;
-        }
-    }
     public class Slider {
 
         @SerializedName("id")
@@ -159,4 +149,68 @@ public class SettingHomeResponse {
             this.image = image;
         }
     }
+
+    public class Summary {
+
+        @SerializedName("maleCount")
+        @Expose
+        private String maleCount;
+        @SerializedName("femaleCount")
+        @Expose
+        private String femaleCount;
+        @SerializedName("otherCount")
+        @Expose
+        private String otherCount;
+
+        public String getMaleCount() {
+            return maleCount;
+        }
+
+        public void setMaleCount(String maleCount) {
+            this.maleCount = maleCount;
+        }
+
+        public String getFemaleCount() {
+            return femaleCount;
+        }
+
+        public void setFemaleCount(String femaleCount) {
+            this.femaleCount = femaleCount;
+        }
+
+        public String getOtherCount() {
+            return otherCount;
+        }
+
+        public void setOtherCount(String otherCount) {
+            this.otherCount = otherCount;
+        }
+    }
+
+    public class Banner {
+
+        @SerializedName("id")
+        @Expose
+        private Integer id;
+        @SerializedName("image")
+        @Expose
+        private String image;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+    }
+
 }

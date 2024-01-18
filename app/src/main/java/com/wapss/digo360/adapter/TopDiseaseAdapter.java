@@ -40,13 +40,13 @@ public class TopDiseaseAdapter extends RecyclerView.Adapter<TopDiseaseAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull TopDiseaseAdapter.ViewHolder holder, int position) {
-            holder.tv_disease.setText(ItemList.get(position).getDiseaseName());
-            if (ItemList.get(position).getDiseaseImage()==null){
+            holder.tv_disease.setText(ItemList.get(position).getName());
+            if (ItemList.get(position).getImage()==null){
                 holder.iv_image.setBackgroundResource(R.drawable.ivicon);
             }
             else {
                 Picasso.with(context)
-                        .load(ItemList.get(position).getDiseaseImage())
+                        .load(ItemList.get(position).getImage())
                         .into(holder.iv_image);
             }
     }

@@ -39,9 +39,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
-               /* if (deviceToken == null)
+                if (deviceToken == null)
                 {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
@@ -50,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
                 {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
-                }*/
+                }
             }
         },2000);
     }

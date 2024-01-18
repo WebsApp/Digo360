@@ -33,7 +33,7 @@ public class TopDiseaseAdapter2 extends RecyclerView.Adapter<TopDiseaseAdapter2.
     @NonNull
     @Override
     public TopDiseaseAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_disease, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_disease_list2, parent, false);
         TopDiseaseAdapter2.ViewHolder viewHolder = new TopDiseaseAdapter2.ViewHolder(view);
         return viewHolder;
     }
@@ -63,9 +63,9 @@ public class TopDiseaseAdapter2 extends RecyclerView.Adapter<TopDiseaseAdapter2.
         LinearLayout item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            iv_image = (ImageView) itemView.findViewById(R.id.iv_image);
-            tv_disease = (TextView) itemView.findViewById(R.id.tv_disease);
-            item = (LinearLayout) itemView.findViewById(R.id.item);
+            iv_image = (ImageView) itemView.findViewById(R.id.iv_image2);
+            tv_disease = (TextView) itemView.findViewById(R.id.tv_disease2);
+            item = (LinearLayout) itemView.findViewById(R.id.item1);
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
