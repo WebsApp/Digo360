@@ -19,6 +19,7 @@ import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.response.TopSearchDiseaseResponse;
 
 import org.json.JSONObject;
 

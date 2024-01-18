@@ -14,32 +14,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
-import com.wapss.digo360.interfaces.TopDiseaseListener2;
-import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 
 import java.util.List;
 
-public class TopDiseaseAdapter2 extends RecyclerView.Adapter<TopDiseaseAdapter2.ViewHolder>{
+public class TopSearchDiseaseAdapter extends RecyclerView.Adapter<TopSearchDiseaseAdapter.ViewHolder>{
     public static List<TopDiseaseResponse.Result> ItemList;
     private Context context;
-    TopDiseaseListener2 listener;
 
-    public TopDiseaseAdapter2(Context context, List<TopDiseaseResponse.Result> ItemList,TopDiseaseListener2 listener) {
-        this.ItemList = ItemList;
-        this.context = context;
-        this.listener = listener;
-    }
+    TopDiseaseListener listener;
     @NonNull
     @Override
-    public TopDiseaseAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopSearchDiseaseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_layout, parent, false);
-        TopDiseaseAdapter2.ViewHolder viewHolder = new TopDiseaseAdapter2.ViewHolder(view);
+        TopSearchDiseaseAdapter.ViewHolder viewHolder = new TopSearchDiseaseAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopDiseaseAdapter2.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopSearchDiseaseAdapter.ViewHolder holder, int position) {
         holder.tv_disease.setText(ItemList.get(position).getName());
         if (ItemList.get(position).getImage()==null){
             holder.iv_image.setBackgroundResource(R.drawable.ivicon);
