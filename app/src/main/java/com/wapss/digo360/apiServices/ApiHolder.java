@@ -52,7 +52,7 @@ public interface ApiHolder {
 
     @GET("degree-specialization/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
-                                             @Header("Authorization") String Token);
+                                 @Header("Authorization") String Token);
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
@@ -98,6 +98,12 @@ public interface ApiHolder {
     @GET("doctor-detail/profile/doctor")
     Call<Profile_Response> get_profile(@Header("Authorization") String Token);
 
+    @GET("patient-details/list")
+    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
+                                                  @Query("limit") int limit,
+                                                  @Query("offset") int offset,
+                                                  @Query("keyword")String keyword);
+
 
     @GET("notifications")
     Call<NotificationResponse> notificationAPi(@Header("Authorization") String Token);
@@ -111,14 +117,8 @@ public interface ApiHolder {
     Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
                                           @Query("limit") int limit,
                                           @Query("offset") int offset,
-                                          @Query("keyword") String keyword);
-
-    @GET("patient-details/list")
-    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
-                                               @Query("limit") int limit,
-                                               @Query("offset") int offset,
-                                               @Query("keyword") String keyword);
-
+                                          @Query("keyword")String keyword);
+    /*18-01-2024*/
     @POST("search-history")
     @FormUrlEncoded
     Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,

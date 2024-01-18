@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -30,6 +31,7 @@ public class NewCasectivity extends AppCompatActivity {
     RadioButton rb_doB,rb_age,rb_phone,rb_email,rb_yes,rb_no,rb_yes_other,rb_no_other;
     TextView tv_submit;
     ImageView back;
+    EditText pt_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
