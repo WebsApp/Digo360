@@ -50,15 +50,13 @@ public interface ApiHolder {
 
     @GET("degree-specialization/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
-                                             @Header("Authorization") String Token);
+                                 @Header("Authorization") String Token);
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
-
     @GET("city/list/{stateId}")
     Call<CityResponse> getCityData(@Path("stateId") String id,
                                    @Header("Authorization") String Token);
-
     @GET("area/list/{cityId}")
     Call<AreaResponse> getAreaData(@Path("cityId") String id,
                                    @Header("Authorization") String Token);
@@ -82,6 +80,7 @@ public interface ApiHolder {
                                             @Field("pincode") String pincode,
                                             @Field("tnc") String tnc);
 
+
     @GET("faqs")
     Call<FaqResponse> helpAPi(@Header("Authorization") String Token);
 
@@ -96,6 +95,12 @@ public interface ApiHolder {
     @GET("doctor-detail/profile/doctor")
     Call<Profile_Response> get_profile(@Header("Authorization") String Token);
 
+    @GET("patient-details/list")
+    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
+                                                  @Query("limit") int limit,
+                                                  @Query("offset") int offset,
+                                                  @Query("keyword")String keyword);
+
 
     @GET("notifications")
     Call<NotificationResponse> notificationAPi(@Header("Authorization") String Token);
@@ -109,11 +114,7 @@ public interface ApiHolder {
     Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
                                           @Query("limit") int limit,
                                           @Query("offset") int offset,
-                                          @Query("keyword") String keyword);
+                                          @Query("keyword")String keyword);
+    /*18-01-2024*/
 
-    @GET("patient-details/list")
-    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
-                                               @Query("limit") int limit,
-                                               @Query("offset") int offset,
-                                               @Query("keyword") String keyword);
 }

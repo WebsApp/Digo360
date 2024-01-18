@@ -83,7 +83,7 @@
             android:background="@drawable/bg_square_corner"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -122,7 +122,12 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/img" />
 
-            </LinearLayout>
+            </LinearLayout>-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/banner_four"/>
 
         </LinearLayout>
 
@@ -164,13 +169,15 @@
                     android:padding="5dp">
 
                     <EditText
-                        android:id="@+id/email1"
+                        android:id="@+id/pt_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:background="@null"
                         android:hint="Enter Name"
-                        android:textStyle="bold"
-                        android:textColorHint="@color/ripple"
+                        android:inputType="textPersonName"
+                        android:maxLength="20"
+                        android:textColorHint="#E594F3"
+                        android:textColor="@color/purple"
                         android:textSize="@dimen/_14ssp" />
                 </LinearLayout>
 
@@ -181,7 +188,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/patient_age1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Age Of your Patient"
@@ -226,22 +232,23 @@
                     <LinearLayout
                         android:id="@+id/ll_Dob"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="@dimen/_35sdp"
                         android:background="@drawable/time_bg"
                         android:orientation="horizontal"
-                        android:padding="5dp"
-                        android:visibility="gone">
+                        android:padding="5dp">
 
                         <EditText
-                            android:id="@+id/calender"
+                            android:id="@+id/pt_DOB"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@null"
-                            android:hint="@string/dob"
+                            android:hint="Enter DOB"
+                            android:inputType="textPersonName"
+                            android:maxLength="20"
+                            android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
-                            android:textColorHint="@color/purple"
-                            android:textSize="14dp" />
+                            android:textSize="@dimen/_14ssp" />
 
                         <ImageView
                             android:id="@+id/iv_date"
@@ -259,8 +266,7 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/time_bg"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:visibility="gone">
+                        android:padding="5dp">
 
                         <EditText
                             android:id="@+id/age"
@@ -272,6 +278,7 @@
                             android:textColorHint="@color/purple"
                             android:textSize="14dp" />
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -312,7 +319,9 @@
                             android:layout_marginStart="20dp"
                             android:text="@string/email"
                             android:textColor="@color/purple" />
+
                     </RadioGroup>
+
                 </LinearLayout>
 
                 <LinearLayout

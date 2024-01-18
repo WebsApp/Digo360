@@ -78,7 +78,7 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                     Toast.makeText(PatientRegistrationCheckActivity.this, "Enter Patient 10 Digit Number", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    startActivity(new Intent(PatientRegistrationCheckActivity.this,PreviousCases.class));
+                    startActivity(new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class));
                     //number_Check_api(keyword);
                 }
             }
