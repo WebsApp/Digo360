@@ -194,8 +194,8 @@ public class HomeFragment extends Fragment {
 
     private void callTopDiseases() {
         progressDialog.showProgressDialog();
-        // String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(3, 0);
+         String Token = "Bearer " + deviceToken;
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token,3, 0);
         banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
             @Override
             public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {

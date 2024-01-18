@@ -137,7 +137,7 @@ public class TopDiseasesActivity extends AppCompatActivity {
     private void callDisease() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( 50, 0);
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( Token,50, 0);
         banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
             @Override
             public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
