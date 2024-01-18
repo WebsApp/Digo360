@@ -91,7 +91,7 @@ public class HelpPage extends AppCompatActivity {
 
     private void help_api(String pageName) {
         progressDialog.showProgressDialog();
-        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
+        Token = "Bearer " + deviceToken;
 
         Call<FaqResponse> help_apiCall = ApiService.apiHolders().faqAPi(Token,pageName);
         help_apiCall.enqueue(new Callback<FaqResponse>() {

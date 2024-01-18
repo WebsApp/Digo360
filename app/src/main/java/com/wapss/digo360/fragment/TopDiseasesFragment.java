@@ -25,12 +25,16 @@ import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.NewCasectivity;
 import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
+import com.wapss.digo360.activity.TopDiseasesActivity;
+import com.wapss.digo360.adapter.TopDiseaseAdapeter3;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter2;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.interfaces.ListDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener2;
+import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 
@@ -46,13 +50,16 @@ public class TopDiseasesFragment extends Fragment {
     String deviceToken;
     CustomProgressDialog progressDialog;
     List<TopDiseaseResponse.Result> topDiseaseResponse;
+    List<TopDiseaseResponse.Result> topSearch;
     List<SearchResponse.Result> searchResponse;
     TopDiseaseAdapter topDiseaseAdapter;
     TopDiseaseAdapter2 topDiseaseAdapter2;
-    RecyclerView rv_disease;
+    TopDiseaseAdapeter3 topDiseaseAdapeter3;
+    RecyclerView rv_disease,rv_top_search;
     SearchView sv_search;
     String cName;
     ImageView notification, help;
+    LinearLayout viewAll2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,10 +71,13 @@ public class TopDiseasesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View TopDis = inflater.inflate(R.layout.fragment_top_diseases, container, false);
-//        rv_disease = TopDis.findViewById(R.id.rv_disease);
-//        sv_search = TopDis.findViewById(R.id.sv_search);
+
         help = TopDis.findViewById(R.id.help);
         notification = TopDis.findViewById(R.id.notification);
+        rv_disease = TopDis.findViewById(R.id.rv_disease);
+        rv_top_search = TopDis.findViewById(R.id.rv_top_search);
+        viewAll2 = TopDis.findViewById(R.id.viewAll2);
+        sv_search = TopDis.findViewById(R.id.sv_search);
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
@@ -87,63 +97,116 @@ public class TopDiseasesFragment extends Fragment {
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                Intent intent = new Intent(getContext(), NotificationActivity.class);
                 startActivity(intent);
             }
         });
 
-        //callDisease();
+        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                cName = s;
+                return false;
+            }
 
-//        sv_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                cName = s;
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                cName = newText;
-//                searchSku(newText);
-//                return false;
-//            }
-//        });
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                cName = newText;
+                searchSku(newText);
+                return false;
+            }
+        });
+
+        callDisease(); //all List
+        callTopSearch(); //top Search
 
         return TopDis;
     }
 
+    private void callTopSearch() {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( Token,50, 0);
+        banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
+            @Override
+            public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                    assert response.body() != null;
+                    topSearch = response.body().getResult();
+                    if (topSearch.size()==0){
+                        viewAll2.setVisibility(View.GONE);
+                    }
+
+                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), topSearch, new TopDiseaseListener2() {
+                        @Override
+                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+                            String diseaseId = item.getId();
+                            callMostSearchClick(diseaseId);
+                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+                    rv_top_search.setLayoutManager(layoutManager);
+                    rv_top_search.setAdapter(topDiseaseAdapter2);
+                } else {
+                    progressDialog.dismiss();
+                    //  ll_faq.setVisibility(View.VISIBLE);
+                    viewAll2.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                //ll_faq.setVisibility(View.VISIBLE);
+                viewAll2.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void searchSku(String newText) {
         if (newText.isEmpty()) {
-            Toast.makeText(getContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
-            //callDisease();
+            // Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
+            callDisease();
+            callTopSearch(); //top Search
         } else {
-            //callSearchDisease(newText);
+            callSearchDisease(newText);
         }
     }
 
     private void callSearchDisease(String newText) {
         // progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<SearchResponse> banner_apiCall = ApiService.apiHolders().SearchADiseasePi(Token, 10, 0, newText);
+        Call<SearchResponse> banner_apiCall = ApiService.apiHolders().SearchADiseasePi( Token,50, 0,newText);
         banner_apiCall.enqueue(new Callback<SearchResponse>() {
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 if (response.isSuccessful()) {
                     // progressDialog.dismiss();
                     assert response.body() != null;
-                    //topDiseaseResponse = response.body().getResult();
-
                     searchResponse = response.body().getResult();
-//                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), searchResponse, new TopDiseaseListener2() {
-//                        @Override
-//                        public void onItemClickedItem(SearchResponse.Result item, int position) {
-//                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+//                    if (searchResponse.size()>0)
+//                    {
+//                        viewAll2.setVisibility(View.GONE);
+//                    }
+
+                    topDiseaseAdapeter3 = new TopDiseaseAdapeter3(getContext(), searchResponse, new ListDiseaseListener() {
+                        @Override
+                        public void onItemClickedItem(SearchResponse.Result item, int position) {
+                            String diseaseId = item.getId();
+                            callMostSearchClick(diseaseId);
+                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
                     rv_disease.setLayoutManager(layoutManager);
-                    rv_disease.setAdapter(topDiseaseAdapter2);
+                    rv_disease.setAdapter(topDiseaseAdapeter3);
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
@@ -163,25 +226,27 @@ public class TopDiseasesFragment extends Fragment {
     private void callDisease() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token,50, 0);
-        banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
+        Call<SearchResponse> banner_apiCall = ApiService.apiHolders().SearchADiseasePi( Token,50, 0,"");
+        banner_apiCall.enqueue(new Callback<SearchResponse>() {
             @Override
-            public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
+            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     assert response.body() != null;
-                    topDiseaseResponse = response.body().getResult();
+                    searchResponse = response.body().getResult();
 
-                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
+                    topDiseaseAdapeter3 = new TopDiseaseAdapeter3(getContext(), searchResponse, new ListDiseaseListener() {
                         @Override
-                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+                        public void onItemClickedItem(SearchResponse.Result item, int position) {
+                            String diseaseId = item.getId();
+                            callMostSearchClick(diseaseId);
                             Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
                     });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
                     rv_disease.setLayoutManager(layoutManager);
-                    rv_disease.setAdapter(topDiseaseAdapter);
+                    rv_disease.setAdapter(topDiseaseAdapeter3);
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
@@ -190,7 +255,32 @@ public class TopDiseasesFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
+            public void onFailure(Call<SearchResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                //ll_faq.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void callMostSearchClick(String diseaseId) {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<MostSearchClickResponse> banner_apiCall = ApiService.apiHolders().MostSearchclick( Token,diseaseId);
+        banner_apiCall.enqueue(new Callback<MostSearchClickResponse>() {
+            @Override
+            public void onResponse(Call<MostSearchClickResponse> call, Response<MostSearchClickResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                } else {
+                    progressDialog.dismiss();
+                    //  ll_faq.setVisibility(View.VISIBLE);
+                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MostSearchClickResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();

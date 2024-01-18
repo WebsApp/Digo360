@@ -118,6 +118,9 @@ public class TopDiseasesActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     assert response.body() != null;
                     topSearch = response.body().getResult();
+                    if (topSearch.size()==0){
+                        viewAll2.setVisibility(View.GONE);
+                    }
 
                     topDiseaseAdapter2 = new TopDiseaseAdapter2(getApplicationContext(), topSearch, new TopDiseaseListener2() {
                         @Override
@@ -134,6 +137,7 @@ public class TopDiseasesActivity extends AppCompatActivity {
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
+                    viewAll2.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -142,6 +146,7 @@ public class TopDiseasesActivity extends AppCompatActivity {
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
+                viewAll2.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -150,35 +155,42 @@ public class TopDiseasesActivity extends AppCompatActivity {
 
     private void searchSku(String newText) {
         if (newText.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
             callDisease();
+            callTopSearch(); //top Search
         } else {
             callSearchDisease(newText);
         }
     }
 
     private void callSearchDisease(String newText) {
-        // progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<SearchResponse> banner_apiCall = ApiService.apiHolders().SearchADiseasePi(Token, 10, 0, newText);
+        Call<SearchResponse> banner_apiCall = ApiService.apiHolders().SearchADiseasePi( Token,50, 0,newText);
         banner_apiCall.enqueue(new Callback<SearchResponse>() {
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 if (response.isSuccessful()) {
-                    // progressDialog.dismiss();
+                   // progressDialog.dismiss();
                     assert response.body() != null;
-
                     searchResponse = response.body().getResult();
-//                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getApplicationContext(), searchResponse, new TopDiseaseListener2() {
-//                        @Override
-//                        public void onItemClickedItem(SearchResponse.Result item, int position) {
-//                            Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    });
+//                    if (searchResponse.size()>0)
+//                    {
+//                        viewAll2.setVisibility(View.GONE);
+//                    }
+
+                    topDiseaseAdapeter3 = new TopDiseaseAdapeter3(getApplicationContext(), searchResponse, new ListDiseaseListener() {
+                        @Override
+                        public void onItemClickedItem(SearchResponse.Result item, int position) {
+                            String diseaseId = item.getId();
+                            callMostSearchClick(diseaseId);
+                            Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
                     rv_disease.setLayoutManager(layoutManager);
-                    rv_disease.setAdapter(topDiseaseAdapter2);
+                    rv_disease.setAdapter(topDiseaseAdapeter3);
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
