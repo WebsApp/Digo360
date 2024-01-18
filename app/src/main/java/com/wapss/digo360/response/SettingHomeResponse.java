@@ -15,6 +15,17 @@ public class SettingHomeResponse {
     @SerializedName("summary")
     @Expose
     private Summary summary;
+    @SerializedName("search")
+    @Expose
+    private List<Search> search;
+
+    public List<Search> getSearch() {
+        return search;
+    }
+
+    public void setSearch(List<Search> search) {
+        this.search = search;
+    }
 
     public Result getResult() {
         return result;
@@ -210,6 +221,65 @@ public class SettingHomeResponse {
 
         public void setImage(String image) {
             this.image = image;
+        }
+    }
+
+    public class Search {
+
+        @SerializedName("disease_name")
+        @Expose
+        private String diseaseName;
+        @SerializedName("disease_image")
+        @Expose
+        private String diseaseImage;
+        @SerializedName("disease_imagePath")
+        @Expose
+        private String diseaseImagePath;
+        @SerializedName("diseaseId")
+        @Expose
+        private String diseaseId;
+        @SerializedName("searchCount")
+        @Expose
+        private String searchCount;
+
+        public String getDiseaseName() {
+            return diseaseName;
+        }
+
+        public void setDiseaseName(String diseaseName) {
+            this.diseaseName = diseaseName;
+        }
+
+        public String getDiseaseImage() {
+            return diseaseImage;
+        }
+
+        public void setDiseaseImage(String diseaseImage) {
+            this.diseaseImage = diseaseImage;
+        }
+
+        public String getDiseaseImagePath() {
+            return diseaseImagePath;
+        }
+
+        public void setDiseaseImagePath(String diseaseImagePath) {
+            this.diseaseImagePath = diseaseImagePath;
+        }
+
+        public String getDiseaseId() {
+            return diseaseId;
+        }
+
+        public void setDiseaseId(String diseaseId) {
+            this.diseaseId = diseaseId;
+        }
+
+        public String getSearchCount() {
+            return searchCount;
+        }
+
+        public void setSearchCount(String searchCount) {
+            this.searchCount = searchCount;
         }
     }
 

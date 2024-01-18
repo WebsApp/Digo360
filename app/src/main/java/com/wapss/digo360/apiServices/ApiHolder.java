@@ -7,6 +7,7 @@ import com.wapss.digo360.response.Degree_Response;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.LoginResponse;
+import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
@@ -54,9 +55,11 @@ public interface ApiHolder {
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
+
     @GET("city/list/{stateId}")
     Call<CityResponse> getCityData(@Path("stateId") String id,
                                    @Header("Authorization") String Token);
+
     @GET("area/list/{cityId}")
     Call<AreaResponse> getAreaData(@Path("cityId") String id,
                                    @Header("Authorization") String Token);
@@ -79,7 +82,6 @@ public interface ApiHolder {
                                             @Field("areaId") String areaId,
                                             @Field("pincode") String pincode,
                                             @Field("tnc") String tnc);
-
 
     @GET("faqs")
     Call<FaqResponse> helpAPi(@Header("Authorization") String Token);
@@ -117,4 +119,14 @@ public interface ApiHolder {
                                           @Query("keyword")String keyword);
     /*18-01-2024*/
 
+    @GET("patient-details/list")
+    Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
+                                               @Query("limit") int limit,
+                                               @Query("offset") int offset,
+                                               @Query("keyword") String keyword);
+
+    @POST("search-history")
+    @FormUrlEncoded
+    Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
+                                                  @Field("payload") String payload);
 }

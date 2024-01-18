@@ -42,10 +42,12 @@ import com.wapss.digo360.activity.TopDiseasesActivity;
 import com.wapss.digo360.activity.Total_Reports;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
+import com.wapss.digo360.adapter.MostSearchDiseaseAdapter;
 import com.wapss.digo360.adapter.TopDiagnosiAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.interfaces.MostSearchDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.HelpResponse;
@@ -69,6 +71,7 @@ public class HomeFragment extends Fragment {
     List<BannerResponse.Result> bannerResponses;
     List<SettingHomeResponse.Banner> settingBanner;
     List<SettingHomeResponse.Slider> sliderList;
+    List<SettingHomeResponse.Search> searchList;
     List<HelpResponse.Result> helpResponse;
     List<TopDiseaseResponse.Result> topDiseaseResponse;
     private int currentPage = 0;
@@ -78,7 +81,8 @@ public class HomeFragment extends Fragment {
     SharedPreferences.Editor editor;
     String deviceToken, Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
-    RecyclerView rv_diagnosis, rv_top_diseases;
+    MostSearchDiseaseAdapter mostSearchDiseaseAdapter;
+    RecyclerView rv_diagnosis, rv_top_diseases,rv_most_search_diseases;
     View home;
     HelpAdapter helpAdapter;
     LinearLayout ll_faq, ll_viewAllDisease;
@@ -121,6 +125,8 @@ public class HomeFragment extends Fragment {
         tv_disease1 = home.findViewById(R.id.tv_disease1);
         tv_disease2 = home.findViewById(R.id.tv_disease2);
         tv_disease3 = home.findViewById(R.id.tv_disease3);
+
+        rv_most_search_diseases = home.findViewById(R.id.rv_most_search_diseases);
 
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
@@ -178,7 +184,7 @@ public class HomeFragment extends Fragment {
         btn_fever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
+               // startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
             }
         });
         CallAPI();
@@ -333,6 +339,7 @@ public class HomeFragment extends Fragment {
                     // String response1 = response.body().toString();
                     settingBanner = response.body().getResult().getBanner();
                     sliderList = response.body().getResult().getSlider();
+                    searchList = response.body().getSearch();
                     String banner1 = response.body().getResult().getBanner1();
                     iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
                     //summary
@@ -345,6 +352,7 @@ public class HomeFragment extends Fragment {
 
                     callBanner(settingBanner);//Banner
                     callTopDiagnosis(sliderList);//Top Diagnosis
+                    callMostSearchDisease(searchList);//most Search Disease
                 } else {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
@@ -357,6 +365,17 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void callMostSearchDisease(List<SettingHomeResponse.Search> searchList) {
+        mostSearchDiseaseAdapter = new MostSearchDiseaseAdapter(getContext(), searchList, new MostSearchDiseaseListener() {
+            @Override
+            public void onItemClickedItem(SettingHomeResponse.Search item, int position) {
+
+            }
+        });
+        rv_most_search_diseases.setAdapter(mostSearchDiseaseAdapter);
+        rv_most_search_diseases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     private void callTopDiagnosis(List<SettingHomeResponse.Slider> sliderList) {
