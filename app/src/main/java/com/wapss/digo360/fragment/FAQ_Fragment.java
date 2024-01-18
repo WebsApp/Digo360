@@ -78,7 +78,7 @@ public class FAQ_Fragment extends Fragment {
     }
     private void faq_api() {
         progressDialog.showProgressDialog();
-        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
+        Token = "Bearer " + deviceToken;
         Call<FaqResponse> help_apiCall = ApiService.apiHolders().helpAPi(Token);
         help_apiCall.enqueue(new Callback<FaqResponse>() {
             @Override
