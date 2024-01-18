@@ -350,6 +350,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
+                    String Dr_name = response.body().getName();
+                    editor.putString("DR_NAME", Dr_name);
+                    editor.commit();
                     //specResponse = response.body().();
                     Toast.makeText(getApplicationContext(), "Successfully Registration", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);

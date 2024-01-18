@@ -32,7 +32,6 @@ import retrofit2.http.Query;
 public interface ApiHolder {
     @GET("settings/default")
     Call<SettingHomeResponse> homeAPi(@Header("Authorization") String Token);
-
     /*-----------------*/
     @POST("auth/doctor/mobile/login")
     @FormUrlEncoded
@@ -49,15 +48,13 @@ public interface ApiHolder {
 
     @GET("degree-specialization/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
-                                             @Header("Authorization") String Token);
+                                 @Header("Authorization") String Token);
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
-
     @GET("city/list/{stateId}")
     Call<CityResponse> getCityData(@Path("stateId") String id,
                                    @Header("Authorization") String Token);
-
     @GET("area/list/{cityId}")
     Call<AreaResponse> getAreaData(@Path("cityId") String id,
                                    @Header("Authorization") String Token);
@@ -80,7 +77,6 @@ public interface ApiHolder {
                                             @Field("areaId") String areaId,
                                             @Field("pincode") String pincode,
                                             @Field("tnc") String tnc);
-
     @GET("faqs")
     Call<FaqResponse> helpAPi(@Header("Authorization") String Token);
 
@@ -96,16 +92,19 @@ public interface ApiHolder {
     Call<Profile_Response> get_profile(@Header("Authorization") String Token);
 
 
+
+
     @GET("notifications")
     Call<NotificationResponse> notificationAPi(@Header("Authorization") String Token);
 
-    @GET("diseases/top-Disease")
-    Call<TopDiseaseResponse> DiseaseAPi(@Query("limit") int limit,
-                                        @Query("offset") int offset);
+    @GET("search-history/top-ten")
+    Call<TopDiseaseResponse> DiseaseAPi(@Header("Authorization") String Token,
+                                     @Query("limit") int limit,
+                                     @Query("offset") int offset);
 
     @GET("diseases/list")
     Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
                                           @Query("limit") int limit,
                                           @Query("offset") int offset,
-                                          @Query("keyword") String keyword);
+                                          @Query("keyword")String keyword);
 }

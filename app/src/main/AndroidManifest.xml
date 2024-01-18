@@ -28,6 +28,9 @@
             android:name=".activity.TopDiseasesActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.Patient_Details"
+            android:exported="false" />
+        <activity
             android:name=".activity.Pages"
             android:exported="false" />
         <activity

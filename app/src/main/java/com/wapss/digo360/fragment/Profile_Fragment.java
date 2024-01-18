@@ -24,6 +24,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wapss.digo360.R;
 import com.wapss.digo360.activity.AboutDigo;
@@ -38,6 +40,10 @@ public class Profile_Fragment extends Fragment {
     LinearLayout profile_layout,about_layout,version_layout,logout_layout,btn_language,btn_refer;
     LinearLayout ll_logOut;
     ImageView btn_faq;
+    TextView txt_profile;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
+    String name;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,11 @@ public class Profile_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View profile =  inflater.inflate(R.layout.fragment_profile_, container, false);
 
+        loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        editor = loginPref.edit();
+        name = loginPref.getString("Dr_Name", null);
+
+        txt_profile = profile.findViewById(R.id.txt_profile);
         btn_refer = profile.findViewById(R.id.btn_refer);
         btn_language = profile.findViewById(R.id.btn_language);
         btn_faq = profile.findViewById(R.id.btn_faq);
@@ -61,6 +72,7 @@ public class Profile_Fragment extends Fragment {
         profile_layout = profile.findViewById(R.id.profile_layout);
         about_layout = profile.findViewById(R.id.about_layout);
         ll_logOut = profile.findViewById(R.id.ll_logOut);
+        txt_profile.setText(name);
 
         profile_layout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Profile_Response {
+
     public class Account {
 
         @SerializedName("phoneNumber")
@@ -19,8 +20,11 @@ public class Profile_Response {
         public void setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
         }
+
     }
+
     public class Area {
+
         @SerializedName("name")
         @Expose
         private String name;
@@ -36,21 +40,6 @@ public class Profile_Response {
     }
 
     public class City {
-        @SerializedName("name")
-        @Expose
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-    }
-
-    public class Degree {
 
         @SerializedName("name")
         @Expose
@@ -66,31 +55,6 @@ public class Profile_Response {
 
     }
 
-    public class DoctorDetailDegree {
-        @SerializedName("id")
-        @Expose
-        private String id;
-        @SerializedName("degree")
-        @Expose
-        private Degree degree;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Degree getDegree() {
-            return degree;
-        }
-
-        public void setDegree(Degree degree) {
-            this.degree = degree;
-        }
-
-    }
         @SerializedName("id")
         @Expose
         private String id;
@@ -118,30 +82,27 @@ public class Profile_Response {
         @SerializedName("imagePath")
         @Expose
         private Object imagePath;
+        @SerializedName("collegeName")
+        @Expose
+        private Object collegeName;
+        @SerializedName("startDate")
+        @Expose
+        private Object startDate;
+        @SerializedName("endDate")
+        @Expose
+        private Object endDate;
+        @SerializedName("experience")
+        @Expose
+        private Object experience;
         @SerializedName("studyYear")
         @Expose
         private String studyYear;
         @SerializedName("experienceLevel")
         @Expose
         private String experienceLevel;
-        @SerializedName("collegeName")
-        @Expose
-        private String collegeName;
-        @SerializedName("zipcode")
-        @Expose
-        private String zipcode;
-        @SerializedName("startDate")
-        @Expose
-        private String startDate;
-        @SerializedName("endDate")
-        @Expose
-        private String endDate;
-        @SerializedName("experience")
-        @Expose
-        private String experience;
         @SerializedName("doctorDetailDegree")
         @Expose
-        private List<DoctorDetailDegree> doctorDetailDegree;
+        private List<Object> doctorDetailDegree;
         @SerializedName("city")
         @Expose
         private City city;
@@ -230,6 +191,38 @@ public class Profile_Response {
             this.imagePath = imagePath;
         }
 
+        public Object getCollegeName() {
+            return collegeName;
+        }
+
+        public void setCollegeName(Object collegeName) {
+            this.collegeName = collegeName;
+        }
+
+        public Object getStartDate() {
+            return startDate;
+        }
+
+        public void setStartDate(Object startDate) {
+            this.startDate = startDate;
+        }
+
+        public Object getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(Object endDate) {
+            this.endDate = endDate;
+        }
+
+        public Object getExperience() {
+            return experience;
+        }
+
+        public void setExperience(Object experience) {
+            this.experience = experience;
+        }
+
         public String getStudyYear() {
             return studyYear;
         }
@@ -246,51 +239,11 @@ public class Profile_Response {
             this.experienceLevel = experienceLevel;
         }
 
-        public String getCollegeName() {
-            return collegeName;
-        }
-
-        public void setCollegeName(String collegeName) {
-            this.collegeName = collegeName;
-        }
-
-        public String getZipcode() {
-            return zipcode;
-        }
-
-        public void setZipcode(String zipcode) {
-            this.zipcode = zipcode;
-        }
-
-        public String getStartDate() {
-            return startDate;
-        }
-
-        public void setStartDate(String startDate) {
-            this.startDate = startDate;
-        }
-
-        public String getEndDate() {
-            return endDate;
-        }
-
-        public void setEndDate(String endDate) {
-            this.endDate = endDate;
-        }
-
-        public String getExperience() {
-            return experience;
-        }
-
-        public void setExperience(String experience) {
-            this.experience = experience;
-        }
-
-        public List<DoctorDetailDegree> getDoctorDetailDegree() {
+        public List<Object> getDoctorDetailDegree() {
             return doctorDetailDegree;
         }
 
-        public void setDoctorDetailDegree(List<DoctorDetailDegree> doctorDetailDegree) {
+        public void setDoctorDetailDegree(List<Object> doctorDetailDegree) {
             this.doctorDetailDegree = doctorDetailDegree;
         }
 
@@ -334,6 +287,7 @@ public class Profile_Response {
             this.account = account;
         }
     public class State {
+
         @SerializedName("name")
         @Expose
         private String name;
@@ -345,5 +299,6 @@ public class Profile_Response {
         public void setName(String name) {
             this.name = name;
         }
+
     }
 }
