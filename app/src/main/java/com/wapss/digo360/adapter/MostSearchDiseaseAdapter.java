@@ -24,6 +24,7 @@ public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDis
     public static List<SettingHomeResponse.Search> ItemList;
     private Context context;
     MostSearchDiseaseListener listener;
+    String name;
     public MostSearchDiseaseAdapter(Context context, List<SettingHomeResponse.Search> ItemList, MostSearchDiseaseListener listener) {
         this.ItemList = ItemList;
         this.context = context;
@@ -39,15 +40,15 @@ public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDis
 
     @Override
     public void onBindViewHolder(@NonNull MostSearchDiseaseAdapter.ViewHolder holder, int position) {
-        holder.tv_disease.setText(ItemList.get(position).getDiseaseName());
-        if (ItemList.get(position).getDiseaseImage()==null){
-            holder.iv_image.setBackgroundResource(R.drawable.ivicon);
-        }
-        else {
-            Picasso.with(context)
-                    .load(ItemList.get(position).getDiseaseImage())
-                    .into(holder.iv_image);
-        }
+        name = ItemList.get(position).getDiseaseName();
+            holder.tv_disease.setText(ItemList.get(position).getDiseaseName());
+            if (ItemList.get(position).getDiseaseImage() == null) {
+                holder.iv_image.setBackgroundResource(R.drawable.ivicon);
+            } else {
+                Picasso.with(context)
+                        .load(ItemList.get(position).getDiseaseImage())
+                        .into(holder.iv_image);
+            }
     }
 
     @Override

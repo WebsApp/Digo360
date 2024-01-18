@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class NotificationActivity extends AppCompatActivity {
     RecyclerView rv_notification;
     List<NotificationResponse.Result> notification;
     NotificationAdapter notificationAdapter;
+    LinearLayout ll_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class NotificationActivity extends AppCompatActivity {
         progressDialog = new CustomProgressDialog(this);
         rv_notification = findViewById(R.id.rv_notification);
         iv_noti = findViewById(R.id.iv_noti);
+        ll_view = findViewById(R.id.ll_view);
         //shared Pref
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
@@ -71,10 +74,10 @@ public class NotificationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*callNotificationAPI(deviceToken);*/
+        callNotificationAPI(deviceToken);
     }
 
-    /*private void callNotificationAPI(String deviceToken) {
+    private void callNotificationAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
         Call<NotificationResponse> banner_apiCall = ApiService.apiHolders().notificationAPi(Token);
@@ -87,6 +90,7 @@ public class NotificationActivity extends AppCompatActivity {
                     int total = response.body().getTotal();
                     if (total == 0) {
                         iv_noti.setVisibility(View.VISIBLE);
+                        ll_view.setVisibility(View.VISIBLE);
                     }
                     notification = response.body().getResult();
                     notificationAdapter = new NotificationAdapter(getApplicationContext(), notification);
@@ -96,6 +100,7 @@ public class NotificationActivity extends AppCompatActivity {
                 } else {
                     progressDialog.dismiss();
                     iv_noti.setVisibility(View.VISIBLE);
+                    ll_view.setVisibility(View.VISIBLE);
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -104,8 +109,9 @@ public class NotificationActivity extends AppCompatActivity {
             public void onFailure(Call<NotificationResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 iv_noti.setVisibility(View.VISIBLE);
+                ll_view.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 }

@@ -255,7 +255,7 @@ public class HomeFragment extends Fragment {
 
                 } else {
                     progressDialog.dismiss();
-                    ll_faq.setVisibility(View.VISIBLE);
+                    //ll_faq.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -263,7 +263,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                ll_faq.setVisibility(View.VISIBLE);
+               // ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });

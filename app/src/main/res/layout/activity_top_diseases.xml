@@ -315,11 +315,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <androidx.appcompat.widget.SearchView
+                    <SearchView
+                        android:id="@+id/sv_search"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:background="@drawable/search_bg"
-
                         android:hint="Search by User Name | Case" />
 
                 </RelativeLayout>
@@ -361,10 +361,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:background="@drawable/bg_summary"
         android:orientation="vertical">
 
@@ -394,8 +391,21 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_top_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -532,6 +542,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -1118,16 +1129,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/two"
+        android:layout_margin="@dimen/_5sdp"
         android:orientation="horizontal"
         android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_margin="@dimen/_5sdp"
             android:orientation="vertical"
             android:visibility="visible">
 

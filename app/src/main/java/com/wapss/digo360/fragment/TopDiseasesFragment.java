@@ -134,21 +134,13 @@ public class TopDiseasesFragment extends Fragment {
                     //topDiseaseResponse = response.body().getResult();
 
                     searchResponse = response.body().getResult();
-
-//                    topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
+//                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), searchResponse, new TopDiseaseListener2() {
 //                        @Override
-//                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+//                        public void onItemClickedItem(SearchResponse.Result item, int position) {
 //                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
 //                            startActivity(intent);
 //                        }
 //                    });
-                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), searchResponse, new TopDiseaseListener2() {
-                        @Override
-                        public void onItemClickedItem(SearchResponse.Result item, int position) {
-                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
-                            startActivity(intent);
-                        }
-                    });
                     GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
                     rv_disease.setLayoutManager(layoutManager);
                     rv_disease.setAdapter(topDiseaseAdapter2);
