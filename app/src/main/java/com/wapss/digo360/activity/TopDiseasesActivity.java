@@ -127,6 +127,8 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
@@ -184,6 +186,8 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
@@ -224,6 +228,8 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }

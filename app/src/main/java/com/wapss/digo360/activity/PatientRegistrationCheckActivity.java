@@ -3,7 +3,9 @@ package com.wapss.digo360.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -34,6 +36,9 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
     EditText et_phone;
     String regex = "^[6-9][0-9]{9}$";
     String keyword,TOKEN;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
+    String deviceToken;
     CustomProgressDialog progressDialog;
 
     @Override
@@ -50,6 +55,10 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         tv_check = findViewById(R.id.tv_check);
         progressDialog = new CustomProgressDialog(this);
+        //shared Pref
+        loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        editor = loginPref.edit();
+        deviceToken = loginPref.getString("deviceToken", null);
         tv_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +86,7 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(keyword);
                 if (matcher.matches()){
-                    //number_Check_api(keyword);
+                    number_Check_api(keyword);
                 }
                 else {
                     final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(PatientRegistrationCheckActivity.this);
@@ -114,7 +123,7 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
 
     private void number_Check_api(String keyword) {
         progressDialog.showProgressDialog();
-        TOKEN = "Bearer " + "eyJhbGciaOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
+        TOKEN = "Bearer " + deviceToken;
         int limit = 10;
         int offset = 0;
         Call<Patient_Check_Response> patient_check = ApiService.apiHolders().Patient_check(TOKEN,limit,offset,keyword);
@@ -125,10 +134,16 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                     progressDialog.hideProgressDialog();
                     String total = String.valueOf(response.body().getTotal());
                     if (total.equals("0")){
-                        startActivity(new Intent(PatientRegistrationCheckActivity.this, PatientsProblemActivity.class));
+                        Bundle bundle = new Bundle();
+                        bundle.putString("p_number",keyword);
+                        Intent intent = new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }else {
                         startActivity(new Intent(PatientRegistrationCheckActivity.this, PreviousCases.class));
                     }
+                }else {
+                    progressDialog.dismiss();
                 }
             }
 
