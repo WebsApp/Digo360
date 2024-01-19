@@ -111,7 +111,7 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                     progressDialog.hideProgressDialog();
                     String total = String.valueOf(response.body().getTotal());
                     if (total.equals("0")){
-                        startActivity(new Intent(PatientRegistrationCheckActivity.this, NewCasectivity.class));
+                        startActivity(new Intent(PatientRegistrationCheckActivity.this, PatientsProblemActivity.class));
                     }else {
                         startActivity(new Intent(PatientRegistrationCheckActivity.this, PreviousCases.class));
                     }

@@ -13,6 +13,7 @@ import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
 import com.wapss.digo360.response.Patient_Check_Response;
+import com.wapss.digo360.response.Patient_Consultation_Response;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SearchResponse;
@@ -138,5 +139,20 @@ public interface ApiHolder {
                                                   @Field("address") String address,
                                                   @Field("gender") String gender,
                                                   @Field("pincode") String pincode);
+    @POST("patient-consultation")
+    @FormUrlEncoded
+    Call<Patient_Consultation_Response> consalt_details(@Header("Authorization") String Token,
+                                                        @Field("bp") String bp,
+                                                        @Field("pulseRate") String pulseRate,
+                                                        @Field("weight") String weight,
+                                                        @Field("height") String height,
+                                                        @Field("temperature") String temperature,
+                                                        @Field("sugar") String sugar,
+                                                        @Field("allergy") String allergy,
+                                                        @Field("surgery") String surgery,
+                                                        @Field("other") String other,
+                                                        @Field("patientDetailId") String patientDetailId,
+                                                        @Field("diseaseId") String diseaseId);
+
 
 }

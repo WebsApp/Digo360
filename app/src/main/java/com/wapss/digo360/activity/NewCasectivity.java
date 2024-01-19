@@ -82,7 +82,9 @@ public class NewCasectivity extends AppCompatActivity {
                 else {
                     //patient_details();
                 }*/
-                patient_details();
+                //patient_details();
+                Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
+                startActivity(i);
             }
         });
     }
@@ -239,7 +241,8 @@ public class NewCasectivity extends AppCompatActivity {
             }
         });
     }
-    private void patient_details() {
+
+    /*private void patient_details() {
         name = pt_name.getText().toString();
         TOKEN = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTU2NDgzMywiZXhwIjoxNzM3MTAwODMzfQ.9gunlTjcc7S-OnrOcZo_n3P_whGhE5EqbjAuGHCSIiQ";
         stateName = pt_State.getText().toString();
@@ -256,8 +259,12 @@ public class NewCasectivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PatientDetails_Response> call, Response<PatientDetails_Response> response) {
                 if (response.isSuccessful()){
-                    Intent intent = new Intent(NewCasectivity.this,PatientsProblemActivity.class);
-                    startActivity(intent);
+                    String p_id = response.body().getId();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("P_ID", p_id);
+                    Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
                 }
             }
             @Override
@@ -265,6 +272,6 @@ public class NewCasectivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 }
