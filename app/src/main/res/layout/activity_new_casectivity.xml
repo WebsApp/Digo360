@@ -526,7 +526,7 @@
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
                                 android:textSize="@dimen/_14ssp"
-                                android:inputType="text"/>
+                                android:inputType="number"/>
 
                         </LinearLayout>
 

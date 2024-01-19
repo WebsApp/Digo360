@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="@drawable/background"
+    android:padding="@dimen/_5sdp">
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="vertical"
+        android:background="@drawable/background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="P-87876"
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Abhijeet Das "
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Male"
+                android:textColor="@color/purple1"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="22Y 7M"
+                android:textColor="@color/purple1"
+                android:textSize="13dp" />
+
+            <TextView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Kidny"
+                android:textColor="@color/purple1"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:background="#ECD5F7"/>
+
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="Patient ID:-"
+            android:textColor="@color/purple1"
+            android:textStyle="bold"
+            android:textSize="@dimen/_13sdp" />
+        <TextView
+            android:id="@+id/pt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:text="name"
+            android:textStyle="normal"
+            android:textColor="@color/purple1"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginLeft="@dimen/_5sdp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Name:-"
+                android:textColor="@color/purple1"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:id="@+id/pt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text=""
+                android:textStyle="normal"
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginLeft="@dimen/_5sdp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Gender:-"
+                android:textColor="@color/purple1"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:id="@+id/pt_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="Male"
+                android:textStyle="normal"
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginLeft="@dimen/_5sdp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Age:-"
+                android:textColor="@color/purple1"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:id="@+id/pt_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="0 Years"
+                android:textStyle="normal"
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginLeft="@dimen/_5sdp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="Diseases:-"
+                android:textColor="@color/purple1"
+                android:textStyle="bold"
+                android:textSize="@dimen/_13sdp" />
+            <TextView
+                android:id="@+id/pt_diseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="01-01-2023"
+                android:textStyle="normal"
+                android:textColor="@color/purple1"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginLeft="@dimen/_5sdp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

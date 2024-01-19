@@ -54,12 +54,13 @@
         android:scrollbars="none"
         android:layout_below="@id/header">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -72,7 +73,7 @@
                     android:background="@drawable/background">
 
                     <EditText
-                        android:id="@+id/edit_user_password"
+                        android:id="@+id/edit_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:hint="@string/edite_one"
@@ -80,10 +81,10 @@
                         android:background="@null"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:maxLength="9"
+                        android:maxLength="15"
                         android:layout_gravity="center"
                         android:padding="10dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPersonName" />
 
                 </RelativeLayout>
 
@@ -97,15 +98,17 @@
                     android:layout_marginStart="@dimen/_5sdp">
 
                     <TextView
+                        android:id="@+id/txt_select_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/_4sdp"
                         android:gravity="left"
-                        android:textColor="@color/purple"
-                        android:text="Select date" />
+                        android:text="Select date"
+                        android:textColor="@color/purple" />
 
                     <ImageView
+                        android:id="@+id/select_date"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_alignParentEnd="true"
@@ -134,233 +137,80 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:orientation="vertical"
-                android:background="@drawable/background">
+                android:id="@+id/rv_reports"
+                android:scrollbars="none"
+                android:visibility="gone"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="P-87876"
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_10sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Abhijeet Das "
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_13sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Male"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="22Y 7M"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Kidny"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:background="#ECD5F7"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="P-87876"
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_10sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Abhijeet Das "
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_13sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Male"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="22Y 7M"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Kidny"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:background="#ECD5F7"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="P-87876"
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_10sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Abhijeet Das "
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_13sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Male"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="22Y 7M"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Kidny"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:background="#ECD5F7"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="P-87876"
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_10sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Abhijeet Das "
-                        android:textColor="@color/purple1"
-                        android:textSize="@dimen/_13sdp" />
-                    <TextView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Male"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="22Y 7M"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-                    <TextView
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="Kidny"
-                        android:textColor="@color/purple1"
-                        android:textSize="13dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:background="#ECD5F7"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/blank_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/View_anim"
+            android:layout_width="@dimen/_240sdp"
+            android:layout_height="@dimen/_200sdp"
+            android:padding="@dimen/_10sdp"
+            app:lottie_rawRes="@raw/customer_service"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Reports Available "
+            android:textColor="#D090ED"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your expertise deserves precise answers. Refresh or try again for FAQs tailored to your specialization!"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="#7210A1"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"/>
+
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/btn_back_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/purple"
+                android:gravity="center"
+                android:text="Back to Home"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </RelativeLayout>

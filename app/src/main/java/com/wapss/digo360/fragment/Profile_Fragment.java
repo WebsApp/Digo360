@@ -16,6 +16,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,9 @@ import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.LoginActivity;
 import com.wapss.digo360.activity.MyProfile;
 import com.wapss.digo360.activity.ReferPage;
+import com.wapss.digo360.activity.RegistrationActivity;
+
+import org.w3c.dom.Text;
 
 public class Profile_Fragment extends Fragment {
 
@@ -111,19 +115,55 @@ public class Profile_Fragment extends Fragment {
         ll_logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.logout_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                TextView et_yes = (TextView)alertDialog1.findViewById(R.id.et_yes);
+                TextView et_cancel = (TextView)alertDialog1.findViewById(R.id.et_cancel);
+                alertDialog1.setCanceledOnTouchOutside(false);
+                et_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences preferences = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.clear();
+                        editor.apply();
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                });
+                et_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog1.dismiss();
+                    }
+                });
             }
         });
         btn_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), ChooseLanguageActivity.class));
+                final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);
             }
         });
         return profile;

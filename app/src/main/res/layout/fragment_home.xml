@@ -160,166 +160,235 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_marginEnd="@dimen/_3sdp">
-
-                        <LinearLayout
-                            android:id="@+id/btn_reports"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bground1"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_2sdp"
-                                android:src="@drawable/report" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_3sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/others"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="909"
-                                    android:textSize="@dimen/_12ssp"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/white" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Other"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_10ssp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:layout_marginEnd="@dimen/_3sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bground1"
-                            android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_2sdp"
-                                android:src="@drawable/male_gender" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_3sdp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/male"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="100"
-                                    android:textSize="@dimen/_12ssp"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/white" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Male"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_10ssp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bground1"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
                             android:orientation="horizontal"
-                            android:padding="10dp">
-
-                            <ImageView
-                                android:layout_width="@dimen/_30sdp"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_2sdp"
-                                android:src="@drawable/femenine" />
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:layout_marginStart="@dimen/_5sdp">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:id="@+id/btn_all_reports"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_3sdp"
-                                android:orientation="vertical">
+                                android:background="@drawable/bground1"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:padding="10dp">
 
-                                <TextView
-                                    android:id="@+id/female"
+                                <ImageView
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    android:src="@drawable/report" />
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:text="90"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_12ssp"
-                                    android:textStyle="bold" />
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:orientation="vertical">
 
-                                <TextView
+                                    <TextView
+                                        android:id="@+id/all"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="909"
+                                        android:textSize="@dimen/_12ssp"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="All"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_12ssp"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginStart="@dimen/_5sdp">
+
+                            <LinearLayout
+                                android:id="@+id/btn_male_reports"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bground1"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    android:src="@drawable/male_gender" />
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Female"
-                                    android:textColor="@color/white"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:textSize="@dimen/_10ssp" />
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/male"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="100"
+                                        android:textSize="@dimen/_12ssp"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Male"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_12ssp"/>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginStart="@dimen/_5sdp">
+
+                            <LinearLayout
+                                android:id="@+id/btn_female_reports"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bground1"
+                                android:orientation="horizontal"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    android:src="@drawable/femenine" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/female"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="90"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_12ssp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Female"
+                                        android:textColor="@color/white"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_5sdp">
+
+                            <LinearLayout
+                                android:id="@+id/btn_reports"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bground1"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:padding="10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_30sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_margin="@dimen/_2sdp"
+                                    android:src="@drawable/baseline_transgender_24" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/others"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="909"
+                                        android:textSize="@dimen/_12ssp"
+                                        android:textStyle="bold"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Other"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/white"
+                                        android:textSize="@dimen/_10ssp" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </HorizontalScrollView>
 
             </LinearLayout>
 
@@ -990,6 +1059,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/viewAll5"
                 android:layout_width="match_parent"

@@ -109,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     },2000);
                 }
-
             }
         });
         txt_tnc.setOnClickListener(new View.OnClickListener() {
