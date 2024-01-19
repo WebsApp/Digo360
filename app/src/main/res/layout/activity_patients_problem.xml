@@ -103,6 +103,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/bp_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -311,6 +312,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/pulse_layout"
                 android:background="@drawable/time_bg"
                 android:layout_width="match_parent"
