@@ -74,12 +74,26 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                     number_Chack_api(keyword);
                 }*/
                 keyword = et_phone.getText().toString();
-                if (et_phone.getText().toString().isEmpty()){
-                    Toast.makeText(PatientRegistrationCheckActivity.this, "Enter Patient 10 Digit Number", Toast.LENGTH_SHORT).show();
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(keyword);
+                if (matcher.matches()){
+                    //number_Check_api(keyword);
                 }
                 else {
-                    startActivity(new Intent(PatientRegistrationCheckActivity.this,NewCasectivity.class));
-                    //number_Check_api(keyword);
+                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(PatientRegistrationCheckActivity.this);
+                    LayoutInflater inflater1 = getLayoutInflater();
+                    View dialogView1 = inflater1.inflate(R.layout.invalid_phone_layout,null);
+                    builder1.setCancelable(false);
+                    builder1.setView(dialogView1);
+                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                    alertDialog1.show();
+                    alertDialog1.setCanceledOnTouchOutside(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertDialog1.dismiss();
+                        }
+                    },2000);
                 }
             }
         });

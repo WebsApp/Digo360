@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
     TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
-    LinearLayout btn_fever, btn_reports;
+    LinearLayout btn_fever, btn_reports,btn_all_reports,btn_male_reports,btn_female_reports;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +113,9 @@ public class HomeFragment extends Fragment {
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
         btn_fever = home.findViewById(R.id.btn_fever);
         btn_reports = home.findViewById(R.id.btn_reports);
+        btn_all_reports = home.findViewById(R.id.btn_all_reports);
+        btn_male_reports = home.findViewById(R.id.btn_male_reports);
+        btn_female_reports = home.findViewById(R.id.btn_female_reports);
 
         others = home.findViewById(R.id.others);
         male = home.findViewById(R.id.male);
@@ -145,11 +148,44 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        btn_all_reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "HOME");
+                Intent i = new Intent(getContext(), Total_Reports.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+        btn_male_reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "MALE");
+                Intent i = new Intent(getContext(), Total_Reports.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+        btn_female_reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "FEMALE");
+                Intent i = new Intent(getContext(), Total_Reports.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
         btn_reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Total_Reports.class);
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "OTHER");
+                Intent i = new Intent(getContext(), Total_Reports.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +227,6 @@ public class HomeFragment extends Fragment {
         callTopDiseases();
         return home;
     }
-
     private void callHelpAPI() {
         // progressDialog.showProgressDialog();
         // Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
