@@ -15,13 +15,14 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             android:layout_gravity="center"
             android:padding="2dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginStart="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,12 +136,26 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_below="@+id/ll_heading2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:text="1"
+        android:textColor="@color/purple"
+        android:textSize="@dimen/_14sdp" />
+
     <LinearLayout
         android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_heading2"
-        android:layout_margin="10dp"
+        android:layout_below="@+id/tv_count"
+        android:layout_margin="@dimen/_10sdp"
         android:background="@drawable/bg_square_corner"
         android:orientation="vertical">
 
@@ -159,6 +174,7 @@
                 android:src="@drawable/circleimg" />
 
             <TextView
+                android:id="@+id/tv_question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -173,126 +189,143 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_list"
         android:background="@drawable/bg_square_corner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/question"
         android:layout_margin="10dp"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_square_corner"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_answerList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:padding="5dp"
-                android:src="@drawable/circleimg" />
+            android:layout_margin="@dimen/_5sdp"
+            />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Fruits"
-                android:textColor="@color/purple"
-                android:textSize="16dp" />
+<!--        <LinearLayout-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/bg_square_corner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/circleimg" />-->
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_square_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:padding="5dp"
-                android:src="@drawable/circleimg" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="Fruits"-->
+<!--                android:textColor="@color/purple"-->
+<!--                android:textSize="16dp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Junk Food"
-                android:textColor="@color/purple"
-                android:textSize="16dp" />
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/bg_square_corner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/circleimg" />-->
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_square_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:padding="5dp"
-                android:src="@drawable/circleimg" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="Junk Food"-->
+<!--                android:textColor="@color/purple"-->
+<!--                android:textSize="16dp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Non Veg"
-                android:textColor="@color/purple"
-                android:textSize="16dp" />
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/bg_square_corner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/circleimg" />-->
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/bg_square_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:padding="5dp"
-                android:src="@drawable/circleimg" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="Non Veg"-->
+<!--                android:textColor="@color/purple"-->
+<!--                android:textSize="16dp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight=".5"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="Veg"
-                android:textColor="@color/purple"
-                android:textSize="16dp" />
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="@drawable/bg_square_corner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2.5"-->
+<!--                android:padding="5dp"-->
+<!--                android:src="@drawable/circleimg" />-->
 
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_weight=".5"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="Veg"-->
+<!--                android:textColor="@color/purple"-->
+<!--                android:textSize="16dp" />-->
+
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_noQuestion"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_below="@+id/ll_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/thankyou"/>
+
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -336,6 +369,72 @@
         </androidx.cardview.widget.CardView>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:padding="5dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:id="@+id/tv_skip"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/purple"
+                    android:gravity="center"
+                    android:text="Skip"
+                    android:textColor="@color/yellow"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:padding="5dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_placed_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:id="@+id/txt_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/purple"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Submit"
+                    android:textColor="@color/yellow"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

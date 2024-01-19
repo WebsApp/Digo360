@@ -14,6 +14,7 @@ import com.wapss.digo360.response.PagesResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
 import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Profile_Response;
+import com.wapss.digo360.response.QuestionResponse;
 import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
@@ -53,7 +54,7 @@ public interface ApiHolder {
 
     @GET("degree-specialization/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
-                                 @Header("Authorization") String Token);
+                                             @Header("Authorization") String Token);
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
@@ -101,9 +102,9 @@ public interface ApiHolder {
 
     @GET("patient-details/list")
     Call<Patient_Check_Response> Patient_check(@Header("Authorization") String Token,
-                                                  @Query("limit") int limit,
-                                                  @Query("offset") int offset,
-                                                  @Query("keyword")String keyword);
+                                               @Query("limit") int limit,
+                                               @Query("offset") int offset,
+                                               @Query("keyword") String keyword);
 
 
     @GET("notifications")
@@ -118,12 +119,14 @@ public interface ApiHolder {
     Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
                                           @Query("limit") int limit,
                                           @Query("offset") int offset,
-                                          @Query("keyword")String keyword);
+                                          @Query("keyword") String keyword);
+
     /*18-01-2024*/
     @POST("search-history")
     @FormUrlEncoded
     Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
                                                   @Field("payload") String payload);
+
     @POST("patient-details")
     @FormUrlEncoded
     Call<PatientDetails_Response> patient_details(@Header("Authorization") String Token,
@@ -138,5 +141,11 @@ public interface ApiHolder {
                                                   @Field("address") String address,
                                                   @Field("gender") String gender,
                                                   @Field("pincode") String pincode);
+
+    @GET("disease-questions")
+    Call<QuestionResponse> QuestionAPI(@Header("Authorization") String Token,
+                                       @Query("gender") String gender,
+                                       @Query("diseaseId") String diseaseId,
+                                       @Query("optionId") String optionId);
 
 }

@@ -30,6 +30,6 @@ public class AfterQuestionActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(AfterQuestionActivity.this, ReportPage.class));
             }
-        },1000);
+        },3000);
     }
 }
