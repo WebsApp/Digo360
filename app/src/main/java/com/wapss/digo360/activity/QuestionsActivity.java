@@ -54,6 +54,7 @@ public class QuestionsActivity extends AppCompatActivity {
     LinearLayout question;
     int quest;
     TextView txt_submit, tv_skip;
+    String gender,diseaseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,9 @@ public class QuestionsActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
+        gender = loginPref.getString("gender",null);
+        diseaseId = loginPref.getString("diseaseId",null);
+
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -99,7 +103,7 @@ public class QuestionsActivity extends AppCompatActivity {
         tv_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callQuestionAPI("6d64acf6-046a-4d46-8223-040f70a0dd25", "null");
+                callQuestionAPI(diseaseId, "null");
             }
         });
         txt_submit.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +115,13 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
 
-        callQuestionAPI("6d64acf6-046a-4d46-8223-040f70a0dd25", "null");
+        callQuestionAPI(diseaseId, "null");
     }
 
     private void callQuestionAPI(String diseaseId, String optionId) {
         progressDialog.showProgressDialog();
-        String Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
-        Call<QuestionResponse> banner_apiCall = ApiService.apiHolders().QuestionAPI(Token, "MALE", diseaseId, optionId);
+        String Token = "Bearer " + deviceToken;
+        Call<QuestionResponse> banner_apiCall = ApiService.apiHolders().QuestionAPI(Token, gender, diseaseId, optionId);
         banner_apiCall.enqueue(new Callback<QuestionResponse>() {
             @Override
             public void onResponse(Call<QuestionResponse> call, Response<QuestionResponse> response) {
@@ -153,9 +157,9 @@ public class QuestionsActivity extends AppCompatActivity {
                             // Toast.makeText(getApplicationContext(), item.getId(), Toast.LENGTH_SHORT).show();
                             String answerId = item.getId();
                             if (next.equals("YES")) {
-                                callQuestionAPI("6d64acf6-046a-4d46-8223-040f70a0dd25", answerId);
+                                callQuestionAPI(diseaseId, answerId);
                             } else {
-                                callQuestionAPI("6d64acf6-046a-4d46-8223-040f70a0dd25", answerId);
+                                callQuestionAPI(diseaseId, questionId);
                             }
                         }
                     });

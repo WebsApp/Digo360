@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 import com.wapss.digo360.R;
 import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.fragment.TopDiseasesFragment;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
@@ -43,16 +46,20 @@ public class NewCasectivity extends AppCompatActivity {
     private int CurrentProgress = 0;
     private ProgressBar progressBar;
     Button start_progress;
-    LinearLayout ll_address,ll_age,ll_Dob,ll_phone_num,ll_phone_email,ll_otherProblem;
-    RadioGroup rg_age,rg_phone,rg_address,rg_gender;
-    RadioButton rb_doB,rb_age,rb_phone,rb_email,rb_yes,rb_no,rb_male,rb_female,rb_other;
+    LinearLayout ll_address, ll_age, ll_Dob, ll_phone_num, ll_phone_email, ll_otherProblem;
+    RadioGroup rg_age, rg_phone, rg_address, rg_gender;
+    RadioButton rb_doB, rb_age, rb_phone, rb_email, rb_yes, rb_no, rb_male, rb_female, rb_other;
     TextView tv_submit;
-    ImageView back,iv_date;
-    EditText pt_name,pt_age,pt_DOB,pt_phone,pt_email,pt_full_Address,pt_State,pt_Area,pt_city,pt_pinCode;
-    String gender,currentTime,dob="",name,age="";
+    ImageView back, iv_date;
+    EditText pt_name, pt_age, pt_DOB, pt_phone, pt_email, pt_full_Address, pt_State, pt_Area, pt_city, pt_pinCode;
+    String gender, currentTime, dob = "", name, age = "";
     private Calendar calendar;
     Date dateNow = null;
-    String ss,TOKEN,stateName,cityName,areaName,phoneNumber,email,address,pincode;
+    String ss, TOKEN, stateName, cityName, areaName, phoneNumber, email, address, pincode;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
+    String deviceToken, p_number;
+    CustomProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -63,6 +70,13 @@ public class NewCasectivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
+
+        Bundle bundle = getIntent().getExtras();
+        //Extract the data…
+        if (bundle != null) {
+            p_number = bundle.getString("p_number");
+        }
+
         initi();
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,19 +97,26 @@ public class NewCasectivity extends AppCompatActivity {
                     //patient_details();
                 }*/
                 //patient_details();
-                Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
-                startActivity(i);
+                patient_details();
+//                Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
+//                startActivity(i);
             }
         });
     }
+
     private void initi() {
+        progressDialog = new CustomProgressDialog(this);
+        //shared Pref
+        loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+        editor = loginPref.edit();
+        deviceToken = loginPref.getString("deviceToken", null);
         progressBar = findViewById(R.id.progressBar);
         back = findViewById(R.id.back);
         start_progress = findViewById(R.id.start_progress);
         ll_address = findViewById(R.id.ll_address);
         ll_age = findViewById(R.id.ll_age);
         rg_age = findViewById(R.id.rg_age);
-        rb_doB =findViewById(R.id.rb_doB);
+        rb_doB = findViewById(R.id.rb_doB);
         rb_age = findViewById(R.id.rb_age);
         ll_Dob = findViewById(R.id.ll_Dob);
         rg_phone = findViewById(R.id.rg_phone);
@@ -127,6 +148,8 @@ public class NewCasectivity extends AppCompatActivity {
 //        rg_other = findViewById(R.id.rg_other);
 //        rb_yes_other = findViewById(R.id.rb_yes_other);
 //        rb_no_other = findViewById(R.id.rb_no_other);
+
+        pt_phone.setText(p_number);//phoneNumber
         start_progress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +186,7 @@ public class NewCasectivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                                 pt_DOB.setText(dateFormat1.format(calendar.getTime()));
                                 dob = dateFormat1.format(calendar.getTime());
-                                Toast.makeText(NewCasectivity.this, ""+dob, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(NewCasectivity.this, "" + dob, Toast.LENGTH_SHORT).show();
 
                             }
                         }, year, month, dayOfMonth);
@@ -242,36 +265,40 @@ public class NewCasectivity extends AppCompatActivity {
         });
     }
 
-    /*private void patient_details() {
+    private void patient_details() {
         name = pt_name.getText().toString();
-        TOKEN = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTU2NDgzMywiZXhwIjoxNzM3MTAwODMzfQ.9gunlTjcc7S-OnrOcZo_n3P_whGhE5EqbjAuGHCSIiQ";
+        TOKEN = "Bearer " + deviceToken;
         stateName = pt_State.getText().toString();
         cityName = pt_city.getText().toString();
         areaName = pt_Area.getText().toString();
-        phoneNumber = "9609095482";
+        phoneNumber = pt_phone.getText().toString();
         email = pt_email.getText().toString();
         address = pt_full_Address.getText().toString();
         pincode = pt_pinCode.getText().toString();
 
-        Call<PatientDetails_Response> details_apiCall = ApiService.apiHolders().patient_details(TOKEN,name,dob,age,phoneNumber,
-                email,stateName,cityName,areaName,address,gender,pincode);
+        Call<PatientDetails_Response> details_apiCall = ApiService.apiHolders().patient_details(TOKEN, name, dob, age, phoneNumber,
+                email, stateName, cityName, areaName, address, gender, pincode);
         details_apiCall.enqueue(new Callback<PatientDetails_Response>() {
             @Override
             public void onResponse(Call<PatientDetails_Response> call, Response<PatientDetails_Response> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
                     String p_id = response.body().getId();
                     Bundle bundle = new Bundle();
                     bundle.putString("P_ID", p_id);
+                    editor.putString("gender", gender);
+                    editor.commit();
                     Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
                     i.putExtras(bundle);
                     startActivity(i);
                 }
             }
+
             @Override
             public void onFailure(Call<PatientDetails_Response> call, Throwable t) {
 
             }
         });
-    }*/
+    }
 
 }

@@ -143,6 +143,8 @@ public class TopDiseasesFragment extends Fragment {
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
@@ -200,6 +202,8 @@ public class TopDiseasesFragment extends Fragment {
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
@@ -240,6 +244,8 @@ public class TopDiseasesFragment extends Fragment {
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
                             callMostSearchClick(diseaseId);
+                            editor.putString("diseaseId", diseaseId);
+                            editor.commit();
                             Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
                             startActivity(intent);
                         }
