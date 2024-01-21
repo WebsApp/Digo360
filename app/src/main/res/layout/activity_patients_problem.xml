@@ -103,6 +103,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/bp_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -311,6 +312,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/pulse_layout"
                 android:background="@drawable/time_bg"
                 android:layout_width="match_parent"
@@ -374,6 +376,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/sugar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -470,6 +473,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/allergy_layout"
                 android:background="@drawable/time_bg"
                 android:layout_width="match_parent"
@@ -531,6 +535,7 @@
             </RadioGroup>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/surgery_layout"
                 android:background="@drawable/time_bg"
                 android:layout_width="match_parent"
@@ -627,6 +632,7 @@
             </LinearLayout>
             <!--******-->
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/other_layout"
                 android:background="@drawable/time_bg"
                 android:layout_width="match_parent"

@@ -169,9 +169,7 @@ public class OTPActivity extends AppCompatActivity {
                                // Toast.makeText(OTPActivity.this, ""+latestLogin, Toast.LENGTH_SHORT).show();
                                 Intent intent;
                                 if (latestLogin) {
-                                   // intent = new Intent(OTPActivity.this, RegistrationActivity.class);
-                                    intent = new Intent(OTPActivity.this, LoadingPage.class);
-                                    startActivity(intent);
+                                    startActivity(new Intent(OTPActivity.this,RegistrationActivity.class));
                                 }else {
                                     intent = new Intent(OTPActivity.this, LoadingPage.class);
                                     startActivity(intent);
