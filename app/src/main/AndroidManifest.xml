@@ -25,6 +25,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Test_Spec"
+            android:exported="false" />
+        <activity
             android:name=".adapter.MostSearchDiseaseActivity"
             android:exported="false" />
         <activity

@@ -69,6 +69,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
         deviceToken = loginPref.getString("deviceToken", null);
         diseaseId = loginPref.getString("diseaseId", null);
 
+        et_surgery = findViewById(R.id.et_surgery);
         et_weight=findViewById(R.id.et_weight);
         et_height= findViewById(R.id.et_height);
         et_pulse = findViewById(R.id.et_pulse);
@@ -193,7 +194,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
     }
 
     private void consultattion_Api_call() {
-        TOKEN = "Bearer " + deviceToken;
+        /*TOKEN = "Bearer " + deviceToken;
         bp = et_before_bp.getText().toString() + "/" + et_after_bp.getText().toString();
         pulseRate = et_pulse.getText().toString();
         weight = et_weight.getText().toString();
@@ -202,7 +203,17 @@ public class PatientsProblemActivity extends AppCompatActivity {
         sugar = et_sugar.getText().toString();
         allergy = et_allergy.getText().toString();
         surgery = "No";
-        other = et_other_problem.getText().toString();
+        other = et_other_problem.getText().toString();*/
+        TOKEN = "Bearer " + deviceToken;
+        bp = "80/120";
+        pulseRate = "80";
+        weight = "60";
+        height = "5.5";
+        temperature = "99.34";
+        sugar = "120";
+        allergy = "100";
+        surgery = "No";
+        other = "No Problem";
         Call<Patient_Consultation_Response> consalt_apiCall = ApiService.apiHolders().consalt_details(TOKEN, bp, pulseRate, weight,
                 height, temperature, sugar, allergy, surgery, other, patientDetailId, diseaseId);
         consalt_apiCall.enqueue(new Callback<Patient_Consultation_Response>() {

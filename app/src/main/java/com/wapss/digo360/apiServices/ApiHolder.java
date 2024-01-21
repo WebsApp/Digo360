@@ -53,9 +53,11 @@ public interface ApiHolder {
     @GET("degree/list")
     Call<Degree_Response> getDegreeData(@Header("Authorization") String Token);
 
-    @GET("degree-specialization/{degreeId}")
+    @GET("specialization/list/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
-                                             @Header("Authorization") String Token);
+                                             @Header("Authorization") String Token,
+                                             @Query("limit") int limit,
+                                             @Query("offset") int offset);
 
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
@@ -66,7 +68,9 @@ public interface ApiHolder {
 
     @GET("area/list/{cityId}")
     Call<AreaResponse> getAreaData(@Path("cityId") String id,
-                                   @Header("Authorization") String Token);
+                                   @Header("Authorization") String Token,
+                                   @Query("limit") int limit,
+                                   @Query("offset") int offset);
 
     @POST("doctor-detail")
     @FormUrlEncoded

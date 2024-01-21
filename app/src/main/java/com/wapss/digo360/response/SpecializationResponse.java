@@ -29,36 +29,16 @@ public class SpecializationResponse {
             this.total = total;
         }
     public static class Result {
-        @SerializedName("id")
-        @Expose
-        private String id;
-        @SerializedName("specialization")
-        @Expose
-        private Specialization specialization;
 
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Specialization getSpecialization() {
-            return specialization;
-        }
-
-        public void setSpecialization(Specialization specialization) {
-            this.specialization = specialization;
-        }
-    }
-    public class Specialization {
         @SerializedName("id")
         @Expose
         private String id;
         @SerializedName("name")
         @Expose
         private String name;
+        @SerializedName("image")
+        @Expose
+        private Object image;
 
         public String getId() {
             return id;
@@ -75,5 +55,14 @@ public class SpecializationResponse {
         public void setName(String name) {
             this.name = name;
         }
+
+        public Object getImage() {
+            return image;
+        }
+
+        public void setImage(Object image) {
+            this.image = image;
+        }
+
     }
 }
