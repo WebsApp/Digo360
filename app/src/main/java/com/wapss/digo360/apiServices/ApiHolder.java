@@ -14,6 +14,7 @@ import com.wapss.digo360.response.PagesResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
 import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Patient_Consultation_Response;
+import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.QuestionResponse;
 import com.wapss.digo360.response.RegistrationResponse;
@@ -142,6 +143,7 @@ public interface ApiHolder {
                                                   @Field("address") String address,
                                                   @Field("gender") String gender,
                                                   @Field("pincode") String pincode);
+
     @POST("patient-consultation")
     @FormUrlEncoded
     Call<Patient_Consultation_Response> consalt_details(@Header("Authorization") String Token,
@@ -163,5 +165,13 @@ public interface ApiHolder {
                                        @Query("gender") String gender,
                                        @Query("diseaseId") String diseaseId,
                                        @Query("optionId") String optionId);
+
+
+    @GET("patient-consultation/list/{patientsId}")
+    Call<PatientsDetailsViewResponse> PatientsDetailsView(@Header("Authorization") String Token,
+                                                          @Path("patientsId") String gender,
+                                                          @Query("limit") int limit,
+                                                          @Query("offset") int offset,
+                                                          @Query("keyword") String keyword);
 
 }

@@ -72,16 +72,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/flote"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/baseline_add_24"
-            android:background="@drawable/background"
-            android:layout_margin="@dimen/_15sdp"
             android:layout_alignParentEnd="true"
-            android:id="@+id/flote"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/background"
+            android:src="@drawable/baseline_add_24" />
         
     </RelativeLayout>
 

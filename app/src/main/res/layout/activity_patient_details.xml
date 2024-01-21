@@ -49,6 +49,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -71,18 +72,30 @@
 
     </ScrollView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/header"
+        android:id="@+id/rv_patientsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_check_problem"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/baseline_add_24"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:background="@drawable/background"
-            android:layout_margin="@dimen/_15sdp"
-            android:layout_alignParentEnd="true"/>
+            android:src="@drawable/baseline_add_24" />
 
     </RelativeLayout>
 
