@@ -60,7 +60,8 @@
 
                     </LinearLayout>-->
 
-                    <androidx.appcompat.widget.SearchView
+                    <SearchView
+                        android:id="@+id/sv_search"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:hint="Search by User Name | Case"
@@ -75,6 +76,23 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_below="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/rv_disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
