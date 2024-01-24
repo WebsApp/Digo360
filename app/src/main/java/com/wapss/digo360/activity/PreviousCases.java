@@ -53,12 +53,12 @@ public class PreviousCases extends AppCompatActivity {
         pt_recycler_View = findViewById(R.id.pt_recycler_View);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         pt_recycler_View.setLayoutManager(layoutManager);
-        flote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent());
-            }
-        });
+//        flote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(PreviousCases.this,Patient_Details_Adapter.class));
+//            }
+//        });
         //cases_api();
     }
 

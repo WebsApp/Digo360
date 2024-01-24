@@ -176,9 +176,8 @@ public class MyProfile extends AppCompatActivity {
 
     private void get_profile() {
         progressDialog.showProgressDialog();
-        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
-
-
+        Token = "Bearer " + deviceToken;
+        //Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
         Call<Profile_Response> profile_apiCall = ApiService.apiHolders().get_profile(Token);
         profile_apiCall.enqueue(new Callback<Profile_Response>() {
             @Override
@@ -196,6 +195,7 @@ public class MyProfile extends AppCompatActivity {
                     txt_address.setText(address);
                     txt_college.setText(collage_name);
                     txt_exp_year.setText(exp_year);
+
                     if (collage_name.equals("null")){
                         txt_college.setText("N/A");
                     }

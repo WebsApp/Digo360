@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,7 +82,7 @@ public class RegistrationActivity extends AppCompatActivity {
     List<String> study_year_list = Arrays.asList("Select Your Study Year", "FIRST YEAR", "SECOND YEAR", "THIRD YEAR", "FOURTH YEAR");
     String[] drOther = {"Dr", "Other"};
     EditText et_name, et_address, et_PinCode, et_email, et_desig, et_spec, et_DOB, et_s_year, et_degree, et_state, et_city, et_area;
-    String dr, name, pin, area, title, pinCode, email, address, Token, currentTime, stateId, cityId, study_Year, specialization_Id, std_year, stryear;
+    String dr,tnc, name, pin, area, title, pinCode, email, address, Token, currentTime, stateId, cityId, study_Year, specialization_Id, std_year, stryear;
     LinearLayout cv_study_year, cv_specialization, cv_degree, cv_city, cv_area;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int textColor = Color.parseColor("#800080");
@@ -92,6 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private String degreeId = "";
     ImageView iv_date;
     Date dateNow = null;
+    CheckBox checkBoxTerms;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -103,6 +105,7 @@ public class RegistrationActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
         /*Id Initialize*/
+        checkBoxTerms = findViewById(R.id.checkBoxTerms);
         et_area = findViewById(R.id.et_area);
         cv_area = findViewById(R.id.cv_area);
         cv_city = findViewById(R.id.cv_city);
@@ -141,6 +144,97 @@ public class RegistrationActivity extends AppCompatActivity {
         deviceToken = loginPref.getString("deviceToken", null);
         /*Function Code*/
         callStateDate();
+        /*Dr choose*/
+        ArrayAdapter<String> Dr = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, drOther);
+        Dr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_dr.setAdapter(Dr);
+        sp_dr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dr = sp_dr.getSelectedItem().toString();
+                if (dr.equals("Dr")){
+                    ((TextView) sp_dr.getChildAt(0)).setTextColor(textColor);
+                    ((TextView) sp_dr.getChildAt(0)).setTextSize(20);
+                    ((TextView) sp_dr.getChildAt(0)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    title = (String) adapterView.getItemAtPosition(i);
+                    tv_registration.setVisibility(View.VISIBLE);
+                }
+                else {
+                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(RegistrationActivity.this);
+                    LayoutInflater inflater1 = getLayoutInflater();
+                    View dialogView1 = inflater1.inflate(R.layout.other_layout,null);
+                    builder1.setCancelable(false);
+                    builder1.setView(dialogView1);
+                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                    alertDialog1.show();
+                    alertDialog1.setCanceledOnTouchOutside(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertDialog1.dismiss();
+                            tv_registration.setVisibility(View.GONE);
+                        }
+                    },2000);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        /*Gender Choose*/
+        rg_gneder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Handle RadioButton selection changes here
+                if (rb_male.isChecked()) {
+                    gender = "MALE";
+                } else if (rb_female.isChecked()) {
+                    gender = "FEMALE";
+                } else if (rb_other.isChecked()) {
+                    gender = "OTHER";
+                }
+            }
+        });
+
+        currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        calendar = Calendar.getInstance();
+        iv_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegistrationActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                calendar.set(Calendar.YEAR, year);
+                                calendar.set(Calendar.MONTH, month);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                                et_DOB.setText(dateFormat1.format(calendar.getTime()));
+                                dob = dateFormat1.format(calendar.getTime());
+                            }
+                        }, year, month, dayOfMonth);
+                try {
+                    dateNow = formatter.parse(currentTime);
+//                    Date date_to = formatter.parse(orderCloseTime);
+//                    if (date_to.before(dateNow)) {
+//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 2000);
+//                    } else {
+//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 1000);
+//                    }
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
         /*EXP level choose*/
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -208,96 +302,107 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
-        //Spec
-        //designation
-        //Doctor
-        ArrayAdapter<String> Dr = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, drOther);
-        Dr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_dr.setAdapter(Dr);
-        sp_dr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dr = sp_dr.getSelectedItem().toString();
-                ((TextView) sp_dr.getChildAt(0)).setTextColor(textColor);
-                ((TextView) sp_dr.getChildAt(0)).setTextSize(15);
-                ((TextView) sp_dr.getChildAt(0)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                title = (String) adapterView.getItemAtPosition(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        rg_gneder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Handle RadioButton selection changes here
-                if (rb_male.isChecked()) {
-                    gender = "MALE";
-                } else if (rb_female.isChecked()) {
-                    gender = "FEMALE";
-                } else if (rb_other.isChecked()) {
-                    gender = "OTHER";
-                }
-            }
-        });
-
-        currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        calendar = Calendar.getInstance();
-        iv_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        RegistrationActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                calendar.set(Calendar.YEAR, year);
-                                calendar.set(Calendar.MONTH, month);
-                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                                et_DOB.setText(dateFormat1.format(calendar.getTime()));
-                                dob = dateFormat1.format(calendar.getTime());
-                            }
-                        }, year, month, dayOfMonth);
-                try {
-                    dateNow = formatter.parse(currentTime);
-//                    Date date_to = formatter.parse(orderCloseTime);
-//                    if (date_to.before(dateNow)) {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 2000);
-//                    } else {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 1000);
-//                    }
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
-                datePickerDialog.show();
-            }
-        });
+        if (checkBoxTerms.isChecked()){
+            tnc = "YES";
+        }
+        else {
+            tnc = "YES";
+        }
         tv_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = et_name.getText().toString();
+                String DOB = et_DOB.getText().toString();
                 pinCode = et_PinCode.getText().toString();
                 email = et_email.getText().toString();
                 address = et_address.getText().toString();
-
-                if (et_name.getText().toString().trim().isEmpty()) {
+                String level = et_desig.getText().toString();
+                String degree = et_degree.getText().toString();
+                String Specialization = et_spec.getText().toString();
+                String state = et_state.getText().toString();
+                String city = et_city.getText().toString();
+                String area = et_area.getText().toString();
+                String study_Year = et_s_year.getText().toString();
+                if (name.equals("")){
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
+                } else if (DOB.equals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Please Select Your DOB", Toast.LENGTH_SHORT).show();
+                } else if (email.equals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
+                } else if (level.equals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Please Select Your Experience Level", Toast.LENGTH_SHORT).show();
+                }
+                else if (level.equals("EXPERIENCE")) {
+                    if (degree.equals("")){
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (Specialization.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Specialization", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (state.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (city.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI();
+                    }
+                }
+                else if (level.equals("INTERN")) {
+                    if (degree.equals("")){
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (state.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (city.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI();
+                    }
+                }
+                else if (level.equals("STUDENT")) {
+                    if (degree.equals("")){
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    if (study_Year.equals("")){
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Study Year", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (state.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (city.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area.equals("")) {
+                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI();
+                    }
+                }
+                else {
+                    callRegistrationAPI();
+                }
+/*                if (et_name.getText().toString().trim().isEmpty()) {
                     et_name.setError("Please Enter Name");
                     et_name.requestFocus();
-                } else if (et_DOB.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please Select DOB", Toast.LENGTH_SHORT).show();
-                    //et_DOB.setError("Please Select DOB");
-//                    et_DOB.requestFocus();
-                } else if (et_email.getText().toString().trim().isEmpty()) {
+                }
+                else if (et_DOB.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please Select DOB", Toast.LENGTH_SHORT).show();;
+                }
+                else if (et_email.getText().toString().trim().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Enter Your Mail", Toast.LENGTH_SHORT).show();
-                } else if (!email.matches(emailPattern)) {
+                }
+                else if (!email.matches(emailPattern)) {
                     final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(RegistrationActivity.this);
                     LayoutInflater inflater1 = getLayoutInflater();
                     View dialogView1 = inflater1.inflate(R.layout.invalid_mail_layout, null);
@@ -312,30 +417,33 @@ public class RegistrationActivity extends AppCompatActivity {
                             alertDialog1.dismiss();
                         }
                     }, 2000);
-                } else if (!experienceLevel.equals("Select Your Designation") && experienceLevel.isEmpty()) {
-                    Toast.makeText(RegistrationActivity.this, "Please Select Your Suitable Designation", Toast.LENGTH_SHORT).show();
-                } else if (degreeId.isEmpty()) {
+                }
+//                else if (!experienceLevel.equals("Select Your Designation") && experienceLevel.isEmpty()) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Select Your Suitable Designation", Toast.LENGTH_SHORT).show();
+//                }
+                else if (degreeId.isEmpty()) {
                     Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
-                } else if (Objects.equals(experienceLevel, "EXPERIENCE")) {
+                }
+                else if (Objects.equals(experienceLevel, "EXPERIENCE")) {
                     if (specializationId.isEmpty()) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your Suitable Specialization", Toast.LENGTH_SHORT).show();
                     }
-                    else if (Objects.equals(experienceLevel, "STUDENT")) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your year", Toast.LENGTH_SHORT).show();
-                    }
-                } else if (et_state.getText().toString().length() == 0) {
-                    Toast.makeText(RegistrationActivity.this, "Please Select State", Toast.LENGTH_SHORT).show();
-                } else if (et_city.getText().toString().isEmpty()) {
-                    Toast.makeText(RegistrationActivity.this, "Please Select City", Toast.LENGTH_SHORT).show();
-                } else if (et_area.getText().toString().isEmpty()) {
-                    Toast.makeText(RegistrationActivity.this, "Please Select Area", Toast.LENGTH_SHORT).show();
-                } else if (et_PinCode.getText().toString().isEmpty()) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter PINCODE", Toast.LENGTH_SHORT).show();
-                } else {
-                    callRegistrationAPI();
+//                    else if (Objects.equals(experienceLevel, "STUDENT")) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your year", Toast.LENGTH_SHORT).show();
+//                    }
                 }
-               /* Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
-                startActivity(intent);*/
+//                else if (et_state.getText().toString().length() == 0) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Select State", Toast.LENGTH_SHORT).show();
+//                } else if (et_city.getText().toString().isEmpty()) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Select City", Toast.LENGTH_SHORT).show();
+//                } else if (et_area.getText().toString().isEmpty()) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Select Area", Toast.LENGTH_SHORT).show();
+//                } else if (et_PinCode.getText().toString().isEmpty()) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Enter PINCODE", Toast.LENGTH_SHORT).show();
+//                }
+                else {
+                    callRegistrationAPI();
+                }*/
             }
         });
     }
@@ -343,15 +451,14 @@ public class RegistrationActivity extends AppCompatActivity {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
         Call<RegistrationResponse> state_apiCall = ApiService.apiHolders().Registration(Token, title, name, gender, dob, email, experienceLevel,
-                degreeId, study_Year, specialization_Id, address, stateId, cityId, area, pinCode, "Yes");
+                degreeId, study_Year, specialization_Id, address, stateId, cityId, area, pinCode,"Yes");
         state_apiCall.enqueue(new Callback<RegistrationResponse>() {
             @Override
             public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
-                    String Dr_name = response.body().getName();
-                    editor.putString("DR_NAME", Dr_name);
+                    editor.putString("DR_NAME", response.body().getName());
                     editor.commit();
                     //specResponse = response.body().();
                     Toast.makeText(getApplicationContext(), "Successfully Registration", Toast.LENGTH_SHORT).show();
@@ -406,7 +513,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                     degreeId = DegreeResponse.get(i).getId();
                                     et_degree.setText(DegreeResponse.get(i).getName());
+                                    stringDigreeArrayList.clear();
                                     callSpecializationAPI(degreeId);
+                                    stringSpecArrayList.clear();
                                 }
 
                                 @Override
@@ -461,12 +570,25 @@ public class RegistrationActivity extends AppCompatActivity {
                     sp_specialization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (i == 0) {
+                            adapterView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    specializationId = specResponse.get(i).getId();
+                                    et_spec.setText(specResponse.get(i).getName());
+                                    stringDigreeArrayList.clear();
+                                }
 
-                            } else {
-                                String specializationId = specResponse.get(i).getId();
-                                et_spec.setText(specResponse.get(i).getName());
-                            }
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+//                            if (i == 0) {
+//
+//                            } else {
+//                                specializationId = specResponse.get(i).getId();
+//                                et_spec.setText(specResponse.get(i).getName());
+//                            }
                         }
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {

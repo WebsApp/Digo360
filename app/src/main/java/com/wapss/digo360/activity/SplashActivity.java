@@ -35,6 +35,8 @@ public class SplashActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
+//        startActivity(new Intent(SplashActivity.this, PatientsProblemActivity.class));
+//        finish();
        // progressDialog.showProgressDialog();
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -69,7 +69,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
+                    android:layout_weight="1.6"
                     android:background="@drawable/background">
 
                     <EditText
@@ -91,7 +91,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1.6"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:background="@drawable/background"
@@ -104,15 +104,44 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/_4sdp"
                         android:gravity="left"
-                        android:text="Select date"
+                        android:text="From Date"
                         android:textColor="@color/purple" />
 
                     <ImageView
                         android:id="@+id/select_date"
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentEnd="true"
-                        android:padding="@dimen/_5sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/baseline_date_range_24"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_weight="1.6"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/background"
+                    android:layout_marginStart="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/txt_to_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:gravity="left"
+                        android:text="To Date"
+                        android:textColor="@color/purple" />
+
+                    <ImageView
+                        android:id="@+id/to_date_picker"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/_2sdp"
                         android:src="@drawable/baseline_date_range_24"/>
 
                 </RelativeLayout>
@@ -120,7 +149,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
-                    android:layout_weight="2.1"
+                    android:layout_weight="2"
                     android:background="@drawable/bground1"
                     android:layout_marginStart="@dimen/_5sdp">
 
@@ -154,8 +183,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -163,37 +195,37 @@
             android:layout_width="@dimen/_240sdp"
             android:layout_height="@dimen/_200sdp"
             android:padding="@dimen/_10sdp"
-            app:lottie_rawRes="@raw/customer_service"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/customer_service" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:text="No Reports Available "
             android:textColor="#D090ED"
             android:textSize="@dimen/_13ssp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your expertise deserves precise answers. Refresh or try again for FAQs tailored to your specialization!"
-            android:textSize="@dimen/_10ssp"
-            android:textColor="#7210A1"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Your expertise deserves precise answers. Refresh or try again for FAQs tailored to your specialization!"
+            android:textColor="#7210A1"
+            android:textSize="@dimen/_10ssp" />
 
         <androidx.cardview.widget.CardView
-            android:visibility="gone"
             android:layout_width="@dimen/_170sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_7sdp"
             app:cardElevation="@dimen/_5sdp">

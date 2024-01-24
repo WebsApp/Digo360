@@ -52,7 +52,7 @@ public class NewCasectivity extends AppCompatActivity {
     TextView tv_submit;
     ImageView back, iv_date;
     EditText pt_name, pt_age, pt_DOB, pt_phone, pt_email, pt_full_Address, pt_State, pt_Area, pt_city, pt_pinCode;
-    String gender, currentTime, dob = "", name, age = "";
+    String currentTime, dob = "", name, age = "";
     private Calendar calendar;
     Date dateNow = null;
     String ss, TOKEN, stateName, cityName, areaName, phoneNumber, email, address, pincode;
@@ -60,6 +60,8 @@ public class NewCasectivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     String deviceToken, p_number;
     CustomProgressDialog progressDialog;
+    String Age_and_DOB = "";
+    String gender  ="";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -78,6 +80,25 @@ public class NewCasectivity extends AppCompatActivity {
         }
 
         initi();
+        rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Handle RadioButton selection changes here
+                if (rb_doB.isChecked()) {
+                    ll_Dob.setVisibility(View.VISIBLE);
+                    ll_age.setVisibility(View.GONE);
+                    pt_age.setText("");
+                    ss = "dob";
+                    age = "";
+                } else if (rb_age.isChecked()) {
+                    ll_Dob.setVisibility(View.GONE);
+                    ll_age.setVisibility(View.VISIBLE);
+                    pt_DOB.setText("");
+                    ss = "age";
+                    dob = "";
+                }
+            }
+        });
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,10 +117,25 @@ public class NewCasectivity extends AppCompatActivity {
                 else {
                     //patient_details();
                 }*/
-                //patient_details();
-                patient_details();
-//                Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
-//                startActivity(i);
+                String P_name = pt_name.getText().toString();
+                String P_DOB = pt_DOB.getText().toString();
+                String P_Age = pt_age.getText().toString();
+                Age_and_DOB = pt_DOB.getText().toString();
+                Age_and_DOB = pt_age.getText().toString();
+                if (P_name.equals("")){
+                    Toast.makeText(NewCasectivity.this, "Enter Patient name", Toast.LENGTH_SHORT).show();
+                }
+                else if (pt_DOB.getText().toString().isEmpty()) {
+                    Toast.makeText(NewCasectivity.this, "Please Select DOB or Age", Toast.LENGTH_SHORT).show();
+                }
+                else if (gender.equals("")) {
+                    Toast.makeText(NewCasectivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
+                }
+               else if (pt_full_Address.getText().toString().isEmpty()) {
+                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Address", Toast.LENGTH_SHORT).show();
+                } else {
+                    patient_details();
+                }
             }
         });
     }
@@ -203,25 +239,6 @@ public class NewCasectivity extends AppCompatActivity {
                 }
                 datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
-            }
-        });
-        rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Handle RadioButton selection changes here
-                if (rb_doB.isChecked()) {
-                    ll_Dob.setVisibility(View.VISIBLE);
-                    ll_age.setVisibility(View.GONE);
-                    pt_age.setText("");
-                    ss = "dob";
-                    age = "";
-                } else if (rb_age.isChecked()) {
-                    ll_Dob.setVisibility(View.GONE);
-                    ll_age.setVisibility(View.VISIBLE);
-                    pt_DOB.setText("");
-                    ss = "age";
-                    dob = "";
-                }
             }
         });
         //phone number

@@ -5,14 +5,15 @@
     android:background="@color/white"
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_margin="5dp"
-        android:layout_width="150dp"
-        android:layout_height="100dp">
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_5sdp">
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/img2" />
 
         <LinearLayout

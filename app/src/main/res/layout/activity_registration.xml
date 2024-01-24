@@ -101,13 +101,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_35sdp"
                             android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="1"
                             android:background="@null"
                             android:hint="@string/name_of_your"
-                            android:textColor="@color/purple"
                             android:inputType="textPersonName"
-                            android:maxLength="20"
-                            android:textColorHint="@color/purple"
-                            android:textSize="@dimen/_13sdp" />
+                           android:maxLength="40"
+                            android:textColor="@color/purple"
+                            android:textColorHint="#B374BD"
+                            android:textSize="@dimen/_13ssp"/>
 
                     </LinearLayout>
 
@@ -187,6 +188,13 @@
                         android:textColorHint="#B374BD"
                         android:textSize="@dimen/_13ssp"/>
 
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="et_s_year" />
+
                     <ImageView
                         android:id="@+id/iv_date"
                         android:layout_width="match_parent"
@@ -254,7 +262,7 @@
                         android:hint="@string/suitable_designation"
                         android:textColor="@color/purple"
                         android:inputType="none"
-                        android:textColorHint="@color/purple"
+                        android:textColorHint="#B374BD"
                         android:editable="false"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:textSize="@dimen/_13ssp" />
@@ -377,7 +385,7 @@
                         android:hint="@string/select_state"
                         android:textColor="@color/purple"
                         android:inputType="none"
-                        android:textColorHint="@color/purple"
+                        android:textColorHint="#B374BD"
                         android:editable="false"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:textSize="@dimen/_13ssp" />
@@ -456,8 +464,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:background="@drawable/time_bg"
-                    android:layout_marginBottom="@dimen/_10sdp">
+                    android:background="@drawable/time_bg">
 
                     <EditText
                         android:id="@+id/et_PinCode"
@@ -471,6 +478,23 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:maxLength="6"
                         android:textSize="@dimen/_13ssp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="bold"
+                        android:checked="true"
+                        android:text="I agree to the Terms and Conditions"/>
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -223,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="5dp"
-                android:text="01-01-2023"
+                android:text="Fever"
                 android:textStyle="normal"
                 android:textColor="@color/purple1"
                 android:textSize="@dimen/_13ssp"

@@ -88,7 +88,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/edit_user_password"
+                android:id="@+id/edit_college_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="College Name "
@@ -96,10 +96,10 @@
                 android:background="@null"
                 android:textColor="@color/purple"
                 android:textColorHint="@color/purple"
-                android:maxLength="9"
+                android:maxLength="30"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
         </LinearLayout>
 
@@ -114,21 +114,24 @@
             android:layout_marginTop="10dp">
 
             <EditText
+                android:id="@+id/et_degree"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Course / Degree "
                 android:textSize="13dp"
+                android:editable="false"
                 android:background="@null"
                 android:textColor="@color/purple"
                 android:textColorHint="@color/purple"
                 android:maxLength="9"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -185,6 +188,7 @@
                 android:layout_marginTop="10dp">
 
                 <EditText
+                    android:id="@+id/et_admission_year"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Admission Year "
@@ -195,7 +199,7 @@
                     android:maxLength="9"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:inputType="textPassword" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -211,6 +215,7 @@
                 android:layout_marginTop="10dp">
 
                 <EditText
+                    android:id="@+id/et_Passout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Passout Year "
@@ -221,13 +226,76 @@
                     android:maxLength="9"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:inputType="textPassword" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="@drawable/background"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/et_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="State"
+                    android:textSize="13dp"
+                    android:background="@null"
+                    android:textColor="@color/purple"
+                    android:textColorHint="@color/purple"
+                    android:maxLength="15"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="@drawable/background"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:id="@+id/et_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="City"
+                    android:textSize="13dp"
+                    android:background="@null"
+                    android:textColor="@color/purple"
+                    android:textColorHint="@color/purple"
+                    android:maxLength="9"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="vertical"
@@ -238,6 +306,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
+                android:id="@+id/et_zipcode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/zipcode"
@@ -245,12 +314,22 @@
                 android:background="@null"
                 android:textColor="@color/purple"
                 android:textColorHint="@color/purple"
-                android:maxLength="9"
+                android:maxLength="6"
                 android:layout_gravity="center"
                 android:padding="10dp"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-2dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -264,9 +343,9 @@
             app:cardElevation="5dp">
 
             <TextView
-                android:id="@+id/tv_registration"
+                android:id="@+id/tv_update"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35ssp"
+                android:layout_height="@dimen/_40ssp"
                 android:layout_gravity="center"
                 android:background="@drawable/ripple_bg"
                 android:gravity="center"

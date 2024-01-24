@@ -64,7 +64,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     ImageView notification, help, iv_banner1;
-    TextView tv_viewAll, btn_search;
+    TextView tv_viewAll, btn_search,all;
     private BottomSheetDialog bottomSheetDialog;
     ViewPager viewPager;
     CustomProgressDialog progressDialog;
@@ -102,6 +102,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         home = inflater.inflate(R.layout.fragment_home, container, false);
         help = home.findViewById(R.id.help);
+        all = home.findViewById(R.id.all);
         btn_search = home.findViewById(R.id.btn_search);
         tv_viewAll = home.findViewById(R.id.tv_viewAll);
         notification = home.findViewById(R.id.notification);
@@ -152,7 +153,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("PAGE_NAME", "HOME");
+                bundle.putString("PAGE_NAME", "ALL");
                 Intent i = new Intent(getContext(), Total_Reports.class);
                 i.putExtras(bundle);
                 startActivity(i);
@@ -384,7 +385,8 @@ public class HomeFragment extends Fragment {
                     others.setText(other);
                     male.setText(males);
                     female.setText(females);
-
+//                    String total = males + females + other;
+//                    all.setText(total);
                     callBanner(settingBanner);//Banner
                     callTopDiagnosis(sliderList);//Top Diagnosis
                     callMostSearchDisease(searchList);//most Search Disease

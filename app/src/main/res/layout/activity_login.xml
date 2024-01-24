@@ -67,7 +67,7 @@
             <ImageView
                 android:id="@+id/otpimg"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_170sdp"
+                android:layout_height="@dimen/_120sdp"
 
                 android:src="@drawable/loginbg" />
 
@@ -159,14 +159,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/purple"
-                    android:textSize="@dimen/_10ssp"
+                    android:textSize="@dimen/_8ssp"
                     android:text="@string/terms"/>
                 <TextView
                     android:id="@+id/txt_privacy_policy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/purple"
-                    android:textSize="@dimen/_9ssp"
+                    android:textSize="@dimen/_8ssp"
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:text="@string/privacy_policy"/>
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/purple"
-                    android:textSize="@dimen/_9ssp"
+                    android:textSize="@dimen/_8ssp"
                     android:textStyle="bold"
                     android:text="@string/terms_amp_conditions"/>
 

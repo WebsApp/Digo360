@@ -1,6 +1,7 @@
 package com.wapss.digo360.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wapss.digo360.R;
 import com.wapss.digo360.model.Help_Model;
 import com.wapss.digo360.model.Report_Model;
+import com.wapss.digo360.utility.EncryptionUtils;
 
 import java.util.List;
 
@@ -36,11 +38,23 @@ public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHold
     public void onBindViewHolder(@NonNull Report_Adapter.ViewHolder holder, int position) {
         Report_Model report_model = report_models.get(position);
         holder.pt_id.setText(report_model.getP_ID());
-        holder.pt_name.setText(report_model.getP_name());
         holder.pt_gender.setText(report_model.getP_gender());
-        holder.pt_age.setText(report_model.getP_age());
         holder.pt_diseases.setText(report_model.getP_desease());
-
+        String ACC_Id = report_model.getAccount_Id();
+        try {
+            String decrypttext = EncryptionUtils.decrypt(report_model.getP_name(), ACC_Id);
+            Log.d("decrypttext",decrypttext);
+            holder.pt_name.setText(decrypttext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            String decrypttext = EncryptionUtils.decrypt(report_model.getP_age(), ACC_Id);
+            Log.d("decrypttext",decrypttext);
+            holder.pt_age.setText(decrypttext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

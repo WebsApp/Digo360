@@ -46,6 +46,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
     String deviceToken;
     CustomProgressDialog progressDialog;
 
+    String Bp;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +71,38 @@ public class PatientsProblemActivity extends AppCompatActivity {
         deviceToken = loginPref.getString("deviceToken", null);
         diseaseId = loginPref.getString("diseaseId", null);
 
-        et_surgery = findViewById(R.id.et_surgery);
-        et_weight=findViewById(R.id.et_weight);
-        et_height= findViewById(R.id.et_height);
-        et_pulse = findViewById(R.id.et_pulse);
-        et_temp = findViewById(R.id.et_temp);
-        et_before_bp = findViewById(R.id.et_before_bp);
-        et_after_bp = findViewById(R.id.et_after_bp);
-        back = findViewById(R.id.back);
+//        et_surgery = findViewById(R.id.et_surgery);
+//        et_weight=findViewById(R.id.et_weight);
+//        et_height= findViewById(R.id.et_height);
+//        et_pulse = findViewById(R.id.et_pulse);
+//        et_temp = findViewById(R.id.et_temp);
+//        et_before_bp = findViewById(R.id.et_before_bp);
+//        et_after_bp = findViewById(R.id.et_after_bp);
+//        back = findViewById(R.id.back);
+//        bp_layout = findViewById(R.id.bp_layout);
+//        pulse_layout = findViewById(R.id.pulse_layout);
+//        sugar_layout = findViewById(R.id.sugar_layout);
+//        allergy_layout = findViewById(R.id.allergy_layout);
+//        surgery_layout = findViewById(R.id.surgery_layout);
+//        other_layout = findViewById(R.id.other_layout);
+
         bp_layout = findViewById(R.id.bp_layout);
         pulse_layout = findViewById(R.id.pulse_layout);
         sugar_layout = findViewById(R.id.sugar_layout);
         allergy_layout = findViewById(R.id.allergy_layout);
         surgery_layout = findViewById(R.id.surgery_layout);
         other_layout = findViewById(R.id.other_layout);
+        back = findViewById(R.id.back);
+        et_before_bp = findViewById(R.id.et_before_bp);
+        et_after_bp = findViewById(R.id.et_after_bp);
+        et_temp = findViewById(R.id.et_temp);
+        et_height = findViewById(R.id.et_height);
+        et_weight = findViewById(R.id.et_weight);
+        et_pulse = findViewById(R.id.et_pulse);
+        et_allergy = findViewById(R.id.et_allergy);
+        et_sugar = findViewById(R.id.et_sugar);
+        et_surgery = findViewById(R.id.et_surgery);
+        et_other_problem = findViewById(R.id.et_other_problem);
 
         rg_bp = findViewById(R.id.rg_bp);
         rg_pulse = findViewById(R.id.rg_pulse);
@@ -109,11 +129,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_bp.isChecked()) {
                     bp_layout.setVisibility(View.VISIBLE);
-                    bp_yes = "Yes";
-
+                    bp = et_before_bp.getText().toString() + "/" + et_after_bp.getText().toString();
+                    Bp = "Bp";
                 } else if (rb_no_bp.isChecked()) {
                     bp_layout.setVisibility(View.GONE);
-                    bp_yes = "No";
+                    bp = "";
                 }
             }
         });
@@ -122,10 +142,10 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_pulse.isChecked()) {
                     pulse_layout.setVisibility(View.VISIBLE);
-                    btn_pulse = "Yes";
+                    pulseRate = et_pulse.getText().toString();
                 } else if (rb_no_pulse.isChecked()) {
                     pulse_layout.setVisibility(View.GONE);
-                    btn_pulse = "No";
+                    pulseRate = "";
                 }
             }
         });
@@ -134,9 +154,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_sugar.isChecked()) {
                     sugar_layout.setVisibility(View.VISIBLE);
+                    sugar = et_sugar.getText().toString();
+                    String Sugar = "Sugar";
                 } else if (rb_no_sugar.isChecked()) {
                     sugar_layout.setVisibility(View.GONE);
-
+                    sugar = "";
                 }
             }
         });
@@ -145,9 +167,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_allergy.isChecked()) {
                     allergy_layout.setVisibility(View.VISIBLE);
+                    allergy = et_allergy.getText().toString();
+                    String Allergy = "Allergy";
                 } else if (rb_no_allergy.isChecked()) {
                     allergy_layout.setVisibility(View.GONE);
-
+                    allergy = "";
                 }
             }
         });
@@ -155,10 +179,12 @@ public class PatientsProblemActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_surgery.isChecked()) {
-                    surgery_layout.setVisibility(View.VISIBLE);
+                    //surgery_layout.setVisibility(View.VISIBLE);
+                    surgery = "Yes";
+                    String Surgery = "Surgery";
                 } else if (rb_no_surgery.isChecked()) {
-                    surgery_layout.setVisibility(View.GONE);
-
+                    //surgery_layout.setVisibility(View.GONE);
+                    surgery = "No";
                 }
             }
         });
@@ -167,9 +193,12 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_other.isChecked()) {
                     other_layout.setVisibility(View.VISIBLE);
+                    other = et_other_problem.getText().toString();
+                    String Other = "Other";
+
                 } else if (rb_no_other.isChecked()) {
                     other_layout.setVisibility(View.GONE);
-
+                    other = "";
                 }
             }
         });
@@ -182,8 +211,6 @@ public class PatientsProblemActivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(PatientsProblemActivity.this, AfterPatientRegistrationActivity.class);
-//                startActivity(intent);
                 /*if (validation()) {
                     //callAPI here
                 }*/
@@ -194,7 +221,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
     }
 
     private void consultattion_Api_call() {
-        /*TOKEN = "Bearer " + deviceToken;
+        TOKEN = "Bearer " + deviceToken;
         bp = et_before_bp.getText().toString() + "/" + et_after_bp.getText().toString();
         pulseRate = et_pulse.getText().toString();
         weight = et_weight.getText().toString();
@@ -202,10 +229,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
         temperature = et_temp.getText().toString();
         sugar = et_sugar.getText().toString();
         allergy = et_allergy.getText().toString();
-        surgery = "No";
-        other = et_other_problem.getText().toString();*/
-        TOKEN = "Bearer " + deviceToken;
-        bp = "80/120";
+        other = et_other_problem.getText().toString();
+       /* bp = "80/120";
         pulseRate = "80";
         weight = "60";
         height = "5.5";
@@ -213,7 +238,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
         sugar = "120";
         allergy = "100";
         surgery = "No";
-        other = "No Problem";
+        other = "No Problem";*/
         Call<Patient_Consultation_Response> consalt_apiCall = ApiService.apiHolders().consalt_details(TOKEN, bp, pulseRate, weight,
                 height, temperature, sugar, allergy, surgery, other, patientDetailId, diseaseId);
         consalt_apiCall.enqueue(new Callback<Patient_Consultation_Response>() {

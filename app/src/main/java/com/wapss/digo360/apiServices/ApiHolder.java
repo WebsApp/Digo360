@@ -3,6 +3,7 @@ package com.wapss.digo360.apiServices;
 import com.wapss.digo360.response.AreaResponse;
 import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.CityResponse;
+import com.wapss.digo360.response.Collage_Response;
 import com.wapss.digo360.response.Degree_Response;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.HelpResponse;
@@ -14,6 +15,7 @@ import com.wapss.digo360.response.PagesResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
 import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Patient_Consultation_Response;
+import com.wapss.digo360.response.Patient_Count_Response;
 import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.QuestionResponse;
@@ -177,5 +179,28 @@ public interface ApiHolder {
                                                           @Query("limit") int limit,
                                                           @Query("offset") int offset,
                                                           @Query("keyword") String keyword);
+    @GET("patient-consultation")
+    Call<Patient_Count_Response> PatientsCount(@Header("Authorization") String Token,
+                                                     @Query("limit") int limit,
+                                                     @Query("offset") int offset,
+                                                     @Query("gender") String gender);
+    @GET("patient-consultation")
+    Call<Patient_Count_Response> Patient_name_Search(@Header("Authorization") String Token,
+                                                    @Query("limit") int limit,
+                                                    @Query("offset") int offset,
+                                                     @Query("keyword") String keyword);
+    @GET("patient-consultation")
+    Call<Patient_Count_Response> Patient_date_Search(@Header("Authorization") String Token,
+                                                     @Query("limit") int limit,
+                                                     @Query("offset") int offset,
+                                                     @Query("fromDate") String fromDate,
+                                                     @Query("toDate") String toDate);
+    @GET("doctor-detail/college")
+    Call<Collage_Response> collage_res(@Header("Authorization") String Token,
+                                       @Field("collegeName") String collegeName,
+                                       @Field("startDate") String startDate,
+                                       @Field("endDate") String endDate,
+                                       @Field("degree") String degree);
+
 
 }

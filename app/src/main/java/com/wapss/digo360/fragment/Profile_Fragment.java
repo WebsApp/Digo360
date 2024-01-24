@@ -65,7 +65,7 @@ public class Profile_Fragment extends Fragment {
 
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
-        name = loginPref.getString("Dr_Name", null);
+        name = loginPref.getString("DR_NAME", null);
 
         txt_profile = profile.findViewById(R.id.txt_profile);
         btn_refer = profile.findViewById(R.id.btn_refer);
@@ -76,7 +76,7 @@ public class Profile_Fragment extends Fragment {
         profile_layout = profile.findViewById(R.id.profile_layout);
         about_layout = profile.findViewById(R.id.about_layout);
         ll_logOut = profile.findViewById(R.id.ll_logOut);
-        txt_profile.setText(name);
+        txt_profile.setText("Dr." +" "+ name);
 
         profile_layout.setOnClickListener(new View.OnClickListener() {
             @Override
