@@ -23,10 +23,12 @@ public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDet
     public static List<PatientsDetailsViewResponse.Result> ItemList;
     private Context context;
     PatientsViewListener listener;
+    String acc_id;
 
-    public PatientsDetailsViewAdapter(Context context, List<PatientsDetailsViewResponse.Result> ItemList, PatientsViewListener listener) {
+    public PatientsDetailsViewAdapter(Context context, List<PatientsDetailsViewResponse.Result> ItemList,String acc_id, PatientsViewListener listener) {
         this.ItemList = ItemList;
         this.context = context;
+        this.acc_id = acc_id;
         this.listener = listener;
     }
     @NonNull
@@ -42,11 +44,12 @@ public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDet
         holder.pt_dob.setText(ItemList.get(position).getPatientDetail().getDob());
         holder.pt_gender.setText(ItemList.get(position).getPatientDetail().getGender());
         holder.pt_date.setText(ItemList.get(position).getCreatedAt());
+
         String Patient_Id = ItemList.get(position).getPatientDetail().getId();
         try {
-            String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getName(), Patient_Id);
+            String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getName(), acc_id);
             holder.pt_name.setText(decrypttext);
-            String decrypttext1 = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getAge(), Patient_Id);
+            String decrypttext1 = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getAge(), acc_id);
             holder.pt_age.setText(decrypttext1);
         } catch (Exception e) {
             e.printStackTrace();

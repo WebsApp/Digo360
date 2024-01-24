@@ -35,6 +35,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -175,7 +176,8 @@ public interface ApiHolder {
                                                @Query("keyword") String keyword,
                                                @Query("fromDate") String fromDate,
                                                @Query("toDate") String toDate);
-    @GET("doctor-detail/college")
+    @PUT("doctor-detail/college")
+    @FormUrlEncoded
     Call<Collage_Response> collage_res(@Header("Authorization") String Token,
                                        @Field("collegeName") String collegeName,
                                        @Field("startDate") String startDate,

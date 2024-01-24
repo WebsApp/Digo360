@@ -20,7 +20,7 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 public class SplashActivity extends AppCompatActivity {
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken;
+    String loginStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +34,21 @@ public class SplashActivity extends AppCompatActivity {
 
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
-        deviceToken = loginPref.getString("deviceToken", null);
+        loginStatus = loginPref.getString("loginStatus", "");
 //        startActivity(new Intent(SplashActivity.this, PatientsProblemActivity.class));
 //        finish();
        // progressDialog.showProgressDialog();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (deviceToken == null)
+                if (loginStatus.equals("true"))
                 {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 }
                 else
                 {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }
             }

@@ -64,7 +64,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     ImageView notification, help, iv_banner1;
-    TextView tv_viewAll, btn_search,all;
+    TextView tv_viewAll, btn_search, all;
     private BottomSheetDialog bottomSheetDialog;
     ViewPager viewPager;
     CustomProgressDialog progressDialog;
@@ -82,14 +82,15 @@ public class HomeFragment extends Fragment {
     String deviceToken, Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
     MostSearchDiseaseAdapter mostSearchDiseaseAdapter;
-    RecyclerView rv_diagnosis, rv_top_diseases,rv_most_search_diseases;
+    RecyclerView rv_diagnosis, rv_top_diseases, rv_most_search_diseases;
     View home;
     HelpAdapter helpAdapter;
     LinearLayout ll_faq, ll_viewAllDisease;
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
     TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
-    LinearLayout btn_fever, btn_reports,btn_all_reports,btn_male_reports,btn_female_reports;
+    LinearLayout btn_fever, btn_reports, btn_all_reports, btn_male_reports, btn_female_reports;
+    int maless, femaless, otherss, totalss;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -221,13 +222,14 @@ public class HomeFragment extends Fragment {
         btn_fever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
+                // startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
             }
         });
         CallAPI();
         callTopDiseases();
         return home;
     }
+
     private void callHelpAPI() {
         // progressDialog.showProgressDialog();
         // Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
@@ -236,8 +238,8 @@ public class HomeFragment extends Fragment {
 
     private void callTopDiseases() {
         progressDialog.showProgressDialog();
-         String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token,3, 0);
+        String Token = "Bearer " + deviceToken;
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi(Token, 3, 0);
         banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
             @Override
             public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
@@ -299,7 +301,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
                 progressDialog.dismiss();
-               // ll_faq.setVisibility(View.VISIBLE);
+                // ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -379,15 +381,24 @@ public class HomeFragment extends Fragment {
                     String banner1 = response.body().getResult().getBanner1();
                     iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
                     //summary
+                    //if (response.body().getSummary().getMaleCount()!=null) {
                     String males = response.body().getSummary().getMaleCount();
                     String females = response.body().getSummary().getFemaleCount();
                     String other = response.body().getSummary().getOtherCount();
-                    others.setText(other);
-                    male.setText(males);
-                    female.setText(females);
-                    int total = Integer.parseInt(males) + Integer.parseInt(females) + Integer.parseInt(other);
-                    String totals = String.valueOf(total);
+                    if (males != null) {
+                        male.setText(males);
+                        maless = Integer.parseInt(males);
+                    } else if (females != null) {
+                        female.setText(females);
+                        femaless = Integer.parseInt(females);
+                    } else if (other != null) {
+                        others.setText(other);
+                        otherss = +Integer.parseInt(other);
+                    }
+                    totalss = maless + femaless + otherss;
+                    String totals = String.valueOf(totalss);
                     all.setText(totals);
+                    //  }
                     callBanner(settingBanner);//Banner
                     callTopDiagnosis(sliderList);//Top Diagnosis
                     callMostSearchDisease(searchList);//most Search Disease

@@ -39,7 +39,7 @@ public class Patient_Details extends AppCompatActivity {
     String deviceToken;
     CustomProgressDialog progressDialog;
     RecyclerView rv_patientsDetails;
-    String P_ID;
+    String P_ID,acc_id;
     PatientsDetailsViewAdapter questionAdapter;
     List<PatientsDetailsViewResponse.Result> responsess;
     FloatingActionButton fb_check_problem;
@@ -65,6 +65,7 @@ public class Patient_Details extends AppCompatActivity {
         //Extract the data…
         if (bundle != null) {
             P_ID = bundle.getString("P_ID");
+            acc_id = bundle.getString("acc_id");
         }
         callApI(P_ID);
 
@@ -101,7 +102,7 @@ public class Patient_Details extends AppCompatActivity {
                     progressDialog.dismiss();
                     assert response.body() != null;
                     responsess = response.body().getResult();
-                    questionAdapter = new PatientsDetailsViewAdapter(getApplicationContext(),responsess, new PatientsViewListener() {
+                    questionAdapter = new PatientsDetailsViewAdapter(getApplicationContext(),responsess,acc_id, new PatientsViewListener() {
                         @Override
                         public void onItemClickedItem(PatientsDetailsViewResponse.Result item, int position) {
                             //PDF page

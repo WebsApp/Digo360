@@ -44,6 +44,7 @@ public class OTPActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     long timerDuration = 60000;
     long timerInterval = 1000;
+    String loginStatus ="true";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -171,6 +172,8 @@ public class OTPActivity extends AppCompatActivity {
                                 if (latestLogin) {
                                     startActivity(new Intent(OTPActivity.this,RegistrationActivity.class));
                                 }else {
+                                    editor.putString("loginStatus", loginStatus);
+                                    editor.commit();
                                     intent = new Intent(OTPActivity.this, LoadingPage.class);
                                     startActivity(intent);
                                 }

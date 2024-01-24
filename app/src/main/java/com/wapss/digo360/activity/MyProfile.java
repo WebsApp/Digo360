@@ -70,6 +70,7 @@ public class MyProfile extends AppCompatActivity {
     String deviceToken,Token;
     CustomProgressDialog progressDialog;
     TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
+    String ex;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -187,6 +188,12 @@ public class MyProfile extends AppCompatActivity {
                     String exp_year = String.valueOf(response.body().getExperience());
                     String collage_name = String.valueOf(response.body().getCollegeName());
                     String address = response.body().getAddress();
+                    String Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
+//                    for (int i=0;i<response.body().getDoctorSpecialization().size();i++){
+//                         ex = response.body().getDoctorSpecialization().get(i).getSpecialization().getName();
+//                    }
+//                    txt_spec.setText(ex);
+                   // String EXp = response.body().getDoctorSpecialization().get(0).getSpecialization().getName();
                     tv_name.setText(response.body().getTitle() +"." + " "+ response.body().getName());
                     tv_mobileNum.setText("+91" + " " + response.body().getAccount().getPhoneNumber());
                     txt_mail.setText(response.body().getEmail());
@@ -195,6 +202,7 @@ public class MyProfile extends AppCompatActivity {
                     txt_address.setText(address);
                     txt_college.setText(collage_name);
                     txt_exp_year.setText(exp_year);
+                    tv_degree.setText(Degree);
 
                     if (collage_name.equals("null")){
                         txt_college.setText("N/A");
@@ -208,6 +216,12 @@ public class MyProfile extends AppCompatActivity {
                     else {
                         txt_exp_year.setText(exp_year);
                     }
+//                    if (ex.equals("null")){
+//                        txt_spec.setText("N/A");
+//                    }
+//                    else {
+//                        txt_spec.setText(ex);
+//                    }
 
                 }
             }

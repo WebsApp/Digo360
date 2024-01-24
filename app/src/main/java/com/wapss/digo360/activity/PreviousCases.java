@@ -130,9 +130,11 @@ public class PreviousCases extends AppCompatActivity {
                         @Override
                         public void onItemClickedItem(Patient_Check_Response.Result item, int position) {
                             String id = item.getId();
+                            String acc_id = item.getAccount().getId();
                             Log.e("pid",""+id);
                             Bundle bundle = new Bundle();
                             bundle.putString("P_ID", id);
+                            bundle.putString("acc_id", acc_id);
                             Intent i = new Intent(PreviousCases.this, Patient_Details.class);
                             i.putExtras(bundle);
                             startActivity(i);

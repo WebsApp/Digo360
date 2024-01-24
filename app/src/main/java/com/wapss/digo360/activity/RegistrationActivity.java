@@ -94,6 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
     ImageView iv_date;
     Date dateNow = null;
     CheckBox checkBoxTerms;
+    String loginStatus ="true";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -459,8 +460,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     editor.putString("DR_NAME", response.body().getName());
-                    editor.commit();
                     //specResponse = response.body().();
+                    editor.putString("loginStatus", loginStatus);
+                    editor.commit();
                     Toast.makeText(getApplicationContext(), "Successfully Registration", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
                     startActivity(intent);

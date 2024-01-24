@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -60,6 +61,7 @@ public class CollegePage extends AppCompatActivity {
         et_zipcode = findViewById(R.id.et_zipcode);
         et_degree = findViewById(R.id.et_degree);
         tv_update = findViewById(R.id.tv_update);
+        progressDialog = new CustomProgressDialog(CollegePage.this);
         et_degree.setText("MD");
         collage_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,19 +93,25 @@ public class CollegePage extends AppCompatActivity {
     }
 
     private void collage_api() {
-        //progressDialog.showProgressDialog();
+        progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         String collegeName = edit_college_name.getText().toString();
         String startDate = et_admission_year.getText().toString();
         String endDate = et_Passout.getText().toString();
-        String degree = et_degree.getText().toString();
-        Call<Collage_Response> collage = ApiService.apiHolders().collage_res(Token,collegeName,startDate,endDate,degree);
+        //String degree = et_degree.getText().toString();
+        Call<Collage_Response> collage = ApiService.apiHolders().collage_res(Token,collegeName,startDate,endDate,"MD");
         collage.enqueue(new Callback<Collage_Response>() {
             @Override
             public void onResponse(Call<Collage_Response> call, Response<Collage_Response> response) {
                 if (response.isSuccessful()) {
-                    //progressDialog.hideProgressDialog();
-                    Toast.makeText(CollegePage.this, "Hi", Toast.LENGTH_SHORT).show();
+                    progressDialog.hideProgressDialog();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(CollegePage.this,MyProfile.class));
+                        }
+                    },2000);
+                    Toast.makeText(CollegePage.this, "Collage Updated Successfully", Toast.LENGTH_SHORT).show();
                 }
                 else {
 
