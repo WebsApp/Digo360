@@ -131,6 +131,9 @@ public class PreviousCases extends AppCompatActivity {
                         public void onItemClickedItem(Patient_Check_Response.Result item, int position) {
                             String id = item.getId();
                             Log.e("pid",""+id);
+                            String gender = item.getGender();
+                            editor.putString("gender", gender);
+                            editor.commit();
                             Bundle bundle = new Bundle();
                             bundle.putString("P_ID", id);
                             Intent i = new Intent(PreviousCases.this, Patient_Details.class);

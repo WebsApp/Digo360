@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
     TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
-    LinearLayout btn_fever, btn_reports,btn_all_reports,btn_male_reports,btn_female_reports;
+    LinearLayout btn_fever, btn_reports,btn_all_reports,btn_male_reports,btn_female_reports,item1,item2,item3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,6 +101,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         home = inflater.inflate(R.layout.fragment_home, container, false);
+        item1 = home.findViewById(R.id.btn_fever);
+        item2 = home.findViewById(R.id.item2);
+        item3 = home.findViewById(R.id.item3);
         help = home.findViewById(R.id.help);
         all = home.findViewById(R.id.all);
         btn_search = home.findViewById(R.id.btn_search);
@@ -262,6 +265,19 @@ public class HomeFragment extends Fragment {
                                     .load(img1)
                                     .into(iv_image1);
                         }
+
+                        item1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String id = topDiseaseResponse.get(0).getId();
+                                editor.putString("diseaseId", id);
+                                editor.commit();
+                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+
                         if (img2 == null) {
                             iv_image2.setBackgroundResource(R.drawable.ivicon);
                         } else {
@@ -269,6 +285,17 @@ public class HomeFragment extends Fragment {
                                     .load(img2)
                                     .into(iv_image2);
                         }
+                        item2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String id = topDiseaseResponse.get(1).getId();
+                                editor.putString("diseaseId", id);
+                                editor.commit();
+                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
                         if (img3 == null) {
                             iv_image3.setBackgroundResource(R.drawable.ivicon);
                         } else {
@@ -276,6 +303,16 @@ public class HomeFragment extends Fragment {
                                     .load(img3)
                                     .into(iv_image3);
                         }
+                        item3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String id = topDiseaseResponse.get(2).getId();
+                                editor.putString("diseaseId", id);
+                                editor.commit();
+                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
 
                     topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
@@ -409,7 +446,11 @@ public class HomeFragment extends Fragment {
         mostSearchDiseaseAdapter = new MostSearchDiseaseAdapter(getContext(), searchList, new MostSearchDiseaseListener() {
             @Override
             public void onItemClickedItem(SettingHomeResponse.Search item, int position) {
-
+                String diseaseId = item.getDiseaseId();
+                editor.putString("diseaseId", diseaseId);
+                editor.commit();
+                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                startActivity(intent);
             }
         });
         rv_most_search_diseases.setAdapter(mostSearchDiseaseAdapter);
