@@ -132,6 +132,9 @@ public class PreviousCases extends AppCompatActivity {
                             String id = item.getId();
                             String acc_id = item.getAccount().getId();
                             Log.e("pid",""+id);
+                            String gender = item.getGender();
+                            editor.putString("gender", gender);
+                            editor.commit();
                             Bundle bundle = new Bundle();
                             bundle.putString("P_ID", id);
                             bundle.putString("acc_id", acc_id);
