@@ -6,43 +6,28 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Patient_Count_Response {
-    public class Disease {
+    @SerializedName("result")
+    @Expose
+    private List<Result> result;
+    @SerializedName("total")
+    @Expose
+    private Integer total;
 
-        @SerializedName("name")
-        @Expose
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+    public List<Result> getResult() {
+        return result;
     }
 
-        @SerializedName("result")
-        @Expose
-        private List<Result> result;
-        @SerializedName("total")
-        @Expose
-        private Integer total;
+    public void setResult(List<Result> result) {
+        this.result = result;
+    }
 
-        public List<Result> getResult() {
-            return result;
-        }
+    public Integer getTotal() {
+        return total;
+    }
 
-        public void setResult(List<Result> result) {
-            this.result = result;
-        }
-
-        public Integer getTotal() {
-            return total;
-        }
-
-        public void setTotal(Integer total) {
-            this.total = total;
-        }
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public class PatientDetail {
         @SerializedName("id")
@@ -124,6 +109,7 @@ public class Patient_Count_Response {
         }
 
     }
+
     public class Result {
 
         @SerializedName("id")
@@ -160,5 +146,19 @@ public class Patient_Count_Response {
             this.disease = disease;
         }
 
+    }
+    public class Disease {
+
+        @SerializedName("name")
+        @Expose
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

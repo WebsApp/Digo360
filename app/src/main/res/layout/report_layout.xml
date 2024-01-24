@@ -197,7 +197,7 @@
                 android:text="0 Years"
                 android:textStyle="normal"
                 android:textColor="@color/purple1"
-                android:textSize="@dimen/_13ssp"
+                android:textSize="@dimen/_12ssp"
                 android:layout_marginLeft="@dimen/_5sdp"/>
 
         </LinearLayout>

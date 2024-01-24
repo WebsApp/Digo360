@@ -30,6 +30,7 @@ import com.wapss.digo360.model.Help_Model;
 import com.wapss.digo360.model.Report_Model;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.Patient_Count_Response;
+import com.wapss.digo360.response.SearchResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,13 +49,13 @@ public class Total_Reports extends AppCompatActivity {
     ImageView back;
     ImageView select_date;
     ImageView to_date_picker;
-    TextView txt_select_date,txt_to_date;
+    TextView txt_select_date, txt_to_date;
     Report_Adapter reportAdapter;
     List<Report_Model> report_list = new ArrayList<>();
     RecyclerView rv_reports;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken,report_enum,currentTime,fromDate,to_date,Token,keyword;
+    String deviceToken, report_enum, currentTime, fromDate, to_date, Token, keyword;
     LinearLayout blank_layout;
     CustomProgressDialog progressDialog;
     private Calendar calendar;
@@ -62,6 +63,7 @@ public class Total_Reports extends AppCompatActivity {
     EditText edit_user_name;
 
     LottieAnimationView animationView;
+    List<Patient_Count_Response.Result> patientsResponse;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -157,129 +159,52 @@ public class Total_Reports extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        rv_reports.setLayoutManager(layoutManager);;
-        total_Report();
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        rv_reports.setLayoutManager(layoutManager);;
+        total_Report("", null, null);
         animationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Patient_Name_Search();
-                Patient_Date_Search();
+                String name = edit_user_name.getText().toString();
+                String ToDate = txt_to_date.getText().toString();
+                String FromDate = txt_select_date.getText().toString();
+                total_Report(name, FromDate, ToDate);
             }
         });
     }
 
-    private void Patient_Date_Search() {
+
+    private void total_Report(String name, String FromDate, String Todate) {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
-        Call<Patient_Count_Response> count_api = ApiService.apiHolders().Patient_date_Search(Token,50,0,fromDate,to_date);
+        Call<Patient_Count_Response> count_api = ApiService.apiHolders().PatientsCount(Token, 50, 0, report_enum, name, FromDate, Todate);
         count_api.enqueue(new Callback<Patient_Count_Response>() {
             @Override
             public void onResponse(Call<Patient_Count_Response> call, Response<Patient_Count_Response> response) {
-                if (response.isSuccessful()){
-                    progressDialog.hideProgressDialog();
-                    List<Patient_Count_Response.Result> arrayList = response.body().getResult();
-                    for (int i = 0;i<arrayList.size();i++){
-                        Report_Model m_model = new Report_Model(arrayList.get(i).getPatientDetail().getPid(),
-                                arrayList.get(i).getPatientDetail().getName(),
-                                arrayList.get(i).getPatientDetail().getGender(),
-                                arrayList.get(i).getPatientDetail().getAge(),
-                                arrayList.get(i).getPatientDetail().getAccountId(),
-                                arrayList.get(i).getDisease().getName());
-                        report_list.add(m_model);
-                    }
-                    if (report_list.size()>0){
-                        reportAdapter = new Report_Adapter(report_list,getApplicationContext());
-                        rv_reports.setAdapter(reportAdapter);
-                        blank_layout.setVisibility(View.GONE);
-                    }
-                    else {
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    blank_layout.setVisibility(View.GONE);
+                    progressDialog.dismiss();
+                    patientsResponse = response.body().getResult();
+                    int total = response.body().getTotal();
+                    if (total == 0) {
                         blank_layout.setVisibility(View.VISIBLE);
+                        rv_reports.setVisibility(View.GONE);
                     }
+                    reportAdapter = new Report_Adapter(getApplicationContext(), patientsResponse);
+                    rv_reports.setAdapter(reportAdapter);
+                    rv_reports.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                } else {
+                    blank_layout.setVisibility(View.VISIBLE);
+                    rv_reports.setVisibility(View.GONE);
+                    progressDialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<Patient_Count_Response> call, Throwable t) {
-                progressDialog.hideProgressDialog();
-                Toast.makeText(Total_Reports.this, "Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void Patient_Name_Search() {
-        progressDialog.showProgressDialog();
-        Token = "Bearer " + deviceToken;
-        keyword = edit_user_name.getText().toString();
-        Call<Patient_Count_Response> count_api = ApiService.apiHolders().Patient_name_Search(Token,50,0,keyword);
-        count_api.enqueue(new Callback<Patient_Count_Response>() {
-            @Override
-            public void onResponse(Call<Patient_Count_Response> call, Response<Patient_Count_Response> response) {
-                if (response.isSuccessful()){
-                    progressDialog.hideProgressDialog();
-                    List<Patient_Count_Response.Result> arrayList = response.body().getResult();
-                    for (int i = 0;i<arrayList.size();i++){
-                        Report_Model m_model = new Report_Model(arrayList.get(i).getPatientDetail().getPid(),
-                                arrayList.get(i).getPatientDetail().getName(),
-                                arrayList.get(i).getPatientDetail().getGender(),
-                                arrayList.get(i).getPatientDetail().getAge(),
-                                arrayList.get(i).getPatientDetail().getAccountId(),
-                                arrayList.get(i).getDisease().getName());
-                        report_list.add(m_model);
-                    }
-                    if (report_list.size()>0){
-                        reportAdapter = new Report_Adapter(report_list,getApplicationContext());
-                        rv_reports.setAdapter(reportAdapter);
-                        blank_layout.setVisibility(View.GONE);
-                    }
-                    else {
-                        blank_layout.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Patient_Count_Response> call, Throwable t) {
-                progressDialog.hideProgressDialog();
-                Toast.makeText(Total_Reports.this, "Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void total_Report() {
-        progressDialog.showProgressDialog();
-        Token = "Bearer " + deviceToken;
-        //Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTU2NDgzMywiZXhwIjoxNzM3MTAwODMzfQ.9gunlTjcc7S-OnrOcZo_n3P_whGhE5EqbjAuGHCSIiQ";
-
-        Call<Patient_Count_Response> count_api = ApiService.apiHolders().PatientsCount(Token,50,0,report_enum);
-        count_api.enqueue(new Callback<Patient_Count_Response>() {
-            @Override
-            public void onResponse(Call<Patient_Count_Response> call, Response<Patient_Count_Response> response) {
-                if (response.isSuccessful()){
-                    progressDialog.hideProgressDialog();
-                    List<Patient_Count_Response.Result> arrayList = response.body().getResult();
-                    for (int i = 0;i<arrayList.size();i++){
-                        Report_Model m_model = new Report_Model(arrayList.get(i).getPatientDetail().getPid(),
-                                arrayList.get(i).getPatientDetail().getName(),
-                                arrayList.get(i).getPatientDetail().getGender(),
-                                arrayList.get(i).getPatientDetail().getAge(),
-                                arrayList.get(i).getPatientDetail().getAccountId(),
-                                arrayList.get(i).getDisease().getName());
-                        report_list.add(m_model);
-                    }
-                    if (report_list.size()>0){
-                        reportAdapter = new Report_Adapter(report_list,getApplicationContext());
-                        rv_reports.setAdapter(reportAdapter);
-                        blank_layout.setVisibility(View.GONE);
-                    }
-                    else {
-                        blank_layout.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Patient_Count_Response> call, Throwable t) {
-                progressDialog.hideProgressDialog();
+                progressDialog.dismiss();
+                rv_reports.setVisibility(View.GONE);
                 Toast.makeText(Total_Reports.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
