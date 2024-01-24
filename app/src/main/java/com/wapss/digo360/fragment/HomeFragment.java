@@ -89,8 +89,7 @@ public class HomeFragment extends Fragment {
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
     TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
-    LinearLayout btn_fever, btn_reports,btn_all_reports,btn_male_reports,btn_female_reports,item1,item2,item3;
-    LinearLayout btn_fever, btn_reports, btn_all_reports, btn_male_reports, btn_female_reports;
+    LinearLayout  btn_reports,btn_all_reports,btn_male_reports,btn_female_reports,item1,item2,item3;
     int maless, femaless, otherss, totalss;
 
     @Override
@@ -117,7 +116,6 @@ public class HomeFragment extends Fragment {
         rv_diagnosis = home.findViewById(R.id.rv_diagnosis);
         rv_top_diseases = home.findViewById(R.id.rv_top_diseases);
         ll_viewAllDisease = home.findViewById(R.id.ll_viewAllDisease);
-        btn_fever = home.findViewById(R.id.btn_fever);
         btn_reports = home.findViewById(R.id.btn_reports);
         btn_all_reports = home.findViewById(R.id.btn_all_reports);
         btn_male_reports = home.findViewById(R.id.btn_male_reports);
@@ -221,12 +219,6 @@ public class HomeFragment extends Fragment {
                 Intent i = new Intent(getContext(), HelpPage.class);
                 i.putExtras(bundle);
                 startActivity(i);
-            }
-        });
-        btn_fever.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(getContext(), PatientRegistrationCheckActivity.class));
             }
         });
         CallAPI();
