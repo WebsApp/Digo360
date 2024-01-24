@@ -15,6 +15,7 @@ import com.wapss.digo360.interfaces.PatientsViewListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener2;
 import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.utility.EncryptionUtils;
 
 import java.util.List;
 
@@ -38,11 +39,18 @@ public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDet
 
     @Override
     public void onBindViewHolder(@NonNull PatientsDetailsViewAdapter.ViewHolder holder, int position) {
-        holder.pt_name.setText(ItemList.get(position).getPatientDetail().getName());
         holder.pt_dob.setText(ItemList.get(position).getPatientDetail().getDob());
         holder.pt_gender.setText(ItemList.get(position).getPatientDetail().getGender());
-        holder.pt_age.setText(ItemList.get(position).getPatientDetail().getAge());
         holder.pt_date.setText(ItemList.get(position).getCreatedAt());
+        String Patient_Id = ItemList.get(position).getPatientDetail().getId();
+        try {
+            String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getName(), Patient_Id);
+            holder.pt_name.setText(decrypttext);
+            String decrypttext1 = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getAge(), Patient_Id);
+            holder.pt_age.setText(decrypttext1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

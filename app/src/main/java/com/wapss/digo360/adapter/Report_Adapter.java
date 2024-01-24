@@ -48,19 +48,9 @@ public class Report_Adapter extends RecyclerView.Adapter<Report_Adapter.ViewHold
         try {
             String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getName(), ACC_Id);
             holder.pt_name.setText(decrypttext);
-//            String decrypttext1 = EncryptionUtils.decrypt(ItemList.get(position).getId(), ACC_Id);
-//            Log.d("decrypttext",decrypttext1);
-//            holder.pt_id.setText(decrypttext1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        try {
-//            String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getAge(), ACC_Id);
-//            Log.d("decrypttext",decrypttext);
-//            holder.pt_age.setText(decrypttext);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override

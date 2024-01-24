@@ -15,19 +15,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wapss.digo360.R;
 import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.Patient_Details;
+import com.wapss.digo360.interfaces.ExsitingpatientsResponse;
 import com.wapss.digo360.model.Help_Model;
 import com.wapss.digo360.model.Patient_Info_Model;
+import com.wapss.digo360.response.Patient_Check_Response;
+import com.wapss.digo360.response.Patient_Count_Response;
+import com.wapss.digo360.utility.EncryptionUtils;
 
 import java.util.List;
 
 public class Patient_Details_Adapter extends RecyclerView.Adapter<Patient_Details_Adapter.ViewHolder> {
 
-    public List<Patient_Info_Model> patient_models;
+    public static List<Patient_Check_Response.Result> checkList;
     Context context;
+    ExsitingpatientsResponse onItemClickedItem;
 
-    public Patient_Details_Adapter(List<Patient_Info_Model> patient_models, Context context) {
-        this.patient_models = patient_models;
+    public Patient_Details_Adapter(Context context, List<Patient_Check_Response.Result> checkList,ExsitingpatientsResponse onItemClickedItem) {
+        this.checkList = checkList;
         this.context = context;
+        this.onItemClickedItem = onItemClickedItem;
     }
 
     @NonNull
@@ -39,24 +45,20 @@ public class Patient_Details_Adapter extends RecyclerView.Adapter<Patient_Detail
 
     @Override
     public void onBindViewHolder(@NonNull Patient_Details_Adapter.ViewHolder holder, int position) {
-        Patient_Info_Model pModel = patient_models.get(position);
-        holder.pt_name.setText(pModel.getName());
-        holder.pt_gender.setText(pModel.getGender());
-        holder.item_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("P_ID", pModel.getId());
-                Intent i = new Intent(context, Patient_Details.class);
-                i.putExtras(bundle);
-                context.startActivity(i);
-            }
-        });
+        holder.pt_gender.setText(checkList.get(position).getGender());
+        String ACC_Id = checkList.get(position).getAccount().getId();
+        try {
+            String decrypttext = EncryptionUtils.decrypt(checkList.get(position).getName(), ACC_Id);
+            holder.pt_name.setText(decrypttext);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return patient_models.size();
+        if (checkList == null) return 0;
+        return checkList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +69,13 @@ public class Patient_Details_Adapter extends RecyclerView.Adapter<Patient_Detail
             pt_gender = itemView.findViewById(R.id.pt_gender);
             pt_name = itemView.findViewById(R.id.pt_name);
             item_layout = itemView.findViewById(R.id.item_layout);
+
+            item_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickedItem.onItemClickedItem(checkList.get(getAdapterPosition()), getAdapterPosition());
+                }
+            });
         }
     }
 }

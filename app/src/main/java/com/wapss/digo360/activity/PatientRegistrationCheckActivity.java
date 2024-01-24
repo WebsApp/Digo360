@@ -140,7 +140,11 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }else {
-                        startActivity(new Intent(PatientRegistrationCheckActivity.this, PreviousCases.class));
+                        Bundle bundle = new Bundle();
+                        bundle.putString("p_number",keyword);
+                        Intent intent = new Intent(PatientRegistrationCheckActivity.this,PreviousCases.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     }
                 }else {
                     progressDialog.dismiss();

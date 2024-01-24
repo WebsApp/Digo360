@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,12 +43,14 @@ public class Patient_Details extends AppCompatActivity {
     PatientsDetailsViewAdapter questionAdapter;
     List<PatientsDetailsViewResponse.Result> responsess;
     FloatingActionButton fb_check_problem;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
         rv_patientsDetails = findViewById(R.id.rv_patientsDetails);
+        back = findViewById(R.id.back);
         fb_check_problem = findViewById(R.id.fb_check_problem);
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -63,9 +66,14 @@ public class Patient_Details extends AppCompatActivity {
         if (bundle != null) {
             P_ID = bundle.getString("P_ID");
         }
-
         callApI(P_ID);
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         fb_check_problem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +81,7 @@ public class Patient_Details extends AppCompatActivity {
                 bundle.putString("P_ID",P_ID);
                 Intent intent = new Intent(Patient_Details.this,PatientsProblemActivity.class);
                 intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

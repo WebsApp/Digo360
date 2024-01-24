@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Patient_Check_Response {
-
     @SerializedName("result")
     @Expose
     private List<Result> result;
@@ -31,7 +30,6 @@ public class Patient_Check_Response {
     }
 
     public class Result {
-
         @SerializedName("id")
         @Expose
         private String id;
