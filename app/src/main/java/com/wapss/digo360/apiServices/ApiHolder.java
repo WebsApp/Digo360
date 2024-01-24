@@ -126,7 +126,7 @@ public interface ApiHolder {
     @POST("search-history")
     @FormUrlEncoded
     Call<MostSearchClickResponse> MostSearchclick(@Header("Authorization") String Token,
-                                                  @Field("payload") String payload);
+                                                  @Field("diseaseId") String payload);
 
     @POST("patient-details")
     @FormUrlEncoded

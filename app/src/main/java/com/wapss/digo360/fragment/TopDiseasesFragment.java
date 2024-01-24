@@ -126,7 +126,7 @@ public class TopDiseasesFragment extends Fragment {
     private void callTopSearch() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( Token,50, 0);
+        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( Token,5, 0);
         banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
             @Override
             public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
@@ -149,7 +149,7 @@ public class TopDiseasesFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5);
                     rv_top_search.setLayoutManager(layoutManager);
                     rv_top_search.setAdapter(topDiseaseAdapter2);
                 } else {
@@ -250,7 +250,7 @@ public class TopDiseasesFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
-                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+                    GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
                     rv_disease.setLayoutManager(layoutManager);
                     rv_disease.setAdapter(topDiseaseAdapeter3);
                 } else {
