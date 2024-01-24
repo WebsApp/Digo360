@@ -385,8 +385,9 @@ public class HomeFragment extends Fragment {
                     others.setText(other);
                     male.setText(males);
                     female.setText(females);
-//                    String total = males + females + other;
-//                    all.setText(total);
+                    int total = Integer.parseInt(males) + Integer.parseInt(females) + Integer.parseInt(other);
+                    String totals = String.valueOf(total);
+                    all.setText(totals);
                     callBanner(settingBanner);//Banner
                     callTopDiagnosis(sliderList);//Top Diagnosis
                     callMostSearchDisease(searchList);//most Search Disease
