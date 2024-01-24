@@ -179,22 +179,29 @@ public interface ApiHolder {
                                                           @Query("limit") int limit,
                                                           @Query("offset") int offset,
                                                           @Query("keyword") String keyword);
+
     @GET("patient-consultation")
     Call<Patient_Count_Response> PatientsCount(@Header("Authorization") String Token,
-                                                     @Query("limit") int limit,
-                                                     @Query("offset") int offset,
-                                                     @Query("gender") String gender);
-    @GET("patient-consultation")
-    Call<Patient_Count_Response> Patient_name_Search(@Header("Authorization") String Token,
-                                                    @Query("limit") int limit,
-                                                    @Query("offset") int offset,
-                                                     @Query("keyword") String keyword);
-    @GET("patient-consultation")
-    Call<Patient_Count_Response> Patient_date_Search(@Header("Authorization") String Token,
-                                                     @Query("limit") int limit,
-                                                     @Query("offset") int offset,
-                                                     @Query("fromDate") String fromDate,
-                                                     @Query("toDate") String toDate);
+                                               @Query("limit") int limit,
+                                               @Query("offset") int offset,
+                                               @Query("gender") String gender,
+                                               @Query("keyword") String keyword,
+                                               @Query("fromDate") String fromDate,
+                                               @Query("toDate") String toDate);
+
+//    @GET("patient-consultation")
+//    Call<Patient_Count_Response> Patient_name_Search(@Header("Authorization") String Token,
+//                                                     @Query("limit") int limit,
+//                                                     @Query("offset") int offset,
+//                                                     @Query("keyword") String keyword);
+//
+//    @GET("patient-consultation")
+//    Call<Patient_Count_Response> Patient_date_Search(@Header("Authorization") String Token,
+//                                                     @Query("limit") int limit,
+//                                                     @Query("offset") int offset,
+//                                                     @Query("fromDate") String fromDate,
+//                                                     @Query("toDate") String toDate);
+
     @GET("doctor-detail/college")
     Call<Collage_Response> collage_res(@Header("Authorization") String Token,
                                        @Field("collegeName") String collegeName,

@@ -172,13 +172,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rv_reports"
                 android:scrollbars="none"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
         </RelativeLayout>
 
     </ScrollView>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/blank_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
