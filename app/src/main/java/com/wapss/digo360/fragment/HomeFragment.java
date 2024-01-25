@@ -409,7 +409,10 @@ public class HomeFragment extends Fragment {
                     sliderList = response.body().getResult().getSlider();
                     searchList = response.body().getSearch();
                     String banner1 = response.body().getResult().getBanner1();
-                    iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
+                    Picasso.with(getContext())
+                            .load(banner1)
+                            .into(iv_banner1);
+                    //iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
                     //summary
                     //if (response.body().getSummary().getMaleCount()!=null) {
                     String males = response.body().getSummary().getMaleCount();

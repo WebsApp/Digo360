@@ -17,6 +17,10 @@ import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 import com.wapss.digo360.utility.EncryptionUtils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDetailsViewAdapter.ViewHolder>{
@@ -43,7 +47,18 @@ public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDet
     public void onBindViewHolder(@NonNull PatientsDetailsViewAdapter.ViewHolder holder, int position) {
         holder.pt_dob.setText(ItemList.get(position).getPatientDetail().getDob());
         holder.pt_gender.setText(ItemList.get(position).getPatientDetail().getGender());
-        holder.pt_date.setText(ItemList.get(position).getCreatedAt());
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        Date date9 = null;//You will get date object relative to server/client timezone wherever it is parsed
+        try {
+//            date = dateFormat.parse("2017-04-26T20:55:00.000Z");
+            date9 = dateFormat1.parse(ItemList.get(position).getCreatedAt());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        DateFormat formatter9 = new SimpleDateFormat("dd-MM-yyyy"); //If you need time just put specific format for time like 'HH:mm:ss'
+        String dateStr = formatter9.format(date9);
+
+        holder.pt_date.setText(dateStr);
 
         String Patient_Id = ItemList.get(position).getPatientDetail().getId();
         try {

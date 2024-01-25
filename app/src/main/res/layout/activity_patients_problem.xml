@@ -195,8 +195,8 @@
                         android:hint="Enter Temperature"
                         android:textSize="18dp"
                         android:textColor="@color/purple"
-                        android:maxLength="10"
-                        android:inputType="text"
+                        android:maxLength="3"
+                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"/>
 
@@ -401,7 +401,7 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/time_bg"
                         android:gravity="center"
-                        android:hint="Enter Sugar"
+                        android:hint="High"
                         android:inputType="number"
                         android:maxLength="3"
                         android:textSize="14dp" />
@@ -420,12 +420,13 @@
                     app:cardElevation="8dp">
 
                     <EditText
+                        android:id="@+id/et_sugar_low"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/time_bg"
                         android:gravity="center"
-                        android:hint="Enter Sugar"
+                        android:hint="Low"
                         android:inputType="number"
                         android:maxLength="3"
                         android:textSize="14dp" />
@@ -648,7 +649,6 @@
                     android:hint="Other Problem"
                     android:textSize="18dp"
                     android:textColor="@color/purple"
-                    android:maxLength="10"
                     android:layout_gravity="center"
                     android:gravity="start"
                     android:inputType="text"

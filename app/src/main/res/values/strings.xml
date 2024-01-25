@@ -75,7 +75,7 @@
     <string name="patient_registration">Patient Registration</string>
     <string name="check">Check</string>
     <string name="patients_checkup">Patients CheckUp</string>
-    <string name="top_header"><![CDATA[for Better Experience, Order tracking & Regular updates]]></string>
+    <string name="top_header">Please Enter Your Phone Number</string>
     <string name="privacy_policy">  Privacy Policy,</string>
     <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="verify_now">Verify Now</string>

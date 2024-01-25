@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     CustomProgressDialog progressDialog;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-
     String regex = "^[6-9][0-9]{9}$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

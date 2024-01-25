@@ -146,8 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/patient_age"
@@ -171,14 +170,93 @@
                     <EditText
                         android:id="@+id/pt_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:background="@null"
-                        android:hint="Enter Name"
+                        android:hint="Enter Patient Name"
                         android:inputType="textPersonName"
                         android:maxLength="20"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/_14ssp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Patient Phone Number"
+                        android:textColor="@color/purple"
+                        android:textColorHint="@color/purple"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/time_bg"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <EditText
+                        android:id="@+id/pt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@null"
+                        android:hint="Patient Phone Number"
+                        android:padding="5dp"
+                        android:editable="false"
+                        android:inputType="none"
+                        android:textColorHint="#E594F3"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/_14ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Patient Email(Optional)"
+                        android:textColor="@color/purple"
+                        android:textColorHint="@color/purple"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_phone_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/time_bg"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <EditText
+                        android:id="@+id/pt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@null"
+                        android:hint="Patient Email"
+                        android:padding="5dp"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#E594F3"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/_14ssp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,6 +365,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -326,53 +405,6 @@
                             android:textColor="@color/purple" />
 
                     </RadioGroup>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_phone_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:background="@drawable/time_bg"
-                    android:orientation="vertical"
-                    android:padding="5dp"
-                    android:visibility="gone">
-
-                    <EditText
-                        android:id="@+id/pt_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="Patient Phone Number"
-                        android:padding="5dp"
-                        android:editable="false"
-                        android:textColorHint="#E594F3"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/_14ssp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_phone_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/time_bg"
-                    android:orientation="vertical"
-                    android:padding="5dp"
-                    android:visibility="gone">
-
-                    <EditText
-                        android:id="@+id/pt_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/patient_email"
-                        android:padding="5dp"
-                        android:inputType="textEmailAddress"
-                        android:textColorHint="#E594F3"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/_14ssp" />
 
                 </LinearLayout>
 
@@ -472,11 +504,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:visibility="gone"
-                        android:layout_marginBottom="@dimen/_50sdp">
+                        android:layout_marginBottom="@dimen/_70sdp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:padding="5dp">
@@ -496,7 +528,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -518,7 +550,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -540,7 +572,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -562,7 +594,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_35sdp"
+                            android:layout_height="@dimen/_50sdp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:layout_marginTop="@dimen/_5sdp">

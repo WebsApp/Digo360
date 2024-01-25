@@ -36,18 +36,26 @@ import com.wapss.digo360.activity.LoginActivity;
 import com.wapss.digo360.activity.MyProfile;
 import com.wapss.digo360.activity.ReferPage;
 import com.wapss.digo360.activity.RegistrationActivity;
+import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.response.Profile_Response;
 
 import org.w3c.dom.Text;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Profile_Fragment extends Fragment {
 
     LinearLayout profile_layout,about_layout,version_layout,logout_layout,btn_language,btn_refer;
     LinearLayout ll_logOut;
     ImageView btn_faq;
-    TextView txt_profile;
+    TextView txt_profile,txt_degree;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String name;
+    String name,Token,deviceToken;
+    CustomProgressDialog progressDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +73,10 @@ public class Profile_Fragment extends Fragment {
 
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
-        name = loginPref.getString("DR_NAME", null);
-
+        deviceToken = loginPref.getString("deviceToken", null);
+        progressDialog = new CustomProgressDialog(getContext());
+        //name = loginPref.getString("DR_NAME", null);
+        txt_degree = profile.findViewById(R.id.txt_degree);
         txt_profile = profile.findViewById(R.id.txt_profile);
         btn_refer = profile.findViewById(R.id.btn_refer);
         btn_language = profile.findViewById(R.id.btn_language);
@@ -76,7 +86,8 @@ public class Profile_Fragment extends Fragment {
         profile_layout = profile.findViewById(R.id.profile_layout);
         about_layout = profile.findViewById(R.id.about_layout);
         ll_logOut = profile.findViewById(R.id.ll_logOut);
-        txt_profile.setText("Dr." +" "+ name);
+        get_profile();
+        //txt_profile.setText("Dr." +" "+ name);
 
         profile_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,5 +178,26 @@ public class Profile_Fragment extends Fragment {
             }
         });
         return profile;
+    }
+
+    private void get_profile() {
+        progressDialog.showProgressDialog();
+        Token = "Bearer " + deviceToken;
+        Call<Profile_Response> profile_apiCall = ApiService.apiHolders().get_profile(Token);
+        profile_apiCall.enqueue(new Callback<Profile_Response>() {
+            @Override
+            public void onResponse(Call<Profile_Response> call, Response<Profile_Response> response) {
+                if (response.isSuccessful()){
+                    progressDialog.hideProgressDialog();
+                    String Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
+                    txt_profile.setText(response.body().getTitle() +"." + " "+ response.body().getName());
+                    txt_degree.setText(Degree);
+                }
+            }
+            @Override
+            public void onFailure(Call<Profile_Response> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
     }
 }

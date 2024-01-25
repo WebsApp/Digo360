@@ -459,7 +459,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
-                    editor.putString("DR_NAME", response.body().getName());
+                    //editor.putString("DR_NAME", response.body().getName());
                     //specResponse = response.body().();
                     editor.putString("loginStatus", loginStatus);
                     editor.commit();

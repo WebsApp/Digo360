@@ -31,6 +31,7 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.fragment.TopDiseasesFragment;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
+import com.wapss.digo360.utility.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,13 +53,13 @@ public class NewCasectivity extends AppCompatActivity {
     TextView tv_submit;
     ImageView back, iv_date;
     EditText pt_name, pt_age, pt_DOB, pt_phone, pt_email, pt_full_Address, pt_State, pt_Area, pt_city, pt_pinCode;
-    String currentTime, dob = "", name, age = "";
+    String currentTime, dob = "", name;
     private Calendar calendar;
     Date dateNow = null;
     String ss, TOKEN, stateName, cityName, areaName, phoneNumber, email, address, pincode;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken, p_number;
+    String deviceToken, p_number,age;
     CustomProgressDialog progressDialog;
     String Age_and_DOB = "";
     String gender  ="";
@@ -87,13 +88,10 @@ public class NewCasectivity extends AppCompatActivity {
                 if (rb_doB.isChecked()) {
                     ll_Dob.setVisibility(View.VISIBLE);
                     ll_age.setVisibility(View.GONE);
-                    pt_age.setText("");
                     ss = "dob";
-                    age = "";
                 } else if (rb_age.isChecked()) {
                     ll_Dob.setVisibility(View.GONE);
                     ll_age.setVisibility(View.VISIBLE);
-                    pt_DOB.setText("");
                     ss = "age";
                     dob = "";
                 }
@@ -102,21 +100,6 @@ public class NewCasectivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if (pt_name.getText().toString().isEmpty()){
-                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Name", Toast.LENGTH_SHORT).show();
-                }
-                else if (ss.equals("dob")){
-                    if (pt_DOB.getText().toString().isEmpty()){
-                        Toast.makeText(NewCasectivity.this, "Please Enter DOB ", Toast.LENGTH_SHORT).show();
-                    }
-                }else if (ss.equals("age")){
-                    if (pt_age.getText().toString().isEmpty()){
-                        Toast.makeText(NewCasectivity.this, "Please Enter  Age", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    //patient_details();
-                }*/
                 String P_name = pt_name.getText().toString();
                 String P_DOB = pt_DOB.getText().toString();
                 String P_Age = pt_age.getText().toString();
@@ -184,7 +167,6 @@ public class NewCasectivity extends AppCompatActivity {
 //        rg_other = findViewById(R.id.rg_other);
 //        rb_yes_other = findViewById(R.id.rb_yes_other);
 //        rb_no_other = findViewById(R.id.rb_no_other);
-
         pt_phone.setText(p_number);//phoneNumber
         start_progress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,18 +204,17 @@ public class NewCasectivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                                 pt_DOB.setText(dateFormat1.format(calendar.getTime()));
                                 dob = dateFormat1.format(calendar.getTime());
-                                Toast.makeText(NewCasectivity.this, "" + dob, Toast.LENGTH_SHORT).show();
+                                int Age = DateUtils.calculateAge(dateFormat1.format(calendar.getTime()));
 
+                                if (Age != -1) {
+                                    pt_age.setText(String.valueOf(Age));
+                                } else {
+
+                                }
                             }
                         }, year, month, dayOfMonth);
                 try {
                     dateNow = formatter.parse(currentTime);
-//                    Date date_to = formatter.parse(orderCloseTime);
-//                    if (date_to.before(dateNow)) {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 2000);
-//                    } else {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 1000);
-//                    }
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -242,7 +223,7 @@ public class NewCasectivity extends AppCompatActivity {
             }
         });
         //phone number
-        rg_phone.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        /*rg_phone.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // Handle RadioButton selection changes here
@@ -254,7 +235,7 @@ public class NewCasectivity extends AppCompatActivity {
                     ll_phone_email.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
         //Address
         rg_address.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -292,6 +273,8 @@ public class NewCasectivity extends AppCompatActivity {
         email = pt_email.getText().toString();
         address = pt_full_Address.getText().toString();
         pincode = pt_pinCode.getText().toString();
+        age = pt_age.getText().toString();
+        dob = pt_DOB.getText().toString();
 
         Call<PatientDetails_Response> details_apiCall = ApiService.apiHolders().patient_details(TOKEN, name, dob, age, phoneNumber,
                 email, stateName, cityName, areaName, address, gender, pincode);

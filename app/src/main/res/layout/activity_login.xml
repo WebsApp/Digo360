@@ -91,9 +91,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_5sdp"
                     android:text="@string/top_header"
                     android:textColor="#CEA0E4"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="@font/epilogue"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="normal" />
@@ -115,7 +115,7 @@
                     <TextView
                         android:text="+91"
                         android:textSize="@dimen/_15ssp"
-                        android:textColor="@color/purple"
+                        android:textColor="#CEA0E4"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textStyle="bold"

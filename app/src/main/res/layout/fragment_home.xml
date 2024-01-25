@@ -115,7 +115,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="@dimen/_120sdp"
                     android:clipToPadding="false"
                     android:foregroundGravity="center"
                     android:overScrollMode="never" />
@@ -127,9 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/banner"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_summary"
                 android:orientation="vertical">
 
@@ -393,18 +391,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/ll_heading2"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_below="@+id/viewAll"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_square_corner"
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:scaleType="fitXY"
                     android:id="@+id/iv_banner1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -454,6 +450,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/viewAll"
@@ -511,9 +508,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_heading2"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_summary"
                 android:orientation="vertical">
 
@@ -1061,9 +1056,7 @@
                 android:id="@+id/viewAll5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_summary_white"
                 android:orientation="vertical">
 

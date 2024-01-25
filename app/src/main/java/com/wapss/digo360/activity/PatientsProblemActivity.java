@@ -38,7 +38,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
     RadioGroup rg_bp, rg_pulse, rg_sugar, rg_allergy, rg_surgery, rg_other;
     RadioButton rb_yes_bp, rb_no_bp, rb_yes_pulse, rb_no_pulse, rb_yes_sugar, rb_no_sugar, rb_yes_allergy, rb_no_allergy, rb_yes_surgery, rb_no_surgery, rb_yes_other, rb_no_other;
     String patientDetailId, bp_yes, btn_pulse;
-    EditText et_before_bp, et_after_bp, et_temp, et_pulse, et_weight, et_height, et_sugar, et_surgery, et_allergy, et_other_problem;
+    EditText et_before_bp,et_sugar_low, et_after_bp, et_temp, et_pulse, et_weight, et_height, et_sugar, et_surgery, et_allergy, et_other_problem;
     String TOKEN, bp, pulseRate, weight, height, temperature, sugar, allergy, surgery, other, diseaseId;
 
     SharedPreferences loginPref;
@@ -46,7 +46,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
     String deviceToken;
     CustomProgressDialog progressDialog;
 
-    String Bp;
+    String Bp, StrBp, strPulse,Sugar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -107,6 +107,7 @@ public class PatientsProblemActivity extends AppCompatActivity {
         rg_bp = findViewById(R.id.rg_bp);
         rg_pulse = findViewById(R.id.rg_pulse);
         rg_sugar = findViewById(R.id.rg_sugar);
+        et_sugar_low = findViewById(R.id.et_sugar_low);
         rg_allergy = findViewById(R.id.rg_allergy);
         rg_surgery = findViewById(R.id.rg_surgery);
         rg_other = findViewById(R.id.rg_other);
@@ -131,9 +132,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
                     bp_layout.setVisibility(View.VISIBLE);
                     bp = et_before_bp.getText().toString() + "/" + et_after_bp.getText().toString();
                     Bp = "Bp";
+                    StrBp = "Yes";
                 } else if (rb_no_bp.isChecked()) {
                     bp_layout.setVisibility(View.GONE);
                     bp = "";
+                    StrBp = "No";
                 }
             }
         });
@@ -143,9 +146,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
                 if (rb_yes_pulse.isChecked()) {
                     pulse_layout.setVisibility(View.VISIBLE);
                     pulseRate = et_pulse.getText().toString();
+                    strPulse = "Yes";
                 } else if (rb_no_pulse.isChecked()) {
                     pulse_layout.setVisibility(View.GONE);
                     pulseRate = "";
+                    strPulse = "No";
                 }
             }
         });
@@ -154,8 +159,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (rb_yes_sugar.isChecked()) {
                     sugar_layout.setVisibility(View.VISIBLE);
-                    sugar = et_sugar.getText().toString();
-                    String Sugar = "Sugar";
+                    sugar = et_sugar.getText().toString() + "/" + et_sugar_low.getText().toString();
+                    Sugar = "Sugar";
                 } else if (rb_no_sugar.isChecked()) {
                     sugar_layout.setVisibility(View.GONE);
                     sugar = "";
@@ -211,9 +216,9 @@ public class PatientsProblemActivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if (validation()) {
-                    //callAPI here
-                }*/
+//                if (validation()) {
+//                    //callAPI here
+//                }
                 consultattion_Api_call();
 
             }
@@ -230,25 +235,17 @@ public class PatientsProblemActivity extends AppCompatActivity {
         sugar = et_sugar.getText().toString();
         allergy = et_allergy.getText().toString();
         other = et_other_problem.getText().toString();
-       /* bp = "80/120";
-        pulseRate = "80";
-        weight = "60";
-        height = "5.5";
-        temperature = "99.34";
-        sugar = "120";
-        allergy = "100";
-        surgery = "No";
-        other = "No Problem";*/
         Call<Patient_Consultation_Response> consalt_apiCall = ApiService.apiHolders().consalt_details(TOKEN, bp, pulseRate, weight,
                 height, temperature, sugar, allergy, surgery, other, patientDetailId, diseaseId);
         consalt_apiCall.enqueue(new Callback<Patient_Consultation_Response>() {
             @Override
             public void onResponse(Call<Patient_Consultation_Response> call, Response<Patient_Consultation_Response> response) {
                 if (response.isSuccessful()) {
-                    Intent intent = new Intent(PatientsProblemActivity.this,AfterPatientRegistrationActivity.class);
+                    Intent intent = new Intent(PatientsProblemActivity.this, AfterPatientRegistrationActivity.class);
                     startActivity(intent);
                 }
             }
+
             @Override
             public void onFailure(Call<Patient_Consultation_Response> call, Throwable t) {
 
@@ -257,17 +254,76 @@ public class PatientsProblemActivity extends AppCompatActivity {
     }
 
     /*private boolean validation() {
-        if (Objects.equals(bp_yes, "Yes")) {
-            if (et_before_bp.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Please Enter Bp before Lunch", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            if (et_after_bp.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Please Enter Bp after Lunch", Toast.LENGTH_SHORT).show();
-                return false;
+        if (isRadioButtonSelected()) {
+            int selectedId = rg_bp.getCheckedRadioButtonId();
+            RadioButton selectedRadioButton = findViewById(selectedId);
+            String selectedOption = selectedRadioButton.getText().toString();
+            if (selectedOption.equals("Yes")){
+                if (et_before_bp.getText().toString().isEmpty()){
+                    Toast.makeText(this, "Please Enter Before Bp", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                else if (et_after_bp.getText().toString().isEmpty()) {
+                    Toast.makeText(this, "Please Enter After Bp", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             }
         }
+        else {
+            Toast.makeText(PatientsProblemActivity.this, "Please select an option", Toast.LENGTH_SHORT).show();
+        }
+        if (isPulseSelected()) {
+            int selectedId = rg_pulse.getCheckedRadioButtonId();
+            RadioButton selectedRadioButton = findViewById(selectedId);
+            String pulse = selectedRadioButton.getText().toString();
+            if (pulse.equals("Yes")){
+                if (et_pulse.getText().toString().isEmpty()){
+                    Toast.makeText(this, "Please Enter Pulse", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+        }
+        else {
+            Toast.makeText(PatientsProblemActivity.this, "Please ", Toast.LENGTH_SHORT).show();
+        }
+
+//        if (Objects.equals(StrBp, "Yes")) {
+//            if (et_before_bp.getText().toString().isEmpty()){
+//                Toast.makeText(this, "Please Enter Before Bp", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//            else if (et_after_bp.getText().toString().isEmpty()) {
+//                Toast.makeText(this, "Please Enter After Bp", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        }
+//        if (strPulse.equals("Yes")) {
+//            if (et_pulse.getText().toString().isEmpty()){
+//                Toast.makeText(this, "Please Enter Pulse Rate", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        }
+//        if (Objects.equals(Sugar, "Yes")) {
+//            if (et_sugar.getText().toString().isEmpty()){
+//                Toast.makeText(this, "Please Enter Low Suagr", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//            else if (et_sugar_low.getText().toString().isEmpty()) {
+//                Toast.makeText(this, "Please Enter High Sugar", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        }
+
 
         return true;
     }*/
+
+//    private boolean isRadioButtonSelected() {
+//        // Check if at least one radio button is selected
+//        return rg_bp.getCheckedRadioButtonId() != -1;
+//    }
+//    private boolean isPulseSelected() {
+//        // Check if at least one radio button is selected
+//        return rg_pulse.getCheckedRadioButtonId() != -1;
+//    }
 }
