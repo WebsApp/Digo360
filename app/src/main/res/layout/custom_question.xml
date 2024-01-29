@@ -30,7 +30,7 @@
             android:padding="@dimen/_5sdp"
             android:text="Fruits"
             android:textColor="@color/purple"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_12sdp" />
 
     </LinearLayout>
 

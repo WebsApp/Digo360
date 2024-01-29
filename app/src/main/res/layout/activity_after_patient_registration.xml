@@ -256,6 +256,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/bg_square_corner"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -296,6 +297,7 @@
                     android:textStyle="normal" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

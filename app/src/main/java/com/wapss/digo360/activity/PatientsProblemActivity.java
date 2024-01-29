@@ -216,15 +216,14 @@ public class PatientsProblemActivity extends AppCompatActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (validation()) {
-//                    //callAPI here
-//                }
+                if (validation()) {
+                    //callAPI here
+                }
                 consultattion_Api_call();
 
             }
         });
     }
-
     private void consultattion_Api_call() {
         TOKEN = "Bearer " + deviceToken;
         bp = et_before_bp.getText().toString() + "/" + et_after_bp.getText().toString();
@@ -253,8 +252,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
         });
     }
 
-    /*private boolean validation() {
-        if (isRadioButtonSelected()) {
+    private boolean validation() {
+       /* if (isRadioButtonSelected()) {
             int selectedId = rg_bp.getCheckedRadioButtonId();
             RadioButton selectedRadioButton = findViewById(selectedId);
             String selectedOption = selectedRadioButton.getText().toString();
@@ -285,38 +284,38 @@ public class PatientsProblemActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(PatientsProblemActivity.this, "Please ", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
-//        if (Objects.equals(StrBp, "Yes")) {
-//            if (et_before_bp.getText().toString().isEmpty()){
-//                Toast.makeText(this, "Please Enter Before Bp", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//            else if (et_after_bp.getText().toString().isEmpty()) {
-//                Toast.makeText(this, "Please Enter After Bp", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
-//        if (strPulse.equals("Yes")) {
-//            if (et_pulse.getText().toString().isEmpty()){
-//                Toast.makeText(this, "Please Enter Pulse Rate", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
-//        if (Objects.equals(Sugar, "Yes")) {
-//            if (et_sugar.getText().toString().isEmpty()){
-//                Toast.makeText(this, "Please Enter Low Suagr", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//            else if (et_sugar_low.getText().toString().isEmpty()) {
-//                Toast.makeText(this, "Please Enter High Sugar", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        }
+        if (Objects.equals(StrBp, "Yes")) {
+            if (et_before_bp.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please Enter Before Bp", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else if (et_after_bp.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please Enter After Bp", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (strPulse.equals("Yes")) {
+            if (et_pulse.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please Enter Pulse Rate", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (Objects.equals(Sugar, "Yes")) {
+            if (et_sugar.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please Enter Low Suagr", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else if (et_sugar_low.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please Enter High Sugar", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
 
 
         return true;
-    }*/
+    }
 
 //    private boolean isRadioButtonSelected() {
 //        // Check if at least one radio button is selected

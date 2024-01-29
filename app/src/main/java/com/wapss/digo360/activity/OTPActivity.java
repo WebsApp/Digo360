@@ -80,7 +80,6 @@ public class OTPActivity extends AppCompatActivity {
 
         tv_phone.setText("We have sent an OTP to " + " +91-"  + phone + " " + "Please wait for 2 min Before resend Attempt .");
         YourOtp.setText("Your OTP is 7832");
-
         tv_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +105,11 @@ public class OTPActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CountDown();
+                otp1.getText().clear();
+                otp2.getText().clear();
+                otp3.getText().clear();
+                otp4.getText().clear();
+                otp1.requestFocus();
                 count_time.setVisibility(View.VISIBLE);
             }
         });
@@ -210,15 +214,13 @@ public class OTPActivity extends AppCompatActivity {
             }
         },2000);
     }
-
     private void otp_move() {
         otp1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                otp1.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp1.setBackgroundDrawable(getResources().getDrawable(R.drawable.otp_bg));
                 otp1.setTextColor(getResources().getColor(R.color.white));
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -239,7 +241,7 @@ public class OTPActivity extends AppCompatActivity {
         otp2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                otp2.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp2.setBackgroundDrawable(getResources().getDrawable(R.drawable.otp_bg));
                 otp2.setTextColor(getResources().getColor(R.color.white));
 
             }
@@ -266,7 +268,7 @@ public class OTPActivity extends AppCompatActivity {
         otp3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                otp3.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp3.setBackgroundDrawable(getResources().getDrawable(R.drawable.otp_bg));
                 otp3.setTextColor(getResources().getColor(R.color.white));
             }
 
@@ -292,7 +294,7 @@ public class OTPActivity extends AppCompatActivity {
         otp4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                otp4.setBackgroundDrawable(getResources().getDrawable(R.drawable.ripple_bg));
+                otp4.setBackgroundDrawable(getResources().getDrawable(R.drawable.otp_bg));
                 otp4.setTextColor(getResources().getColor(R.color.white));
             }
 

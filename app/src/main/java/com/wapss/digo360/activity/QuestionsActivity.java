@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.wapss.digo360.R;
 import com.wapss.digo360.adapter.QuestionAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter2;
@@ -50,7 +51,7 @@ public class QuestionsActivity extends AppCompatActivity {
     TextView tv_question;
     private int questionCount = 0;
     TextView tv_count;
-    ImageView iv_noQuestion;
+    LottieAnimationView iv_noQuestion;
     LinearLayout question;
     int quest;
     TextView txt_submit, tv_skip;
