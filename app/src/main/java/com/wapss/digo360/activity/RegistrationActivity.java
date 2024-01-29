@@ -220,19 +220,11 @@ public class RegistrationActivity extends AppCompatActivity {
                                 et_DOB.setText(dateFormat1.format(calendar.getTime()));
                                 dob = dateFormat1.format(calendar.getTime());
                             }
-                        }, year, month, dayOfMonth);
-                try {
-                    dateNow = formatter.parse(currentTime);
-//                    Date date_to = formatter.parse(orderCloseTime);
-//                    if (date_to.before(dateNow)) {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 2000);
-//                    } else {
-//                        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis() + 24 * 60 * 60 * 1000);
-//                    }
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
-                datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                        }, year-20, month, dayOfMonth);
+                calendar.set(year-20,month,dayOfMonth);
+                long value=calendar.getTimeInMillis();
+
+                datePickerDialog.getDatePicker().setMaxDate(value);
                 datePickerDialog.show();
             }
         });
