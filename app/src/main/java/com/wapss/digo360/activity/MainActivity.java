@@ -6,8 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -17,6 +25,7 @@ import com.wapss.digo360.fragment.FAQ_Fragment;
 import com.wapss.digo360.fragment.HomeFragment;
 import com.wapss.digo360.fragment.Profile_Fragment;
 import com.wapss.digo360.fragment.TopDiseasesFragment;
+import com.wapss.digo360.utility.Internet_Check;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -26,12 +35,38 @@ public class MainActivity extends AppCompatActivity  {
     //BottomNavigationView bottomNavigationView;
     private MeowBottomNavigation nav_view;
     String page;
+    private Dialog noInternetDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 //        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        /*network Connection Check*/
+        if(!Internet_Check.isInternetAvailable(MainActivity.this)) {
+            noInternetDialog = new Dialog(this);
+            noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            noInternetDialog.setContentView(R.layout.no_internet_layout);
+            noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            noInternetDialog.setCancelable(false);
+
+            TextView retryButton = noInternetDialog.findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Internet_Check.isInternetAvailable(MainActivity.this)) {
+                        noInternetDialog.dismiss();
+                    }
+                }
+            });
+            noInternetDialog.show();
+            noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+
+        }
         nav_view = findViewById(R.id.nav_view);
         nav_view.add(new MeowBottomNavigation.Model(1, R.drawable.baseline_home_24));
         nav_view.add(new MeowBottomNavigation.Model(2, R.drawable.baseline_person_search_24));

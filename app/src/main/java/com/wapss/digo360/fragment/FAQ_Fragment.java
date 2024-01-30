@@ -1,8 +1,11 @@
 package com.wapss.digo360.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -17,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
@@ -27,6 +31,7 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.model.Help_Model;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.HelpResponse;
+import com.wapss.digo360.utility.Internet_Check;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +51,7 @@ public class FAQ_Fragment extends Fragment {
     String Token;
     List<Help_Model> faq_list = new ArrayList<>();
     RecyclerView rv_faq;
+    private Dialog noInternetDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,12 +68,37 @@ public class FAQ_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View faq = inflater.inflate(R.layout.fragment_f_a_q_, container, false);
+        if(!Internet_Check.isInternetAvailable(getContext())) {
+            noInternetDialog = new Dialog(getContext());
+            noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            noInternetDialog.setContentView(R.layout.no_internet_layout);
+            noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            noInternetDialog.setCancelable(false);
+
+            TextView retryButton = noInternetDialog.findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Internet_Check.isInternetAvailable(getContext())) {
+                        noInternetDialog.dismiss();
+                    }
+                }
+            });
+            noInternetDialog.show();
+            noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+
+        }
         progressDialog = new CustomProgressDialog(getContext());
         ll_faq = faq.findViewById(R.id.ll_faq);
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
+        /*network Connection Check*/
 
         rv_faq  = faq.findViewById(R.id.rv_faq);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

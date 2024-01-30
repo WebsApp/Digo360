@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
+import com.wapss.digo360.adapter.Designation_Adapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.AreaResponse;
@@ -229,9 +230,8 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
         /*EXP level choose*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_designation.setAdapter(adapter);
+        Designation_Adapter designationAdapter = new Designation_Adapter(this, R.layout.custom_spinner, items);
+        sp_designation.setAdapter(designationAdapter);
         sp_designation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -239,7 +239,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 } else {
                     strSpec = items.get(i);
-
                     if (strSpec.equals("EXPERIENCE")) {
                         cv_degree.setVisibility(View.VISIBLE);
                         cv_specialization.setVisibility(View.VISIBLE);
@@ -248,7 +247,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         experienceLevel = "EXPERIENCE";
                         et_desig.setText(strSpec);
                         callDegreeAPI();
-                    } else if (strSpec.equals("INTERN")) {
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("INTERN")) {
                         cv_degree.setVisibility(View.VISIBLE);
                         cv_specialization.setVisibility(View.GONE);
                         cv_study_year.setVisibility(View.GONE);
@@ -257,7 +258,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         et_desig.setText(strSpec);
                         specialization_Id = null;
                         callDegreeAPI();
-                    } else if (strSpec.equals("STUDENT")) {
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("STUDENT")) {
                         cv_degree.setVisibility(View.VISIBLE);
                         cv_study_year.setVisibility(View.VISIBLE);
                         cv_specialization.setVisibility(View.GONE);
@@ -266,6 +269,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         et_desig.setText(strSpec);
                         stryear = "STUDENT";
                         callDegreeAPI();
+                        stringDigreeArrayList.clear();
                     }
                 }
             }
@@ -275,6 +279,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+
+
+
         /*Study Year*/
         ArrayAdapter<String> study_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, study_year_list);
         study_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -385,58 +392,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 else {
                     callRegistrationAPI();
                 }
-/*                if (et_name.getText().toString().trim().isEmpty()) {
-                    et_name.setError("Please Enter Name");
-                    et_name.requestFocus();
-                }
-                else if (et_DOB.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please Select DOB", Toast.LENGTH_SHORT).show();;
-                }
-                else if (et_email.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please Enter Your Mail", Toast.LENGTH_SHORT).show();
-                }
-                else if (!email.matches(emailPattern)) {
-                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(RegistrationActivity.this);
-                    LayoutInflater inflater1 = getLayoutInflater();
-                    View dialogView1 = inflater1.inflate(R.layout.invalid_mail_layout, null);
-                    builder1.setCancelable(false);
-                    builder1.setView(dialogView1);
-                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                    alertDialog1.show();
-                    alertDialog1.setCanceledOnTouchOutside(false);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            alertDialog1.dismiss();
-                        }
-                    }, 2000);
-                }
-//                else if (!experienceLevel.equals("Select Your Designation") && experienceLevel.isEmpty()) {
-//                    Toast.makeText(RegistrationActivity.this, "Please Select Your Suitable Designation", Toast.LENGTH_SHORT).show();
-//                }
-                else if (degreeId.isEmpty()) {
-                    Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
-                }
-                else if (Objects.equals(experienceLevel, "EXPERIENCE")) {
-                    if (specializationId.isEmpty()) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Suitable Specialization", Toast.LENGTH_SHORT).show();
-                    }
-//                    else if (Objects.equals(experienceLevel, "STUDENT")) {
-//                        Toast.makeText(RegistrationActivity.this, "Please Select Your year", Toast.LENGTH_SHORT).show();
-//                    }
-                }
-//                else if (et_state.getText().toString().length() == 0) {
-//                    Toast.makeText(RegistrationActivity.this, "Please Select State", Toast.LENGTH_SHORT).show();
-//                } else if (et_city.getText().toString().isEmpty()) {
-//                    Toast.makeText(RegistrationActivity.this, "Please Select City", Toast.LENGTH_SHORT).show();
-//                } else if (et_area.getText().toString().isEmpty()) {
-//                    Toast.makeText(RegistrationActivity.this, "Please Select Area", Toast.LENGTH_SHORT).show();
-//                } else if (et_PinCode.getText().toString().isEmpty()) {
-//                    Toast.makeText(RegistrationActivity.this, "Please Enter PINCODE", Toast.LENGTH_SHORT).show();
-//                }
-                else {
-                    callRegistrationAPI();
-                }*/
             }
         });
     }
@@ -459,7 +414,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegistrationActivity.this, ChooseLanguageActivity.class);
                     startActivity(intent);
 
-                } else {
+                }
+                else {
                     progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }

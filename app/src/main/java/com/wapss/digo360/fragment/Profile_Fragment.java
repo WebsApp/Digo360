@@ -36,9 +36,11 @@ import com.wapss.digo360.activity.LoginActivity;
 import com.wapss.digo360.activity.MyProfile;
 import com.wapss.digo360.activity.ReferPage;
 import com.wapss.digo360.activity.RegistrationActivity;
+import com.wapss.digo360.activity.SearchPage;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.Profile_Response;
+import com.wapss.digo360.utility.Internet_Check;
 
 import org.w3c.dom.Text;
 
@@ -48,7 +50,8 @@ import retrofit2.Response;
 
 public class Profile_Fragment extends Fragment {
 
-    LinearLayout profile_layout,about_layout,version_layout,logout_layout,btn_language,btn_refer;
+    LinearLayout profile_layout,about_layout,version_layout,logout_layout,btn_language,btn_refer,permission_layout,
+            btn_manage_case,btn_storage,btn_Search,btn_Ai_question,btn_alart,btn_case_file;
     LinearLayout ll_logOut;
     ImageView btn_faq;
     TextView txt_profile,txt_degree;
@@ -56,6 +59,7 @@ public class Profile_Fragment extends Fragment {
     SharedPreferences.Editor editor;
     String name,Token,deviceToken;
     CustomProgressDialog progressDialog;
+    private Dialog noInternetDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +90,38 @@ public class Profile_Fragment extends Fragment {
         profile_layout = profile.findViewById(R.id.profile_layout);
         about_layout = profile.findViewById(R.id.about_layout);
         ll_logOut = profile.findViewById(R.id.ll_logOut);
+        permission_layout = profile.findViewById(R.id.permission_layout);
+        btn_manage_case = profile.findViewById(R.id.btn_manage_case);
+        btn_storage = profile.findViewById(R.id.btn_storage);
+        btn_Search = profile.findViewById(R.id.btn_Search);
+        btn_Ai_question = profile.findViewById(R.id.btn_Ai_question);
+        btn_alart = profile.findViewById(R.id.btn_alart);
+        btn_case_file = profile.findViewById(R.id.btn_case_file);
+        /*network Connection Check*/
+        if(!Internet_Check.isInternetAvailable(getContext())) {
+            noInternetDialog = new Dialog(getContext());
+            noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            noInternetDialog.setContentView(R.layout.no_internet_layout);
+            noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            noInternetDialog.setCancelable(false);
+
+            TextView retryButton = noInternetDialog.findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Internet_Check.isInternetAvailable(getContext())) {
+                        noInternetDialog.dismiss();
+                    }
+                }
+            });
+            noInternetDialog.show();
+            noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+
+        }
         get_profile();
         //txt_profile.setText("Dr." +" "+ name);
 
@@ -160,7 +196,7 @@ public class Profile_Fragment extends Fragment {
         btn_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
                 LayoutInflater inflater1 = getLayoutInflater();
                 View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
                 dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
@@ -174,9 +210,249 @@ public class Profile_Fragment extends Fragment {
                     public void run() {
                         alertDialog1.dismiss();
                     }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
                 }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
+        permission_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+        btn_manage_case.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+        btn_storage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+        btn_Search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                startActivity(new Intent(getContext(), SearchPage.class));
+            }
+        });
+        btn_Ai_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+        btn_alart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+        btn_case_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                LayoutInflater inflater1 = getLayoutInflater();
+                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
+                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
+                builder1.setCancelable(false);
+                builder1.setView(dialogView1);
+                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+                alertDialog1.setCanceledOnTouchOutside(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertDialog1.dismiss();
+                    }
+                }, 2000);*/
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+
         return profile;
     }
 

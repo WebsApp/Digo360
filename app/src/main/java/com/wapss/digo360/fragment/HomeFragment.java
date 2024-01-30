@@ -1,9 +1,12 @@
 package com.wapss.digo360.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -34,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import com.wapss.digo360.R;
 import com.wapss.digo360.activity.AboutDigo;
 import com.wapss.digo360.activity.HelpPage;
+import com.wapss.digo360.activity.MainActivity;
 import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.Pages;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
@@ -53,6 +57,7 @@ import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.utility.Internet_Check;
 
 import java.util.List;
 import java.util.Timer;
@@ -85,6 +90,7 @@ public class HomeFragment extends Fragment {
     RecyclerView rv_diagnosis, rv_top_diseases, rv_most_search_diseases;
     View home;
     HelpAdapter helpAdapter;
+    private Dialog noInternetDialog;
     LinearLayout ll_faq, ll_viewAllDisease;
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
@@ -145,6 +151,31 @@ public class HomeFragment extends Fragment {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
+        /*network Connection Check*/
+        if(!Internet_Check.isInternetAvailable(getContext())) {
+            noInternetDialog = new Dialog(getContext());
+            noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            noInternetDialog.setContentView(R.layout.no_internet_layout);
+            noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            noInternetDialog.setCancelable(false);
+
+            TextView retryButton = noInternetDialog.findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Internet_Check.isInternetAvailable(getContext())) {
+                        noInternetDialog.dismiss();
+                    }
+                }
+            });
+            noInternetDialog.show();
+            noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+
+        }
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

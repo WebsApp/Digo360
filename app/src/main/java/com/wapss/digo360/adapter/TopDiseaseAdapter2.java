@@ -33,7 +33,7 @@ public class TopDiseaseAdapter2 extends RecyclerView.Adapter<TopDiseaseAdapter2.
     @NonNull
     @Override
     public TopDiseaseAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.most_searched_layout, parent, false);
         TopDiseaseAdapter2.ViewHolder viewHolder = new TopDiseaseAdapter2.ViewHolder(view);
         return viewHolder;
     }

@@ -45,8 +45,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     String deviceToken;
     CustomProgressDialog progressDialog;
-
-    String Bp, StrBp, strPulse,Sugar;
+    String strPulse,SUGAR,ALLERGY,OTHER_P;
+    String Bp, StrBp,Sugar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -161,9 +161,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
                     sugar_layout.setVisibility(View.VISIBLE);
                     sugar = et_sugar.getText().toString() + "/" + et_sugar_low.getText().toString();
                     Sugar = "Sugar";
+                    SUGAR = "Yes";
                 } else if (rb_no_sugar.isChecked()) {
                     sugar_layout.setVisibility(View.GONE);
                     sugar = "";
+                    SUGAR = "No";
                 }
             }
         });
@@ -174,9 +176,11 @@ public class PatientsProblemActivity extends AppCompatActivity {
                     allergy_layout.setVisibility(View.VISIBLE);
                     allergy = et_allergy.getText().toString();
                     String Allergy = "Allergy";
+                    ALLERGY  = "Yes";
                 } else if (rb_no_allergy.isChecked()) {
                     allergy_layout.setVisibility(View.GONE);
                     allergy = "";
+                    ALLERGY = "No";
                 }
             }
         });
@@ -200,10 +204,12 @@ public class PatientsProblemActivity extends AppCompatActivity {
                     other_layout.setVisibility(View.VISIBLE);
                     other = et_other_problem.getText().toString();
                     String Other = "Other";
+                    OTHER_P = "Yes";
 
                 } else if (rb_no_other.isChecked()) {
                     other_layout.setVisibility(View.GONE);
                     other = "";
+                    OTHER_P = "No";
                 }
             }
         });
@@ -217,10 +223,8 @@ public class PatientsProblemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validation()) {
-                    //callAPI here
+                    consultattion_Api_call();
                 }
-                consultattion_Api_call();
-
             }
         });
     }
@@ -296,27 +300,38 @@ public class PatientsProblemActivity extends AppCompatActivity {
                 return false;
             }
         }
-        if (strPulse.equals("Yes")) {
+
+        if (Objects.equals(strPulse, "Yes")) {
             if (et_pulse.getText().toString().isEmpty()){
                 Toast.makeText(this, "Please Enter Pulse Rate", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
-        if (Objects.equals(Sugar, "Yes")) {
+        if (Objects.equals(SUGAR, "Yes")) {
             if (et_sugar.getText().toString().isEmpty()){
-                Toast.makeText(this, "Please Enter Low Suagr", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please Enter High Sugar", Toast.LENGTH_SHORT).show();
                 return false;
             }
             else if (et_sugar_low.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Please Enter High Sugar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please Enter Low Sugar", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (Objects.equals(ALLERGY, "Yes")) {
+            if (et_allergy.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please Enter Allergy", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (Objects.equals(OTHER_P, "Yes")) {
+            if (et_other_problem.getText().toString().isEmpty()){
+                Toast.makeText(this, "Please Enter Other Problem", Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
 
-
         return true;
     }
-
 //    private boolean isRadioButtonSelected() {
 //        // Check if at least one radio button is selected
 //        return rg_bp.getCheckedRadioButtonId() != -1;

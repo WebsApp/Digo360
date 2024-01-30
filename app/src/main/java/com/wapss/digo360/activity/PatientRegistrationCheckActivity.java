@@ -49,6 +49,9 @@ public class PatientRegistrationCheckActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE |
+                        WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE );
 
         et_phone = findViewById(R.id.et_phone);
         et_phone = findViewById(R.id.et_phone);

@@ -1,8 +1,11 @@
 package com.wapss.digo360.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,9 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wapss.digo360.R;
@@ -37,6 +43,7 @@ import com.wapss.digo360.interfaces.TopDiseaseListener2;
 import com.wapss.digo360.response.MostSearchClickResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.utility.Internet_Check;
 
 import java.util.List;
 
@@ -59,7 +66,8 @@ public class TopDiseasesFragment extends Fragment {
     SearchView sv_search;
     String cName;
     ImageView notification, help;
-    LinearLayout viewAll2;
+    LinearLayout viewAll2,blank_layout;
+    private Dialog noInternetDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,32 @@ public class TopDiseasesFragment extends Fragment {
         // Inflate the layout for this fragment
         View TopDis = inflater.inflate(R.layout.fragment_top_diseases, container, false);
 
+        /*network Connection Check*/
+        if(!Internet_Check.isInternetAvailable(getContext())) {
+            noInternetDialog = new Dialog(getContext());
+            noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            noInternetDialog.setContentView(R.layout.no_internet_layout);
+            noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            noInternetDialog.setCancelable(false);
+
+            TextView retryButton = noInternetDialog.findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Internet_Check.isInternetAvailable(getContext())) {
+                        noInternetDialog.dismiss();
+                    }
+                }
+            });
+            noInternetDialog.show();
+            noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+        else {
+
+        }
+        blank_layout = TopDis.findViewById(R.id.blank_layout);
         help = TopDis.findViewById(R.id.help);
         notification = TopDis.findViewById(R.id.notification);
         rv_disease = TopDis.findViewById(R.id.rv_disease);
@@ -176,6 +210,7 @@ public class TopDiseasesFragment extends Fragment {
             // Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();
             callDisease();
             callTopSearch(); //top Search
+            blank_layout.setVisibility(View.GONE);
         } else {
             callSearchDisease(newText);
         }
@@ -191,6 +226,7 @@ public class TopDiseasesFragment extends Fragment {
                 if (response.isSuccessful()) {
                     // progressDialog.dismiss();
                     assert response.body() != null;
+                    blank_layout.setVisibility(View.VISIBLE);
                     searchResponse = response.body().getResult();
 //                    if (searchResponse.size()>0)
 //                    {
@@ -214,6 +250,7 @@ public class TopDiseasesFragment extends Fragment {
                 } else {
                     progressDialog.dismiss();
                     //  ll_faq.setVisibility(View.VISIBLE);
+                    blank_layout.setVisibility(View.VISIBLE);
                     Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -223,6 +260,7 @@ public class TopDiseasesFragment extends Fragment {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                blank_layout.setVisibility(View.VISIBLE);
             }
         });
     }

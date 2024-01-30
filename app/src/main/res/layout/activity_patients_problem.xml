@@ -28,20 +28,20 @@
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_back_arrow" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="2dp"
-                    android:padding="5dp"
+                    android:padding="@dimen/_5sdp"
                     android:text="@string/patients_checkup"
                     android:textColor="@color/white"
-                    android:textSize="16dp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
 
@@ -98,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/no"
+                    android:checked="true"
                     android:textColor="@color/purple" />
 
             </RadioGroup>
@@ -308,6 +309,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/no"
+                    android:checked="true"
                     android:textColor="@color/purple" />
             </RadioGroup>
             <!--******-->
@@ -372,6 +374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/no"
+                    android:checked="true"
                     android:textColor="@color/purple" />
             </RadioGroup>
             <!--******-->
@@ -383,7 +386,7 @@
                 android:layout_below="@+id/tv_bp"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+               <!-- <androidx.cardview.widget.CardView
                     android:id="@+id/cv_sugarr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -401,9 +404,11 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@drawable/time_bg"
                         android:gravity="center"
-                        android:hint="High"
-                        android:inputType="number"
+                        android:hint="@string/high"
                         android:maxLength="3"
+                        android:inputType="number"
+                        android:textColor="@color/purple3"
+                        android:textColorHint="@color/purple3"
                         android:textSize="14dp" />
 
                 </androidx.cardview.widget.CardView>
@@ -431,7 +436,53 @@
                         android:maxLength="3"
                         android:textSize="14dp" />
 
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1.5"
+                    app:cardElevation="8dp">
+
+                    <EditText
+                        android:id="@+id/et_sugar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/time_bg"
+                        android:gravity="center"
+                        android:hint="Heigh"
+                        android:inputType="number"
+                        android:textColor="@color/purple3"
+                        android:textColorHint="@color/purple3"
+                        android:maxLength="3"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1.5"
+                    app:cardElevation="8dp">
+
+                    <EditText
+                        android:id="@+id/et_sugar_low"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/time_bg"
+                        android:gravity="center"
+                        android:hint="Low"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:textColor="@color/purple3"
+                        android:textColorHint="@color/purple3"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -470,6 +521,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/no"
+                    android:checked="true"
                     android:textColor="@color/purple" />
             </RadioGroup>
             <!--******-->
@@ -532,6 +584,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/no"
+                    android:checked="true"
                     android:textColor="@color/purple" />
             </RadioGroup>
             <!--******-->
@@ -599,6 +652,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:text="@string/no"
+                        android:checked="true"
                         android:textColor="@color/purple" />
                 </RadioGroup>
 

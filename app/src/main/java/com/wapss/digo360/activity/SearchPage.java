@@ -70,6 +70,7 @@ public class SearchPage extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 cName = newText;
                 searchSku(newText);
+
                 return false;
             }
         });
