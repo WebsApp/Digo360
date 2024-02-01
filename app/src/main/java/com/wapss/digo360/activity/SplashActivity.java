@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
@@ -17,10 +18,12 @@ import android.widget.ImageView;
 import com.wapss.digo360.R;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 
+import java.util.Locale;
+
 public class SplashActivity extends AppCompatActivity {
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String loginStatus;
+    String loginStatus,languageToLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         loginStatus = loginPref.getString("loginStatus", "");
+        languageToLoad = loginPref.getString("languageToLoad", "");
 //        startActivity(new Intent(SplashActivity.this, PatientsProblemActivity.class));
 //        finish();
        // progressDialog.showProgressDialog();
@@ -43,11 +47,21 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if (loginStatus.equals("true"))
                 {
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getResources().updateConfiguration(config,getResources().getDisplayMetrics());
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 }
                 else
                 {
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getResources().updateConfiguration(config,getResources().getDisplayMetrics());
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }
