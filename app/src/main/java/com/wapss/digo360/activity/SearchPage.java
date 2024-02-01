@@ -102,6 +102,10 @@ public class SearchPage extends AppCompatActivity {
                     searchResponse = response.body().getResult();
                     rv_disease.setVisibility(View.VISIBLE);
                     ll_search.setVisibility(View.GONE);
+                    int total = response.body().getTotal();
+                    if (total==0){
+                        ll_search.setVisibility(View.VISIBLE);
+                    }
 
                     topDiseaseAdapeter3 = new TopDiseaseAdapeter3(getApplicationContext(), searchResponse, new ListDiseaseListener() {
                         @Override
