@@ -26,6 +26,7 @@ import com.wapss.digo360.interfaces.AnswerListener;
 import com.wapss.digo360.interfaces.PatientsViewListener;
 import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.QuestionResponse;
+import com.wapss.digo360.utility.EncryptionUtils;
 
 import java.util.List;
 

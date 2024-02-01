@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,13 +22,17 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -63,14 +68,15 @@ public class MyProfile extends AppCompatActivity {
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
     String mCurrentPhotoPath = "", image;
     private final int MY_CAMERA_REQUEST_CODE = 101;
-    ImageView back,profile_faq;
-    ImageView address_edite,college_edite,btn_camera,btn_edite;
+    ImageView back,profile_faq,btn_camera;
+    ImageView address_edite,college_edite,btn_edite;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String deviceToken,Token;
     CustomProgressDialog progressDialog;
     TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
     String ex;
+    private Dialog noInternetDialog;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -107,6 +113,25 @@ public class MyProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MyProfile.this, AddressPage.class));
+            }
+        });
+        btn_edite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noInternetDialog = new Dialog(MyProfile.this);
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.language_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
         college_edite.setOnClickListener(new View.OnClickListener() {
@@ -164,9 +189,15 @@ public class MyProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        iv_profile.setOnClickListener(new View.OnClickListener() {
+//        iv_profile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (checkAndRequestPermission()) {
                     takePictureCamera();
                 }

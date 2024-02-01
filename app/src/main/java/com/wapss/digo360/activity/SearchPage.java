@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -47,7 +48,10 @@ public class SearchPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
         rv_disease = findViewById(R.id.rv_disease);
+
         sv_search = findViewById(R.id.sv_search);
+        sv_search.setQueryHint("Search Diseases Name here");
+
         ll_search = findViewById(R.id.ll_search);
         progressDialog = new CustomProgressDialog(this);
         //shared Pref
@@ -75,7 +79,6 @@ public class SearchPage extends AppCompatActivity {
             }
         });
     }
-
     private void searchSku(String newText) {
         if (newText.isEmpty()) {
            // Toast.makeText(getApplicationContext(), "Please Enter Diseases Name", Toast.LENGTH_SHORT).show();

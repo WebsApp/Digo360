@@ -59,8 +59,6 @@ public class PatientsDetailsViewAdapter extends RecyclerView.Adapter<PatientsDet
         String dateStr = formatter9.format(date9);
 
         holder.pt_date.setText(dateStr);
-
-        String Patient_Id = ItemList.get(position).getPatientDetail().getId();
         try {
             String decrypttext = EncryptionUtils.decrypt(ItemList.get(position).getPatientDetail().getName(), acc_id);
             holder.pt_name.setText(decrypttext);

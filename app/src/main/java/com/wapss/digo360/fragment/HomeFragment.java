@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
@@ -57,6 +58,7 @@ import com.wapss.digo360.response.BannerResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.utility.EncryptionUtils;
 import com.wapss.digo360.utility.Internet_Check;
 
 import java.util.List;
@@ -80,8 +82,8 @@ public class HomeFragment extends Fragment {
     List<HelpResponse.Result> helpResponse;
     List<TopDiseaseResponse.Result> topDiseaseResponse;
     private int currentPage = 0;
-    private final long DELAY_MS = 3000; // Delay in milliseconds before flipping to the next page
-    private final long PERIOD_MS = 3000; // Time period between each auto-flipping
+    private final long DELAY_MS = 5000; // Delay in milliseconds before flipping to the next page
+    private final long PERIOD_MS = 5000; // Time period between each auto-flipping
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String deviceToken, Token;
@@ -98,6 +100,9 @@ public class HomeFragment extends Fragment {
     LinearLayout  btn_reports,btn_all_reports,btn_male_reports,btn_female_reports,item1,item2,item3;
     int maless, femaless, otherss, totalss;
 
+    String males,females,other,totals;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +113,26 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         home = inflater.inflate(R.layout.fragment_home, container, false);
+        Window window = requireActivity().getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
+        swipeRefreshLayout = home.findViewById(R.id.swipeRefreshLayout);
+
+        // Set the color scheme for the loading indicator
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(() -> {
+                    swipeRefreshLayout.setRefreshing(false);
+                }, 2000); // Delay in milliseconds
+            }
+        });
+
         item1 = home.findViewById(R.id.btn_fever);
         item2 = home.findViewById(R.id.item2);
         item3 = home.findViewById(R.id.item3);
@@ -147,10 +172,6 @@ public class HomeFragment extends Fragment {
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
 
-        Window window = requireActivity().getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
         /*network Connection Check*/
         if(!Internet_Check.isInternetAvailable(getContext())) {
             noInternetDialog = new Dialog(getContext());
@@ -254,6 +275,21 @@ public class HomeFragment extends Fragment {
         });
         CallAPI();
         callTopDiseases();
+        // Set the color scheme for the loading indicator
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                CallAPI();
+                callTopDiseases();
+                new Handler().postDelayed(() -> {
+                    swipeRefreshLayout.setRefreshing(false);
+                }, 2000); // Delay in milliseconds
+            }
+        });
         return home;
     }
 
@@ -446,23 +482,29 @@ public class HomeFragment extends Fragment {
                     //iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
                     //summary
                     //if (response.body().getSummary().getMaleCount()!=null) {
-                    String males = response.body().getSummary().getMaleCount();
-                    String females = response.body().getSummary().getFemaleCount();
-                    String other = response.body().getSummary().getOtherCount();
-                    if (males != null) {
-                        male.setText(males);
-                        maless = Integer.parseInt(males);
-                    } else if (females != null) {
-                        female.setText(females);
-                        femaless = Integer.parseInt(females);
-                    } else if (other != null) {
-                        others.setText(other);
-                        otherss = +Integer.parseInt(other);
-                    }
+                    males = response.body().getSummary().getMaleCount();
+                    females = response.body().getSummary().getFemaleCount();
+                    other = response.body().getSummary().getOtherCount();
+                    male.setText(response.body().getSummary().getMaleCount());
+                    female.setText(response.body().getSummary().getFemaleCount());
+                    others.setText(response.body().getSummary().getOtherCount());
+
+                    maless = Integer.parseInt(response.body().getSummary().getMaleCount());
+                    femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
+                    otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
+//                    if (males != null) {
+//                        male.setText(response.body().getSummary().getMaleCount());
+//                        maless = Integer.parseInt(response.body().getSummary().getMaleCount());
+//                    } else if (females != null) {
+//                        female.setText(response.body().getSummary().getFemaleCount());
+//                        femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
+//                    } else if (other != null) {
+//                        others.setText(response.body().getSummary().getOtherCount());
+//                        otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
+//                    }
                     totalss = maless + femaless + otherss;
-                    String totals = String.valueOf(totalss);
+                    totals = String.valueOf(totalss);
                     all.setText(totals);
-                    //  }
                     callBanner(settingBanner);//Banner
                     callTopDiagnosis(sliderList);//Top Diagnosis
                     callMostSearchDisease(searchList);//most Search Disease

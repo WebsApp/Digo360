@@ -29,9 +29,9 @@
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="5dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_back_arrow"
                     android:visibility="visible" />
 
@@ -155,7 +155,7 @@
                         android:hint="@string/whats_your_patients_name"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -170,14 +170,14 @@
                     <EditText
                         android:id="@+id/pt_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:background="@null"
                         android:hint="Enter Patient Name"
                         android:inputType="textPersonName"
                         android:maxLength="20"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -192,7 +192,7 @@
                         android:hint="Patient Phone Number"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -208,7 +208,7 @@
                     <EditText
                         android:id="@+id/pt_phone"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:background="@null"
                         android:hint="Patient Phone Number"
                         android:padding="5dp"
@@ -216,7 +216,7 @@
                         android:inputType="none"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
                 </LinearLayout>
 
@@ -232,7 +232,7 @@
                         android:hint="Patient Email(Optional)"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -248,14 +248,14 @@
                     <EditText
                         android:id="@+id/pt_email"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:background="@null"
                         android:hint="Patient Email"
                         android:padding="5dp"
                         android:inputType="textEmailAddress"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
                 </LinearLayout>
 
@@ -271,7 +271,7 @@
                         android:hint="Age Of your Patient"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <RadioGroup
@@ -289,6 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/select_calender"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
 
                         <RadioButton
@@ -297,6 +298,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:text="@string/enter_year"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
                     </RadioGroup>
 
@@ -310,7 +312,7 @@
                     <LinearLayout
                         android:id="@+id/ll_Dob"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:background="@drawable/time_bg"
                         android:orientation="horizontal"
                         android:padding="5dp"
@@ -327,7 +329,7 @@
                             android:editable="false"
                             android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/_14ssp" />
+                            android:textSize="@dimen/_10ssp" />
 
                         <ImageView
                             android:id="@+id/iv_date"
@@ -420,7 +422,7 @@
                         android:hint="@string/select_gender"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <RadioGroup
@@ -436,22 +438,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/male"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
 
                         <RadioButton
                             android:id="@+id/rb_female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="@dimen/_15sdp"
                             android:text="@string/female"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
 
                         <RadioButton
                             android:id="@+id/rb_other"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="@dimen/_15sdp"
                             android:text="@string/other"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
 
                     </RadioGroup>
@@ -471,7 +476,7 @@
                         android:hint="@string/where_is_he_coming_from"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
                     <RadioGroup
@@ -487,6 +492,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/yes"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
 
                         <RadioButton
@@ -495,6 +501,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:text="@string/no"
+                            android:textSize="@dimen/_10ssp"
                             android:textColor="@color/purple" />
                     </RadioGroup>
 
@@ -508,7 +515,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:padding="5dp">
@@ -522,13 +529,13 @@
                                 android:padding="5dp"
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="@dimen/_10ssp"
                                 android:inputType="text"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -543,14 +550,14 @@
                                 android:padding="5dp"
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="@dimen/_10ssp"
                                 android:inputType="text"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -565,14 +572,14 @@
                                 android:padding="5dp"
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="@dimen/_10ssp"
                                 android:inputType="text"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
@@ -587,14 +594,14 @@
                                 android:padding="5dp"
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="@dimen/_10ssp"
                                 android:inputType="text"/>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50sdp"
+                            android:layout_height="@dimen/_30sdp"
                             android:background="@drawable/time_bg"
                             android:orientation="vertical"
                             android:layout_marginTop="@dimen/_5sdp">
@@ -608,7 +615,7 @@
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:textColorHint="#E594F3"
                                 android:textColor="@color/purple"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="@dimen/_10ssp"
                                 android:inputType="number"/>
 
                         </LinearLayout>
@@ -633,9 +640,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_50sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="7dp"
@@ -644,14 +651,14 @@
             <TextView
                 android:id="@+id/tv_submit"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:background="@color/purple"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/submit"
                 android:textColor="@color/yellow"
-                android:textSize="15dp"
+                android:textSize="@dimen/_13ssp"
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>

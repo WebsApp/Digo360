@@ -112,6 +112,7 @@ public class TopDiseasesFragment extends Fragment {
         rv_top_search = TopDis.findViewById(R.id.rv_top_search);
         viewAll2 = TopDis.findViewById(R.id.viewAll2);
         sv_search = TopDis.findViewById(R.id.sv_search);
+        sv_search.setQueryHint("Search Diseases Name here");
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);

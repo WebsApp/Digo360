@@ -16,11 +16,11 @@
         <ImageView
             android:id="@+id/back"
             android:layout_width="@dimen/_30sdp"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             android:layout_gravity="center"
-            android:padding="2dp"
-            android:layout_marginLeft="10dp" />
+            android:padding="@dimen/_2sdp"
+            android:layout_marginLeft="@dimen/_10sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,9 +103,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:background="@drawable/background"
                 android:orientation="vertical">
 
@@ -121,9 +121,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Personal Details"
+                        android:text="@string/personal_details"
                         android:textColor="#626262"
-                        android:textSize="16dp"
+                        android:textSize="@dimen/_13ssp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -135,19 +135,19 @@
 
                         <ImageView
                             android:id="@+id/btn_edite"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/pen"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="@dimen/_10sdp" />
 
                         <ImageView
                             android:id="@+id/btn_camera"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/camera"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="@dimen/_10sdp"/>
 
                     </LinearLayout>
 
@@ -167,7 +167,7 @@
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dr. Sangeeta Paul"
+                        android:text="@string/dr_name"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/_16sdp"
                         android:textStyle="bold" />
@@ -176,18 +176,18 @@
                         android:id="@+id/tv_degree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BHMS, MD {Medicine}"
+                        android:text="@string/dr_Spec"
                         android:textColor="@color/purple"
-                        android:textSize="12dp"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="normal" />
 
                     <TextView
                         android:id="@+id/tv_mobileNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+91 9763500291"
+                        android:text="@string/dr_number"
                         android:textColor="@color/purple"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_marginTop="10dp"
                         android:textStyle="bold" />
 
@@ -197,10 +197,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/background"
@@ -211,9 +211,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="support@webappssoft.com"
+                    android:text="@string/dr_mail"
                     android:textColor="#6A0E97"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_12ssp"
                     android:textStyle="normal" />
 
                 <LinearLayout
@@ -222,18 +222,18 @@
                     android:orientation="horizontal"
                     android:layout_gravity="center"
                     android:gravity="right"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="@dimen/_70sdp"
                         android:layout_height="wrap_content"
-                        android:text="Verify Now"
+                        android:text="@string/verify_mail"
                         android:textStyle="bold"
                         android:textColor="@color/purple"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:padding="5dp"
-                        android:textSize="10dp"
+                        android:padding="@dimen/_5sdp"
+                        android:textSize="@dimen/_8ssp"
                         android:background="@drawable/background"/>
 
                 </LinearLayout>
@@ -248,68 +248,68 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="5dp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/background"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Specialization"
+                        android:text="@string/specialization"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txt_spec"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Child Specialist"
+                        android:text="@string/spec_name"
                         android:textColor="#6A0E97"
-                        android:textSize="12dp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textStyle="normal" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="5dp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/background"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Designation "
+                        android:text="@string/designation"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
+                       android:gravity="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txt_Desig"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="General Physician "
+                        android:text="@string/general_physician"
                         android:textColor="#6A0E97"
-                        android:textSize="12dp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textStyle="normal" />
 
                 </LinearLayout>
@@ -320,45 +320,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="5dp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/background"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date Of Birth"
+                        android:text="@string/date_of_birth"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txt_Dob"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="22 Jan 1999"
+                        android:text="@string/dr_dob"
                         android:textColor="#6A0E97"
-                        android:textSize="12dp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textStyle="normal" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:padding="5dp"
@@ -369,23 +369,23 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Experience "
+                        android:text="@string/experience"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
+                        android:gravity="center"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/txt_exp_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0Years"
+                        android:text="@string/exp_years"
                         android:textColor="#6A0E97"
-                        android:textSize="12dp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textStyle="normal" />
 
                 </LinearLayout>
@@ -396,25 +396,25 @@
                 android:layout_width="match_parent"
                 android:layout_height='wrap_content'
                 android:orientation="vertical"
-                android:padding="5dp"
+                android:padding="@dimen/_5sdp"
                 android:background="@drawable/background"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="College &amp; Degree"
+                        android:text="@string/college_amp_degree"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_13ssp"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
@@ -427,11 +427,11 @@
 
                         <ImageView
                             android:id="@+id/college_edite"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/pen"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp" />
+                            android:layout_marginLeft="@dimen/_10sdp" />
 
                     </LinearLayout>
 
@@ -441,13 +441,13 @@
                     android:id="@+id/txt_college"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="N/A"
+                    android:text="@string/n_a"
                     android:textColor="#6A0E97"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10ssp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:textStyle="normal" />
 
             </LinearLayout>
@@ -456,26 +456,26 @@
                 android:layout_width="match_parent"
                 android:layout_height='wrap_content'
                 android:orientation="vertical"
-                android:padding="5dp"
+                android:padding="@dimen/_5sdp"
                 android:background="@drawable/background"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_20sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address"
+                        android:text="@string/dr_address"
                         android:textColor="#626262"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_13ssp"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
@@ -503,13 +503,13 @@
                     android:id="@+id/txt_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1st Floor jodhpur Gardens Near South City Mall Kolkata700035 India"
+                    android:text="@string/address_dr"
                     android:textColor="#6A0E97"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10ssp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:textStyle="normal" />
 
             </LinearLayout>

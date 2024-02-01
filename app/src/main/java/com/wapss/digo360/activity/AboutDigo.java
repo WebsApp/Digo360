@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.wapss.digo360.R;
 
@@ -31,6 +32,7 @@ public class AboutDigo extends AppCompatActivity {
         btn_about = findViewById(R.id.btn_about);
         btn_privacy = findViewById(R.id.btn_privacy);
         btn_agreement = findViewById(R.id.btn_agreement);
+        btn_data_share = findViewById(R.id.btn_data_share);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,18 @@ public class AboutDigo extends AppCompatActivity {
                 Intent i = new Intent(AboutDigo.this, Pages.class);
                 i.putExtras(bundle);
                 startActivity(i);
+            }
+        });
+        btn_data_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AboutDigo.this, "Data Sharing Policy Upload Pending", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_agreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AboutDigo.this, "User Data Agreement Upload Pending", Toast.LENGTH_SHORT).show();
             }
         });
     }

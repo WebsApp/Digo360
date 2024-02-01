@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Field;
 
-public class PatientsProblemActivity extends AppCompatActivity {
+public class    PatientsProblemActivity extends AppCompatActivity {
     TextView tv_submit;
     ImageView back;
     LinearLayout bp_layout, pulse_layout, sugar_layout, allergy_layout, surgery_layout, other_layout;

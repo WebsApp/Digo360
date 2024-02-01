@@ -19,4 +19,11 @@
         <item name="android:backgroundTint">@color/purple1</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Customize the hint color -->
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

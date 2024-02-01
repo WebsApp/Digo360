@@ -65,7 +65,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:hint="Search by User Name | Case"
-                        android:background="@drawable/search_bg"/>
+                        style="@style/SearchViewStyle"
+                        android:background="@drawable/search_test_bg"/>
 
                 </RelativeLayout>
 
@@ -125,8 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:gravity="center"
+            android:layout_margin="@dimen/_10sdp"
             android:text="Explore top searches or start your case-taking journey with us!"
             android:textColor="#7210A1"
             android:textSize="@dimen/_10ssp" />

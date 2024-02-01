@@ -221,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Your Prefferd Language is "
+                            android:text="Your Prefferd Language is English "
                             android:textColor="#626262"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
@@ -864,7 +864,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Manage Data &amp; Access Permission "
+                            android:text="Manage all the reminders"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />

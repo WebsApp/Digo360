@@ -39,7 +39,7 @@
                     android:padding="5dp"
                     android:text="@string/faq"
                     android:textColor="@color/white"
-                    android:textSize="16dp" />
+                    android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
 

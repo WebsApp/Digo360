@@ -137,12 +137,6 @@ public class Profile_Fragment extends Fragment {
                 startActivity(new Intent(getContext(), AboutDigo.class));
             }
         });
-        logout_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         btn_refer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +156,7 @@ public class Profile_Fragment extends Fragment {
         ll_logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
                 LayoutInflater inflater1 = getLayoutInflater();
                 View dialogView1 = inflater1.inflate(R.layout.logout_layout, null);
                 dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
@@ -190,27 +184,41 @@ public class Profile_Fragment extends Fragment {
                     public void onClick(View view) {
                         alertDialog1.dismiss();
                     }
+                });*/
+
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.logout_layout);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                noInternetDialog.show();
+                TextView et_yes = (TextView)noInternetDialog.findViewById(R.id.et_yes);
+                TextView et_cancel = (TextView)noInternetDialog.findViewById(R.id.et_cancel);
+                et_yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences preferences = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.clear();
+                        editor.apply();
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
                 });
+                et_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        noInternetDialog.dismiss();
+                    }
+                });
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
         });
         btn_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -230,21 +238,6 @@ public class Profile_Fragment extends Fragment {
         permission_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -264,21 +257,6 @@ public class Profile_Fragment extends Fragment {
         btn_manage_case.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -298,21 +276,6 @@ public class Profile_Fragment extends Fragment {
         btn_storage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -332,42 +295,12 @@ public class Profile_Fragment extends Fragment {
         btn_Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 startActivity(new Intent(getContext(), SearchPage.class));
             }
         });
         btn_Ai_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -387,21 +320,6 @@ public class Profile_Fragment extends Fragment {
         btn_alart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);
@@ -421,21 +339,6 @@ public class Profile_Fragment extends Fragment {
         btn_case_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(getContext());
-                LayoutInflater inflater1 = getLayoutInflater();
-                View dialogView1 = inflater1.inflate(R.layout.language_layout, null);
-                dialogView1.setBackgroundResource(R.drawable.rounded_dialog_background);
-                builder1.setCancelable(false);
-                builder1.setView(dialogView1);
-                final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                alertDialog1.show();
-                alertDialog1.setCanceledOnTouchOutside(false);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        alertDialog1.dismiss();
-                    }
-                }, 2000);*/
                 noInternetDialog = new Dialog(getContext());
                 noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 noInternetDialog.setContentView(R.layout.language_layout);

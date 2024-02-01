@@ -15,12 +15,12 @@
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             android:layout_gravity="center"
-            android:padding="2dp"
-            android:layout_marginLeft="10dp" />
+            android:padding="@dimen/_3sdp"
+            android:layout_marginLeft="@dimen/_10sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,12 +40,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="5dp"
-                    android:text="About Digo360"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/about_digo360"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:textSize="@dimen/_13ssp" />
 
             </LinearLayout>
 
@@ -58,11 +58,12 @@
                 android:gravity="right">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/question"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp" />
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginLeft="@dimen/_10sdp" />
 
             </LinearLayout>
 
@@ -74,10 +75,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:background="@drawable/background"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_below="@id/header">
 
         <LinearLayout
@@ -85,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:padding="@dimen/_5sdp">
 
             <LinearLayout
@@ -93,13 +94,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="@dimen/_10sdp">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    app:civ_border_color="@color/purple"
-                    app:civ_border_width="1dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/aboutdigo"/>
 
@@ -111,15 +110,15 @@
                 android:orientation="vertical"
                 android:layout_weight="1.5"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="About Digo360!"
+                    android:layout_margin="@dimen/_3sdp"
+                    android:text="@string/about_digo"
                     android:textColor="#6E6D6F"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_13ssp"
                     android:gravity="center"
                     android:textStyle="bold" />
 
@@ -148,10 +147,8 @@
                 android:layout_marginLeft="20dp">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    app:civ_border_color="@color/purple"
-                    app:civ_border_width="1dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/contract"/>
 
@@ -163,15 +160,15 @@
                 android:orientation="vertical"
                 android:layout_weight="1.5"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Privacy's Policy "
+                    android:layout_margin="@dimen/_3sdp"
+                    android:text="@string/privacy_s_policy"
                     android:textColor="#6E6D6F"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -251,10 +248,8 @@
                 android:layout_marginLeft="20dp">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    app:civ_border_color="@color/purple"
-                    app:civ_border_width="1dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/collaboration"/>
 
@@ -266,15 +261,15 @@
                 android:orientation="vertical"
                 android:layout_weight="1.5"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="@dimen/_3sdp"
                     android:text="Data Sharing Policy "
                     android:textColor="#6E6D6F"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -302,10 +297,8 @@
                 android:layout_marginLeft="20dp">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    app:civ_border_color="@color/purple"
-                    app:civ_border_width="1dp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/handshake"/>
 
@@ -317,15 +310,15 @@
                 android:orientation="vertical"
                 android:layout_weight="1.5"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp">
+                android:layout_marginLeft="@dimen/_10sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="@dimen/_3sdp"
                     android:text="User Data Agreement"
                     android:textColor="#6E6D6F"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold" />
 
             </LinearLayout>
