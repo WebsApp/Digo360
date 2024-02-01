@@ -195,7 +195,8 @@ public class HomeFragment extends Fragment {
             noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
         else {
-
+            CallAPI();
+            callTopDiseases();
         }
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
