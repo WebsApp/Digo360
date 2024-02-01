@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.app.NotificationManager;
@@ -41,6 +42,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_login,txt_tnc,txt_privacy_policy;
+    CardView btn_card;
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 123;
     String fb_token, deviceId, phone, phoneNum;
     EditText et_phone;
@@ -159,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initi() {
+        btn_card = findViewById(R.id.btn_card);
         txt_privacy_policy = findViewById(R.id.txt_privacy_policy);
         txt_tnc = findViewById(R.id.txt_tnc);
         tv_login = findViewById(R.id.tv_login);

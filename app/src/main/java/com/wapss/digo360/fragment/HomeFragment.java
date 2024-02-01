@@ -118,7 +118,6 @@ public class HomeFragment extends Fragment {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(requireActivity().getWindow().getContext(), R.color.purple));
         swipeRefreshLayout = home.findViewById(R.id.swipeRefreshLayout);
-
         // Set the color scheme for the loading indicator
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,

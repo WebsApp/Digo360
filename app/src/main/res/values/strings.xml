@@ -16,10 +16,10 @@
     <string name="verify_your_phone_number">Verify Your Phone Number</string>
     <string name="vfy">We have sent an OTP to +91 97XXX - XXXX. Please wait for 2 min before  attempt Next.</string>
     <string name="you_can_request_otp_after">You Can Request OTP after</string>
-    <string name="login">Login</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="terms">By Continuing I agree with the</string>
-    <string name="agree_amp_continue"><![CDATA[Agree & Continue]]></string>
+
+
+
+
     <string name="registration">Registration</string>
     <string name="salutation">Salutation</string>
     <string name="name_of_your">Name Of Doctor</string>
@@ -37,10 +37,8 @@
     <string name="ask_q">Ask Q</string>
     <string name="cases">Case</string>
     <string name="profile">Profile</string>
-    <string name="summary">Summary</string>
+
     <string name="view_all">View All</string>
-    <string name="top_diagnosis">Top Diagnosis</string>
-    <string name="top_diseases">Top diseases</string>
     <string name="notification">Notification</string>
     <string name="new_case">New Case</string>
     <string name="whats_your_patients_name">Whats your Patient Name ?</string>
@@ -64,9 +62,6 @@
     <string name="view_amp_scane"><![CDATA[View & Scan]]></string>
     <string name="faq">FAQ</string>
     <string name="select_gender">Select Gender</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="other">Other</string>
     <string name="logout">Are you sure you want to end this\n session ?</string>
     <string name="Confirm">Confirm</string>
     <string name="cancel">Cancel</string>
@@ -75,9 +70,8 @@
     <string name="patient_registration">Patient Registration</string>
     <string name="check">Check</string>
     <string name="patients_checkup">Patients CheckUp</string>
-    <string name="top_header">Please Enter Your Phone Number</string>
-    <string name="privacy_policy">  Privacy Policy,</string>
-    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+
+
     <string name="verify_now">Verify Now</string>
     <string name="otp">OTP</string>
     <string name="loding">We saw you are new to us.</string>
@@ -100,11 +94,10 @@
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
     <string name="select_area">Select Area</string>
-    <string name="number_hint">97XXXXXX44</string>
+
     <string name="name">name</string>
     <string name="previous_case">Previous Cases</string>
     <string name="previous_details">Previous Details</string>
-    <string name="top_diseases_search">Most Search Diseases</string>
     <string name="enter_age">Enter Age</string>
     <string name="enter_dob">Enter DOB</string>
     <string name="patient_email">Patient email</string>
@@ -145,6 +138,26 @@
     <string name="about_digo">About Digo360!</string>
     <string name="privacy_s_policy">Privacy\'s Policy</string>
     <string name="report">Report</string>
+    <!--Login Page-->
+    <string name="login">Login</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="top_header">Please Enter Your Phone Number</string>
+    <string name="agree_amp_continue"><![CDATA[Agree & Continue]]></string>
+    <string name="number_hint">97XXXXXX44</string>
+    <string name="terms">By Continuing I agree with the</string>
+    <string name="privacy_policy">  Privacy Policy,</string>
+    <string name="terms_amp_conditions"><![CDATA[Terms & Conditions]]></string>
+    <!--Home Fragment-->
+    <string name="search_case">Search by Diseases Name</string>
+    <string name="top_diseases">Top diseases</string>
+    <string name="top_diseases_search">Most Search Diseases</string>
+    <string name="summary">Summary</string>
+    <string name="top_diagnosis">Top Diagnosis</string>
+    <string name="all">All</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+
     <!--    <string name="title_one">If you have any SKILL you can EARN.\n Teaching,Sports, Hobby classes now you can build a successful career</string>-->
     <!--    <string name="title_two">Whether a working professional, struggle,unemployed or a student.you can earn by teaching, training online or offline</string>-->
     <!--    <string name="title_three">This App helps you Enhance your Earning, It\'s a free to use App, So keep it on your mobile</string>-->

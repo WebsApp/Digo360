@@ -63,7 +63,7 @@
                             android:textColor="@color/white"
                             android:textStyle="normal"
                             android:padding="@dimen/_5sdp"
-                            android:text=" Serch by User Name | Case"
+                            android:text="@string/search_case"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30sdp"/>
@@ -148,8 +148,8 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/top_diseases"
-                            android:textSize="@dimen/_13ssp"
                             android:textColor="@color/purple"
+                            android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -932,7 +932,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="All"
+                                            android:text="@string/all"
                                             android:layout_gravity="center"
                                             android:gravity="center"
                                             android:textColor="@color/white"
@@ -985,7 +985,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Male"
+                                            android:text="@string/male"
                                             android:layout_gravity="center"
                                             android:gravity="center"
                                             android:textColor="@color/white"

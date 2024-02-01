@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="@dimen/_170sdp"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_170sdp"
             android:scaleType="fitXY"
             android:src="@drawable/img2" />
 
