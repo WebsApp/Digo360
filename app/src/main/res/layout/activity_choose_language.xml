@@ -62,6 +62,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_english"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -76,26 +77,27 @@
                         android:padding="2dp">
 
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/bg_square"
                             android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:padding="10dp">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent">
 
                                 <RadioGroup
-                                    android:layout_marginStart="10dp"
-                                    android:gravity="center_vertical"
+                                    android:id="@+id/rg_english"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
+                                    android:gravity="center_vertical">
+
                                     <RadioButton
+                                        android:id="@+id/rb_english"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="true"
-                                        android:clickable="false"/>
+                                        android:layout_height="wrap_content" />
                                 </RadioGroup>
 
                             </LinearLayout>
@@ -105,42 +107,45 @@
                                 android:layout_height="match_parent">
 
                                 <LinearLayout
-                                    android:layout_marginStart="10dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
+
                                     <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_margin="5dp"
                                         android:text="English"
                                         android:textSize="18dp"
-                                        android:textStyle="bold"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:textStyle="bold" />
+
                                     <TextView
-                                        android:layout_marginStart="5dp"
-                                        android:text="English"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:text="English" />
                                 </LinearLayout>
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:gravity="end"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:gravity="end">
 
                                 <LinearLayout
-                                    android:layout_marginStart="10dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
+
                                     <ImageView
-                                        android:src="@drawable/languageicon"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/languageicon" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -157,7 +162,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/item1"
+                    android:id="@+id/cv_hindi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -171,67 +176,78 @@
                         android:background="@color/white"
                         android:orientation="vertical"
                         android:padding="2dp">
+
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/bg_square"
                             android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:padding="10dp">
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent">
+
                                 <RadioGroup
-                                    android:layout_marginStart="10dp"
-                                    android:gravity="center_vertical"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
-                                <RadioButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:clickable="false"/>
-                                </RadioGroup>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent">
-                                <LinearLayout
-                                    android:layout_marginStart="10dp"
+                                    android:id="@+id/rg_hindi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
+                                    android:gravity="center_vertical">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hindi"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
+
                                     <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_margin="5dp"
                                         android:text="हिंदी"
                                         android:textSize="18dp"
-                                        android:textStyle="bold"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:textStyle="bold" />
+
                                     <TextView
-                                        android:layout_marginStart="5dp"
-                                        android:text="Hindi"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:text="Hindi" />
                                 </LinearLayout>
                             </LinearLayout>
+
                             <LinearLayout
-                                android:gravity="end"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:gravity="end">
+
                                 <LinearLayout
-                                    android:layout_marginStart="10dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
-                                   <ImageView
-                                       android:src="@drawable/languageicon"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"/>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/languageicon" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-
 
 
                     </LinearLayout>
@@ -241,7 +257,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/item2"
@@ -258,67 +275,77 @@
                         android:background="@color/white"
                         android:orientation="vertical"
                         android:padding="2dp">
+
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/bg_square"
                             android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:padding="10dp"
-                            android:layout_height="wrap_content">
+                            android:padding="10dp">
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent">
+
                                 <RadioGroup
-                                    android:layout_marginStart="10dp"
-                                    android:gravity="center_vertical"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
+                                    android:gravity="center_vertical">
+
                                     <RadioButton
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"/>
+                                        android:clickable="false" />
                                 </RadioGroup>
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent">
+
                                 <LinearLayout
-                                    android:layout_marginStart="10dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
+
                                     <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:layout_margin="5dp"
                                         android:text="अंग्रेज़ी"
                                         android:textSize="18dp"
-                                        android:textStyle="bold"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:textStyle="bold" />
+
                                     <TextView
-                                        android:layout_marginStart="5dp"
-                                        android:text="English"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:text="English" />
                                 </LinearLayout>
                             </LinearLayout>
+
                             <LinearLayout
-                                android:gravity="end"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:gravity="end">
+
                                 <LinearLayout
-                                    android:layout_marginStart="10dp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
                                     android:gravity="center_vertical"
                                     android:orientation="vertical">
+
                                     <ImageView
-                                        android:src="@drawable/languageicon"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/languageicon" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-
 
 
                     </LinearLayout>

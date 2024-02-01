@@ -219,20 +219,22 @@ public class Profile_Fragment extends Fragment {
         btn_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noInternetDialog = new Dialog(getContext());
-                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                noInternetDialog.setContentView(R.layout.language_layout);
-                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                noInternetDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        noInternetDialog.dismiss();
-                    }
-                }, 2000);
-                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//                noInternetDialog = new Dialog(getContext());
+//                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                noInternetDialog.setContentView(R.layout.language_layout);
+//                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                noInternetDialog.show();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        noInternetDialog.dismiss();
+//                    }
+//                }, 2000);
+//                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+//                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                Intent intent = new Intent(getContext(),ChooseLanguageActivity.class);
+                startActivity(intent);
             }
         });
         permission_layout.setOnClickListener(new View.OnClickListener() {
