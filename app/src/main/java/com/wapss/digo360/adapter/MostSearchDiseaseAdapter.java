@@ -20,16 +20,18 @@ import com.wapss.digo360.response.SettingHomeResponse;
 
 import java.util.List;
 
-public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDiseaseAdapter.ViewHolder>{
+public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDiseaseAdapter.ViewHolder> {
     public static List<SettingHomeResponse.Search> ItemList;
     private Context context;
     MostSearchDiseaseListener listener;
     String name;
+
     public MostSearchDiseaseAdapter(Context context, List<SettingHomeResponse.Search> ItemList, MostSearchDiseaseListener listener) {
         this.ItemList = ItemList;
         this.context = context;
         this.listener = listener;
     }
+
     @NonNull
     @Override
     public MostSearchDiseaseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,15 +42,16 @@ public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDis
 
     @Override
     public void onBindViewHolder(@NonNull MostSearchDiseaseAdapter.ViewHolder holder, int position) {
-        name = ItemList.get(position).getDiseaseName();
-            holder.tv_disease.setText(ItemList.get(position).getDiseaseName());
-            if (ItemList.get(position).getDiseaseImage() == null) {
-                holder.iv_image.setBackgroundResource(R.drawable.ivicon);
-            } else {
-                Picasso.with(context)
-                        .load(ItemList.get(position).getDisease_mostSearchImage())
-                        .into(holder.iv_image);
-            }
+        name = ItemList.get(position).getName();
+        holder.tv_disease.setText(ItemList.get(position).getName());
+        holder.tv_disease.setVisibility(View.GONE);
+        if (ItemList.get(position).getDiseaseMostSearchImage() == null) {
+            holder.iv_image.setBackgroundResource(R.drawable.digologo);
+        } else {
+            Picasso.with(context)
+                    .load(ItemList.get(position).getDiseaseMostSearchImage())
+                    .into(holder.iv_image);
+        }
     }
 
     @Override
@@ -61,6 +64,7 @@ public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDis
         TextView tv_disease;
         ImageView iv_image;
         LinearLayout item;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_image = (ImageView) itemView.findViewById(R.id.iv_image2);

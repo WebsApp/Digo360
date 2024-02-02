@@ -225,56 +225,25 @@ public class SettingHomeResponse {
     }
 
     public class Search {
-
-        @SerializedName("disease_name")
-        @Expose
-        private String diseaseName;
-        @SerializedName("disease_image")
-        @Expose
-        private String diseaseImage;
         @SerializedName("disease_mostSearchImage")
         @Expose
-        private String disease_mostSearchImage;
-        @SerializedName("disease_imagePath")
-        @Expose
-        private String diseaseImagePath;
+        private String diseaseMostSearchImage;
         @SerializedName("diseaseId")
         @Expose
         private String diseaseId;
+        @SerializedName("name")
+        @Expose
+        private String name;
         @SerializedName("searchCount")
         @Expose
         private String searchCount;
 
-        public String getDisease_mostSearchImage() {
-            return disease_mostSearchImage;
+        public String getDiseaseMostSearchImage() {
+            return diseaseMostSearchImage;
         }
 
-        public void setDisease_mostSearchImage(String disease_mostSearchImage) {
-            this.disease_mostSearchImage = disease_mostSearchImage;
-        }
-
-        public String getDiseaseName() {
-            return diseaseName;
-        }
-
-        public void setDiseaseName(String diseaseName) {
-            this.diseaseName = diseaseName;
-        }
-
-        public String getDiseaseImage() {
-            return diseaseImage;
-        }
-
-        public void setDiseaseImage(String diseaseImage) {
-            this.diseaseImage = diseaseImage;
-        }
-
-        public String getDiseaseImagePath() {
-            return diseaseImagePath;
-        }
-
-        public void setDiseaseImagePath(String diseaseImagePath) {
-            this.diseaseImagePath = diseaseImagePath;
+        public void setDiseaseMostSearchImage(String diseaseMostSearchImage) {
+            this.diseaseMostSearchImage = diseaseMostSearchImage;
         }
 
         public String getDiseaseId() {
@@ -283,6 +252,14 @@ public class SettingHomeResponse {
 
         public void setDiseaseId(String diseaseId) {
             this.diseaseId = diseaseId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getSearchCount() {
