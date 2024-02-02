@@ -154,6 +154,8 @@
     <string name="female">Female</string>
     <string name="other">Other</string>
     <string name="view_all">View All</string>
+    <string name="home_female">Female</string>
+    <string name="home_other">Other</string>
     <!--Profile Fragment-->
     <string name="profile">Profile</string>
     <string name="language">Language</string>
@@ -179,6 +181,7 @@
     <string name="app_version">App Version</string>
     <string name="logout_from_digo360">Logout From Digo360</string>
     <string name="we_keep_your_data_safe">We keep your data safe.</string>
+
 
 
 </resources>
