@@ -97,10 +97,10 @@ public class HomeFragment extends Fragment {
     TopDiseaseAdapter topDiseaseAdapter;
     ImageView iv_image1, iv_image2, iv_image3;
     TextView tv_disease1, tv_disease2, tv_disease3, others, male, female;
-    LinearLayout  btn_reports,btn_all_reports,btn_male_reports,btn_female_reports,item1,item2,item3;
+    LinearLayout btn_reports, btn_all_reports, btn_male_reports, btn_female_reports, item1, item2, item3;
     int maless, femaless, otherss, totalss;
 
-    String males,females,other,totals;
+    String males, females, other, totals;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment {
         deviceToken = loginPref.getString("deviceToken", null);
 
         /*network Connection Check*/
-        if(!Internet_Check.isInternetAvailable(getContext())) {
+        if (!Internet_Check.isInternetAvailable(getContext())) {
             noInternetDialog = new Dialog(getContext());
             noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             noInternetDialog.setContentView(R.layout.no_internet_layout);
@@ -192,8 +192,7 @@ public class HomeFragment extends Fragment {
             noInternetDialog.show();
             noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-        else {
+        } else {
             CallAPI();
             callTopDiseases();
         }
@@ -398,7 +397,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
                 progressDialog.dismiss();
-               // ll_faq.setVisibility(View.VISIBLE);
+                // ll_faq.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -482,16 +481,34 @@ public class HomeFragment extends Fragment {
                     //iv_banner1.setImageDrawable(Drawable.createFromPath(banner1));
                     //summary
                     //if (response.body().getSummary().getMaleCount()!=null) {
-                    males = response.body().getSummary().getMaleCount();
-                    females = response.body().getSummary().getFemaleCount();
-                    other = response.body().getSummary().getOtherCount();
-                    male.setText(response.body().getSummary().getMaleCount());
-                    female.setText(response.body().getSummary().getFemaleCount());
-                    others.setText(response.body().getSummary().getOtherCount());
+//                    males = response.body().getSummary().getMaleCount();
+//                    females = response.body().getSummary().getFemaleCount();
+//                    other = response.body().getSummary().getOtherCount();
+//                    male.setText(response.body().getSummary().getMaleCount());
+//                    female.setText(response.body().getSummary().getFemaleCount());
+//                    others.setText(response.body().getSummary().getOtherCount());
 
-                    maless = Integer.parseInt(response.body().getSummary().getMaleCount());
-                    femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
-                    otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
+                    if (response.body().getSummary().getMaleCount() != null) {
+                        maless = Integer.parseInt(response.body().getSummary().getMaleCount());
+                        male.setText(response.body().getSummary().getMaleCount());
+                    }else {
+                        maless=0;
+                        male.setText("0");
+                    }
+                    if (response.body().getSummary().getFemaleCount() != null) {
+                        femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
+                        female.setText(response.body().getSummary().getFemaleCount());
+                    }else {
+                        femaless=0;
+                        female.setText("0");
+                    }
+                    if (response.body().getSummary().getOtherCount() != null) {
+                        otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
+                        others.setText(response.body().getSummary().getOtherCount());
+                    }else {
+                        otherss=0;
+                        others.setText("0");
+                    }
 //                    if (males != null) {
 //                        male.setText(response.body().getSummary().getMaleCount());
 //                        maless = Integer.parseInt(response.body().getSummary().getMaleCount());
