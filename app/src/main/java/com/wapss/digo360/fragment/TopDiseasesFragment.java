@@ -38,9 +38,11 @@ import com.wapss.digo360.adapter.TopDiseaseAdapter2;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.interfaces.ListDiseaseListener;
+import com.wapss.digo360.interfaces.MostDiseaseClick;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener2;
 import com.wapss.digo360.response.MostSearchClickResponse;
+import com.wapss.digo360.response.MostSearchResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 import com.wapss.digo360.utility.Internet_Check;
@@ -68,6 +70,7 @@ public class TopDiseasesFragment extends Fragment {
     ImageView notification, help;
     LinearLayout viewAll2,blank_layout;
     private Dialog noInternetDialog;
+    List<MostSearchResponse.Result> topSearch1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -161,22 +164,22 @@ public class TopDiseasesFragment extends Fragment {
     private void callTopSearch() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
-        Call<TopDiseaseResponse> banner_apiCall = ApiService.apiHolders().DiseaseAPi( Token,5, 0);
-        banner_apiCall.enqueue(new Callback<TopDiseaseResponse>() {
+        Call<MostSearchResponse> banner_apiCall = ApiService.apiHolders().MostDiseaseAPi( Token,5, 0);
+        banner_apiCall.enqueue(new Callback<MostSearchResponse>() {
             @Override
-            public void onResponse(Call<TopDiseaseResponse> call, Response<TopDiseaseResponse> response) {
+            public void onResponse(Call<MostSearchResponse> call, Response<MostSearchResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     assert response.body() != null;
-                    topSearch = response.body().getResult();
-                    if (topSearch.size()==0){
+                    topSearch1 = response.body().getResult();
+                    if (topSearch1.size()==0){
                         viewAll2.setVisibility(View.GONE);
                     }
 
-                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), topSearch, new TopDiseaseListener2() {
+                    topDiseaseAdapter2 = new TopDiseaseAdapter2(getContext(), topSearch1, new MostDiseaseClick() {
                         @Override
-                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
-                            String diseaseId = item.getId();
+                        public void onItemClickedItem(MostSearchResponse.Result item, int position) {
+                            String diseaseId = item.getDiseaseId();
                             callMostSearchClick(diseaseId);
                             editor.putString("diseaseId", diseaseId);
                             editor.commit();
@@ -196,7 +199,7 @@ public class TopDiseasesFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<TopDiseaseResponse> call, Throwable t) {
+            public void onFailure(Call<MostSearchResponse> call, Throwable t) {
                 progressDialog.dismiss();
                 //ll_faq.setVisibility(View.VISIBLE);
                 viewAll2.setVisibility(View.GONE);

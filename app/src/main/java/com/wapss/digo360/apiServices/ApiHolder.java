@@ -9,6 +9,7 @@ import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.HelpResponse;
 import com.wapss.digo360.response.LoginResponse;
 import com.wapss.digo360.response.MostSearchClickResponse;
+import com.wapss.digo360.response.MostSearchResponse;
 import com.wapss.digo360.response.NotificationResponse;
 import com.wapss.digo360.response.OTP_Response;
 import com.wapss.digo360.response.PagesResponse;
@@ -116,6 +117,11 @@ public interface ApiHolder {
     Call<TopDiseaseResponse> DiseaseAPi(@Header("Authorization") String Token,
                                         @Query("limit") int limit,
                                         @Query("offset") int offset);
+
+    @GET("search-history/top-ten")
+    Call<MostSearchResponse> MostDiseaseAPi(@Header("Authorization") String Token,
+                                            @Query("limit") int limit,
+                                            @Query("offset") int offset);
 
     @GET("diseases/list")
     Call<SearchResponse> SearchADiseasePi(@Header("Authorization") String Token,
