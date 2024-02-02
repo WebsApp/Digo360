@@ -43,6 +43,7 @@ public class TopDiseaseAdapter2 extends RecyclerView.Adapter<TopDiseaseAdapter2.
     @Override
     public void onBindViewHolder(@NonNull TopDiseaseAdapter2.ViewHolder holder, int position) {
         holder.tv_disease.setText(ItemList.get(position).getName());
+        holder.tv_disease.setVisibility(View.GONE);
         if (ItemList.get(position).getDiseaseMostSearchImage()==null){
             holder.iv_image.setBackgroundResource(R.drawable.digologo);
         }
