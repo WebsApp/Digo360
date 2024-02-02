@@ -46,7 +46,7 @@ public class MostSearchDiseaseAdapter extends RecyclerView.Adapter<MostSearchDis
                 holder.iv_image.setBackgroundResource(R.drawable.ivicon);
             } else {
                 Picasso.with(context)
-                        .load(ItemList.get(position).getDiseaseImage())
+                        .load(ItemList.get(position).getDisease_mostSearchImage())
                         .into(holder.iv_image);
             }
     }

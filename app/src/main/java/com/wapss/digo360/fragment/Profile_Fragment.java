@@ -49,7 +49,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Profile_Fragment extends Fragment {
-
     LinearLayout profile_layout,about_layout,version_layout,logout_layout,btn_language,btn_refer,permission_layout,
             btn_manage_case,btn_storage,btn_Search,btn_Ai_question,btn_alart,btn_case_file;
     LinearLayout ll_logOut;

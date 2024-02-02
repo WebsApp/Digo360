@@ -232,6 +232,9 @@ public class SettingHomeResponse {
         @SerializedName("disease_image")
         @Expose
         private String diseaseImage;
+        @SerializedName("disease_mostSearchImage")
+        @Expose
+        private String disease_mostSearchImage;
         @SerializedName("disease_imagePath")
         @Expose
         private String diseaseImagePath;
@@ -241,6 +244,14 @@ public class SettingHomeResponse {
         @SerializedName("searchCount")
         @Expose
         private String searchCount;
+
+        public String getDisease_mostSearchImage() {
+            return disease_mostSearchImage;
+        }
+
+        public void setDisease_mostSearchImage(String disease_mostSearchImage) {
+            this.disease_mostSearchImage = disease_mostSearchImage;
+        }
 
         public String getDiseaseName() {
             return diseaseName;

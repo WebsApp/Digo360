@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Home Fragment-->
-    <string name="search_case">Search by Diseases Name</string>
-    <string name="top_diseases">Top diseases</string>
-    <string name="top_diseases_search">Most Search Diseases</string>
+    <string name="search_case">रोग के नाम से खोजें</string>
+    <string name="top_diseases">शीर्ष रोग</string>
+    <string name="top_diseases_search">सबसे ज्यादा खोजी जाने वाली बीमारियाँ</string>
     <string name="summary">Summary</string>
     <string name="top_diagnosis">Top Diagnosis</string>
     <string name="all">All</string>
@@ -166,4 +166,27 @@
     <string name="about_digo">About Digo360!</string>
     <string name="privacy_s_policy">Privacy\'s Policy</string>
     <string name="report">Report</string>
+    <string name="your_preafferd_language_is_english">Your Preafferd Language is English</string>
+    <string name="permission">Permission</string>
+    <string name="manage_data_amp_access_permission"><![CDATA[Manage Data & Access Permission]]></string>
+    <string name="terms_and_conditions">I agree to the Terms and Conditions</string>
+    <string name="refer_and_earn">Refer and Earn</string>
+    <string name="manage_case">Manage Case</string>
+    <string name="case_manage">Case Manage</string>
+    <string name="case_storage">Case Storage</string>
+    <string name="case_store">Case Store</string>
+    <string name="top_searches">Top Searches</string>
+    <string name="ai_base_questions">AI Base Questions</string>
+    <string name="updates_on_ai_amp_question_forms"><![CDATA[Updates on AI & Question Forms]]></string>
+    <string name="learn_how_top_searches_works">Learn how top searches works</string>
+    <string name="alerts_amp_reminders"><![CDATA[Alerts & Reminders]]></string>
+    <string name="manage_all_the_alerts_amp_reminders"><![CDATA[Manage all the Alerts & Reminders]]></string>
+    <string name="case_amp_files"><![CDATA[Case & Files]]></string>
+    <string name="manage_all_the_cases_and_files">Manage all the Cases and Files</string>
+    <string name="about_digo_360">About Digo360</string>
+    <string name="learn_data_amp_terms_of_services"><![CDATA[Learn Data & Terms of Services]]></string>
+    <string name="app_version">App Version</string>
+    <string name="logout_from_digo360">Logout From Digo360</string>
+    <string name="we_keep_your_data_safe">We keep your data safe.</string>
+    <string name="loading_desc">We are creating Specialized Dashboard for you. It might take some to please allow us a moment.</string>
 </resources>

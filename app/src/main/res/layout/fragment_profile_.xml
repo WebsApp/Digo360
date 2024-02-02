@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="5dp"
-                    android:text="Profile"
+                    android:text="@string/profile"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="@color/white"
@@ -221,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Your Prefferd Language is English "
+                            android:text="@string/your_preafferd_language_is_english"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
@@ -289,7 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Permission"
+                            android:text="@string/permission"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13sdp"
                             android:textStyle="bold" />
@@ -298,7 +298,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Manage Data &amp; Access Permission "
+                            android:text="@string/manage_data_amp_access_permission"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
@@ -372,7 +372,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Refer &amp; Share "
+                            android:text="@string/refer_amp_share"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13sdp"
                             android:textStyle="bold" />
@@ -381,7 +381,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Your Preferred Language is "
+                            android:text="@string/refer_and_earn"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
@@ -451,7 +451,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Manage  Case "
+                            android:text="@string/manage_case"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13sdp"
                             android:textStyle="bold" />
@@ -460,7 +460,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Manage Data &amp; Access Permission "
+                            android:text="@string/case_manage"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="normal" />
@@ -541,7 +541,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Case Storage "
+                            android:text="@string/case_storage"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -550,7 +550,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Your Prefferd Language is "
+                            android:text="@string/case_store"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -620,7 +620,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Top Searchs "
+                            android:text="@string/top_searches"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -629,7 +629,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Learn how top searchs works "
+                            android:text="@string/learn_how_top_searches_works"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -697,7 +697,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="AI Base Questions"
+                            android:text="@string/ai_base_questions"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -706,7 +706,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Updates on AI &amp; Question Forms"
+                            android:text="@string/updates_on_ai_amp_question_forms"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -776,7 +776,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Alerts &amp; Reminders "
+                            android:text="@string/alerts_amp_reminders"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -785,7 +785,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Manage all the Alerts &amp; Reminders "
+                            android:text="@string/manage_all_the_alerts_amp_reminders"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -855,7 +855,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Case &amp; Files "
+                            android:text="@string/case_amp_files"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -864,7 +864,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Manage all the reminders"
+                            android:text="@string/manage_all_the_cases_and_files"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -936,7 +936,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="About Digo360"
+                            android:text="@string/about_digo_360"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -945,7 +945,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="Learn Data &amp; Terms of Serivice "
+                            android:text="@string/learn_data_amp_terms_of_services"
                             android:textColor="#626262"
                             android:textSize="@dimen/_10ssp"
                             android:textStyle="normal" />
@@ -1013,7 +1013,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="App Version"
+                            android:text="@string/app_version"
                             android:textColor="#626262"
                             android:textSize="@dimen/_13ssp"
                             android:textStyle="bold" />
@@ -1088,7 +1088,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Logout From Digo360"
+                        android:text="@string/logout_from_digo360"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/_13ssp"
                         android:textStyle="bold" />
@@ -1097,7 +1097,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="We keep your data safe."
+                        android:text="@string/we_keep_your_data_safe"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="normal" />

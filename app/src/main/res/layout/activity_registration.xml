@@ -488,7 +488,7 @@
                         android:textColor="@color/purple"
                         android:textStyle="bold"
                         android:checked="true"
-                        android:text="I agree to the Terms and Conditions"/>
+                        android:text="@string/terms_and_conditions"/>
 
                 </LinearLayout>
 
