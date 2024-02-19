@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +21,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -50,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String regex = "^[6-9][0-9]{9}$";
+    private Dialog noInternetDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             // Request notification permission
             requestNotificationPermission();
         }
-
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -84,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
 //                        Toast.makeText(OTP_Verify.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
-
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,41 +98,56 @@ public class LoginActivity extends AppCompatActivity {
                     callLogin(phone, deviceId);
                 }
                 else {
-                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
-                    LayoutInflater inflater1 = getLayoutInflater();
-                    View dialogView1 = inflater1.inflate(R.layout.invalid_phone_layout,null);
-                    builder1.setCancelable(false);
-                    builder1.setView(dialogView1);
-                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
-                    alertDialog1.show();
-                    alertDialog1.setCanceledOnTouchOutside(false);
+//                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
+//                    LayoutInflater inflater1 = getLayoutInflater();
+//                    View dialogView1 = inflater1.inflate(R.layout.invalid_phone_layout,null);
+//                    builder1.setCancelable(false);
+//                    builder1.setView(dialogView1);
+//                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+//                    alertDialog1.show();
+//                    alertDialog1.setCanceledOnTouchOutside(false);
+//
+                    noInternetDialog = new Dialog(LoginActivity.this);
+                    noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    noInternetDialog.setContentView(R.layout.invalid_phone_layout);
+                    noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    noInternetDialog.setCancelable(false);
+                    noInternetDialog.show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            alertDialog1.dismiss();
+                            noInternetDialog.dismiss();
                         }
                     },2000);
+                    noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                    noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 }
             }
         });
         txt_tnc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://classpoint.in/terms_and_conditions.php");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Bundle bundle = new Bundle();
+                bundle.putString("page", "Terms And Condition");
+                bundle.putString("urls", "https://classpoint.in/terms_and_conditions.php");
+                Intent intent = new Intent(LoginActivity.this, Privacy_Policy.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
         txt_privacy_policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://classpoint.in/privacy_policy.php");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Bundle bundle = new Bundle();
+                bundle.putString("page", "Privacy Policy");
+                bundle.putString("urls", "https://classpoint.in/terms_and_conditions.php");
+                Intent intent = new Intent(LoginActivity.this, Privacy_Policy.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
     }
-
     private void callLogin(String phone, String DeviceId) {
         progressDialog.showProgressDialog();
         Call<LoginResponse> login_apiCall = ApiService.apiHolders().login(phone, DeviceId);
@@ -159,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     private void initi() {
         btn_card = findViewById(R.id.btn_card);
         txt_privacy_policy = findViewById(R.id.txt_privacy_policy);
@@ -172,12 +189,10 @@ public class LoginActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
     }
-
     private boolean isNotificationPermissionGranted() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         return notificationManager.areNotificationsEnabled();
     }
-
     private void requestNotificationPermission() {
         Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName())
@@ -185,7 +200,6 @@ public class LoginActivity extends AppCompatActivity {
 
         startActivityForResult(intent, NOTIFICATION_PERMISSION_REQUEST_CODE);
     }
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
@@ -197,10 +211,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
     }
 }

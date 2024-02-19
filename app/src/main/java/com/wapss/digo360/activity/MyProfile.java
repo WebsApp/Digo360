@@ -189,6 +189,7 @@ public class MyProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 //        iv_profile.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

@@ -21,6 +21,7 @@ import com.wapss.digo360.response.TopDiseaseResponse;
 import java.util.List;
 
 public class TopDiseaseAdapeter3 extends RecyclerView.Adapter<TopDiseaseAdapeter3.ViewHolder>{
+
     public static List<SearchResponse.Result> ItemList;
     private Context context;
 

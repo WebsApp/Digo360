@@ -509,16 +509,6 @@ public class HomeFragment extends Fragment {
                         otherss=0;
                         others.setText("0");
                     }
-//                    if (males != null) {
-//                        male.setText(response.body().getSummary().getMaleCount());
-//                        maless = Integer.parseInt(response.body().getSummary().getMaleCount());
-//                    } else if (females != null) {
-//                        female.setText(response.body().getSummary().getFemaleCount());
-//                        femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
-//                    } else if (other != null) {
-//                        others.setText(response.body().getSummary().getOtherCount());
-//                        otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
-//                    }
                     totalss = maless + femaless + otherss;
                     totals = String.valueOf(totalss);
                     all.setText(totals);
