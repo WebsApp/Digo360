@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                /*if (loginStatus.equals("true"))
+                if (loginStatus.equals("true"))
                 {
                     Locale locale = new Locale(languageToLoad);
                     Locale.setDefault(locale);
@@ -64,9 +64,9 @@ public class SplashActivity extends AppCompatActivity {
                     getResources().updateConfiguration(config,getResources().getDisplayMetrics());
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
-                }*/
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
+                }
+//                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                finish();
             }
         },2000);
     }
