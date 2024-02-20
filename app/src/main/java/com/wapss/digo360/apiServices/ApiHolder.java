@@ -27,6 +27,7 @@ import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 import com.wapss.digo360.response.TopSearchDiseaseResponse;
+import com.wapss.digo360.response.Update_Profile_Response;
 
 import org.json.JSONObject;
 
@@ -35,6 +36,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -189,4 +191,11 @@ public interface ApiHolder {
                                        @Field("startDate") String startDate,
                                        @Field("endDate") String endDate,
                                        @Field("degree") String degree);
+
+    @PATCH("doctor-detail/profile/update")
+    @FormUrlEncoded
+    Call<Update_Profile_Response> update_res(@Header("Authorization") String Token,
+                                              @Field("name") String name,
+                                              @Field("email") String email,
+                                              @Field("address") String address);
 }

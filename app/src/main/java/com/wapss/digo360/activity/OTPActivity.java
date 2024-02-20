@@ -42,7 +42,7 @@ public class OTPActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     CustomProgressDialog progressDialog;
     private CountDownTimer countDownTimer;
-    long timerDuration = 60000;
+    long timerDuration = 120000;
     long timerInterval = 1000;
     String loginStatus ="true";
 

@@ -113,6 +113,10 @@ public class HelpPage extends AppCompatActivity {
                         blank_layout.setVisibility(View.VISIBLE);
                     }
                 }
+                else {
+                    progressDialog.hideProgressDialog();
+                    blank_layout.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

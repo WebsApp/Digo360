@@ -75,7 +75,7 @@ public class MyProfile extends AppCompatActivity {
     String deviceToken,Token;
     CustomProgressDialog progressDialog;
     TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
-    String ex;
+    String ex,Degree;
     private Dialog noInternetDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -118,26 +118,7 @@ public class MyProfile extends AppCompatActivity {
         btn_edite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noInternetDialog = new Dialog(MyProfile.this);
-                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                noInternetDialog.setContentView(R.layout.language_layout);
-                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                noInternetDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        noInternetDialog.dismiss();
-                    }
-                }, 2000);
-                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            }
-        });
-        college_edite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyProfile.this, CollegePage.class));
+                startActivity(new Intent(MyProfile.this,Update_Profile.class));
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +186,16 @@ public class MyProfile extends AppCompatActivity {
             }
         });
         get_profile();
+        college_edite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("DEASES_NAME", "Degree");
+                Intent i = new Intent(MyProfile.this, CollegePage.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
     }
 
     private void get_profile() {
@@ -220,7 +211,7 @@ public class MyProfile extends AppCompatActivity {
                     String exp_year = String.valueOf(response.body().getExperience());
                     String collage_name = String.valueOf(response.body().getCollegeName());
                     String address = response.body().getAddress();
-                    String Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
+                    Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
 //                    for (int i=0;i<response.body().getDoctorSpecialization().size();i++){
 //                         ex = response.body().getDoctorSpecialization().get(i).getSpecialization().getName();
 //                    }
@@ -336,6 +327,12 @@ public class MyProfile extends AppCompatActivity {
     private void takePictureCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, Camera_Req_Code);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        get_profile();
     }
 
     @Override

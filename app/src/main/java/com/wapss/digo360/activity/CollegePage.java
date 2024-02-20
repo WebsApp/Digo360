@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,19 +25,28 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.Collage_Response;
 import com.wapss.digo360.response.FaqResponse;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CollegePage extends AppCompatActivity {
 
-    ImageView collage_back,btn_faq;
+    ImageView collage_back,btn_faq,to_date_picker,select_date;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken,Token,pageName;
+    String deviceToken,Token,pageName,currentTime;
     CustomProgressDialog progressDialog;
-    EditText et_Passout,et_admission_year,edit_college_name,et_degree,et_zipcode,et_state,et_city;
-    TextView tv_update;
+    EditText edit_college_name,et_degree,et_zipcode,et_state,et_city;
+    TextView tv_update,et_Passout,et_admission_year;
+    private Calendar calendar;
+    Date dateNow = null;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -61,8 +72,68 @@ public class CollegePage extends AppCompatActivity {
         et_zipcode = findViewById(R.id.et_zipcode);
         et_degree = findViewById(R.id.et_degree);
         tv_update = findViewById(R.id.tv_update);
+        select_date = findViewById(R.id.select_date);
+        to_date_picker = findViewById(R.id.to_date_picker);
         progressDialog = new CustomProgressDialog(CollegePage.this);
         et_degree.setText("MD");
+
+        currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        calendar = Calendar.getInstance();
+        select_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        CollegePage.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                calendar.set(Calendar.YEAR, year);
+                                calendar.set(Calendar.MONTH, month);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                                et_admission_year.setText(dateFormat1.format(calendar.getTime()));
+                            }
+                        }, year, month, dayOfMonth);
+//                try {
+//                    dateNow = formatter.parse(currentTime);
+//                } catch (ParseException e) {
+//                    throw new RuntimeException(e);
+//                }
+                //datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
+        to_date_picker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        CollegePage.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                calendar.set(Calendar.YEAR, year);
+                                calendar.set(Calendar.MONTH, month);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                                et_Passout.setText(dateFormat1.format(calendar.getTime()));
+                            }
+                        }, year, month, dayOfMonth);
+//                try {
+//                    dateNow = formatter.parse(currentTime);
+//                } catch (ParseException e) {
+//                    throw new RuntimeException(e);
+//                }
+                //datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePickerDialog.show();
+            }
+        });
         collage_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +143,11 @@ public class CollegePage extends AppCompatActivity {
         btn_faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CollegePage.this, HelpPage.class));
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "COLLAGE");
+                Intent i = new Intent(CollegePage.this, HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         tv_update.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +166,6 @@ public class CollegePage extends AppCompatActivity {
             }
         });
     }
-
     private void collage_api() {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
@@ -105,16 +179,33 @@ public class CollegePage extends AppCompatActivity {
             public void onResponse(Call<Collage_Response> call, Response<Collage_Response> response) {
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(new Intent(CollegePage.this,MyProfile.class));
-                        }
-                    },2000);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            startActivity(new Intent(CollegePage.this,MyProfile.class));
+//                        }
+//                    },2000);
+                    DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                    Date date9 = null;
+                    Date date10 = null;//You will get date object relative to server/client timezone wherever it is parsed
+                    try {
+                        date9 = dateFormat1.parse(response.body().getStartDate());
+                        date10 = dateFormat1.parse(response.body().getEndDate());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    DateFormat formatter9 = new SimpleDateFormat("yyyy-mm-dd"); //If you need time just put specific format for time like 'HH:mm:ss'
+                    String dateStr = formatter9.format(date9);
+                    String date_pass = formatter9.format(date10);
+
+//                    et_admission_year.setText(dateStr);
+//                    et_Passout.setText(date_pass);
+//                    edit_college_name.setText(response.body().getCollegeName());
+
                     Toast.makeText(CollegePage.this, "Collage Updated Successfully", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    progressDialog.hideProgressDialog();
                 }
             }
             @Override

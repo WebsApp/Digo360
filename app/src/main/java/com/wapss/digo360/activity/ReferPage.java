@@ -17,7 +17,7 @@ import com.wapss.digo360.R;
 public class ReferPage extends AppCompatActivity {
 
     String messageToShare = "Hello, this is the text to share.";
-    ImageView back;
+    ImageView back,btn_faq;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,21 @@ public class ReferPage extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.refer));
         back = findViewById(R.id.back);
+        btn_faq = findViewById(R.id.btn_faq);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        btn_faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "REFERED");
+                Intent i = new Intent(ReferPage.this, HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         refer_bottom_sheet();

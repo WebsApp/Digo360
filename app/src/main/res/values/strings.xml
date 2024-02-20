@@ -80,7 +80,7 @@
     <string name="logout_confirm">Are you sure you want to log out?</string>
     <string name="personal_details">Personal Details</string>
     <string name="dr_name">Dr. Sangeeta Paul</string>
-    <string name="dr_Spec">BHMS, MD {Medicine}</string>
+    <string name="dr_Spec">MD{Medicine}</string>
     <string name="dr_number">+91 9763500291</string>
     <string name="dr_mail">support@webappssoft.com</string>
     <string name="verify_mail">Verify Now</string>

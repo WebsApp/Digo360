@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,7 +24,7 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import java.util.Locale;
 
 public class ChooseLanguageActivity extends AppCompatActivity {
-    TextView tv_language;
+    TextView tv_language,txt_skip;
     ImageView back;
     CardView cv_english,cv_hindi;
     String languageToLoad;
@@ -31,6 +32,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     RadioButton rb_hindi,rb_english;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         cv_hindi = findViewById(R.id.cv_hindi);
         rg_hindi = findViewById(R.id.rg_hindi);
         rg_english = findViewById(R.id.rg_english);
+        txt_skip = findViewById(R.id.txt_skip);
         rb_hindi = findViewById(R.id.rb_hindi);
         rb_english = findViewById(R.id.rb_english);
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
@@ -78,25 +81,19 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        cv_english.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                languageToLoad="en";
-//                languageFunction(languageToLoad);
-//            }
-//        });
-//        cv_hindi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                languageToLoad="hi";
-//                languageFunction(languageToLoad);
-//            }
-//        });
         tv_language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editor.putString("languageToLoad", languageToLoad);
                 editor.commit();
+                Intent intent = new Intent(ChooseLanguageActivity.this,LoadingPage.class);
+                startActivity(intent);
+
+            }
+        });
+        txt_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(ChooseLanguageActivity.this,LoadingPage.class);
                 startActivity(intent);
             }

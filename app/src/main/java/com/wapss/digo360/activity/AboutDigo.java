@@ -44,7 +44,8 @@ public class AboutDigo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("PAGE_ID", "3");
+                bundle.putString("PAGE_ID", "2");
+                bundle.putString("PAGE_Name", "ABOUT DIGO 360");
                 Intent i = new Intent(AboutDigo.this, Pages.class);
                 i.putExtras(bundle);
                 startActivity(i);
@@ -54,7 +55,8 @@ public class AboutDigo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("PAGE_ID", "2");
+                bundle.putString("PAGE_ID", "3");
+                bundle.putString("PAGE_Name", "PRIVACY POLICY");
                 Intent i = new Intent(AboutDigo.this, Pages.class);
                 i.putExtras(bundle);
                 startActivity(i);
