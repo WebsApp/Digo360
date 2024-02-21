@@ -90,8 +90,8 @@ public class HomeFragment extends Fragment {
     private int currentPage = 0;
     private final long DELAY_MS = 5000; // Delay in milliseconds before flipping to the next page
     private final long PERIOD_MS = 5000; // Time period between each auto-flipping
-    SharedPreferences loginPref,loginPref2;
-    SharedPreferences.Editor editor,editor2;
+    SharedPreferences loginPref, loginPref2;
+    SharedPreferences.Editor editor, editor2;
     String deviceToken, Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
     MostSearchDiseaseAdapter mostSearchDiseaseAdapter;
@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     HomeTopDiseaseAdapter homeTopDiseaseAdapter;
     RecyclerView rv_home_top_disease;
-    String maintenance,version,versionName;
+    String maintenance, version, versionName;
     Dialog dialog;
 
     @Override
@@ -216,7 +216,8 @@ public class HomeFragment extends Fragment {
         }
 
         // Get the package manager instance
-        PackageManager packageManager = getContext().getPackageManager();;
+        PackageManager packageManager = getContext().getPackageManager();
+        ;
 
         try {
             // Get the package information
@@ -231,8 +232,8 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)){
-           // popUpMaintencae(maintenance,version);
+        if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)) {
+           // popUpMaintencae(maintenance, version);
         }
 
         notification.setOnClickListener(new View.OnClickListener() {
@@ -338,7 +339,7 @@ public class HomeFragment extends Fragment {
         TextView tv_version = dialog.findViewById(R.id.tv_version);
         TextView tv_update = dialog.findViewById(R.id.tv_update);
         dialog.show();
-        if (maintenance!=null) {
+        if (maintenance != null) {
             if (maintenance.equals("true")) {
                 tv_version.setText("Under Maintenance");
                 tv_update.setVisibility(View.GONE);
@@ -346,7 +347,7 @@ public class HomeFragment extends Fragment {
                 tv_version.setText("New Version Available");
             }
         }
-        tv_update .setOnClickListener(new View.OnClickListener() {
+        tv_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.wapss.digo360"));
@@ -359,6 +360,7 @@ public class HomeFragment extends Fragment {
         // progressDialog.showProgressDialog();
         // Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
     }
+
     private void callTopDiseases() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -476,6 +478,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     /*private void callHelpAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -601,6 +604,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     private void callMostSearchDisease(List<SettingHomeResponse.Search> searchList) {
         mostSearchDiseaseAdapter = new MostSearchDiseaseAdapter(getContext(), searchList, new MostSearchDiseaseListener() {
             @Override
@@ -615,6 +619,7 @@ public class HomeFragment extends Fragment {
         rv_most_search_diseases.setAdapter(mostSearchDiseaseAdapter);
         rv_most_search_diseases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
+
     private void callTopDiagnosis(List<SettingHomeResponse.Slider> sliderList) {
         topDiagnosiAdapter = new TopDiagnosiAdapter(getContext(), sliderList);
         rv_diagnosis.setAdapter(topDiagnosiAdapter);
