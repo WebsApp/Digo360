@@ -55,7 +55,7 @@ public class Total_Reports extends AppCompatActivity {
     RecyclerView rv_reports;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken, report_enum, currentTime, fromDate, to_date, Token, keyword;
+    String deviceToken, report_enum, currentTime, fromDate, to_date, Token, FromDate = "",ToDate = "";
     LinearLayout blank_layout;
     CustomProgressDialog progressDialog;
     private Calendar calendar;
@@ -166,14 +166,12 @@ public class Total_Reports extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = edit_user_name.getText().toString();
-                String ToDate = txt_to_date.getText().toString();
-                String FromDate = txt_select_date.getText().toString();
+                ToDate = txt_to_date.getText().toString();
+                FromDate = txt_select_date.getText().toString();
                 total_Report(name, FromDate, ToDate);
             }
         });
     }
-
-
     private void total_Report(String name, String FromDate, String Todate) {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
@@ -182,12 +180,13 @@ public class Total_Reports extends AppCompatActivity {
             @Override
             public void onResponse(Call<Patient_Count_Response> call, Response<Patient_Count_Response> response) {
                 if (response.isSuccessful()) {
+                    progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     blank_layout.setVisibility(View.GONE);
-                    progressDialog.dismiss();
                     patientsResponse = response.body().getResult();
                     int total = response.body().getTotal();
                     if (total == 0) {
+                        progressDialog.hideProgressDialog();
                         blank_layout.setVisibility(View.VISIBLE);
                         rv_reports.setVisibility(View.GONE);
                     }
@@ -195,15 +194,14 @@ public class Total_Reports extends AppCompatActivity {
                     rv_reports.setAdapter(reportAdapter);
                     rv_reports.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 } else {
+                    progressDialog.hideProgressDialog();
                     blank_layout.setVisibility(View.VISIBLE);
                     rv_reports.setVisibility(View.GONE);
-                    progressDialog.dismiss();
                 }
             }
-
             @Override
             public void onFailure(Call<Patient_Count_Response> call, Throwable t) {
-                progressDialog.dismiss();
+                progressDialog.hideProgressDialog();
                 rv_reports.setVisibility(View.GONE);
                 Toast.makeText(Total_Reports.this, "Failed", Toast.LENGTH_SHORT).show();
             }

@@ -40,7 +40,7 @@ import retrofit2.Response;
 
 public class QuestionsActivity extends AppCompatActivity {
     TextView tv_save;
-    ImageView back;
+    ImageView back,btn_faq;
     RecyclerView rv_answerList;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
@@ -67,6 +67,7 @@ public class QuestionsActivity extends AppCompatActivity {
             questionCount = quest - 1;
         }
 
+        btn_faq = findViewById(R.id.btn_faq);
         tv_save = findViewById(R.id.tv_save);
         back = findViewById(R.id.back);
         rv_answerList = findViewById(R.id.rv_answerList);
@@ -93,6 +94,16 @@ public class QuestionsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionsActivity.this, SpecialActivity.class);
                 startActivity(intent);
+            }
+        });
+        btn_faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "QUESTION");
+                Intent i = new Intent(QuestionsActivity.this, HelpPage.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

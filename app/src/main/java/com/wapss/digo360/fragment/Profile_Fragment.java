@@ -40,6 +40,7 @@ import com.wapss.digo360.activity.MyProfile;
 import com.wapss.digo360.activity.ReferPage;
 import com.wapss.digo360.activity.RegistrationActivity;
 import com.wapss.digo360.activity.SearchPage;
+import com.wapss.digo360.activity.Total_Reports;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.response.Profile_Response;
@@ -263,20 +264,11 @@ public class Profile_Fragment extends Fragment {
         btn_manage_case.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noInternetDialog = new Dialog(getContext());
-                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                noInternetDialog.setContentView(R.layout.language_layout);
-                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                noInternetDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        noInternetDialog.dismiss();
-                    }
-                }, 2000);
-                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "ALL");
+                Intent i = new Intent(getContext(), Total_Reports.class);
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
         btn_storage.setOnClickListener(new View.OnClickListener() {
