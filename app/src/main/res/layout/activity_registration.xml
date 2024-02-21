@@ -221,6 +221,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/cv_designation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,6 +249,24 @@
                         android:layout_weight="6"
                         android:layout_height="@dimen/_35sdp"
                         android:layout_marginLeft="@dimen/_20ssp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/time_bg">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 

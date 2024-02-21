@@ -48,8 +48,8 @@ public class NewCasectivity extends AppCompatActivity {
     private ProgressBar progressBar;
     Button start_progress;
     LinearLayout ll_address, ll_age, ll_Dob, ll_phone_num, ll_phone_email, ll_otherProblem;
-    RadioGroup rg_age, rg_phone, rg_address, rg_gender;
-    RadioButton rb_doB, rb_age, rb_phone, rb_email, rb_yes, rb_no, rb_male, rb_female, rb_other;
+    RadioGroup rg_age, rg_phone, rg_address, rg_gender,rg_dob;
+    RadioButton rb_doB, rb_age, rb_phone, rb_email, rb_yes, rb_no, rb_male, rb_female, rb_other,rb_age_yes,rb_age_no,rb_doB_yes,rb_dob_no;
     TextView tv_submit;
     ImageView back, iv_date;
     EditText pt_name, pt_age, pt_DOB, pt_phone, pt_email, pt_full_Address, pt_State, pt_Area, pt_city, pt_pinCode;
@@ -81,22 +81,36 @@ public class NewCasectivity extends AppCompatActivity {
         }
 
         initi();
-        rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        /*rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // Handle RadioButton selection changes here
-                if (rb_doB.isChecked()) {
-                    ll_Dob.setVisibility(View.VISIBLE);
-                    ll_age.setVisibility(View.GONE);
-                    ss = "dob";
-                } else if (rb_age.isChecked()) {
-                    ll_Dob.setVisibility(View.GONE);
+                if (rb_age_yes.isChecked()) {
                     ll_age.setVisibility(View.VISIBLE);
-                    ss = "age";
-                    dob = "";
+                    //ss = "dob";
+                } else if (rb_age_no.isChecked()) {
+                    ll_age.setVisibility(View.GONE);
+                    //ss = "age";
+                    //dob = "";
                 }
+
             }
         });
+        rg_dob.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // Handle RadioButton selection changes here
+                if (rb_doB_yes.isChecked()) {
+                    ll_Dob.setVisibility(View.VISIBLE);
+                    //ss = "dob";
+                } else if (rb_dob_no.isChecked()) {
+                    ll_Dob.setVisibility(View.GONE);
+                    //ss = "age";
+                    //dob = "";
+                }
+
+            }
+        });*/
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +128,10 @@ public class NewCasectivity extends AppCompatActivity {
                 else if (gender.equals("")) {
                     Toast.makeText(NewCasectivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
                 }
-               else if (pt_full_Address.getText().toString().isEmpty()) {
-                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Address", Toast.LENGTH_SHORT).show();
-                } else {
+//               else if (pt_full_Address.getText().toString().isEmpty()) {
+//                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Address", Toast.LENGTH_SHORT).show();
+//                }
+               else {
                     patient_details();
                 }
             }
@@ -133,6 +148,11 @@ public class NewCasectivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         start_progress = findViewById(R.id.start_progress);
         ll_address = findViewById(R.id.ll_address);
+//        rg_dob = findViewById(R.id.rg_dob);
+//        rb_doB_yes = findViewById(R.id.rb_doB_yes);
+//        rb_dob_no = findViewById(R.id.rb_dob_no);
+//        rb_age_no = findViewById(R.id.rb_age_no);
+//        rb_age_yes = findViewById(R.id.rb_age_yes);
         ll_age = findViewById(R.id.ll_age);
         rg_age = findViewById(R.id.rg_age);
         rb_doB = findViewById(R.id.rb_doB);

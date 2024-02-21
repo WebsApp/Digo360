@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -321,20 +322,7 @@ public class Profile_Fragment extends Fragment {
         btn_alart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noInternetDialog = new Dialog(getContext());
-                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                noInternetDialog.setContentView(R.layout.language_layout);
-                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                noInternetDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        noInternetDialog.dismiss();
-                    }
-                }, 2000);
-                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                startActivity(new Intent(getContext(), Notification.class));
             }
         });
         btn_case_file.setOnClickListener(new View.OnClickListener() {

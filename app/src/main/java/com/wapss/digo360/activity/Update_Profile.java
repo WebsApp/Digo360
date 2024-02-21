@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wapss.digo360.R;
 import com.wapss.digo360.apiServices.ApiService;
@@ -78,6 +79,7 @@ public class Update_Profile extends AppCompatActivity {
             public void onResponse(Call<Update_Profile_Response> call, Response<Update_Profile_Response> response) {
                 if (response.isSuccessful()){
                     progressDialog.hideProgressDialog();
+                    Toast.makeText(Update_Profile.this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     progressDialog.hideProgressDialog();

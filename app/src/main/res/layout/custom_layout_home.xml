@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/item1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -16,8 +17,8 @@
 
         <LinearLayout
             android:id="@+id/btn_fever"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
             android:background="@drawable/bground1"
             android:orientation="horizontal"
             android:layout_gravity="center"
@@ -26,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/iv_image1"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp" />
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp" />
 
         </LinearLayout>
 

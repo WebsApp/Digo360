@@ -300,9 +300,7 @@ public class HomeFragment extends Fragment {
     private void callHelpAPI() {
         // progressDialog.showProgressDialog();
         // Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdjZWQ0ODY4LWYwN2QtNDBhMi05NzZlLWMyNjYwYzRhYzRkNSIsImlhdCI6MTcwNTMwNDA5MiwiZXhwIjoxNzM2ODQwMDkyfQ.b63hddX2A1z-o_JdkWQiyIaak5SUNGyuxqshB0EGMYs";
-
     }
-
     private void callTopDiseases() {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -420,7 +418,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
     /*private void callHelpAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;
@@ -546,7 +543,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
     private void callMostSearchDisease(List<SettingHomeResponse.Search> searchList) {
         mostSearchDiseaseAdapter = new MostSearchDiseaseAdapter(getContext(), searchList, new MostSearchDiseaseListener() {
             @Override
@@ -561,7 +557,6 @@ public class HomeFragment extends Fragment {
         rv_most_search_diseases.setAdapter(mostSearchDiseaseAdapter);
         rv_most_search_diseases.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
-
     private void callTopDiagnosis(List<SettingHomeResponse.Slider> sliderList) {
         topDiagnosiAdapter = new TopDiagnosiAdapter(getContext(), sliderList);
         rv_diagnosis.setAdapter(topDiagnosiAdapter);

@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.wapss.digo360.R;
 import com.wapss.digo360.adapter.Designation_Adapter;
 import com.wapss.digo360.apiServices.ApiService;
@@ -230,15 +231,67 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
         /*EXP level choose*/
-        Designation_Adapter designationAdapter = new Designation_Adapter(this, R.layout.custom_spinner, items);
+       /* Designation_Adapter designationAdapter = new Designation_Adapter(this, R.layout.custom_spinner, items);
         sp_designation.setAdapter(designationAdapter);
         sp_designation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
+                *//*if (i == 0) {
 
-                } else {
+                }
+                else {
                     strSpec = items.get(i);
+                    if (strSpec.equals("EXPERIENCE")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.GONE);
+                        study_Year = null;
+                        experienceLevel = "EXPERIENCE";
+                        et_desig.setText(strSpec);
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("INTERN")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        cv_study_year.setVisibility(View.GONE);
+                        study_Year = null;
+                        experienceLevel = "INTERN";
+                        et_desig.setText(strSpec);
+                        specialization_Id = null;
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("STUDENT")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        specialization_Id = null;
+                        experienceLevel = "STUDENT";
+                        et_desig.setText(strSpec);
+                        stryear = "STUDENT";
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                }*//*
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });*/
+
+        MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.spinner);
+        spinner.setItems("Select Your Designation","EXPERIENCE", "INTERN", "STUDENT");
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if (position == 0) {
+
+                }
+                else {
+                    strSpec = items.get(position);
                     if (strSpec.equals("EXPERIENCE")) {
                         cv_degree.setVisibility(View.VISIBLE);
                         cv_specialization.setVisibility(View.VISIBLE);
@@ -273,12 +326,17 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
         });
+
+
+
+
+
+
+
+
+
+
 
 
 
