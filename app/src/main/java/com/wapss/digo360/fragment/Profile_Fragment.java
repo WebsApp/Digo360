@@ -37,6 +37,7 @@ import com.wapss.digo360.activity.ChooseLanguageActivity;
 import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.LoginActivity;
 import com.wapss.digo360.activity.MyProfile;
+import com.wapss.digo360.activity.Permission;
 import com.wapss.digo360.activity.ReferPage;
 import com.wapss.digo360.activity.RegistrationActivity;
 import com.wapss.digo360.activity.SearchPage;
@@ -245,20 +246,7 @@ public class Profile_Fragment extends Fragment {
         permission_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noInternetDialog = new Dialog(getContext());
-                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                noInternetDialog.setContentView(R.layout.language_layout);
-                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                noInternetDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        noInternetDialog.dismiss();
-                    }
-                }, 2000);
-                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                startActivity(new Intent(getContext(), Permission.class));
             }
         });
         btn_manage_case.setOnClickListener(new View.OnClickListener() {
