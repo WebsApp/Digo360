@@ -12,6 +12,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -37,6 +39,7 @@ import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.authentication.DeviceUtils;
 import com.wapss.digo360.response.LoginResponse;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,10 +54,12 @@ public class LoginActivity extends AppCompatActivity {
     String fb_token, deviceId, phone, phoneNum;
     EditText et_phone;
     CustomProgressDialog progressDialog;
-    SharedPreferences loginPref;
-    SharedPreferences.Editor editor;
+    SharedPreferences loginPref,loginPref2;
+    SharedPreferences.Editor editor,editor2;
     String regex = "^[6-9][0-9]{9}$";
     private Dialog noInternetDialog;
+    Dialog dialog;
+    String maintenance,version,versionName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +72,27 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE |
                         WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE );
+
+        //forcefully upgrade check
+        // Get the package manager instance
+        PackageManager packageManager = getPackageManager();
+
+        try {
+            // Get the package information
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+
+            // Retrieve the version information
+            versionName = packageInfo.versionName;
+            // int versionCode = packageInfo.versionCode;
+
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)){
+            //popUpMaintencae(maintenance,version);
+        }
 
         if (!isNotificationPermissionGranted()) {
             // Request notification permission
@@ -148,6 +174,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void popUpMaintencae(String maintenance, String version) {
+        dialog.setContentView(R.layout.maintance);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        TextView tv_version = dialog.findViewById(R.id.tv_version);
+        TextView tv_update = dialog.findViewById(R.id.tv_update);
+        dialog.show();
+        if (maintenance!=null) {
+            if (maintenance.equals("true")) {
+                tv_version.setText("Under Maintenance");
+                tv_update.setVisibility(View.GONE);
+            } else {
+                tv_version.setText("New Version Available");
+            }
+        }
+        tv_update .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.wapss.digo360"));
+                startActivity(intent);
+            }
+        });
+    }
+
+
     private void callLogin(String phone, String DeviceId) {
         progressDialog.showProgressDialog();
         Call<LoginResponse> login_apiCall = ApiService.apiHolders().login(phone, DeviceId);
@@ -159,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                     assert response.body() != null;
                     phoneNum = response.body().getPhoneNumber();
                     editor.putString("phone", phoneNum);
-                    // editor.putString("fcm",fb_token);
+                     editor.putString("fcm",fb_token);
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
                     startActivity(intent);
@@ -178,6 +230,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void initi() {
+        dialog = new Dialog(LoginActivity.this);
         btn_card = findViewById(R.id.btn_card);
         txt_privacy_policy = findViewById(R.id.txt_privacy_policy);
         txt_tnc = findViewById(R.id.txt_tnc);
@@ -188,6 +241,12 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog = new CustomProgressDialog(this);
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
+
+        loginPref2 = getSharedPreferences("login_pref2", Context.MODE_PRIVATE);
+        editor2 = loginPref2.edit();
+
+        maintenance = loginPref2.getString("maintenance", null);
+        version = loginPref2.getString("version", null);
     }
     private boolean isNotificationPermissionGranted() {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);

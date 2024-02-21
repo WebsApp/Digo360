@@ -44,7 +44,7 @@ public class OTPActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     long timerDuration = 120000;
     long timerInterval = 1000;
-    String loginStatus ="true";
+    String loginStatus ="true",fcm;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -68,6 +68,7 @@ public class OTPActivity extends AppCompatActivity {
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         phone = loginPref.getString("phone", null);
+        fcm = loginPref.getString("fb_token",null);
       //  passWord = loginPref.getString("passWord", null);
 
         Window window = getWindow();
@@ -145,7 +146,7 @@ public class OTPActivity extends AppCompatActivity {
     }
     private void callVerifyOTP(String otp, String phone) {
 //        progressDialog.showProgressDialog();
-        Call<OTP_Response> login_apiCall = ApiService.apiHolders().OTP_Verify(otp,phone);
+        Call<OTP_Response> login_apiCall = ApiService.apiHolders().OTP_Verify(otp,phone,fcm);
         login_apiCall.enqueue(new Callback<OTP_Response>() {
             @Override
             public void onResponse(Call<OTP_Response> call, Response<OTP_Response> response) {

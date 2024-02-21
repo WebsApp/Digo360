@@ -23,6 +23,7 @@ import com.wapss.digo360.response.QuestionResponse;
 import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SearchResponse;
 import com.wapss.digo360.response.SettingHomeResponse;
+import com.wapss.digo360.response.SettingResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
@@ -53,7 +54,8 @@ public interface ApiHolder {
     @POST("auth/verify")
     @FormUrlEncoded
     Call<OTP_Response> OTP_Verify(@Field("otp") String otp,
-                                  @Field("loginId") String loginId);
+                                  @Field("loginId") String loginId,
+                                  @Field("fcm") String fcm);
     @GET("degree/list")
     Call<Degree_Response> getDegreeData(@Header("Authorization") String Token);
     @GET("specialization/list/{degreeId}")
@@ -198,4 +200,7 @@ public interface ApiHolder {
                                               @Field("name") String name,
                                               @Field("email") String email,
                                               @Field("address") String address);
+
+    @GET("settings/version")
+    Call<SettingResponse> setting_maint(@Query("key") String id);
 }
