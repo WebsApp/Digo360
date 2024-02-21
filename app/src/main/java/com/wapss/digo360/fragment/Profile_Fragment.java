@@ -8,6 +8,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.content.SharedPreferences;
@@ -53,12 +55,13 @@ public class Profile_Fragment extends Fragment {
             btn_manage_case,btn_storage,btn_Search,btn_Ai_question,btn_alart,btn_case_file;
     LinearLayout ll_logOut;
     ImageView btn_faq;
-    TextView txt_profile,txt_degree;
+    TextView txt_profile,txt_degree,tv_version;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
     String name,Token,deviceToken;
     CustomProgressDialog progressDialog;
     private Dialog noInternetDialog;
+    String versionName;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +99,7 @@ public class Profile_Fragment extends Fragment {
         btn_Ai_question = profile.findViewById(R.id.btn_Ai_question);
         btn_alart = profile.findViewById(R.id.btn_alart);
         btn_case_file = profile.findViewById(R.id.btn_case_file);
+        tv_version = profile.findViewById(R.id.tv_version);
         /*network Connection Check*/
         if(!Internet_Check.isInternetAvailable(getContext())) {
             noInternetDialog = new Dialog(getContext());
@@ -346,6 +350,46 @@ public class Profile_Fragment extends Fragment {
                 noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 noInternetDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        noInternetDialog.dismiss();
+                    }
+                }, 2000);
+                noInternetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                noInternetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
+        });
+
+        // Get the package manager instance
+        PackageManager packageManager = getContext().getPackageManager();;
+
+        try {
+            // Get the package information
+            PackageInfo packageInfo = packageManager.getPackageInfo(getContext().getPackageName(), 0);
+
+            // Retrieve the version information
+            versionName = packageInfo.versionName;
+            // int versionCode = packageInfo.versionCode;
+
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        tv_version.setText(versionName);
+
+        version_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noInternetDialog = new Dialog(getContext());
+                noInternetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                noInternetDialog.setContentView(R.layout.version);
+                noInternetDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                noInternetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                TextView tv_txt = noInternetDialog.findViewById(R.id.tv_txt);
+                noInternetDialog.show();
+                tv_txt.setText("App Version" + " " + versionName);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

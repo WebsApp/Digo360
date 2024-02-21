@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -64,6 +67,7 @@ import com.wapss.digo360.utility.EncryptionUtils;
 import com.wapss.digo360.utility.Internet_Check;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -86,8 +90,8 @@ public class HomeFragment extends Fragment {
     private int currentPage = 0;
     private final long DELAY_MS = 5000; // Delay in milliseconds before flipping to the next page
     private final long PERIOD_MS = 5000; // Time period between each auto-flipping
-    SharedPreferences loginPref;
-    SharedPreferences.Editor editor;
+    SharedPreferences loginPref,loginPref2;
+    SharedPreferences.Editor editor,editor2;
     String deviceToken, Token;
     TopDiagnosiAdapter topDiagnosiAdapter;
     MostSearchDiseaseAdapter mostSearchDiseaseAdapter;
@@ -106,6 +110,8 @@ public class HomeFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     HomeTopDiseaseAdapter homeTopDiseaseAdapter;
     RecyclerView rv_home_top_disease;
+    String maintenance,version,versionName;
+    Dialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -169,12 +175,19 @@ public class HomeFragment extends Fragment {
         tv_disease3 = home.findViewById(R.id.tv_disease3);
 
         rv_most_search_diseases = home.findViewById(R.id.rv_most_search_diseases);
+        dialog = new Dialog(getContext());
 
         progressDialog = new CustomProgressDialog(getContext());
         //shared Pref
         loginPref = getContext().getSharedPreferences("login_pref", Context.MODE_PRIVATE);
         editor = loginPref.edit();
         deviceToken = loginPref.getString("deviceToken", null);
+
+        loginPref2 = getContext().getSharedPreferences("login_pref2", Context.MODE_PRIVATE);
+        editor2 = loginPref2.edit();
+
+        maintenance = loginPref2.getString("maintenance", null);
+        version = loginPref2.getString("version", null);
 
         /*network Connection Check*/
         if (!Internet_Check.isInternetAvailable(getContext())) {
@@ -201,6 +214,27 @@ public class HomeFragment extends Fragment {
             CallAPI();
             callTopDiseases();
         }
+
+        // Get the package manager instance
+        PackageManager packageManager = getContext().getPackageManager();;
+
+        try {
+            // Get the package information
+            PackageInfo packageInfo = packageManager.getPackageInfo(getContext().getPackageName(), 0);
+
+            // Retrieve the version information
+            versionName = packageInfo.versionName;
+            // int versionCode = packageInfo.versionCode;
+
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)){
+           // popUpMaintencae(maintenance,version);
+        }
+
         notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -295,6 +329,30 @@ public class HomeFragment extends Fragment {
             }
         });
         return home;
+    }
+
+    private void popUpMaintencae(String maintenance, String version) {
+        dialog.setContentView(R.layout.maintance);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        TextView tv_version = dialog.findViewById(R.id.tv_version);
+        TextView tv_update = dialog.findViewById(R.id.tv_update);
+        dialog.show();
+        if (maintenance!=null) {
+            if (maintenance.equals("true")) {
+                tv_version.setText("Under Maintenance");
+                tv_update.setVisibility(View.GONE);
+            } else {
+                tv_version.setText("New Version Available");
+            }
+        }
+        tv_update .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.wapss.digo360"));
+                startActivity(intent);
+            }
+        });
     }
 
     private void callHelpAPI() {
