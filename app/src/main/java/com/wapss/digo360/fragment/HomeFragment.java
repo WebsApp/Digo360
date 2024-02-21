@@ -47,11 +47,13 @@ import com.wapss.digo360.activity.TopDiseasesActivity;
 import com.wapss.digo360.activity.Total_Reports;
 import com.wapss.digo360.adapter.BannerAdapter;
 import com.wapss.digo360.adapter.HelpAdapter;
+import com.wapss.digo360.adapter.HomeTopDiseaseAdapter;
 import com.wapss.digo360.adapter.MostSearchDiseaseAdapter;
 import com.wapss.digo360.adapter.TopDiagnosiAdapter;
 import com.wapss.digo360.adapter.TopDiseaseAdapter;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.interfaces.HomeTopDiseaseListener;
 import com.wapss.digo360.interfaces.MostSearchDiseaseListener;
 import com.wapss.digo360.interfaces.TopDiseaseListener;
 import com.wapss.digo360.response.BannerResponse;
@@ -102,6 +104,8 @@ public class HomeFragment extends Fragment {
 
     String males, females, other, totals;
     private SwipeRefreshLayout swipeRefreshLayout;
+    HomeTopDiseaseAdapter homeTopDiseaseAdapter;
+    RecyclerView rv_home_top_disease;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +136,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        rv_home_top_disease = home.findViewById(R.id.rv_home_top_disease);
         item1 = home.findViewById(R.id.btn_fever);
         item2 = home.findViewById(R.id.item2);
         item3 = home.findViewById(R.id.item3);
@@ -310,71 +315,84 @@ public class HomeFragment extends Fragment {
                     assert response.body() != null;
                     topDiseaseResponse = response.body().getResult();
 
-                    if (topDiseaseResponse != null) {
-                        tv_disease1.setText(topDiseaseResponse.get(0).getName());
-                        tv_disease2.setText(topDiseaseResponse.get(1).getName());
-                        tv_disease3.setText(topDiseaseResponse.get(2).getName());
-
-                        String img1 = topDiseaseResponse.get(0).getImage();
-                        String img2 = topDiseaseResponse.get(1).getImage();
-                        String img3 = topDiseaseResponse.get(2).getImage();
-
-                        if (img1 == null) {
-                            iv_image1.setBackgroundResource(R.drawable.ivicon);
-                        } else {
-                            Picasso.with(getContext())
-                                    .load(img1)
-                                    .into(iv_image1);
+                    homeTopDiseaseAdapter = new HomeTopDiseaseAdapter(getContext(), topDiseaseResponse, new HomeTopDiseaseListener() {
+                        @Override
+                        public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
+                            String id = item.getId();
+                            editor.putString("diseaseId", id);
+                            editor.commit();
+                            Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+                            startActivity(intent);
                         }
+                    });
+                    rv_home_top_disease.setAdapter(homeTopDiseaseAdapter);
+                    rv_home_top_disease.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-                        item1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String id = topDiseaseResponse.get(0).getId();
-                                editor.putString("diseaseId", id);
-                                editor.commit();
-                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-
-
-                        if (img2 == null) {
-                            iv_image2.setBackgroundResource(R.drawable.ivicon);
-                        } else {
-                            Picasso.with(getContext())
-                                    .load(img2)
-                                    .into(iv_image2);
-                        }
-                        item2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String id = topDiseaseResponse.get(1).getId();
-                                editor.putString("diseaseId", id);
-                                editor.commit();
-                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                        if (img3 == null) {
-                            iv_image3.setBackgroundResource(R.drawable.ivicon);
-                        } else {
-                            Picasso.with(getContext())
-                                    .load(img3)
-                                    .into(iv_image3);
-                        }
-                        item3.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String id = topDiseaseResponse.get(2).getId();
-                                editor.putString("diseaseId", id);
-                                editor.commit();
-                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                    }
+//                    if (topDiseaseResponse != null) {
+//                        tv_disease1.setText(topDiseaseResponse.get(0).getName());
+//                        tv_disease2.setText(topDiseaseResponse.get(1).getName());
+//                        tv_disease3.setText(topDiseaseResponse.get(2).getName());
+//
+//                        String img1 = topDiseaseResponse.get(0).getImage();
+//                        String img2 = topDiseaseResponse.get(1).getImage();
+//                        String img3 = topDiseaseResponse.get(2).getImage();
+//
+//                        if (img1 == null) {
+//                            iv_image1.setBackgroundResource(R.drawable.ivicon);
+//                        } else {
+//                            Picasso.with(getContext())
+//                                    .load(img1)
+//                                    .into(iv_image1);
+//                        }
+//
+//                        item1.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                String id = topDiseaseResponse.get(0).getId();
+//                                editor.putString("diseaseId", id);
+//                                editor.commit();
+//                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
+//
+//
+//                        if (img2 == null) {
+//                            iv_image2.setBackgroundResource(R.drawable.ivicon);
+//                        } else {
+//                            Picasso.with(getContext())
+//                                    .load(img2)
+//                                    .into(iv_image2);
+//                        }
+//                        item2.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                String id = topDiseaseResponse.get(1).getId();
+//                                editor.putString("diseaseId", id);
+//                                editor.commit();
+//                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
+//
+//                        if (img3 == null) {
+//                            iv_image3.setBackgroundResource(R.drawable.ivicon);
+//                        } else {
+//                            Picasso.with(getContext())
+//                                    .load(img3)
+//                                    .into(iv_image3);
+//                        }
+//                        item3.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                String id = topDiseaseResponse.get(2).getId();
+//                                editor.putString("diseaseId", id);
+//                                editor.commit();
+//                                Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
+//                    }
 
                     topDiseaseAdapter = new TopDiseaseAdapter(getContext(), topDiseaseResponse, new TopDiseaseListener() {
                         @Override
@@ -491,22 +509,22 @@ public class HomeFragment extends Fragment {
                     if (response.body().getSummary().getMaleCount() != null) {
                         maless = Integer.parseInt(response.body().getSummary().getMaleCount());
                         male.setText(response.body().getSummary().getMaleCount());
-                    }else {
-                        maless=0;
+                    } else {
+                        maless = 0;
                         male.setText("0");
                     }
                     if (response.body().getSummary().getFemaleCount() != null) {
                         femaless = Integer.parseInt(response.body().getSummary().getFemaleCount());
                         female.setText(response.body().getSummary().getFemaleCount());
-                    }else {
-                        femaless=0;
+                    } else {
+                        femaless = 0;
                         female.setText("0");
                     }
                     if (response.body().getSummary().getOtherCount() != null) {
                         otherss = +Integer.parseInt(response.body().getSummary().getOtherCount());
                         others.setText(response.body().getSummary().getOtherCount());
-                    }else {
-                        otherss=0;
+                    } else {
+                        otherss = 0;
                         others.setText("0");
                     }
                     totalss = maless + femaless + otherss;
