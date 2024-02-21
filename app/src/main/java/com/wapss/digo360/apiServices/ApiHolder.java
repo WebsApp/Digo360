@@ -53,7 +53,8 @@ public interface ApiHolder {
     @POST("auth/verify")
     @FormUrlEncoded
     Call<OTP_Response> OTP_Verify(@Field("otp") String otp,
-                                  @Field("loginId") String loginId);
+                                  @Field("loginId") String loginId,
+                                  @Field("fcm") String fcm);
     @GET("degree/list")
     Call<Degree_Response> getDegreeData(@Header("Authorization") String Token);
     @GET("specialization/list/{degreeId}")

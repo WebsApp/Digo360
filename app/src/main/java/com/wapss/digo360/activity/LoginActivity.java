@@ -159,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                     assert response.body() != null;
                     phoneNum = response.body().getPhoneNumber();
                     editor.putString("phone", phoneNum);
-                    // editor.putString("fcm",fb_token);
+                     editor.putString("fcm",fb_token);
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, OTPActivity.class);
                     startActivity(intent);
