@@ -17,7 +17,7 @@ import com.wapss.digo360.R;
 
 public class AboutDigo extends AppCompatActivity {
     LinearLayout btn_about,btn_privacy,btn_data_share,btn_agreement;
-    ImageView back;
+    ImageView back,about_faq;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class AboutDigo extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
 
+        about_faq = findViewById(R.id.about_faq);
         back = findViewById(R.id.back);
         btn_about = findViewById(R.id.btn_about);
         btn_privacy = findViewById(R.id.btn_privacy);
@@ -58,6 +59,16 @@ public class AboutDigo extends AppCompatActivity {
                 bundle.putString("PAGE_ID", "3");
                 bundle.putString("PAGE_Name", "PRIVACY POLICY");
                 Intent i = new Intent(AboutDigo.this, Pages.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+        about_faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("PAGE_NAME", "ABOUTDIGO");
+                Intent i = new Intent(AboutDigo.this, HelpPage.class);
                 i.putExtras(bundle);
                 startActivity(i);
             }
