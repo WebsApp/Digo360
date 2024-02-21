@@ -66,7 +66,6 @@ public class Update_Profile extends AppCompatActivity {
             }
         });
     }
-
     private void profile_Update() {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
