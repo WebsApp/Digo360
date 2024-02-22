@@ -92,11 +92,12 @@ public class RegistrationActivity extends AppCompatActivity {
     private String specializationId = "";
     private String studyYear = "";
     private String dob = "";
-    private String degreeId = "";
+    private String degreeId;
     ImageView iv_date;
     Date dateNow = null;
     CheckBox checkBoxTerms;
     String loginStatus ="true";
+    MaterialSpinner spinner_degree,spinner_spec;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -109,6 +110,8 @@ public class RegistrationActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(getWindow().getContext(), R.color.purple));
         /*Id Initialize*/
         checkBoxTerms = findViewById(R.id.checkBoxTerms);
+        spinner_degree = findViewById(R.id.spinner_degree);
+        spinner_spec = findViewById(R.id.spinner_spec);
         et_area = findViewById(R.id.et_area);
         cv_area = findViewById(R.id.cv_area);
         cv_city = findViewById(R.id.cv_city);
@@ -118,22 +121,22 @@ public class RegistrationActivity extends AppCompatActivity {
         cv_degree = findViewById(R.id.cv_degree);
         cv_specialization = findViewById(R.id.cv_specialization);
         cv_study_year = findViewById(R.id.cv_study_year);
-        et_degree = findViewById(R.id.et_degree);
-        et_s_year = findViewById(R.id.et_s_year);
+        //et_degree = findViewById(R.id.et_degree);
+        ///et_s_year = findViewById(R.id.et_s_year);
         et_DOB = findViewById(R.id.et_DOB);
         iv_date = findViewById(R.id.iv_date);
-        et_spec = findViewById(R.id.et_spec);
+        //et_spec = findViewById(R.id.et_spec);
         et_desig = findViewById(R.id.et_desig);
         tv_registration = findViewById(R.id.tv_registration);
         sp_state = findViewById(R.id.sp_state);
-        sp_study_year = findViewById(R.id.sp_study_year);
-        sp_degree = findViewById(R.id.sp_degree);
+//        sp_study_year = findViewById(R.id.sp_study_year);
+        //sp_degree = findViewById(R.id.sp_degree);
         rg_gneder = findViewById(R.id.rg_gneder);
         rb_male = findViewById(R.id.rb_male);
         rb_female = findViewById(R.id.rb_female);
         rb_other = findViewById(R.id.rb_other);
         sp_designation = findViewById(R.id.sp_designation);
-        sp_specialization = findViewById(R.id.sp_specialization);
+        //sp_specialization = findViewById(R.id.sp_specialization);
         sp_dr = findViewById(R.id.sp_dr);
         et_name = findViewById(R.id.et_name);
         sp_area = findViewById(R.id.sp_area);
@@ -231,57 +234,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
         /*EXP level choose*/
-       /* Designation_Adapter designationAdapter = new Designation_Adapter(this, R.layout.custom_spinner, items);
-        sp_designation.setAdapter(designationAdapter);
-        sp_designation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                *//*if (i == 0) {
-
-                }
-                else {
-                    strSpec = items.get(i);
-                    if (strSpec.equals("EXPERIENCE")) {
-                        cv_degree.setVisibility(View.VISIBLE);
-                        cv_specialization.setVisibility(View.VISIBLE);
-                        cv_study_year.setVisibility(View.GONE);
-                        study_Year = null;
-                        experienceLevel = "EXPERIENCE";
-                        et_desig.setText(strSpec);
-                        callDegreeAPI();
-                        stringDigreeArrayList.clear();
-                    }
-                    else if (strSpec.equals("INTERN")) {
-                        cv_degree.setVisibility(View.VISIBLE);
-                        cv_specialization.setVisibility(View.GONE);
-                        cv_study_year.setVisibility(View.GONE);
-                        study_Year = null;
-                        experienceLevel = "INTERN";
-                        et_desig.setText(strSpec);
-                        specialization_Id = null;
-                        callDegreeAPI();
-                        stringDigreeArrayList.clear();
-                    }
-                    else if (strSpec.equals("STUDENT")) {
-                        cv_degree.setVisibility(View.VISIBLE);
-                        cv_study_year.setVisibility(View.VISIBLE);
-                        cv_specialization.setVisibility(View.GONE);
-                        specialization_Id = null;
-                        experienceLevel = "STUDENT";
-                        et_desig.setText(strSpec);
-                        stryear = "STUDENT";
-                        callDegreeAPI();
-                        stringDigreeArrayList.clear();
-                    }
-                }*//*
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
         MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.spinner);
         spinner.setItems("Select Your Designation","EXPERIENCE", "INTERN", "STUDENT");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -327,39 +279,58 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
         /*Study Year*/
-        ArrayAdapter<String> study_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, study_year_list);
-        study_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_study_year.setAdapter(study_adapter);
-        sp_study_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        MaterialSpinner spinner_study = (MaterialSpinner) findViewById(R.id.spinner_study);
+        spinner_study.setItems("Select Your Study Year", "FIRST YEAR", "SECOND YEAR", "THIRD YEAR", "FOURTH YEAR");
+        spinner_study.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+               /* if (position == 0) {
+
+                }
+                else {
+                    strSpec = items.get(position);
+                    if (strSpec.equals("EXPERIENCE")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.GONE);
+                        study_Year = null;
+                        experienceLevel = "EXPERIENCE";
+                        et_desig.setText(strSpec);
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("INTERN")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        cv_study_year.setVisibility(View.GONE);
+                        study_Year = null;
+                        experienceLevel = "INTERN";
+                        et_desig.setText(strSpec);
+                        specialization_Id = null;
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                    else if (strSpec.equals("STUDENT")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        specialization_Id = null;
+                        experienceLevel = "STUDENT";
+                        et_desig.setText(strSpec);
+                        stryear = "STUDENT";
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                    }
+                }*/
+                if (position == 0) {
 
                 } else {
-                    studyYear = study_year_list.get(i);
-                    et_s_year.setText(studyYear);
+                    studyYear = study_year_list.get(position);
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
         });
+
         if (checkBoxTerms.isChecked()){
             tnc = "YES";
         }
@@ -375,12 +346,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 email = et_email.getText().toString();
                 address = et_address.getText().toString();
                 String level = et_desig.getText().toString();
-                String degree = et_degree.getText().toString();
-                String Specialization = et_spec.getText().toString();
+                //String degree = et_degree.getText().toString();
+                //String Specialization = et_spec.getText().toString();
                 String state = et_state.getText().toString();
                 String city = et_city.getText().toString();
                 String area = et_area.getText().toString();
-                String study_Year = et_s_year.getText().toString();
+                //String study_Year = et_s_year.getText().toString();
                 if (name.equals("")){
                     Toast.makeText(RegistrationActivity.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
                 } else if (DOB.equals("")) {
@@ -391,13 +362,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Please Select Your Experience Level", Toast.LENGTH_SHORT).show();
                 }
                 else if (level.equals("EXPERIENCE")) {
-                    if (degree.equals("")){
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (Specialization.equals("")) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Specialization", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (state.equals("")) {
+//                    if (degree.equals("")){
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (Specialization.equals("")) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Specialization", Toast.LENGTH_SHORT).show();
+//                    }
+                    if (state.equals("")) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
                     }
                     else if (city.equals("")) {
@@ -411,10 +382,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 }
                 else if (level.equals("INTERN")) {
-                    if (degree.equals("")){
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (state.equals("")) {
+//                    if (degree.equals("")){
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+//                    }
+                    if (state.equals("")) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
                     }
                     else if (city.equals("")) {
@@ -428,13 +399,13 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 }
                 else if (level.equals("STUDENT")) {
-                    if (degree.equals("")){
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
-                    }
-                    if (study_Year.equals("")){
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Study Year", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (state.equals("")) {
+//                    if (degree.equals("")){
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+//                    }
+//                    if (study_Year.equals("")){
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Study Year", Toast.LENGTH_SHORT).show();
+//                    }
+                    if (state.equals("")) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
                     }
                     else if (city.equals("")) {
@@ -491,7 +462,7 @@ public class RegistrationActivity extends AppCompatActivity {
         degree_apiCall.enqueue(new Callback<Degree_Response>() {
             @Override
             public void onResponse(Call<Degree_Response> call, Response<Degree_Response> response) {
-                if (response.isSuccessful()) {
+               /* if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     DegreeResponse = response.body().getResult();
@@ -538,7 +509,44 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-                } else {
+                }
+                else {
+                    progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }*/
+
+                if (response.isSuccessful()) {
+                    progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    DegreeResponse = response.body().getResult();
+                    List<Degree_Response.Result> degreeList = new ArrayList<Degree_Response.Result>();
+
+                    for (int i = 0; i < DegreeResponse.size(); i++) {
+                        Degree_Response.Result response2 = new Degree_Response.Result();
+                        response2.setId(DegreeResponse.get(i).getId());
+                        response2.setName(DegreeResponse.get(i).getName());
+                        degreeList.add(response2);
+
+                    }
+                    for (int i = 0; i < degreeList.size(); i++) {
+                        // stringDigreeArrayList.add(DegreeResponse.get(i).getId());
+                        stringDigreeArrayList.add(DegreeResponse.get(i).getName());
+
+                    }
+                    spinner_degree.setItems(stringDigreeArrayList);
+                    //spinner.setSelectedIndex(0);
+                    spinner_degree.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                                degreeId = DegreeResponse.get(position).getId();
+                                //et_degree.setText(DegreeResponse.get(position).getName());
+                                //stringDigreeArrayList.clear();
+                                stringSpecArrayList.clear();
+                                callSpecializationAPI(degreeId);
+                        }
+                    });
+                }
+                else {
                     progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -572,7 +580,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         stringSpecArrayList.add(specResponse.get(i).getName());
                     }
 
-                    ArrayAdapter<String> spec = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringSpecArrayList);
+                    /*ArrayAdapter<String> spec = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringSpecArrayList);
                     spec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     sp_specialization.setAdapter(spec);
                     sp_specialization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -601,6 +609,21 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
 
+                        }
+                    });*/
+                    spinner_spec.setItems(stringSpecArrayList);
+                    //spinner.setSelectedIndex(0);
+                    spinner_spec.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            if (position == 0) {
+
+                            }
+                            else {
+                                specializationId = specResponse.get(position).getId();
+                                //et_spec.setText(specResponse.get(position).getName());
+                                stringDigreeArrayList.clear();
+                            }
                         }
                     });
                 } else {

@@ -279,7 +279,7 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:visibility="gone">
 
-                    <EditText
+                    <!--<EditText
                         android:id="@+id/et_degree"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -297,7 +297,15 @@
                         android:id="@+id/sp_degree"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
-                        android:layout_weight="5"/>
+                        android:layout_weight="5"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 
@@ -310,7 +318,7 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:visibility="gone">
 
-                    <EditText
+                    <!--<EditText
                         android:id="@+id/et_s_year"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -322,13 +330,16 @@
                         android:textColorHint="#B374BD"
                         android:editable="false"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_13ssp" />
+                        android:textSize="@dimen/_13ssp" />-->
 
-                    <Spinner
-                        android:id="@+id/sp_study_year"
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_study"
                         android:layout_width="match_parent"
-                        android:layout_weight="5"
-                        android:layout_height="@dimen/_35sdp"/>
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 
@@ -341,7 +352,7 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:visibility="gone">
 
-                    <EditText
+                    <!--<EditText
                         android:id="@+id/et_spec"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -359,7 +370,15 @@
                         android:id="@+id/sp_specialization"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
-                        android:layout_weight="5"/>
+                        android:layout_weight="5"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_spec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.wapss.digo360.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.wapss.digo360.R;
 import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.response.Degree_Response;
 import com.wapss.digo360.response.SpecializationResponse;
 
 import java.util.ArrayList;
@@ -22,71 +25,70 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Test_Spec extends AppCompatActivity {
-   /* Spinner sp_specialization;
-    EditText et_spec;
-    List<SpecializationResponse.Result> specResponse;
-    private ArrayList<String> stringSpecArrayList = new ArrayList<String>();*/
+    List<Degree_Response.Result> DegreeResponse;
+    private ArrayList<String> stringDigreeArrayList = new ArrayList<String>();
+    MaterialSpinner spinner;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_spec);
-//        sp_specialization = findViewById(R.id.sp_specialization);
-//        et_spec = findViewById(R.id.et_spec);
-        //spc_api();
+
+        spinner = findViewById(R.id.spinner);
+        spc_api();
     }
 
-   /* private void spc_api() {
-        String degreeId = "8e580121-96ec-4a5d-87d4-d65e5a80d5d8";
-        String Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTY2MDA2MiwiZXhwIjoxNzM3MTk2MDYyfQ.DLpBOutEtY2JQBZ6BFeKw2b7bOURnYm5xleK6diqp1Q";
-        int limit = 50;
-        int  offset = 0;
-        Call<SpecializationResponse> Specialization_apiCall = ApiService.apiHolders().getSpecData(degreeId,Token,limit,offset);
-        Specialization_apiCall.enqueue(new Callback<SpecializationResponse>() {
+    private void spc_api() {
+        String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2ZTk1OWI4LTg1MTMtNDY4NS05YmVjLWI4Y2Q5OTA4ZWJiOCIsImlhdCI6MTcwODU3ODk5NywiZXhwIjoxNzQwMTE0OTk3fQ.QcTOc9teqsq1poe99DEhNAworjhe6SBLwqcAKIS8B1o";
+        String Token = "Bearer " + TOKEN;
+        Call<Degree_Response> degree_apiCall = ApiService.apiHolders().getDegreeData(Token);
+        degree_apiCall.enqueue(new Callback<Degree_Response>() {
             @Override
-            public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
+            public void onResponse(Call<Degree_Response> call, Response<Degree_Response> response) {
                 if (response.isSuccessful()) {
+
                     assert response.body() != null;
-                    specResponse = response.body().getResult();
-                    List<SpecializationResponse.Result> specList = new ArrayList<SpecializationResponse.Result>();
-                    for (int i = 0; i < specResponse.size(); i++) {
-                        SpecializationResponse.Result specialization_response = new SpecializationResponse.Result();
-                        specialization_response.setId(specResponse.get(i).getId());
-                        specialization_response.setId(specResponse.get(i).getName());
-                        specList.add(specialization_response);
-                    }
-                    for (int i = 0; i < specList.size(); i++) {
-                        // stringArrayList.add(stateResponse.get(i).getId());
-                        stringSpecArrayList.add(specResponse.get(i).getName());
-                    }
+                    DegreeResponse = response.body().getResult();
+                    List<Degree_Response.Result> degreeList = new ArrayList<Degree_Response.Result>();
 
-                    ArrayAdapter<String> spec = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringSpecArrayList);
-                    spec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_specialization.setAdapter(spec);
-                    sp_specialization.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    for (int i = 0; i < DegreeResponse.size(); i++) {
+                        Degree_Response.Result response2 = new Degree_Response.Result();
+                        response2.setId(DegreeResponse.get(i).getId());
+                        response2.setName(DegreeResponse.get(i).getName());
+                        degreeList.add(response2);
+
+                    }
+                    for (int i = 0; i < degreeList.size(); i++) {
+                        // stringDigreeArrayList.add(DegreeResponse.get(i).getId());
+                        stringDigreeArrayList.add(DegreeResponse.get(i).getName());
+
+                    }
+                    spinner.setItems(stringDigreeArrayList);
+                    //spinner.setSelectedIndex(0);
+                    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                         @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (i == 0) {
-
-                            } else {
-                                String specializationId = specResponse.get(i).getId();
-                                et_spec.setText(specResponse.get(i).getName());
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            if (position == 0) {
+                                spinner.setHint("Select Your Degree");
+                            }
+                            else {
+                                Toast.makeText(Test_Spec.this, ""+item, Toast.LENGTH_SHORT).show();
                             }
                         }
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
                     });
-                } else {
+
+                }
+                else {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
-            public void onFailure(Call<SpecializationResponse> call, Throwable t) {
-                //progressDialog.hideProgressDialog();
+            public void onFailure(Call<Degree_Response> call, Throwable t) {
+
             }
         });
 
-    }*/
+    }
 }
