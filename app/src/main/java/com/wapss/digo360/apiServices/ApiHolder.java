@@ -201,6 +201,6 @@ public interface ApiHolder {
                                               @Field("email") String email,
                                               @Field("address") String address);
 
-    @GET("settings/version")
-    Call<SettingResponse> setting_maint(@Query("key") String id);
+    @GET("settings/version/{key}")
+    Call<SettingResponse> setting_maint(@Path("key") String id);
 }
