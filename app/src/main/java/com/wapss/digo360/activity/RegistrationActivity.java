@@ -84,7 +84,7 @@ public class RegistrationActivity extends AppCompatActivity {
     List<String> study_year_list = Arrays.asList("Select Your Study Year", "FIRST YEAR", "SECOND YEAR", "THIRD YEAR", "FOURTH YEAR");
     String[] drOther = {"Dr", "Other"};
     EditText et_name, et_address, et_PinCode, et_email, et_desig, et_spec, et_DOB, et_s_year, et_degree, et_state, et_city, et_area;
-    String dr,tnc, name, pin, area, title, pinCode, email, address, Token, currentTime, stateId, cityId, study_Year, specialization_Id, std_year, stryear;
+    String dr,tnc, name, pin, area, title, pinCode, email = "", address = "", Token, currentTime, stateId, cityId, study_Year, specialization_Id, std_year, stryear;
     LinearLayout cv_study_year, cv_specialization, cv_degree, cv_city, cv_area;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int textColor = Color.parseColor("#800080");
@@ -356,9 +356,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
                 } else if (DOB.equals("")) {
                     Toast.makeText(RegistrationActivity.this, "Please Select Your DOB", Toast.LENGTH_SHORT).show();
-                } else if (email.equals("")) {
-                    Toast.makeText(RegistrationActivity.this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
-                } else if (level.equals("")) {
+                }
+//                else if (email.equals("")) {
+//                    Toast.makeText(RegistrationActivity.this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
+//                }
+                else if (level.equals("")) {
                     Toast.makeText(RegistrationActivity.this, "Please Select Your Experience Level", Toast.LENGTH_SHORT).show();
                 }
                 else if (level.equals("EXPERIENCE")) {
@@ -514,7 +516,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }*/
-
                 if (response.isSuccessful()) {
                     progressDialog.hideProgressDialog();
                     assert response.body() != null;
