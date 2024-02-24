@@ -183,7 +183,6 @@ public class TopDiseasesActivity extends AppCompatActivity {
 //                    {
 //                        viewAll2.setVisibility(View.GONE);
 //                    }
-
                     topDiseaseAdapeter3 = new TopDiseaseAdapeter3(getApplicationContext(), searchResponse, new ListDiseaseListener() {
                         @Override
                         public void onItemClickedItem(SearchResponse.Result item, int position) {

@@ -70,6 +70,7 @@ public class HelpPage extends AppCompatActivity {
         assert bundle != null;
         pageName = bundle.getString("PAGE_NAME");
 
+
         btn_back_home = findViewById(R.id.btn_back_home);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
