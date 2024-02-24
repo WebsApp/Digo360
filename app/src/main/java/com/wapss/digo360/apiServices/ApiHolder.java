@@ -18,6 +18,7 @@ import com.wapss.digo360.response.Patient_Check_Response;
 import com.wapss.digo360.response.Patient_Consultation_Response;
 import com.wapss.digo360.response.Patient_Count_Response;
 import com.wapss.digo360.response.PatientsDetailsViewResponse;
+import com.wapss.digo360.response.PendingResponse;
 import com.wapss.digo360.response.Profile_Response;
 import com.wapss.digo360.response.QuestionResponse;
 import com.wapss.digo360.response.RegistrationResponse;
@@ -201,6 +202,9 @@ public interface ApiHolder {
                                               @Field("email") String email,
                                               @Field("address") String address);
 
-    @GET("settings/version/{key}")
+    @GET("settings/{key}")
     Call<SettingResponse> setting_maint(@Path("key") String id);
+
+    @GET("doctor-detail/token")
+    Call<PendingResponse> pendingDoctor(@Header("Authorization") String Token);
 }
