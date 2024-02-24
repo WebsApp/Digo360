@@ -478,7 +478,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
     /*private void callHelpAPI(String deviceToken) {
         progressDialog.showProgressDialog();
         String Token = "Bearer " + deviceToken;

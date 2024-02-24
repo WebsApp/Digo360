@@ -183,7 +183,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     },2000);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
