@@ -458,7 +458,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
     private void callDegreeAPI() {
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         Call<Degree_Response> degree_apiCall = ApiService.apiHolders().getDegreeData(Token);
         degree_apiCall.enqueue(new Callback<Degree_Response>() {
@@ -517,7 +517,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }*/
                 if (response.isSuccessful()) {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     DegreeResponse = response.body().getResult();
                     List<Degree_Response.Result> degreeList = new ArrayList<Degree_Response.Result>();
@@ -548,25 +548,25 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
                 }
                 else {
-                    progressDialog.hideProgressDialog();
+                   // progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<Degree_Response> call, Throwable t) {
-                progressDialog.hideProgressDialog();
+               // progressDialog.hideProgressDialog();
             }
         });
     }
     private void callSpecializationAPI(String degreeId) {
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         Call<SpecializationResponse> Specialization_apiCall = ApiService.apiHolders().getSpecData(degreeId,Token,50,0);
         Specialization_apiCall.enqueue(new Callback<SpecializationResponse>() {
             @Override
             public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     specResponse = response.body().getResult();
                     List<SpecializationResponse.Result> specList = new ArrayList<SpecializationResponse.Result>();
@@ -628,7 +628,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    progressDialog.hideProgressDialog();
+                   // progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -639,7 +639,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
     private void callStateDate() {
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         Call<StateResponse> state_apiCall = ApiService.apiHolders().getStateData(Token);
         state_apiCall.enqueue(new Callback<StateResponse>() {
@@ -689,7 +689,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }*/
                 if (response.isSuccessful()) {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     stateResponse = response.body().getResult();
                     List<StateResponse.Result> statelist = new ArrayList<StateResponse.Result>();
@@ -727,26 +727,26 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    progressDialog.hideProgressDialog();
+                   // progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<StateResponse> call, Throwable t) {
-                progressDialog.hideProgressDialog();
+               // progressDialog.hideProgressDialog();
             }
         });
     }
     private void callCity(String stateId) {
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         Call<CityResponse> state_apiCall = ApiService.apiHolders().getCityData(stateId, Token);
         state_apiCall.enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.hideProgressDialog();
+                   // progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     cityResponse = response.body().getResult();
                     List<CityResponse.Result> citylist = new ArrayList<CityResponse.Result>();
@@ -783,26 +783,26 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
-                progressDialog.hideProgressDialog();
+               // progressDialog.hideProgressDialog();
             }
         });
     }
     private void callArea(String cityId) {
-        progressDialog.showProgressDialog();
+       // progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
         Call<AreaResponse> state_apiCall = ApiService.apiHolders().getAreaData(cityId, Token,50,0);
         state_apiCall.enqueue(new Callback<AreaResponse>() {
             @Override
             public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     assert response.body() != null;
                     areaResponse = response.body().getResult();
                     List<AreaResponse.Result> arealist = new ArrayList<AreaResponse.Result>();
@@ -838,14 +838,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    progressDialog.hideProgressDialog();
+                  //  progressDialog.hideProgressDialog();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AreaResponse> call, Throwable t) {
-                progressDialog.hideProgressDialog();
+              //  progressDialog.hideProgressDialog();
             }
         });
     }

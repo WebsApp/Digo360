@@ -7,11 +7,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,15 +24,19 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.wapss.digo360.R;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.fragment.TopDiseasesFragment;
 import com.wapss.digo360.response.FaqResponse;
 import com.wapss.digo360.response.PatientDetails_Response;
+import com.wapss.digo360.response.PendingResponse;
+import com.wapss.digo360.response.SettingResponse;
 import com.wapss.digo360.utility.DateUtils;
 
 import java.text.ParseException;
@@ -48,8 +54,8 @@ public class NewCasectivity extends AppCompatActivity {
     private ProgressBar progressBar;
     Button start_progress;
     LinearLayout ll_address, ll_age, ll_Dob, ll_phone_num, ll_phone_email, ll_otherProblem;
-    RadioGroup rg_age, rg_phone, rg_address, rg_gender,rg_dob;
-    RadioButton rb_doB, rb_age, rb_phone, rb_email, rb_yes, rb_no, rb_male, rb_female, rb_other,rb_age_yes,rb_age_no,rb_doB_yes,rb_dob_no;
+    RadioGroup rg_age, rg_phone, rg_address, rg_gender, rg_dob;
+    RadioButton rb_doB, rb_age, rb_phone, rb_email, rb_yes, rb_no, rb_male, rb_female, rb_other, rb_age_yes, rb_age_no, rb_doB_yes, rb_dob_no;
     TextView tv_submit;
     ImageView back, iv_date;
     EditText pt_name, pt_age, pt_DOB, pt_phone, pt_email, pt_full_Address, pt_State, pt_Area, pt_city, pt_pinCode;
@@ -59,10 +65,13 @@ public class NewCasectivity extends AppCompatActivity {
     String ss, TOKEN, stateName, cityName, areaName, phoneNumber, email, address, pincode;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken, p_number,age;
+    String deviceToken, p_number, age;
     CustomProgressDialog progressDialog;
     String Age_and_DOB = "";
-    String gender  ="";
+    String gender = "";
+    String CheckStatus;
+    Dialog dialog;
+    RelativeLayout rl_layout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -81,6 +90,8 @@ public class NewCasectivity extends AppCompatActivity {
         }
 
         initi();
+
+        callPendingAPi();
         /*rg_age.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -119,26 +130,69 @@ public class NewCasectivity extends AppCompatActivity {
                 String P_Age = pt_age.getText().toString();
                 Age_and_DOB = pt_DOB.getText().toString();
                 Age_and_DOB = pt_age.getText().toString();
-                if (P_name.equals("")){
+                if (P_name.equals("")) {
                     Toast.makeText(NewCasectivity.this, "Enter Patient name", Toast.LENGTH_SHORT).show();
-                }
-                else if (pt_DOB.getText().toString().isEmpty()) {
+                } else if (pt_DOB.getText().toString().isEmpty()) {
                     Toast.makeText(NewCasectivity.this, "Please Select DOB or Age", Toast.LENGTH_SHORT).show();
-                }
-                else if (gender.equals("")) {
+                } else if (gender.equals("")) {
                     Toast.makeText(NewCasectivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
                 }
 //               else if (pt_full_Address.getText().toString().isEmpty()) {
 //                    Toast.makeText(NewCasectivity.this, "Please Enter Patient Address", Toast.LENGTH_SHORT).show();
 //                }
-               else {
-                    patient_details();
+                else {
+                    if (CheckStatus.equals("PENDING")) {
+                        // pendingPopUp();
+                        Snackbar errorBar;
+                        errorBar = Snackbar.make(rl_layout, "Doctor's Profile is Currently Under Verification", Snackbar.LENGTH_LONG);
+                        errorBar.setTextColor(getResources().getColor(R.color.white));
+                        errorBar.setActionTextColor(getResources().getColor(R.color.white));
+                        errorBar.setBackgroundTint(getResources().getColor(R.color.black));
+                        errorBar.show();
+                    } else {
+                        patient_details();
+                    }
                 }
             }
         });
     }
 
+    private void pendingPopUp() {
+        dialog.setContentView(R.layout.pending);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    private void callPendingAPi() {
+        TOKEN = "Bearer " + deviceToken;
+        Call<PendingResponse> profile_apiCall = ApiService.apiHolders().pendingDoctor(TOKEN);
+        profile_apiCall.enqueue(new Callback<PendingResponse>() {
+            @Override
+            public void onResponse(Call<PendingResponse> call, Response<PendingResponse> response) {
+                if (response.code() == 401) {
+
+                } else {
+                    if (response.isSuccessful()) {
+                        PendingResponse pendingResponse = response.body();
+                        assert pendingResponse != null;
+                        CheckStatus = pendingResponse.getStatus();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PendingResponse> call, Throwable t) {
+                Toast.makeText(NewCasectivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void initi() {
+        rl_layout = findViewById(R.id.rl_layout);
+        dialog = new Dialog(NewCasectivity.this);
         progressDialog = new CustomProgressDialog(this);
         //shared Pref
         loginPref = getSharedPreferences("login_pref", Context.MODE_PRIVATE);

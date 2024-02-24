@@ -323,7 +323,6 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/ll_viewAllDisease"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_2sdp"
@@ -699,6 +698,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
+                                android:id="@+id/ll_viewAllDisease"
                                 android:layout_width="@dimen/_60sdp"
                                 android:layout_height="@dimen/_60sdp"
                                 android:layout_gravity="center"

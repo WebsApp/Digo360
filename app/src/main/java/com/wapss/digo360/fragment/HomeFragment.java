@@ -233,7 +233,7 @@ public class HomeFragment extends Fragment {
         }
 
         if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)) {
-           // popUpMaintencae(maintenance, version);
+            popUpMaintencae(maintenance, version);
         }
 
         notification.setOnClickListener(new View.OnClickListener() {
