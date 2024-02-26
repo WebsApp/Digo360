@@ -100,7 +100,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your expertise deserves precise answers. Refresh or try again for FAQs tailored to your specialization!"
+            android:text="@string/faq_desc"
             android:textSize="@dimen/_10ssp"
             android:textColor="#7210A1"
             android:layout_gravity="center"
@@ -124,7 +124,7 @@
                 android:layout_gravity="center"
                 android:background="@color/purple"
                 android:gravity="center"
-                android:text="Back to Home"
+                android:text="@string/back_to_home"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp" />
 

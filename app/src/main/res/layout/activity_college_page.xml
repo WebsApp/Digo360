@@ -254,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:padding="@dimen/_7sdp"
-                    android:text="Admission Year"
+                    android:text="@string/admission"
                     android:textColor="@color/purple" />
 
                 <ImageView
@@ -283,7 +283,7 @@
                     android:layout_centerInParent="true"
                     android:gravity="left"
                     android:padding="@dimen/_7sdp"
-                    android:text="Passout Year"
+                    android:text="@string/passout_year"
                     android:textColor="@color/purple" />
 
                 <ImageView

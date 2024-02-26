@@ -75,7 +75,23 @@ public class CollegePage extends AppCompatActivity {
         select_date = findViewById(R.id.select_date);
         to_date_picker = findViewById(R.id.to_date_picker);
         progressDialog = new CustomProgressDialog(CollegePage.this);
-        et_degree.setText("MD");
+        //et_degree.setText("MD");
+        Bundle bundle = getIntent().getExtras();
+        //Extract the data…
+        if (bundle != null){
+            String Clg_name = bundle.getString("CLG_NAME");
+            String Clg_admission = bundle.getString("CLG_ADMISSION");
+            String Clg_pass = bundle.getString("CLG_PASS");
+            String Degree = bundle.getString("DEASES_NAME");
+
+            edit_college_name.setText(Clg_name);
+            et_admission_year.setText(Clg_admission);
+            et_Passout.setText(Clg_pass);
+            et_degree.setText(Degree);
+        }
+        else {
+
+        }
 
         currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
@@ -98,12 +114,6 @@ public class CollegePage extends AppCompatActivity {
                                 et_admission_year.setText(dateFormat1.format(calendar.getTime()));
                             }
                         }, year, month, dayOfMonth);
-//                try {
-//                    dateNow = formatter.parse(currentTime);
-//                } catch (ParseException e) {
-//                    throw new RuntimeException(e);
-//                }
-                //datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
@@ -125,12 +135,6 @@ public class CollegePage extends AppCompatActivity {
                                 et_Passout.setText(dateFormat1.format(calendar.getTime()));
                             }
                         }, year, month, dayOfMonth);
-//                try {
-//                    dateNow = formatter.parse(currentTime);
-//                } catch (ParseException e) {
-//                    throw new RuntimeException(e);
-//                }
-                //datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
@@ -198,9 +202,6 @@ public class CollegePage extends AppCompatActivity {
                     String dateStr = formatter9.format(date9);
                     String date_pass = formatter9.format(date10);
 
-//                    et_admission_year.setText(dateStr);
-//                    et_Passout.setText(date_pass);
-//                    edit_college_name.setText(response.body().getCollegeName());
 
                     Toast.makeText(CollegePage.this, "Collage Updated Successfully", Toast.LENGTH_SHORT).show();
                 }

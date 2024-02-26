@@ -72,11 +72,9 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE |
                         WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE );
-
         //forcefully upgrade check
         // Get the package manager instance
         PackageManager packageManager = getPackageManager();
-
         try {
             // Get the package information
             PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
@@ -84,9 +82,8 @@ public class LoginActivity extends AppCompatActivity {
             // Retrieve the version information
             versionName = packageInfo.versionName;
             // int versionCode = packageInfo.versionCode;
-
-
-        } catch (PackageManager.NameNotFoundException e) {
+        }
+        catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -114,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        Toast.makeText(OTP_Verify.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
+        
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
     private void popUpMaintencae(String maintenance, String version) {
         dialog.setContentView(R.layout.maintance);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -198,8 +195,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void callLogin(String phone, String DeviceId) {
         progressDialog.showProgressDialog();
         Call<LoginResponse> login_apiCall = ApiService.apiHolders().login(phone, DeviceId);

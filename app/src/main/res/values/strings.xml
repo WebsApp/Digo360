@@ -50,8 +50,8 @@
     <string name="patients_checkup">Patients CheckUp</string>
     <string name="loding">We saw you are new to us.</string>
     <string name="loading_regis">Hey welcome to Digo360 Please click register button given below. Allow us some more information about to get you in.</string>
-    <string name="help">Help</string>
-    <string name="help_heading">No FAQ for Your Specialization?</string>
+
+
     <string name="no_search">No Recent Searches?</string>
     <string name="zipcode">Zipcode</string>
     <string name="Patient">Patient Problem Statement</string>
@@ -63,7 +63,7 @@
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
     <string name="name">name</string>
-    <string name="previous_case">Previous Cases</string>
+
     <string name="previous_details">Previous Details</string>
     <string name="enter_age">Enter Age</string>
     <string name="enter_dob">Enter DOB</string>
@@ -78,28 +78,26 @@
     <string name="retry">Retry</string>
     <string name="Internet">Please Check Your Internet</string>
     <string name="logout_confirm">Are you sure you want to log out?</string>
-    <string name="personal_details">Personal Details</string>
+
     <string name="dr_name">Dr. Sangeeta Paul</string>
     <string name="dr_Spec">MD{Medicine}</string>
     <string name="dr_number">+91 9763500291</string>
     <string name="dr_mail">support@webappssoft.com</string>
     <string name="verify_mail">Verify Now</string>
-    <string name="specialization">Specialization</string>
+
     <string name="spec_name">Child Specialist</string>
-    <string name="designation">Designation</string>
-    <string name="general_physician">General Physician</string>
-    <string name="date_of_birth">Date Of Birth</string>
-    <string name="experience">Experience</string>
+
+
+
     <string name="dr_dob">22 Jan 1999</string>
-    <string name="college_amp_degree"><![CDATA[College & Degree]]></string>
+
     <string name="n_a">N/A</string>
-    <string name="dr_address">Address</string>
+
     <string name="address_dr">1st Floor jodhpur Gardens Near South City Mall Kolkata700035 India</string>
     <string name="exp_years">0Years</string>
-    <string name="college_details">College Details</string>
-    <string name="college_name">College Name</string>
+
+
     <string name="course_degree">Course / Degree</string>
-    <string name="admission_year">Admission Year</string>
 
     <string name="about_digo360">About Digo360</string>
     <string name="about_digo">About Digo360!</string>
@@ -136,7 +134,7 @@
     <string name="pincode">Pin Code</string>
     <string name="select_area">Select Area</string>
     <string name="terms_and_conditions">I agree to the Terms and Conditions</string>
-    <string name="submit">Submit</string>
+
     <!--Language Activity-->
     <string name="choose_language">Choose Language</string>
     <string name="lets_start">Lets Start</string>
@@ -181,6 +179,29 @@
     <string name="app_version">App Version</string>
     <string name="logout_from_digo360">Logout From Digo360</string>
     <string name="we_keep_your_data_safe">We keep your data safe.</string>
+    <!--My Profile-->
+    <string name="personal_details">Personal Details</string>
+    <string name="specialization">Specialization</string>
+    <string name="general_physician">General Physician</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="experience">Experience</string>
+    <string name="college_amp_degree"><![CDATA[College & Degree]]></string>
+    <string name="dr_address">Address</string>
+    <string name="designation">Designation</string>
+    <!--Collage-->
+    <string name="college_details">College Details</string>
+    <string name="submit">Submit</string>
+    <string name="college_name">College Name</string>
+    <string name="admission_year">Admission Year</string>
+    <string name="passout_year">Passout Year</string>
+    <string name="admission">Admission Year</string>
+    <!--Page Wise Faq-->
+    <string name="help">Help</string>
+    <string name="help_heading">No FAQ for Your Specialization?</string>
+    <string name="faq_desc">Your expertise deserves precise answers. Refresh or try again for FAQs tailored to your specialization</string>
+    <string name="back_to_home">Back to Home</string>
+    <!--Previous Cases-->
+    <string name="previous_case">Previous Cases</string>
 
 
 </resources>

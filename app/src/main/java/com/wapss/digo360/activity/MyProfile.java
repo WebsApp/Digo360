@@ -72,7 +72,7 @@ public class MyProfile extends AppCompatActivity {
     ImageView address_edite,college_edite,btn_edite;
     SharedPreferences loginPref;
     SharedPreferences.Editor editor;
-    String deviceToken,Token;
+    String deviceToken,Token,A_collage,P_collage,collage_name;
     CustomProgressDialog progressDialog;
     TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
     String ex,Degree;
@@ -170,13 +170,6 @@ public class MyProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-//        iv_profile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         btn_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,7 +183,10 @@ public class MyProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("DEASES_NAME", "Degree");
+                bundle.putString("DEASES_NAME", Degree);
+                bundle.putString("CLG_NAME", collage_name);
+                bundle.putString("CLG_ADMISSION", A_collage);
+                bundle.putString("CLG_PASS", P_collage);
                 Intent i = new Intent(MyProfile.this, CollegePage.class);
                 i.putExtras(bundle);
                 startActivity(i);
@@ -201,7 +197,6 @@ public class MyProfile extends AppCompatActivity {
     private void get_profile() {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
-        //Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NDE1ZDQzLWRiOGMtNGMxZi04ZTZkLWZjMzE1NjQ0ZDhmMCIsImlhdCI6MTcwNTQ3ODUwMSwiZXhwIjoxNzM3MDE0NTAxfQ.jrRZjtg3ajeD5xsXmjvIOJ7UIGbIGusiApb-BlTElDI";
         Call<Profile_Response> profile_apiCall = ApiService.apiHolders().get_profile(Token);
         profile_apiCall.enqueue(new Callback<Profile_Response>() {
             @Override
@@ -209,7 +204,9 @@ public class MyProfile extends AppCompatActivity {
                 if (response.isSuccessful()){
                     progressDialog.hideProgressDialog();
                     String exp_year = String.valueOf(response.body().getExperience());
-                    String collage_name = String.valueOf(response.body().getCollegeName());
+                    collage_name = String.valueOf(response.body().getCollegeName());
+                    A_collage = response.body().getStartDate();
+                    P_collage = response.body().getEndDate();
                     String address = response.body().getAddress();
                     Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
 //                    for (int i=0;i<response.body().getDoctorSpecialization().size();i++){
