@@ -226,14 +226,12 @@ public class HomeFragment extends Fragment {
             // Retrieve the version information
             versionName = packageInfo.versionName;
             // int versionCode = packageInfo.versionCode;
-
-
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
         if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)) {
-            popUpMaintencae(maintenance, version);
+          //  popUpMaintencae(maintenance, version);
         }
 
         notification.setOnClickListener(new View.OnClickListener() {

@@ -3,51 +3,386 @@ package com.wapss.digo360.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.wapss.digo360.R;
 import com.wapss.digo360.apiServices.ApiService;
+import com.wapss.digo360.authentication.CustomProgressDialog;
+import com.wapss.digo360.response.AreaResponse;
+import com.wapss.digo360.response.CityResponse;
 import com.wapss.digo360.response.Degree_Response;
+import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SpecializationResponse;
+import com.wapss.digo360.response.StateResponse;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Test_Spec extends AppCompatActivity {
+    TextView tv_registration;
+    Spinner sp_dr, sp_area;
+    SharedPreferences loginPref;
+    SharedPreferences.Editor editor;
+    CustomProgressDialog progressDialog;
+    List<StateResponse.Result> stateResponse;
+    private ArrayList<String> stringStateArrayList = new ArrayList<String>();
+    List<SpecializationResponse.Result> specResponse;
+    private ArrayList<String> stringSpecArrayList = new ArrayList<String>();
     List<Degree_Response.Result> DegreeResponse;
     private ArrayList<String> stringDigreeArrayList = new ArrayList<String>();
-    MaterialSpinner spinner;
+    List<CityResponse.Result> cityResponse;
+    private ArrayList<String> stringCityArrayList = new ArrayList<String>();
+    List<AreaResponse.Result> areaResponse;
+    private ArrayList<String> stringAreaArrayList = new ArrayList<String>();
+    RadioGroup rg_gneder;
+    private Calendar calendar;
+    RadioButton rb_male, rb_female, rb_other;
+    String deviceToken, experienceLevel;
+    List<String> items = Arrays.asList("Select Your Designation", "EXPERIENCE", "INTERN", "STUDENT");
+    List<String> study_year_list = Arrays.asList("Select Your Study Year", "FIRST YEAR", "SECOND YEAR", "THIRD YEAR", "FOURTH YEAR");
+    String[] drOther = {"Dr", "Other"};
+    EditText et_name, et_address, et_PinCode, et_email, et_DOB;
+    String dr, pin, area, title, Token, currentTime, stateId, cityId, specialization_Id,tnc;
+    LinearLayout cv_study_year, cv_specialization, cv_degree, cv_city, cv_area, pin_code_layout;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    int textColor = Color.parseColor("#800080");
+    private String strSpec = "";
+    private String specializationId = "";
+    private String studyYear = "";
+    private String dob = "";
+    private String degreeId,DOB,level;
+    ImageView iv_date;
+    Date dateNow = null;
+    CheckBox checkBoxTerms;
+    String loginStatus ="true",gender = "MALE";
+    MaterialSpinner spinner_degree,spinner_spec,state_spinner,city_spinner,area_spinner;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_spec);
+        intialize();
+        /*DR and Other Spinner Drop down*/
+        ArrayAdapter<String> Dr = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, drOther);
+        Dr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_dr.setAdapter(Dr);
+        sp_dr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dr = sp_dr.getSelectedItem().toString();
+                if (dr.equals("Dr")){
+                    ((TextView) sp_dr.getChildAt(0)).setTextColor(textColor);
+                    ((TextView) sp_dr.getChildAt(0)).setTextSize(20);
+                    ((TextView) sp_dr.getChildAt(0)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    title = (String) adapterView.getItemAtPosition(i);
+                    et_name.setEnabled(true);
+                    et_DOB.setEnabled(true);
+                    et_email.setEnabled(true);
+                    et_address.setEnabled(true);
+                    tv_registration.setVisibility(View.VISIBLE);
+                }
+                else {
+                    ((TextView) sp_dr.getChildAt(0)).setTextColor(textColor);
+                    ((TextView) sp_dr.getChildAt(0)).setTextSize(15);
+                    ((TextView) sp_dr.getChildAt(0)).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    et_name.setEnabled(false);
+                    et_DOB.setEnabled(false);
+                    et_email.setEnabled(false);
+                    et_address.setEnabled(false);
 
-        spinner = findViewById(R.id.spinner);
-        spc_api();
+                    final androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(Test_Spec.this);
+                    LayoutInflater inflater1 = getLayoutInflater();
+                    View dialogView1 = inflater1.inflate(R.layout.other_layout,null);
+                    builder1.setCancelable(false);
+                    builder1.setView(dialogView1);
+                    final androidx.appcompat.app.AlertDialog alertDialog1 = builder1.create();
+                    alertDialog1.show();
+                    alertDialog1.setCanceledOnTouchOutside(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertDialog1.dismiss();
+                            tv_registration.setVisibility(View.GONE);
+                        }
+                    },2000);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        /*Gender Choose*/
+        rg_gneder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (rb_male.isChecked()) {
+                    gender = "MALE";
+                    Toast.makeText(Test_Spec.this, ""+gender, Toast.LENGTH_SHORT).show();
+                } else if (rb_female.isChecked()) {
+                    gender = "FEMALE";
+                    Toast.makeText(Test_Spec.this, ""+gender, Toast.LENGTH_SHORT).show();
+                } else if (rb_other.isChecked()) {
+                    gender = "OTHER";
+                    Toast.makeText(Test_Spec.this, ""+gender, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        /*DOB Date Picker*/
+        currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        calendar = Calendar.getInstance();
+        iv_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        Test_Spec.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                calendar.set(Calendar.YEAR, year);
+                                calendar.set(Calendar.MONTH, month);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                                et_DOB.setText(dateFormat1.format(calendar.getTime()));
+                                dob = dateFormat1.format(calendar.getTime());
+                            }
+                        }, year-20, month, dayOfMonth);
+                calendar.set(year-20,month,dayOfMonth);
+                long value=calendar.getTimeInMillis();
+
+                datePickerDialog.getDatePicker().setMaxDate(value);
+                datePickerDialog.show();
+            }
+        });
+        /*EXP level choose*/
+        MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.spinner);
+        spinner.setItems("Select Your Designation","EXPERIENCE", "INTERN", "STUDENT");
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if (position == 0) {
+
+                }
+                else {
+                    strSpec = items.get(position);
+                    if (strSpec.equals("EXPERIENCE")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.GONE);
+                        experienceLevel = "EXPERIENCE";
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                        studyYear = "";
+                    }
+                    else if (strSpec.equals("INTERN")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        cv_study_year.setVisibility(View.GONE);
+                        experienceLevel = "INTERN";
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                        specialization_Id ="";
+                        studyYear = "";
+
+                    }
+                    else if (strSpec.equals("STUDENT")) {
+                        cv_degree.setVisibility(View.VISIBLE);
+                        cv_study_year.setVisibility(View.VISIBLE);
+                        cv_specialization.setVisibility(View.GONE);
+                        experienceLevel = "STUDENT";
+                        callDegreeAPI();
+                        stringDigreeArrayList.clear();
+                        specialization_Id ="";
+                    }
+                }
+            }
+        });
+        /*Study Year*/
+        MaterialSpinner spinner_study = (MaterialSpinner) findViewById(R.id.spinner_study);
+        spinner_study.setItems("Select Your Study Year", "FIRST YEAR", "SECOND YEAR", "THIRD YEAR", "FOURTH YEAR");
+        spinner_study.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if (position == 0) {
+
+                } else {
+                    studyYear = study_year_list.get(position);
+                }
+            }
+        });
+        /*Function Code*/
+        if (checkBoxTerms.isChecked()){
+            tnc = "YES";
+        }
+        else {
+            tnc = "YES";
+        }
+        callStateDate();
+        tv_registration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Title = title;
+                String Name = et_name.getText().toString();
+                String Gender = gender;
+                String DOB = dob;
+                String Email = et_email.getText().toString();
+                String Designation = experienceLevel;
+                String Degree = degreeId;
+                String Specialization = specialization_Id;
+                String Study_Year = studyYear;
+                String Address = et_address.getText().toString();
+                String CityId = cityId;
+                String StateId = stateId;
+                String AreaId = area;
+                String Pin = pin;
+                if (Name.equals("")){
+                    Toast.makeText(Test_Spec.this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
+                }
+                else if (DOB.equals("")) {
+                    Toast.makeText(Test_Spec.this, "Please Select Your DOB", Toast.LENGTH_SHORT).show();
+                }
+                else if (Designation == null) {
+                    Toast.makeText(Test_Spec.this, "Please Select Your Experience Level", Toast.LENGTH_SHORT).show();
+                }
+                else if (Designation.equals("EXPERIENCE")) {
+                    if (Degree == null){
+                        Toast.makeText(Test_Spec.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (Specialization == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your Specialization", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (StateId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (CityId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
+                    }
+                }
+                else if (Designation.equals("INTERN")) {
+                    if (Degree == null){
+                        Toast.makeText(Test_Spec.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (StateId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (CityId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
+                    }
+                }
+                else if (Designation.equals("STUDENT")) {
+                    if (Degree == null){
+                        Toast.makeText(Test_Spec.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (Study_Year == null || Study_Year.equals("")) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your Study Year", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (StateId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (CityId == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (area == null) {
+                        Toast.makeText(Test_Spec.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
+                    }
+                }
+            }
+        });
     }
+    private void intialize() {
+        city_spinner = findViewById(R.id.city_spinner);
+        state_spinner = findViewById(R.id.state_spinner);
+        checkBoxTerms = findViewById(R.id.checkBoxTerms);
+        spinner_degree = findViewById(R.id.spinner_degree);
+        spinner_spec = findViewById(R.id.spinner_spec);
+        area_spinner = findViewById(R.id.area_spinner);
+        //et_area = findViewById(R.id.et_area);
+        cv_area = findViewById(R.id.cv_area);
+        cv_city = findViewById(R.id.cv_city);
+        //et_city = findViewById(R.id.et_city);
+        //sp_city = findViewById(R.id.sp_city);
+        //et_state = findViewById(R.id.et_state);
+        cv_degree = findViewById(R.id.cv_degree);
+        cv_specialization = findViewById(R.id.cv_specialization);
+        cv_study_year = findViewById(R.id.cv_study_year);
+        //et_degree = findViewById(R.id.et_degree);
+        ///et_s_year = findViewById(R.id.et_s_year);
+        et_DOB = findViewById(R.id.et_DOB);
+        iv_date = findViewById(R.id.iv_date);
+        tv_registration = findViewById(R.id.tv_registration);
+        //sp_state = findViewById(R.id.sp_state);
+//        sp_study_year = findViewById(R.id.sp_study_year);
+        //sp_degree = findViewById(R.id.sp_degree);
+        rg_gneder = findViewById(R.id.rg_gneder);
+        rb_male = findViewById(R.id.rb_male);
+        rb_female = findViewById(R.id.rb_female);
+        rb_other = findViewById(R.id.rb_other);
+        sp_dr = findViewById(R.id.sp_dr);
+        et_name = findViewById(R.id.et_name);
+        //sp_area = findViewById(R.id.sp_area);
+        et_address = findViewById(R.id.et_address);
+        et_PinCode = findViewById(R.id.et_PinCode);
+        et_email = findViewById(R.id.et_email);
+        pin_code_layout = findViewById(R.id.pin_code_layout);
+    }
+    private void callDegreeAPI() {
+        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2ZTk1OWI4LTg1MTMtNDY4NS05YmVjLWI4Y2Q5OTA4ZWJiOCIsImlhdCI6MTcwODQyOTMxNywiZXhwIjoxNzM5OTY1MzE3fQ.0yMOzGRaJJMCncQUIL7FnsStfVIWNBwOsbSEqgqW38g";
 
-    private void spc_api() {
-        String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2ZTk1OWI4LTg1MTMtNDY4NS05YmVjLWI4Y2Q5OTA4ZWJiOCIsImlhdCI6MTcwODU3ODk5NywiZXhwIjoxNzQwMTE0OTk3fQ.QcTOc9teqsq1poe99DEhNAworjhe6SBLwqcAKIS8B1o";
-        String Token = "Bearer " + TOKEN;
         Call<Degree_Response> degree_apiCall = ApiService.apiHolders().getDegreeData(Token);
         degree_apiCall.enqueue(new Callback<Degree_Response>() {
             @Override
             public void onResponse(Call<Degree_Response> call, Response<Degree_Response> response) {
                 if (response.isSuccessful()) {
-
                     assert response.body() != null;
                     DegreeResponse = response.body().getResult();
                     List<Degree_Response.Result> degreeList = new ArrayList<Degree_Response.Result>();
@@ -60,35 +395,296 @@ public class Test_Spec extends AppCompatActivity {
 
                     }
                     for (int i = 0; i < degreeList.size(); i++) {
-                        // stringDigreeArrayList.add(DegreeResponse.get(i).getId());
                         stringDigreeArrayList.add(DegreeResponse.get(i).getName());
 
                     }
-                    spinner.setItems(stringDigreeArrayList);
-                    //spinner.setSelectedIndex(0);
-                    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                    spinner_degree.setItems(stringDigreeArrayList);
+                    spinner_degree.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                            if (position == 0) {
-                                spinner.setHint("Select Your Degree");
-                            }
-                            else {
-                                Toast.makeText(Test_Spec.this, ""+item, Toast.LENGTH_SHORT).show();
-                            }
+                            degreeId = DegreeResponse.get(position).getId();
+                            stringSpecArrayList.clear();
+                            callSpecializationAPI(degreeId);
                         }
                     });
-
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<Degree_Response> call, Throwable t) {
-
             }
         });
 
     }
+    private void callSpecializationAPI(String degreeId) {
+        Token = "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI2ZTk1OWI4LTg1MTMtNDY4NS05YmVjLWI4Y2Q5OTA4ZWJiOCIsImlhdCI6MTcwODQyOTMxNywiZXhwIjoxNzM5OTY1MzE3fQ.0yMOzGRaJJMCncQUIL7FnsStfVIWNBwOsbSEqgqW38g";
+
+        Call<SpecializationResponse> Specialization_apiCall = ApiService.apiHolders().getSpecData(degreeId,Token,50,0);
+        Specialization_apiCall.enqueue(new Callback<SpecializationResponse>() {
+            @Override
+            public void onResponse(Call<SpecializationResponse> call, Response<SpecializationResponse> response) {
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    specResponse = response.body().getResult();
+                    List<SpecializationResponse.Result> specList = new ArrayList<SpecializationResponse.Result>();
+                    for (int i = 0; i < specResponse.size(); i++) {
+                        SpecializationResponse.Result specialization_response = new SpecializationResponse.Result();
+                        specialization_response.setId(specResponse.get(i).getId());
+                        specialization_response.setId(specResponse.get(i).getName());
+                        specList.add(specialization_response);
+                    }
+                    for (int i = 0; i < specList.size(); i++) {
+                        stringSpecArrayList.add(specResponse.get(i).getName());
+                    }
+                    spinner_spec.setItems(stringSpecArrayList);
+                    spinner_spec.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            specialization_Id = specResponse.get(position).getId();
+                            stringDigreeArrayList.clear();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<SpecializationResponse> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
+    }
+    private void callStateDate() {
+        // progressDialog.showProgressDialog();
+        Token = "Bearer " + deviceToken;
+        Call<StateResponse> state_apiCall = ApiService.apiHolders().getStateData(Token);
+        state_apiCall.enqueue(new Callback<StateResponse>() {
+            @Override
+            public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
+                if (response.isSuccessful()) {
+                    //  progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    stateResponse = response.body().getResult();
+                    List<StateResponse.Result> statelist = new ArrayList<StateResponse.Result>();
+
+                    for (int i = 0; i < stateResponse.size(); i++) {
+                        StateResponse.Result state_Response = new StateResponse.Result();
+                        state_Response.setId(stateResponse.get(i).getId());
+                        state_Response.setName(stateResponse.get(i).getName());
+                        statelist.add(state_Response);
+
+                    }
+                    for (int i = 0; i < statelist.size(); i++) {
+                        stringStateArrayList.add(stateResponse.get(i).getName());
+
+                    }
+                    ArrayAdapter<String> state = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringStateArrayList);
+                    state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    state_spinner.setAdapter(state);
+                    state_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            stateId = String.valueOf(stateResponse.get(position).getId());
+                            //et_state.setText(stateResponse.get(position).getName());
+                            cv_city.setVisibility(View.VISIBLE);
+                            callCity(stateId);
+                            stringCityArrayList.clear();
+                            //et_city.getText().clear();
+                            //et_area.getText().clear();
+                            et_PinCode.getText().clear();
+                        }
+                    });
+                    /*sp_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            stateId = String.valueOf(stateResponse.get(i).getId());
+                            et_state.setText(stateResponse.get(i).getName());
+                            cv_city.setVisibility(View.VISIBLE);
+                            callCity(stateId);
+                            stringCityArrayList.clear();
+                            et_city.getText().clear();
+                            et_area.getText().clear();
+                            et_PinCode.getText().clear();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });*/
+                }
+                else {
+                    // progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StateResponse> call, Throwable t) {
+                // progressDialog.hideProgressDialog();
+            }
+        });
+    }
+    private void callCity(String stateId) {
+        // progressDialog.showProgressDialog();
+        Token = "Bearer " + deviceToken;
+        Call<CityResponse> state_apiCall = ApiService.apiHolders().getCityData(stateId, Token);
+        state_apiCall.enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                if (response.isSuccessful()) {
+                    // progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    cityResponse = response.body().getResult();
+                    List<CityResponse.Result> citylist = new ArrayList<CityResponse.Result>();
+
+                    for (int i = 0; i < cityResponse.size(); i++) {
+                        CityResponse.Result city_Response = new CityResponse.Result();
+                        city_Response.setId(cityResponse.get(i).getId());
+                        city_Response.setName(cityResponse.get(i).getName());
+                        stringAreaArrayList.clear();
+                        citylist.add(city_Response);
+                    }
+                    for (int i = 0; i < citylist.size(); i++) {
+                        stringCityArrayList.add(cityResponse.get(i).getName());
+
+                    }
+                    ArrayAdapter<String> city = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringCityArrayList);
+                    city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    city_spinner.setAdapter(city);
+                    city_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            cityId = String.valueOf(cityResponse.get(position).getId());
+                            //et_city.setText(cityResponse.get(position).getName());
+                            cv_area.setVisibility(View.VISIBLE);
+                            callArea(cityId);
+                            //stringCityArrayList.clear();
+                        }
+                    });
+                    /*sp_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            cityId = String.valueOf(cityResponse.get(i).getId());
+                            et_city.setText(cityResponse.get(i).getName());
+                            cv_area.setVisibility(View.VISIBLE);
+                            callArea(cityId);
+                            stringCityArrayList.clear();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });*/
+
+                } else {
+                    //  progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+                // progressDialog.hideProgressDialog();
+            }
+        });
+    }
+    private void callArea(String cityId) {
+        // progressDialog.showProgressDialog();
+        Token = "Bearer " + deviceToken;
+        Call<AreaResponse> state_apiCall = ApiService.apiHolders().getAreaData(cityId, Token,50,0);
+        state_apiCall.enqueue(new Callback<AreaResponse>() {
+            @Override
+            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
+                if (response.isSuccessful()) {
+                    //  progressDialog.hideProgressDialog();
+                    pin_code_layout.setVisibility(View.VISIBLE);
+                    assert response.body() != null;
+                    areaResponse = response.body().getResult();
+                    List<AreaResponse.Result> arealist = new ArrayList<AreaResponse.Result>();
+
+                    for (int i = 0; i < areaResponse.size(); i++) {
+                        AreaResponse.Result area_Response = new AreaResponse.Result();
+                        area_Response.setId(areaResponse.get(i).getId());
+                        area_Response.setName(areaResponse.get(i).getName());
+                        area_Response.setName(areaResponse.get(i).getPincode());
+                        arealist.add(area_Response);
+
+                    }
+                    for (int i = 0; i < arealist.size(); i++) {
+                        stringAreaArrayList.add(areaResponse.get(i).getName());
+
+                    }
+                    ArrayAdapter<String> city = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringAreaArrayList);
+                    city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    area_spinner.setAdapter(city);
+                  /*  sp_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            area = String.valueOf(areaResponse.get(i).getId());
+                            pin = String.valueOf(areaResponse.get(i).getPincode());
+                            et_area.setText(areaResponse.get(i).getName());
+                            et_PinCode.setText(pin);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });*/
+                    area_spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                            area = String.valueOf(areaResponse.get(position).getId());
+                            pin = String.valueOf(areaResponse.get(position).getPincode());
+                            //et_area.setText(areaResponse.get(position).getName());
+                            et_PinCode.setText(pin);
+                        }
+                    });
+
+                } else {
+                    //  progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaResponse> call, Throwable t) {
+                //  progressDialog.hideProgressDialog();
+            }
+        });
+    }
+    private void callRegistrationAPI(String title, String name, String gender, String dob, String email, String designation, String degree, String specialization, String studyYear, String address, String stateId, String cityId, String areaId, String pin) {
+        String Token = "Bearer " + deviceToken;
+        Call<RegistrationResponse> state_apiCall = ApiService.apiHolders().Registration(Token,title,name,gender,dob,email,designation,degree,studyYear,specialization,address,stateId,cityId,areaId,pin,"Yes");
+        state_apiCall.enqueue(new Callback<RegistrationResponse>() {
+            @Override
+            public void onResponse(Call<RegistrationResponse> call, Response<RegistrationResponse> response) {
+                                if (response.isSuccessful()) {
+                    progressDialog.hideProgressDialog();
+                    assert response.body() != null;
+                    //editor.putString("DR_NAME", response.body().getName());
+                    //specResponse = response.body().();
+                    editor.putString("loginStatus", loginStatus);
+                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "Successfully Registration", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Test_Spec.this, ChooseLanguageActivity.class);
+                    startActivity(intent);
+
+                }
+                else {
+                    progressDialog.hideProgressDialog();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegistrationResponse> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
+    }
+
 }

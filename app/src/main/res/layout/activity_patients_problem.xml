@@ -71,7 +71,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Is He/She have BP ?"
+                android:text="@string/is_he_she_have_bp"
                 android:textColor="@color/purple"
                 android:textStyle="bold"
                 android:textSize="16dp" />
@@ -169,7 +169,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Enter Body Temperature"
+                android:text="@string/enter_body_temperature"
                 android:textColor="@color/purple"
                 android:textStyle="bold"
                 android:textSize="16dp" />
@@ -213,7 +213,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Enter Height And Weight(inc/cm)"
+                android:text="@string/enter_height_and_weight_inc_cm"
                 android:textColor="@color/purple"
                 android:textStyle="bold"
                 android:textSize="16dp" />
@@ -282,7 +282,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:padding="5dp"
-                android:text="Choose Pulse Rate"
+                android:text="@string/choose_pulse_rate"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
                 android:textSize="16dp" />
@@ -346,7 +346,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Is He/She have Sugar ?"
+                android:text="@string/is_he_she_have_sugar"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/purple"
@@ -494,7 +494,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Patient have Allergy ?"
+                android:text="@string/patient_have_allergy"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
                 android:textSize="16dp" />
@@ -556,7 +556,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
-                android:text="Patient have any Surgery ?"
+                android:text="@string/patient_have_any_surgery"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"

@@ -90,7 +90,9 @@ public class CollegePage extends AppCompatActivity {
             et_degree.setText(Degree);
         }
         else {
-
+//            edit_college_name.setText("Enter College Name");
+//            et_admission_year.setText("Admission Year");
+//            et_Passout.setText("Pass Out Year");
         }
 
         currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());

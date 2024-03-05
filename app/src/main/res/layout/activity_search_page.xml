@@ -128,7 +128,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_margin="@dimen/_10sdp"
-            android:text="Explore top searches or start your case-taking journey with us!"
+            android:text="@string/explore_top_searches_or_start_your_case_taking_journey_with_us"
             android:textColor="#7210A1"
             android:textSize="@dimen/_10ssp" />
 

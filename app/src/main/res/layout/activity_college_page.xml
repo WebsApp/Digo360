@@ -96,7 +96,7 @@
                 android:background="@null"
                 android:textColor="@color/purple"
                 android:textColorHint="@color/purple"
-                android:maxLength="30"
+                android:maxLength="50"
                 android:layout_gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:inputType="text" />

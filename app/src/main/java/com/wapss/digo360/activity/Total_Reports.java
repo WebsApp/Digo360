@@ -45,7 +45,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Total_Reports extends AppCompatActivity {
-
     ImageView back;
     ImageView select_date;
     ImageView to_date_picker;
@@ -61,10 +60,8 @@ public class Total_Reports extends AppCompatActivity {
     private Calendar calendar;
     Date dateNow = null;
     EditText edit_user_name;
-
-    LottieAnimationView animationView;
+    ImageView animationView;
     List<Patient_Count_Response.Result> patientsResponse;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

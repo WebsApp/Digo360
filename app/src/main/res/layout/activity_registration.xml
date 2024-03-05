@@ -384,7 +384,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/time_bg">
 
@@ -409,25 +409,14 @@
                     android:background="@drawable/time_bg"
                     android:layout_marginTop="@dimen/_7sdp">
 
-                    <EditText
-                        android:id="@+id/et_state"
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/state_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="@string/select_state"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/purple"
-                        android:inputType="none"
-                        android:textColorHint="#B374BD"
-                        android:editable="false"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_13ssp" />
-
-                    <Spinner
-                        android:id="@+id/sp_state"
-                        android:layout_width="match_parent"
-                        android:layout_weight="5"
-                        android:layout_height="@dimen/_35sdp"/>
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 
@@ -440,7 +429,7 @@
                     android:layout_marginTop="@dimen/_7sdp"
                     android:visibility="gone">
 
-                    <EditText
+                    <!--<EditText
                         android:id="@+id/et_city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -458,7 +447,15 @@
                         android:id="@+id/sp_city"
                         android:layout_width="match_parent"
                         android:layout_weight="5"
-                        android:layout_height="@dimen/_35sdp"/>
+                        android:layout_height="@dimen/_35sdp"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/city_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 
@@ -471,31 +468,20 @@
                     android:background="@drawable/time_bg"
                     android:layout_marginTop="@dimen/_7sdp">
 
-                    <EditText
-                        android:id="@+id/et_area"
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/area_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="@string/select_area"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/purple"
-                        android:inputType="none"
-                        android:textColorHint="@color/purple"
-                        android:editable="false"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_13ssp" />
-
-                    <Spinner
-                        android:id="@+id/sp_area"
-                        android:layout_width="match_parent"
-                        android:layout_weight="5"
-                        android:layout_height="@dimen/_35sdp"/>
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/time_bg">
 

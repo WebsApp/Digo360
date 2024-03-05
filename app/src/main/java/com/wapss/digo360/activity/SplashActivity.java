@@ -81,7 +81,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         },2000);
     }
-
     private void callAPI() {
         Call<SettingResponse> profile_apiCall = ApiService.apiHolders().setting_maint("1");
         profile_apiCall.enqueue(new Callback<SettingResponse>() {

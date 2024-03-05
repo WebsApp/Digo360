@@ -8,21 +8,550 @@
     android:layout_gravity="center"
     android:gravity="center">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_marginBottom="@dimen/_50sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bground"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/back"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_back_arrow"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            android:text="@string/registration"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14ssp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/header"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.5"
+                        android:background="@drawable/time_bg">
+
+                        <Spinner
+                            android:id="@+id/sp_dr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_35sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/time_bg">
+
+                        <EditText
+                            android:id="@+id/et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="@string/name_of_your"
+                            android:inputType="textPersonName"
+                            android:maxLength="40"
+                            android:textColor="@color/purple"
+                            android:textColorHint="#B374BD"
+                            android:textSize="@dimen/_13ssp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/patient_age1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_gender"
+                        android:textColor="@color/purple"
+                        android:textColorHint="@color/purple"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_gneder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/male"
+                            android:checked="true"
+                            android:textSize="@dimen/_14ssp"
+                            android:textColor="@color/purple" />
+
+                        <RadioButton
+                            android:id="@+id/rb_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/female"
+                            android:textSize="@dimen/_14ssp"
+                            android:textColor="@color/purple" />
+                        <RadioButton
+                            android:id="@+id/rb_other"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/other"
+                            android:textSize="@dimen/_14ssp"
+                            android:textColor="@color/purple" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_Dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/time_bg"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <EditText
+                        android:id="@+id/et_DOB"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/dob"
+                        android:inputType="none"
+                        android:editable="false"
+                        android:textColor="@color/purple"
+                        android:textColorHint="#B374BD"
+                        android:textSize="@dimen/_13ssp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="center"
+                        android:layout_weight="6"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/baseline_calendar_month_24" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/time_bg"
+                    android:padding="@dimen/_3sdp">
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/enter_mail"
+                        android:textColor="@color/purple"
+                        android:inputType="textEmailAddress"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColorHint="#B374BD"
+                        android:textSize="@dimen/_13ssp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/time_bg">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_degree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <!--<EditText
+                        android:id="@+id/et_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_degree"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="#B374BD"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_weight="5"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_degree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_study_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <!--<EditText
+                        android:id="@+id/et_s_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/study_year"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="#B374BD"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />-->
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_study"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_specialization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <!--<EditText
+                        android:id="@+id/et_spec"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_specialization"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="#B374BD"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_specialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_weight="5"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_spec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/time_bg">
+
+                    <EditText
+                        android:id="@+id/et_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/address"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/purple"
+                        android:textColorHint="#B374BD"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/state_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cv_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:visibility="gone">
+
+                    <!--<EditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_city"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_city"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/city_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/cv_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/time_bg"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <!--<EditText
+                        android:id="@+id/et_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/select_area"
+                        android:textColor="@color/purple"
+                        android:inputType="none"
+                        android:textColorHint="@color/purple"
+                        android:editable="false"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textSize="@dimen/_13ssp" />
+
+                    <Spinner
+                        android:id="@+id/sp_area"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:layout_height="@dimen/_35sdp"/>-->
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/area_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="normal"
+                        android:textSize="@dimen/_13ssp"
+                        android:layout_margin="@dimen/_3sdp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pin_code_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@drawable/time_bg"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/et_PinCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/pincode"
+                        android:textColor="@color/purple"
+                        android:textColorHint="#B374BD"
+                        android:inputType="number"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:maxLength="6"
+                        android:textSize="@dimen/_13ssp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/purple"
+                        android:textStyle="bold"
+                        android:checked="true"
+                        android:text="@string/terms_and_conditions"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@drawable/time_bg">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.jaredrummler.materialspinner.MaterialSpinner
-            android:id="@+id/spinner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/purple"
-            android:textStyle="normal"
-            android:textSize="@dimen/_13ssp"
-            android:layout_margin="@dimen/_3sdp"/>
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_7sdp"
+                app:cardElevation="5dp">
+
+                <TextView
+                    android:id="@+id/tv_registration"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35ssp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ripple_bg"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/submit"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     </LinearLayout>
 

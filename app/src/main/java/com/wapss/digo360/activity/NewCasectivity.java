@@ -1,5 +1,7 @@
 package com.wapss.digo360.activity;
 
+import static com.wapss.digo360.utility.DateUtils.calculateAge;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -12,6 +14,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -132,9 +136,11 @@ public class NewCasectivity extends AppCompatActivity {
                 Age_and_DOB = pt_age.getText().toString();
                 if (P_name.equals("")) {
                     Toast.makeText(NewCasectivity.this, "Enter Patient name", Toast.LENGTH_SHORT).show();
-                } else if (pt_DOB.getText().toString().isEmpty()) {
-                    Toast.makeText(NewCasectivity.this, "Please Select DOB or Age", Toast.LENGTH_SHORT).show();
-                } else if (gender.equals("")) {
+                }
+                else if (pt_DOB.getText().toString().isEmpty()) {
+                    Toast.makeText(NewCasectivity.this, "Please Select DOB", Toast.LENGTH_SHORT).show();
+                }
+                else if (gender.equals("")) {
                     Toast.makeText(NewCasectivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
                 }
 //               else if (pt_full_Address.getText().toString().isEmpty()) {
@@ -156,14 +162,12 @@ public class NewCasectivity extends AppCompatActivity {
             }
         });
     }
-
     private void pendingPopUp() {
         dialog.setContentView(R.layout.pending);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
         dialog.show();
     }
-
     private void callPendingAPi() {
         TOKEN = "Bearer " + deviceToken;
         Call<PendingResponse> profile_apiCall = ApiService.apiHolders().pendingDoctor(TOKEN);
@@ -189,7 +193,6 @@ public class NewCasectivity extends AppCompatActivity {
             }
         });
     }
-
     private void initi() {
         rl_layout = findViewById(R.id.rl_layout);
         dialog = new Dialog(NewCasectivity.this);
@@ -278,7 +281,7 @@ public class NewCasectivity extends AppCompatActivity {
                                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                                 pt_DOB.setText(dateFormat1.format(calendar.getTime()));
                                 dob = dateFormat1.format(calendar.getTime());
-                                int Age = DateUtils.calculateAge(dateFormat1.format(calendar.getTime()));
+                                int Age = calculateAge(dateFormat1.format(calendar.getTime()));
 
                                 if (Age != -1) {
                                     pt_age.setText(String.valueOf(Age));
@@ -294,6 +297,24 @@ public class NewCasectivity extends AppCompatActivity {
                 }
                 datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePickerDialog.show();
+            }
+        });
+        pt_age.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               String newText = String.valueOf(charSequence);
+               Calculate(newText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //String newText = editable.toString();
+
             }
         });
         //phone number
@@ -336,7 +357,26 @@ public class NewCasectivity extends AppCompatActivity {
             }
         });
     }
+    private void Calculate(String newText) {
+        String ageString = pt_age.getText().toString();
+        if (!ageString.isEmpty()) {
+            int age = Integer.parseInt(ageString);
 
+            // Calculate birthdate based on current date
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, -age);
+            Date dob = calendar.getTime();
+
+            // Format the date of birth
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String dobString = sdf.format(dob);
+
+            // Display the result
+            pt_DOB.setText(dobString);
+        } else {
+
+        }
+    }
     private void patient_details() {
         name = pt_name.getText().toString();
         TOKEN = "Bearer " + deviceToken;

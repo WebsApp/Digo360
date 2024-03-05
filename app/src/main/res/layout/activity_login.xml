@@ -108,7 +108,7 @@
                     <TextView
                         android:text="+91"
                         android:textSize="@dimen/_15ssp"
-                        android:textColor="#CEA0E4"
+                        android:textColor="@color/purple"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textStyle="bold"

@@ -54,6 +54,37 @@ public class Update_Profile extends AppCompatActivity {
         et_email = findViewById(R.id.et_email);
         edit_name = findViewById(R.id.edit_name);
         tv_update = findViewById(R.id.tv_update);
+        Bundle bundle = getIntent().getExtras();
+        //Extract the data…
+        if (bundle != null){
+            String doc_name = bundle.getString("DOC_NAME");
+            String doc_email = bundle.getString("DOC_EMAIL");
+            String doc_address = bundle.getString("DOC_ADDRESS");
+
+            if (doc_name != null){
+                edit_name.setText(doc_name);
+            }
+            else {
+                edit_name.setText("Enter Name");
+            }
+
+            if (doc_email != null){
+                et_email.setText(doc_email);
+            }
+            else {
+                et_email.setText("Enter Email");
+            }
+
+            if (doc_address != null){
+                et_address.setText(doc_address);
+            }
+            else {
+                et_address.setText("Enter Address");
+            }
+        }
+        else {
+
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

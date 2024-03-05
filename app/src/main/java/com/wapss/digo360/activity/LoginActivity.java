@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (!Objects.equals(maintenance, "false") || !Objects.equals(version, versionName)){
-            popUpMaintencae(maintenance,version);
+           // popUpMaintencae(maintenance,version);
         }
 
         if (!isNotificationPermissionGranted()) {

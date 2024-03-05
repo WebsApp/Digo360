@@ -20,21 +20,11 @@
     <string name="ask_q">Ask Q</string>
     <string name="cases">Case</string>
     <string name="notification">Notification</string>
-    <string name="new_case">New Case</string>
-    <string name="whats_your_patients_name">Whats your Patient Name ?</string>
-    <string name="select_calender">Select DOB</string>
-    <string name="enter_year">Age in Year</string>
-    <string name="please_select">Please Select</string>
-    <string name="email">Email</string>
-    <string name="age">age</string>
-    <string name="where_is_he_coming_from">Where is he coming from</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="full_address">Full Address</string>
-    <string name="area">Area</string>
-    <string name="pin_code">Pin Code</string>
+
+
+
     <string name="is_he_having">is he having ?</string>
-    <string name="any_other_problem">Any Other Problem ?</string>
+
     <string name="child">Child</string>
     <string name="save_amp_continue"><![CDATA[Save & Continue]]></string>
     <string name="generate_report">Generate Report</string>
@@ -202,6 +192,48 @@
     <string name="back_to_home">Back to Home</string>
     <!--Previous Cases-->
     <string name="previous_case">Previous Cases</string>
+    <!--New Cases-->
+    <string name="new_case">New Case</string>
+    <string name="whats_your_patients_name">Whats your Patient Name ?</string>
+    <string name="patient_phone">Patient Phone Number</string>
+    <string name="patient_email_optional">Patient Email(Optional)</string>
+    <string name="enter_patient_dob">Enter Patient DOB(Optional)</string>
+    <string name="enter_patient_age_year">Enter Patient AGE(Year)</string>
+    <string name="select_calender">Select DOB</string>
+    <string name="enter_year">Age in Year</string>
+    <string name="please_select">Please Select</string>
+    <string name="email">Email</string>
+    <string name="age">age</string>
+    <string name="where_is_he_coming_from">Where is he coming from</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="full_address">Full Address</string>
+    <string name="area">Area</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="permission_page">Permission</string>
+    <string name="is_he_she_have_bp">Is He/She have BP ?</string>
+    <string name="enter_body_temperature">Enter Body Temperature</string>
+    <string name="enter_height_and_weight_inc_cm">Enter Height And Weight(inc/cm)</string>
+    <string name="choose_pulse_rate">Choose Pulse Rate</string>
+    <string name="is_he_she_have_sugar">Is He/She have Sugar ?</string>
+    <string name="patient_have_allergy">Patient have Allergy ?</string>
+    <string name="patient_have_any_surgery">Patient have any Surgery ?</string>
+    <string name="any_other_problem">Any Other Problem ?</string>
+    <string name="no_notification_found">No Notification found</string>
+    <string name="there_s_no_notification_found_our_app_ensures_you_re_always_in_the_loop">There\'s no Notification found, our app ensures you\'re always in the loop.</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="doc_name">Name</string>
+    <string name="doc_email">Email</string>
+    <string name="doc_address">Address</string>
+    <string name="update">Update</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="explore_top_searches_or_start_your_case_taking_journey_with_us">Explore top searches or start your case-taking journey with us!</string>
+    <string name="qn_skip">Skip</string>
+    <string name="qn_submit">Submit</string>
+    <string name="notification_permission">Notification Permission</string>
+    <string name="camera_permission">Camera Permission</string>
+    <string name="sms_permission">SMS Permission</string>
 
 
 </resources>

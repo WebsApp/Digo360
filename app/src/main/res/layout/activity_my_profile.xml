@@ -270,7 +270,7 @@
                         android:id="@+id/txt_spec"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/spec_name"
+                        android:text="N/A"
                         android:textColor="#6A0E97"
                         android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center"
@@ -287,7 +287,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/_5sdp"
                     android:background="@drawable/background"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
@@ -363,8 +363,8 @@
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:background="@drawable/background"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="match_parent"

@@ -82,7 +82,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Notification found"
+            android:text="@string/no_notification_found"
             android:textColor="#8114B3"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
@@ -92,7 +92,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="There's no Notification found, our app ensures you're always in the loop. "
+            android:text="@string/there_s_no_notification_found_our_app_ensures_you_re_always_in_the_loop"
             android:textColor="#9062A6"
             android:textSize="@dimen/_10ssp"
             android:layout_gravity="center"

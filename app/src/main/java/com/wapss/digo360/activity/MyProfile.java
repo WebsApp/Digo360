@@ -75,7 +75,7 @@ public class MyProfile extends AppCompatActivity {
     String deviceToken,Token,A_collage,P_collage,collage_name;
     CustomProgressDialog progressDialog;
     TextView tv_name,tv_degree,tv_mobileNum,txt_mail,txt_spec,txt_Desig,txt_Dob,txt_exp_year,txt_college,txt_address;
-    String ex,Degree;
+    String ex,Degree,address,name,email;
     private Dialog noInternetDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -83,6 +83,7 @@ public class MyProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
         address_edite = findViewById(R.id.address_edite);
         txt_address = findViewById(R.id.txt_address);
         txt_college = findViewById(R.id.txt_college);
@@ -113,12 +114,6 @@ public class MyProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MyProfile.this, AddressPage.class));
-            }
-        });
-        btn_edite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyProfile.this,Update_Profile.class));
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -192,8 +187,19 @@ public class MyProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        btn_edite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("DOC_NAME", name);
+                bundle.putString("DOC_EMAIL", email);
+                bundle.putString("DOC_ADDRESS", address);
+                Intent i = new Intent(MyProfile.this, Update_Profile.class);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
     }
-
     private void get_profile() {
         progressDialog.showProgressDialog();
         Token = "Bearer " + deviceToken;
@@ -207,12 +213,18 @@ public class MyProfile extends AppCompatActivity {
                     collage_name = String.valueOf(response.body().getCollegeName());
                     A_collage = response.body().getStartDate();
                     P_collage = response.body().getEndDate();
-                    String address = response.body().getAddress();
+                    address = response.body().getAddress();
+                    name = response.body().getName();
+                    email = response.body().getEmail();
                     Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
-//                    for (int i=0;i<response.body().getDoctorSpecialization().size();i++){
-//                         ex = response.body().getDoctorSpecialization().get(i).getSpecialization().getName();
-//                    }
-//                    txt_spec.setText(ex);
+                    ex = String.valueOf(response.body().getDoctorSpecialization());
+                    //String Specia = String.valueOf(response.body().getDoctorSpecialization().get(0).getSpecialization().getName());
+                    if (ex.equals(null)){
+                        txt_spec.setText("N/A");
+                    }
+                    else {
+                        //txt_spec.setText(Specia);
+                    }
                    // String EXp = response.body().getDoctorSpecialization().get(0).getSpecialization().getName();
                     tv_name.setText(response.body().getTitle() +"." + " "+ response.body().getName());
                     tv_mobileNum.setText("+91" + " " + response.body().getAccount().getPhoneNumber());
@@ -261,7 +273,6 @@ public class MyProfile extends AppCompatActivity {
         }
         return true;
     }
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -277,7 +288,6 @@ public class MyProfile extends AppCompatActivity {
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -309,7 +319,6 @@ public class MyProfile extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No image Capture to upload", Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -320,18 +329,15 @@ public class MyProfile extends AppCompatActivity {
             Toast.makeText(MyProfile.this, "Permission not granted", Toast.LENGTH_SHORT).show();
         }
     }
-
     private void takePictureCamera() {
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, Camera_Req_Code);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         get_profile();
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

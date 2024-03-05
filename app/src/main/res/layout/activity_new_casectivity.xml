@@ -83,7 +83,6 @@
             android:layout_below="@+id/viewAll"
             android:background="@drawable/bg_square_corner"
             android:orientation="horizontal">
-
             <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -178,7 +177,7 @@
                         android:maxLength="20"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -190,7 +189,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Patient Phone Number"
+                        android:hint="@string/patient_phone"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
                         android:textSize="@dimen/_10ssp"
@@ -217,7 +216,7 @@
                         android:inputType="none"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
 
@@ -230,7 +229,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Patient Email(Optional)"
+                        android:hint="@string/patient_email_optional"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
                         android:textSize="@dimen/_10ssp"
@@ -256,7 +255,7 @@
                         android:inputType="textEmailAddress"
                         android:textColorHint="#E594F3"
                         android:textColor="@color/purple"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
 
@@ -269,7 +268,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Patient DOB"
+                        android:hint="@string/enter_patient_dob"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
                         android:textSize="@dimen/_10ssp"
@@ -330,7 +329,7 @@
                             android:editable="false"
                             android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/_14ssp" />
+                            android:textSize="@dimen/_12ssp" />
 
                         <ImageView
                             android:id="@+id/iv_date"
@@ -354,7 +353,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Patient AGE(Year)"
+                        android:hint="@string/enter_patient_age_year"
                         android:textColor="@color/purple"
                         android:textColorHint="@color/purple"
                         android:textSize="@dimen/_10ssp"
@@ -416,7 +415,7 @@
                             android:maxLength="3"
                             android:textColorHint="#E594F3"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/_14ssp"/>
+                            android:textSize="@dimen/_12ssp"/>
                     </LinearLayout>
 
                 </LinearLayout>

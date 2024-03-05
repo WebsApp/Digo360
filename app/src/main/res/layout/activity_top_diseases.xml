@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:text="Most Searched"
+                android:text="@string/most_searched"
                 android:textColor="@color/purple"
                 android:textStyle="bold" />
 
