@@ -29,7 +29,6 @@ public class AreaResponse {
             this.total = total;
         }
     public static class Result {
-
         @SerializedName("id")
         @Expose
         private Integer id;
@@ -63,6 +62,5 @@ public class AreaResponse {
         public void setPincode(String pincode) {
             this.pincode = pincode;
         }
-
     }
 }
