@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:id="@+id/rl_layout"
     tools:context=".activity.NewCasectivity">
 
     <LinearLayout
@@ -69,564 +69,570 @@
         android:textAllCaps="false"
         android:visibility="gone" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.core.widget.NestedScrollView
         android:layout_below="@+id/header"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_heading2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/viewAll"
-            android:background="@drawable/bg_square_corner"
-            android:orientation="horizontal">
-            <!--<LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_heading2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewAll"
+                android:background="@drawable/bg_square_corner"
+                android:orientation="horizontal">
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Heading Tag Line "
-                    android:textColor="@color/purple"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Heading Tag Line "
+                        android:textColor="@color/purple"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Create stunning NFTs applications"
-                    android:textColor="@color/black"
-                    android:textSize="12dp"
-                    android:textStyle="normal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Create stunning NFTs applications"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/img" />
+
+                </LinearLayout>-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/banner_four" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="end"
-                android:padding="10dp">
+                android:layout_marginTop="5dp"
+                android:scrollbars="none">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/img" />
-
-            </LinearLayout>-->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/banner_four"/>
-
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/patient_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/whats_your_patients_name"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/time_bg"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <EditText
-                        android:id="@+id/pt_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@null"
-                        android:hint="Enter Patient Name"
-                        android:inputType="textPersonName"
-                        android:maxLength="20"
-                        android:textColorHint="#E594F3"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/_12ssp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/patient_phone"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_phone_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/time_bg"
-                    android:orientation="vertical"
-                    android:padding="5dp"
-                    android:layout_marginTop="@dimen/_5sdp">
-
-                    <EditText
-                        android:id="@+id/pt_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@null"
-                        android:hint="Patient Phone Number"
-                        android:padding="5dp"
-                        android:editable="false"
-                        android:inputType="none"
-                        android:textColorHint="#E594F3"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/_12ssp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/patient_email_optional"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_phone_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/time_bg"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <EditText
-                        android:id="@+id/pt_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@null"
-                        android:hint="Patient Email"
-                        android:padding="5dp"
-                        android:inputType="textEmailAddress"
-                        android:textColorHint="#E594F3"
-                        android:textColor="@color/purple"
-                        android:textSize="@dimen/_12ssp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/enter_patient_dob"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <!--<RadioGroup
-                        android:id="@+id/rg_dob"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_doB_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                        <RadioButton
-                            android:id="@+id/rb_dob_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="No"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-                    </RadioGroup>-->
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/_3sdp">
 
                     <LinearLayout
-                        android:id="@+id/ll_Dob"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:background="@drawable/time_bg"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                        <EditText
-                            android:id="@+id/pt_DOB"
+                        <TextView
+                            android:id="@+id/patient_age"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:layout_weight="1"
-                            android:hint="Enter DOB"
-                            android:padding="5dp"
-                            android:editable="false"
-                            android:textColorHint="#E594F3"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/whats_your_patients_name"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/_12ssp" />
-
-                        <ImageView
-                            android:id="@+id/iv_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="6"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/baseline_calendar_month_24" />
-
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/enter_patient_age_year"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <!--<RadioGroup
-                        android:id="@+id/rg_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_age_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                        <RadioButton
-                            android:id="@+id/rb_age_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="No"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-                    </RadioGroup>-->
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="@dimen/_3sdp">
-
                     <LinearLayout
-                        android:id="@+id/ll_age"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/time_bg"
                         android:orientation="vertical"
                         android:padding="5dp">
 
                         <EditText
-                            android:id="@+id/pt_age"
+                            android:id="@+id/pt_name"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_height="@dimen/_30sdp"
                             android:background="@null"
-                            android:hint="@string/enter_age"
-                            android:inputType="number"
-                            android:maxLength="3"
-                            android:textColorHint="#E594F3"
+                            android:hint="Enter Patient Name"
+                            android:inputType="textPersonName"
+                            android:maxLength="20"
                             android:textColor="@color/purple"
-                            android:textSize="@dimen/_12ssp"/>
+                            android:textColorHint="#E594F3"
+                            android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/select_gender"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                    <RadioGroup
-                        android:id="@+id/rg_gender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_male"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/male"
+                            android:hint="@string/patient_phone"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
                             android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                        <RadioButton
-                            android:id="@+id/rb_female"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:text="@string/female"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                        <RadioButton
-                            android:id="@+id/rb_other"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:text="@string/other"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/patient_addresse"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/where_is_he_coming_from"
-                        android:textColor="@color/purple"
-                        android:textColorHint="@color/purple"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
-
-                    <RadioGroup
-                        android:id="@+id/rg_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:gravity="start"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/yes"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-
-                        <RadioButton
-                            android:id="@+id/rb_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="@string/no"
-                            android:textSize="@dimen/_10ssp"
-                            android:textColor="@color/purple" />
-                    </RadioGroup>
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_address"
+                        android:id="@+id/ll_phone_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/time_bg"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <EditText
+                            android:id="@+id/pt_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@null"
+                            android:editable="false"
+                            android:hint="Patient Phone Number"
+                            android:inputType="none"
+                            android:padding="5dp"
+                            android:textColor="@color/purple"
+                            android:textColorHint="#E594F3"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/patient_email_optional"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_phone_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/time_bg"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <EditText
+                            android:id="@+id/pt_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@null"
+                            android:hint="Patient Email"
+                            android:inputType="textEmailAddress"
+                            android:padding="5dp"
+                            android:textColor="@color/purple"
+                            android:textColorHint="#E594F3"
+                            android:textSize="@dimen/_12ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enter_patient_dob"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <!--<RadioGroup
+                            android:id="@+id/rg_dob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_doB_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/purple" />
+
+                            <RadioButton
+                                android:id="@+id/rb_dob_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="No"
+                                android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/purple" />
+                        </RadioGroup>-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_Dob"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@drawable/time_bg"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <EditText
+                                android:id="@+id/pt_DOB"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:editable="false"
+                                android:hint="Enter DOB"
+                                android:padding="5dp"
+                                android:textColor="@color/purple"
+                                android:textColorHint="#E594F3"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <ImageView
+                                android:id="@+id/iv_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="6"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/baseline_calendar_month_24" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enter_patient_age_year"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <!--<RadioGroup
+                            android:id="@+id/rg_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_age_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/purple" />
+
+                            <RadioButton
+                                android:id="@+id/rb_age_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="No"
+                                android:textSize="@dimen/_10ssp"
+                                android:textColor="@color/purple" />
+                        </RadioGroup>-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/time_bg"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <EditText
+                                android:id="@+id/pt_age"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:hint="@string/enter_age"
+                                android:inputType="number"
+                                android:maxLength="3"
+                                android:textColor="@color/purple"
+                                android:textColorHint="#E594F3"
+                                android:textSize="@dimen/_12ssp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone"
-                        android:layout_marginBottom="@dimen/_70sdp">
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/select_gender"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/male"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:text="@string/female"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_other"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:text="@string/other"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/patient_addresse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/where_is_he_coming_from"
+                            android:textColor="@color/purple"
+                            android:textColorHint="@color/purple"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/yes"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="@string/no"
+                                android:textColor="@color/purple"
+                                android:textSize="@dimen/_10ssp" />
+                        </RadioGroup>
 
                         <LinearLayout
+                            android:id="@+id/ll_address"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/time_bg"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_70sdp"
                             android:orientation="vertical"
-                            android:padding="5dp">
+                            android:visibility="gone">
 
-                            <EditText
-                                android:id="@+id/pt_full_Address"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/full_address"
-                                android:padding="5dp"
-                                android:textColorHint="#E594F3"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/_10ssp"
-                                android:inputType="text"/>
-                        </LinearLayout>
+                                android:layout_height="@dimen/_30sdp"
+                                android:background="@drawable/time_bg"
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/time_bg"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                                <EditText
+                                    android:id="@+id/pt_full_Address"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="@string/full_address"
+                                    android:inputType="text"
+                                    android:padding="5dp"
+                                    android:textColor="@color/purple"
+                                    android:textColorHint="#E594F3"
+                                    android:textSize="@dimen/_10ssp" />
+                            </LinearLayout>
 
-                            <EditText
-                                android:id="@+id/pt_State"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/state"
-                                android:padding="5dp"
-                                android:textColorHint="#E594F3"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/_10ssp"
-                                android:inputType="text"/>
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/time_bg"
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
-                        </LinearLayout>
+                                <EditText
+                                    android:id="@+id/pt_State"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="@string/state"
+                                    android:inputType="text"
+                                    android:padding="5dp"
+                                    android:textColor="@color/purple"
+                                    android:textColorHint="#E594F3"
+                                    android:textSize="@dimen/_10ssp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/time_bg"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                            </LinearLayout>
 
-                            <EditText
-                                android:id="@+id/pt_city"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/city"
-                                android:padding="5dp"
-                                android:textColorHint="#E594F3"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/_10ssp"
-                                android:inputType="text"/>
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/time_bg"
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
-                        </LinearLayout>
+                                <EditText
+                                    android:id="@+id/pt_city"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="@string/city"
+                                    android:inputType="text"
+                                    android:padding="5dp"
+                                    android:textColor="@color/purple"
+                                    android:textColorHint="#E594F3"
+                                    android:textSize="@dimen/_10ssp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/time_bg"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                            </LinearLayout>
 
-                            <EditText
-                                android:id="@+id/pt_Area"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/area"
-                                android:padding="5dp"
-                                android:textColorHint="#E594F3"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/_10ssp"
-                                android:inputType="text"/>
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/time_bg"
+                                android:orientation="vertical"
+                                android:padding="5dp">
 
-                        </LinearLayout>
+                                <EditText
+                                    android:id="@+id/pt_Area"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:hint="@string/area"
+                                    android:inputType="text"
+                                    android:padding="5dp"
+                                    android:textColor="@color/purple"
+                                    android:textColorHint="#E594F3"
+                                    android:textSize="@dimen/_10ssp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_30sdp"
-                            android:background="@drawable/time_bg"
-                            android:orientation="vertical"
-                            android:layout_marginTop="@dimen/_5sdp">
+                            </LinearLayout>
 
-                            <EditText
-                                android:id="@+id/pt_pinCode"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null"
-                                android:hint="@string/pin_code"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                android:textColorHint="#E594F3"
-                                android:textColor="@color/purple"
-                                android:textSize="@dimen/_10ssp"
-                                android:inputType="number"/>
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="@drawable/time_bg"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/pt_pinCode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:background="@null"
+                                    android:hint="@string/pin_code"
+                                    android:inputType="number"
+                                    android:textColor="@color/purple"
+                                    android:textColorHint="#E594F3"
+                                    android:textSize="@dimen/_10ssp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -634,11 +640,10 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </ScrollView>
 
-        </ScrollView>
-
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -651,9 +656,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_50sdp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="7dp"
             app:cardElevation="5dp">

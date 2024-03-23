@@ -37,6 +37,7 @@ import com.wapss.digo360.activity.ChooseLanguageActivity;
 import com.wapss.digo360.activity.HelpPage;
 import com.wapss.digo360.activity.LoginActivity;
 import com.wapss.digo360.activity.MyProfile;
+import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.Permission;
 import com.wapss.digo360.activity.ReferPage;
 import com.wapss.digo360.activity.RegistrationActivity;
@@ -306,7 +307,7 @@ public class Profile_Fragment extends Fragment {
         btn_alart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Notification.class));
+                startActivity(new Intent(getContext(), NotificationActivity.class));
             }
         });
         btn_case_file.setOnClickListener(new View.OnClickListener() {
