@@ -309,15 +309,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     else if (Specialization == null) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your Specialization", Toast.LENGTH_SHORT).show();
                     }
-                    else if (StateId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (CityId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (area == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
-                    }
+//                    else if (StateId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (CityId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (area == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+//                    }
                     else {
                         callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
                     }
@@ -326,15 +326,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     if (Degree == null){
                         Toast.makeText(RegistrationActivity.this, "Please Select Your Degree", Toast.LENGTH_SHORT).show();
                     }
-                    else if (StateId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (CityId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (area == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
-                    }
+//                    else if (StateId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (CityId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (area == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+//                    }
                     else {
                         callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
                     }
@@ -346,15 +346,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     else if (Study_Year == null || Study_Year.equals("")) {
                         Toast.makeText(RegistrationActivity.this, "Please Select Your Study Year", Toast.LENGTH_SHORT).show();
                     }
-                    else if (StateId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (CityId == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (area == null) {
-                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
-                    }
+//                    else if (StateId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your State", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (CityId == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your City", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else if (area == null) {
+//                        Toast.makeText(RegistrationActivity.this, "Please Select Your Area", Toast.LENGTH_SHORT).show();
+//                    }
                     else {
                         callRegistrationAPI(Title,Name,Gender,DOB,Email,Designation,Degree,Specialization,Study_Year,Address,StateId,CityId,AreaId,Pin);
                     }
@@ -397,6 +397,7 @@ public class RegistrationActivity extends AppCompatActivity {
         et_PinCode = findViewById(R.id.et_PinCode);
         et_email = findViewById(R.id.et_email);
         pin_code_layout = findViewById(R.id.pin_code_layout);
+        progressDialog = new CustomProgressDialog(RegistrationActivity.this);
     }
     private void callDegreeAPI() {
         String Token = "Bearer " + deviceToken;
