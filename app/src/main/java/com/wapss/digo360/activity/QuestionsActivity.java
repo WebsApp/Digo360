@@ -3,7 +3,6 @@ package com.wapss.digo360.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,14 +21,15 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.wapss.digo360.R;
+import com.wapss.digo360.adapter.NewQuestionApdater;
 import com.wapss.digo360.adapter.QuestionAdapter;
-import com.wapss.digo360.adapter.TopDiseaseAdapter2;
 import com.wapss.digo360.apiServices.ApiService;
 import com.wapss.digo360.authentication.CustomProgressDialog;
 import com.wapss.digo360.interfaces.AnswerListener;
-import com.wapss.digo360.interfaces.TopDiseaseListener2;
+import com.wapss.digo360.interfaces.NewQuestionInterface;
+import com.wapss.digo360.response.QuestionNewResponse;
 import com.wapss.digo360.response.QuestionResponse;
-import com.wapss.digo360.response.TopDiseaseResponse;
+import com.wapss.digo360.response.SubmitQuestionResponse;
 
 import java.util.List;
 
@@ -47,7 +46,9 @@ public class QuestionsActivity extends AppCompatActivity {
     String deviceToken;
     CustomProgressDialog progressDialog;
     List<QuestionResponse.DiseaseAnswer> questions;
+    List<String> questions1;
     QuestionAdapter questionAdapter;
+    NewQuestionApdater questionApdater1;
     TextView tv_question;
     private int questionCount = 0;
     TextView tv_count;
@@ -55,7 +56,7 @@ public class QuestionsActivity extends AppCompatActivity {
     LinearLayout question;
     int quest;
     TextView txt_submit, tv_skip;
-    String gender,diseaseId;
+    String gender,diseaseId,option,patientDetailId,diseaseName,patientConsultationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class QuestionsActivity extends AppCompatActivity {
         deviceToken = loginPref.getString("deviceToken", null);
         gender = loginPref.getString("gender",null);
         diseaseId = loginPref.getString("diseaseId",null);
+        patientDetailId = loginPref.getString("patientDetailId",null);
+        diseaseName = loginPref.getString("diseaseName",null);
+        patientConsultationId = loginPref.getString("patientConsultationId",null);
 
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -115,19 +119,113 @@ public class QuestionsActivity extends AppCompatActivity {
         tv_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callQuestionAPI(diseaseId, "null");
+                // callQuestionAPI(diseaseId, "null");
+                callQuestionNewAPi(diseaseName,"", patientDetailId);
             }
         });
         txt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Intent intent = new Intent(QuestionsActivity.this, SpecialActivity.class);
-                Intent intent = new Intent(QuestionsActivity.this, AfterQuestionActivity.class);
-                startActivity(intent);
+                callSubmitAPI(diseaseName,option,patientDetailId,diseaseId,gender,patientConsultationId);
             }
         });
 
-        callQuestionAPI(diseaseId, "null");
+      //  callQuestionAPI(diseaseId, "null");
+
+        callQuestionNewAPi(diseaseName,"",patientDetailId);
+    }
+
+    private void callSubmitAPI(String fever, String option, String patientDetailId, String diseaseId, String gender, String patientConsultationId) {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<SubmitQuestionResponse> banner_apiCall1 = ApiService.apiHolders().questionsComplete(Token,fever,option,patientDetailId,diseaseId,gender,patientConsultationId);
+        banner_apiCall1.enqueue(new Callback<SubmitQuestionResponse>() {
+            @Override
+            public void onResponse(Call<SubmitQuestionResponse> call, Response<SubmitQuestionResponse> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                    Intent intent = new Intent(QuestionsActivity.this, AfterQuestionActivity.class);
+                    startActivity(intent);
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<SubmitQuestionResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void callQuestionNewAPi(String fever, String s, String s1) {
+        progressDialog.showProgressDialog();
+        String Token = "Bearer " + deviceToken;
+        Call<QuestionNewResponse> banner_apiCall1 = ApiService.apiHolders().questions(Token,s1,fever,s);
+        banner_apiCall1.enqueue(new Callback<QuestionNewResponse>() {
+            @Override
+            public void onResponse(Call<QuestionNewResponse> call, Response<QuestionNewResponse> response) {
+                if (response.code() == 404) {
+                    progressDialog.dismiss();
+                    iv_noQuestion.setVisibility(View.VISIBLE);
+                    question.setVisibility(View.GONE);
+                    tv_count.setVisibility(View.GONE);
+                    rv_answerList.setVisibility(View.GONE);
+                    tv_skip.setVisibility(View.GONE);
+                    txt_submit.setVisibility(View.GONE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.hideProgressDialog();
+                            Intent intent = new Intent(QuestionsActivity.this, AfterQuestionActivity.class);
+                            startActivity(intent);
+                        }
+                    }, 2000);
+                    Toast.makeText(getApplicationContext(), "No Question", Toast.LENGTH_SHORT).show();
+                } else if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+                    String question = response.body().getQuestion();
+                   // String questionId = response.body().getQuestion().getId();
+                    tv_question.setText(question);
+                    questions1 = response.body().getOptions();
+                    questionCount++;
+                    tv_count.setText("Question Number : " + " " + questionCount);
+                    questionApdater1 = new NewQuestionApdater(getApplicationContext(), questions1, new NewQuestionInterface() {
+                        @Override
+                        public void onItemClickedQuestionItem(String item, int position) {
+                            //Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                            option = item;
+                            callQuestionNewAPi(diseaseName,item,patientDetailId);
+                        }
+                    });
+                    rv_answerList.setAdapter(questionApdater1);
+                    rv_answerList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                } else {
+                    progressDialog.dismiss();
+                    iv_noQuestion.setVisibility(View.VISIBLE);
+                    question.setVisibility(View.GONE);
+                    tv_count.setVisibility(View.GONE);
+                    rv_answerList.setVisibility(View.GONE);
+                    tv_skip.setVisibility(View.GONE);
+                    txt_submit.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuestionNewResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                iv_noQuestion.setVisibility(View.VISIBLE);
+                question.setVisibility(View.GONE);
+                tv_count.setVisibility(View.GONE);
+                rv_answerList.setVisibility(View.GONE);
+                tv_skip.setVisibility(View.GONE);
+                txt_submit.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void callQuestionAPI(String diseaseId, String optionId) {

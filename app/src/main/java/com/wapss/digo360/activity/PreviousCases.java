@@ -134,10 +134,12 @@ public class PreviousCases extends AppCompatActivity {
                             Log.e("pid",""+id);
                             String gender = item.getGender();
                             editor.putString("gender", gender);
-                            editor.commit();
+
                             Bundle bundle = new Bundle();
                             bundle.putString("P_ID", id);
                             bundle.putString("acc_id", acc_id);
+                            editor.putString("patientDetailId",id);
+                            editor.commit();
                             Intent i = new Intent(PreviousCases.this, Patient_Details.class);
                             i.putExtras(bundle);
                             startActivity(i);

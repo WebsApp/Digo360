@@ -401,6 +401,7 @@ public class NewCasectivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("P_ID", p_id);
                     editor.putString("gender", gender);
+                    editor.putString("patientDetailId",p_id);
                     editor.commit();
                     Intent i = new Intent(NewCasectivity.this, PatientsProblemActivity.class);
                     i.putExtras(bundle);

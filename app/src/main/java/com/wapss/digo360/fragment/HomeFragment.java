@@ -45,6 +45,7 @@ import com.wapss.digo360.activity.MainActivity;
 import com.wapss.digo360.activity.NotificationActivity;
 import com.wapss.digo360.activity.Pages;
 import com.wapss.digo360.activity.PatientRegistrationCheckActivity;
+import com.wapss.digo360.activity.QuestionsActivity;
 import com.wapss.digo360.activity.SearchPage;
 import com.wapss.digo360.activity.TopDiseasesActivity;
 import com.wapss.digo360.activity.Total_Reports;
@@ -306,6 +307,7 @@ public class HomeFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("PAGE_NAME", "HOME");
                 Intent i = new Intent(getContext(), HelpPage.class);
+                //Intent i = new Intent(getContext(), QuestionsActivity.class);
                 i.putExtras(bundle);
                 startActivity(i);
             }
@@ -375,7 +377,9 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onItemClickedItem(TopDiseaseResponse.Result item, int position) {
                             String id = item.getId();
+                            String diseaseName = item.getName();
                             editor.putString("diseaseId", id);
+                            editor.putString("diseaseName",diseaseName);
                             editor.commit();
                             Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);
                             startActivity(intent);
@@ -607,6 +611,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClickedItem(SettingHomeResponse.Search item, int position) {
                 String diseaseId = item.getDiseaseId();
+                String diseaseName = item.getName();
+                editor.putString("diseaseName",diseaseName);
                 editor.putString("diseaseId", diseaseId);
                 editor.commit();
                 Intent intent = new Intent(getContext(), PatientRegistrationCheckActivity.class);

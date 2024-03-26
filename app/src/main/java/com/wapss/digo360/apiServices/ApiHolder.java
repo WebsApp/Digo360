@@ -20,6 +20,7 @@ import com.wapss.digo360.response.Patient_Count_Response;
 import com.wapss.digo360.response.PatientsDetailsViewResponse;
 import com.wapss.digo360.response.PendingResponse;
 import com.wapss.digo360.response.Profile_Response;
+import com.wapss.digo360.response.QuestionNewResponse;
 import com.wapss.digo360.response.QuestionResponse;
 import com.wapss.digo360.response.RegistrationResponse;
 import com.wapss.digo360.response.SearchResponse;
@@ -27,6 +28,7 @@ import com.wapss.digo360.response.SettingHomeResponse;
 import com.wapss.digo360.response.SettingResponse;
 import com.wapss.digo360.response.SpecializationResponse;
 import com.wapss.digo360.response.StateResponse;
+import com.wapss.digo360.response.SubmitQuestionResponse;
 import com.wapss.digo360.response.TopDiseaseResponse;
 import com.wapss.digo360.response.TopSearchDiseaseResponse;
 import com.wapss.digo360.response.Update_Profile_Response;
@@ -47,23 +49,28 @@ import retrofit2.http.Query;
 public interface ApiHolder {
     @GET("settings/default")
     Call<SettingHomeResponse> homeAPi(@Header("Authorization") String Token);
+
     /*-----------------*/
     @POST("auth/doctor/mobile/login")
     @FormUrlEncoded
     Call<LoginResponse> login(@Field("loginId") String loginId,
                               @Field("deviceId") String deviceId);
+
     @POST("auth/verify")
     @FormUrlEncoded
     Call<OTP_Response> OTP_Verify(@Field("otp") String otp,
                                   @Field("loginId") String loginId,
                                   @Field("fcm") String fcm);
+
     @GET("degree/list")
     Call<Degree_Response> getDegreeData(@Header("Authorization") String Token);
+
     @GET("specialization/list/{degreeId}")
     Call<SpecializationResponse> getSpecData(@Path("degreeId") String degreeId,
                                              @Header("Authorization") String Token,
                                              @Query("limit") int limit,
                                              @Query("offset") int offset);
+
     @GET("state/list")
     Call<StateResponse> getStateData(@Header("Authorization") String Token);
 
@@ -76,6 +83,7 @@ public interface ApiHolder {
                                    @Header("Authorization") String Token,
                                    @Query("limit") int limit,
                                    @Query("offset") int offset);
+
     @POST("doctor-detail")
     @FormUrlEncoded
     Call<RegistrationResponse> Registration(@Header("Authorization") String Token,
@@ -94,6 +102,7 @@ public interface ApiHolder {
                                             @Field("areaId") String areaId,
                                             @Field("pincode") String pincode,
                                             @Field("tnc") String tnc);
+
     @GET("faqs")
     Call<FaqResponse> helpAPi(@Header("Authorization") String Token);
 
@@ -154,6 +163,7 @@ public interface ApiHolder {
                                                   @Field("address") String address,
                                                   @Field("gender") String gender,
                                                   @Field("pincode") String pincode);
+
     @POST("patient-consultation")
     @FormUrlEncoded
     Call<Patient_Consultation_Response> consalt_details(@Header("Authorization") String Token,
@@ -168,17 +178,20 @@ public interface ApiHolder {
                                                         @Field("other") String other,
                                                         @Field("patientDetailId") String patientDetailId,
                                                         @Field("diseaseId") String diseaseId);
+
     @GET("disease-questions")
     Call<QuestionResponse> QuestionAPI(@Header("Authorization") String Token,
                                        @Query("gender") String gender,
                                        @Query("diseaseId") String diseaseId,
                                        @Query("optionId") String optionId);
+
     @GET("patient-consultation/list/{patientsId}")
     Call<PatientsDetailsViewResponse> PatientsDetailsView(@Header("Authorization") String Token,
                                                           @Path("patientsId") String gender,
                                                           @Query("limit") int limit,
                                                           @Query("offset") int offset,
                                                           @Query("keyword") String keyword);
+
     @GET("patient-consultation")
     Call<Patient_Count_Response> PatientsCount(@Header("Authorization") String Token,
                                                @Query("limit") int limit,
@@ -187,6 +200,7 @@ public interface ApiHolder {
                                                @Query("keyword") String keyword,
                                                @Query("fromDate") String fromDate,
                                                @Query("toDate") String toDate);
+
     @PUT("doctor-detail/college")
     @FormUrlEncoded
     Call<Collage_Response> collage_res(@Header("Authorization") String Token,
@@ -198,13 +212,30 @@ public interface ApiHolder {
     @PATCH("doctor-detail/profile/update")
     @FormUrlEncoded
     Call<Update_Profile_Response> update_res(@Header("Authorization") String Token,
-                                              @Field("name") String name,
-                                              @Field("email") String email,
-                                              @Field("address") String address);
+                                             @Field("name") String name,
+                                             @Field("email") String email,
+                                             @Field("address") String address);
 
     @GET("settings/{key}")
     Call<SettingResponse> setting_maint(@Path("key") String id);
 
     @GET("doctor-detail/token")
     Call<PendingResponse> pendingDoctor(@Header("Authorization") String Token);
+
+    @POST("disease-questions/question/{patientDetailId}")
+    @FormUrlEncoded
+    Call<QuestionNewResponse> questions(@Header("Authorization") String Token,
+                                        @Path("patientDetailId") String id,
+                                        @Field("diseaseName") String diseaseName,
+                                        @Field("option") String option);
+
+    @POST("disease-questions/completed")
+    @FormUrlEncoded
+    Call<SubmitQuestionResponse> questionsComplete(@Header("Authorization") String Token,
+                                                   @Field("diseaseName") String diseaseName,
+                                                   @Field("option") String option,
+                                                   @Field("patientDetailId") String patientDetailId,
+                                                   @Field("diseaseId") String diseaseId,
+                                                   @Field("gender") String gender,
+                                                   @Field("patientConsultationId") String patientConsultationId);
 }

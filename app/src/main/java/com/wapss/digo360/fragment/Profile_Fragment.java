@@ -382,7 +382,11 @@ public class Profile_Fragment extends Fragment {
             public void onResponse(Call<Profile_Response> call, Response<Profile_Response> response) {
                 if (response.isSuccessful()){
                     progressDialog.hideProgressDialog();
-                    String Degree = response.body().getDoctorDetailDegree().get(0).getDegree().getName();
+                    assert response.body() != null;
+                    String Degree = null;
+                    if (response.body().getDoctorDetailDegree().get(0).getDegree()!=null) {
+                         Degree= response.body().getDoctorDetailDegree().get(0).getDegree().getName();
+                    }
                     txt_profile.setText(response.body().getTitle() +"." + " "+ response.body().getName());
                     txt_degree.setText(Degree);
                 }

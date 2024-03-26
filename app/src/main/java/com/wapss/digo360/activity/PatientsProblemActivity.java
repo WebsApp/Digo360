@@ -244,6 +244,10 @@ public class    PatientsProblemActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Patient_Consultation_Response> call, Response<Patient_Consultation_Response> response) {
                 if (response.isSuccessful()) {
+                    assert response.body() != null;
+                    String patientConsultationId = response.body().getId();
+                    editor.putString("patientConsultationId",patientConsultationId);
+                    editor.commit();
                     Intent intent = new Intent(PatientsProblemActivity.this, AfterPatientRegistrationActivity.class);
                     startActivity(intent);
                 }

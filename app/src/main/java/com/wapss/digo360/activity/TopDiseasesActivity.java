@@ -129,8 +129,10 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         @Override
                         public void onItemClickedItem(MostSearchResponse.Result item, int position) {
                             String diseaseId = item.getDiseaseId();
+                            String diseaseName = item.getName();
                             callMostSearchClick(diseaseId);
                             editor.putString("diseaseId", diseaseId);
+                            editor.putString("diseaseName",diseaseName);
                             editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
@@ -187,8 +189,10 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         @Override
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
+                            String diseaseName = item.getName();
                             callMostSearchClick(diseaseId);
                             editor.putString("diseaseId", diseaseId);
+                            editor.putString("diseaseName",diseaseName);
                             editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
@@ -229,8 +233,10 @@ public class TopDiseasesActivity extends AppCompatActivity {
                         @Override
                         public void onItemClickedItem(SearchResponse.Result item, int position) {
                             String diseaseId = item.getId();
+                            String diseaseName = item.getName();
                             callMostSearchClick(diseaseId);
                             editor.putString("diseaseId", diseaseId);
+                            editor.putString("diseaseName",diseaseName);
                             editor.commit();
                             Intent intent = new Intent(TopDiseasesActivity.this, PatientRegistrationCheckActivity.class);
                             startActivity(intent);
