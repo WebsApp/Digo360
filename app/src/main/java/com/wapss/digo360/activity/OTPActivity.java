@@ -42,7 +42,7 @@ public class OTPActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     CustomProgressDialog progressDialog;
     private CountDownTimer countDownTimer;
-    long timerDuration = 120000;
+    long timerDuration = 6000;
     long timerInterval = 1000;
     String loginStatus ="true",fcm;
 
@@ -112,6 +112,14 @@ public class OTPActivity extends AppCompatActivity {
                 otp4.getText().clear();
                 otp1.requestFocus();
                 count_time.setVisibility(View.VISIBLE);
+                otp = otp1.getText().toString()+otp2.getText().toString()+otp3.getText().toString()+otp4.getText().toString();
+                if (otp1.getText().toString().isEmpty() || otp2.getText().toString().isEmpty() || otp3.getText().toString().isEmpty() ||
+                        otp4.getText().toString().isEmpty()){
+                    Toast.makeText(OTPActivity.this, "Please Enter OTP", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    callVerifyOTP(otp,phone);
+                }
             }
         });
     }

@@ -18,8 +18,8 @@ public class ApiService {
                 .readTimeout(100, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-               // .baseUrl("https://digoserver.sporto.team:2025/api/v1/")
-                     .baseUrl("http://192.168.29.56:2025/api/v1/")
+                .baseUrl("https://test.abhitprints.in:2025/api/v1/")
+               //      .baseUrl("http://192.168.29.56:2025/api/v1/")
                 .client(okHttpClient)
                 .build();
         return retrofit;

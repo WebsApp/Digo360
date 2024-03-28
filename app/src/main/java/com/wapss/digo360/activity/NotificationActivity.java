@@ -91,6 +91,7 @@ public class NotificationActivity extends AppCompatActivity {
                     if (total == 0) {
                         iv_noti.setVisibility(View.VISIBLE);
                         ll_view.setVisibility(View.VISIBLE);
+                        rv_notification.setVisibility(View.GONE);
                     }
                     notification = response.body().getResult();
                     notificationAdapter = new NotificationAdapter(getApplicationContext(), notification);
@@ -101,6 +102,7 @@ public class NotificationActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     iv_noti.setVisibility(View.VISIBLE);
                     ll_view.setVisibility(View.VISIBLE);
+                    rv_notification.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -110,6 +112,7 @@ public class NotificationActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 iv_noti.setVisibility(View.VISIBLE);
                 ll_view.setVisibility(View.VISIBLE);
+                rv_notification.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
         });

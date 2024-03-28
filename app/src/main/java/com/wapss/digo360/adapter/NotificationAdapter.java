@@ -41,21 +41,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
 
-//        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-//        Date date9 = null;//You will get date object relative to server/client timezone wherever it is parsed
-//        try {
-////            date = dateFormat.parse("2017-04-26T20:55:00.000Z");
-//            date9 = dateFormat1.parse(ItemList.get(position).getCreatedAt());
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
-//        DateFormat formatter9 = new SimpleDateFormat("dd-MM-yyyy | hh:mm a"); //If you need time just put specific format for time like 'HH:mm:ss'
-//        String dateStr = formatter9.format(date9);
-//
-//        Log.d("datecheck",dateStr);
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        Date date9 = null;//You will get date object relative to server/client timezone wherever it is parsed
+        try {
+//            date = dateFormat.parse("2017-04-26T20:55:00.000Z");
+            date9 = dateFormat1.parse(ItemList.get(position).getCreatedAt());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        DateFormat formatter9 = new SimpleDateFormat("dd-MM-yyyy | hh:mm a"); //If you need time just put specific format for time like 'HH:mm:ss'
+        String dateStr = formatter9.format(date9);
+
+        Log.d("datecheck",dateStr);
 
         holder.tv_title.setText(ItemList.get(position).getTitle());
         holder.tv_des.setText(ItemList.get(position).getDesc());
+        holder.tv_time.setText(dateStr);
 
     }
 
